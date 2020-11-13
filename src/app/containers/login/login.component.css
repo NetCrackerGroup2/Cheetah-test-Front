@@ -1,0 +1,99 @@
+.login_form{
+  display: flex;
+  flex-direction: column;
+
+
+  background-color: #f2e5d9;
+  height: 480px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  border-radius: 40px;
+  border: 1px solid #c89668;
+  padding-left: 35px;
+  padding-right: 35px;
+
+
+
+}
+.login_container{
+
+  width: 80vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.signUp_text{
+  text-align: center;
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 56px;
+
+  color: #744D25;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+.login_password{
+  width: 400px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  font-size: 20px;
+  color: #d9b18c;
+
+  border: 2px solid #d9b18c;
+
+}
+.login_password::placeholder{
+  color: #d9b18c;
+}
+
+.login_label{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.login_submit{
+  width: 300px;
+  height: 50px;
+
+  border-color: #825930;
+  border-radius: 25px;
+  background-color: #bd7d42;
+  margin: 30px auto 30px;
+
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 42px;
+  text-align: center;
+  opacity: 0.9;
+
+  transition: linear 0.3s;
+}
+.login_submit:hover{
+  background-color: #D98F4C;
+  border: 2px white;
+  color: white;
+}
+.system_message{
+  font-size: 20px;
+  color: red;
+  font-family:Roboto, sans-serif;
+  text-align: center;
+}
+.forgotPassword{
+  text-align: center;
+  text-decoration: none;
+  color: cornflowerblue;
+  font-size:20px ;
+}
