@@ -38,7 +38,7 @@ export class ForgotPasswordComponent implements OnInit {
       .pipe(
         mapTo(true),
         catchError(error => {
-          alert(error.error);
+          console.log(error.error);
           return of(false);
         })
       );
