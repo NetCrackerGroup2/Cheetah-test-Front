@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, mapTo} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {ResetPasswordService} from '../../services/reset-password.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,35 +12,21 @@ export class ForgotPasswordComponent implements OnInit {
   recoveryToken: string;
   message: string;
   isSent: boolean;
-  constructor(private http: HttpClient,  ){}
+  constructor(private http: HttpClient, private rserv: ResetPasswordService){}
 
   ngOnInit(): void {
   }
   resetPassword(): void{
     this.message = '*some problem occured';
 
-    this.SendResetEmail().subscribe({
+    this.rserv.SendResetEmail(this.recoveryEmail).subscribe({
       next(x): void{
-        if (x === true){
-        this.message = 'message was sent to your e-mail';
-      }
+        this.message = x;
       }
     });
 
 
 }
-  SendResetEmail(): Observable<boolean>{
-    const headers = new HttpHeaders({
-      email: this.recoveryEmail,
-    });
-    return this.http.get<any>('/forgotpassword', {headers})
-      .pipe(
-        mapTo(true),
-        catchError(error => {
-          console.log(error.error);
-          return of(false);
-        })
-      );
-  }
+
 
 }
