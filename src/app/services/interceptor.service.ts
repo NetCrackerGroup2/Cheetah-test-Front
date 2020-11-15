@@ -15,23 +15,24 @@ export class InterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.authenticationService.isLoggedIn()) {
-      // const authReq = req.clone({
-      //   headers: new HttpHeaders({
-      //     'Content-Type': 'application/json',
-      //     Authorization: `Bearer ${this.authenticationService.getJwtToken()}`
-      //   })
-      // });
-      // return next.handle(authReq);
+    if (this.authenticationService.isLoggedIn()
+      && req.url.indexOf('reset-password') === -1
+      && req.url.indexOf('save-password') === -1) {
+      const authReq = req.clone({
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.authenticationService.getJwtToken()}`
+        })
+      });
+      return next.handle(authReq);
     } else {
-      // return next.handle(req).pipe(catchError(err => {
-      //   if (err.status === 0) {
-      //     this.router.navigateByUrl('/');
-      //   } else {
-      //     return throwError(err);
-      //   }
-      // }));
+        return next.handle(req).pipe(catchError(err => {
+          if (err.status === 403) {
+            this.router.navigate(['']);
+          } else {
+            return throwError(err);
+          }
+      }));
     }
-    return next.handle(req);
   }
 }

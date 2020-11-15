@@ -19,11 +19,9 @@ export class ForgotPasswordComponent implements OnInit {
   resetPassword(): void{
     this.message = '*some problem occured';
 
-    this.rserv.SendResetEmail(this.recoveryEmail).subscribe({
-      next(x): void{
-        this.message = x;
-      }
-    });
+    this.rserv.sendResetEmail(this.recoveryEmail).subscribe(
+      data => this.message = data
+    );
 }
 
 

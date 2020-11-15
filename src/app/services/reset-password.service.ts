@@ -10,7 +10,7 @@ export class ResetPasswordService {
 
   constructor(private http: HttpClient) { }
 
-  SendResetEmail(recoveryEmail: string): Observable<any>{
+  sendResetEmail(recoveryEmail: string): Observable<any>{
     return this.http.post<any>('http://localhost:8080/api/reset-password', recoveryEmail)
       .pipe(
         mapTo(true),
@@ -20,4 +20,15 @@ export class ResetPasswordService {
         })
       );
   }
+
+  // sendResetTokenAndPassword(resetToken: string, password: string): Observable<any> {
+    // return this.http.post<any>('http://localhost:8080/api/save-password', )
+    //   .pipe(
+    //     mapTo(true),
+    //     catchError(error => {
+    //       console.log(error.error);
+    //       return of(false);
+    //     })
+    //   );
+  // }
 }

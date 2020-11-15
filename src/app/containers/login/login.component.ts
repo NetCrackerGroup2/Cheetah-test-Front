@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   doLogIN(): void {
-    // const user: User = new User(this.email, this.password);
-    // this.auth.login(user)
-    const user: User = new User('abereznikov64@gmail.com', 'password');
+    const user: User = new User(this.email, this.password);
     this.auth.login(user)
       .subscribe(data => this.token = data.accessToken);
   }

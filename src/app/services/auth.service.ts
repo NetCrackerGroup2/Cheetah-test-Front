@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, mapTo, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {User} from '../common/user/user';
@@ -13,11 +13,6 @@ import {JwtToken} from '../common/jwtToken/jwt-token';
 export class AuthService {
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private loggedUser: string;
-
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
-
   constructor(private http: HttpClient, private router: Router) {
   }
 
@@ -27,6 +22,7 @@ export class AuthService {
         tap((newToken: JwtToken) => {
           console.log(`returned token: ${newToken.accessToken}`);
           this.doLoginUser(user.email, newToken.accessToken);
+          this.router.navigate(['desktop']);
         }),
         catchError(this.handleError<JwtToken>('login')));
   }
@@ -65,6 +61,11 @@ export class AuthService {
   // tslint:disable-next-line:typedef
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
+      if (error.status === 401) {
+        this.router.navigate(['']);
+      } else {
+        return throwError(error);
+      }
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

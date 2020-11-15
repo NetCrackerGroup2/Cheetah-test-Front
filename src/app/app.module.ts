@@ -9,6 +9,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
 import {DesktopComponent} from './containers/desktop/desktop.component';
 import {InterceptorService} from './services/interceptor.service';
+import { SavePasswordComponent } from './containers/save-password/save-password.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import {InterceptorService} from './services/interceptor.service';
     LoginComponent,
     ForgotPasswordComponent,
     DesktopComponent,
+    SavePasswordComponent,
   ],
   imports: [
     BrowserModule,
