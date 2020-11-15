@@ -24,8 +24,6 @@ export class ForgotPasswordComponent implements OnInit {
         this.message = x;
       }
     });
-
-
 }
 
 

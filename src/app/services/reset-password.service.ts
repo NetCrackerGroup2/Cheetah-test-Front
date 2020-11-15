@@ -11,7 +11,7 @@ export class ResetPasswordService {
   constructor(private http: HttpClient) { }
 
   SendResetEmail(recoveryEmail: string): Observable<any>{
-    return this.http.post<any>('/forgotpassword', recoveryEmail)
+    return this.http.post<any>('http://localhost:8080/api/reset-password', recoveryEmail)
       .pipe(
         mapTo(true),
         catchError(error => {
