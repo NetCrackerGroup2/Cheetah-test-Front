@@ -8,7 +8,7 @@ import {SavePasswordComponent} from './containers/save-password/save-password.co
 const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'forgotpassword', component: ForgotPasswordComponent},
+  {path: 'forgotpassword', component: ForgotPasswordComponent, },
   {path: 'desktop', component: DesktopComponent},
   {path: 'reset-password', component: SavePasswordComponent}
 ];

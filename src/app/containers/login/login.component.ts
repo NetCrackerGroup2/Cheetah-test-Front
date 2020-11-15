@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
     const user: User = new User(this.email, this.password);
     this.auth.login(user)
       .subscribe(data => this.token = data.accessToken);
+    this.auth.messageSubject$.subscribe(message => {
+      this.message = message;
+    });
   }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResetPasswordService} from '../../services/reset-password.service';
+import {RecoveryEmail} from '../../common/recoveryEmail/recovery-email';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,7 +10,6 @@ import {ResetPasswordService} from '../../services/reset-password.service';
 })
 export class ForgotPasswordComponent implements OnInit {
   recoveryEmail: string;
-  recoveryToken: string;
   message: string;
   isSent: boolean;
   constructor(private http: HttpClient, private rserv: ResetPasswordService){}
@@ -17,11 +17,17 @@ export class ForgotPasswordComponent implements OnInit {
   ngOnInit(): void {
   }
   resetPassword(): void{
-    this.message = '*some problem occured';
-
-    this.rserv.sendResetEmail(this.recoveryEmail).subscribe(
-      data => this.message = data
+    const email = new RecoveryEmail();
+    email.email = this.recoveryEmail;
+    this.rserv.sendResetEmail(email).subscribe(
+      data => {
+        console.log(data);
+        });
+    this.rserv.messageSubject$.subscribe( message => {
+      this.message = message;
+      }
     );
+
 }
 
 

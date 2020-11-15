@@ -75,6 +75,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
+  color: white;
   line-height: 42px;
   text-align: center;
   opacity: 0.9;
@@ -84,7 +85,7 @@
 .login_submit:hover{
   background-color: #D98F4C;
   border: 2px white;
-  color: white;
+  color: black;
 }
 .system_message{
   font-size: 20px;
@@ -97,4 +98,8 @@
   text-decoration: none;
   color: cornflowerblue;
   font-size:20px ;
+  transition: linear 0.5s ;
+}
+.forgotPassword:hover{
+  color: #c3af2a;
 }
