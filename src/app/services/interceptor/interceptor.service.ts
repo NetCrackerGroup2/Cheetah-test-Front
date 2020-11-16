@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {AuthService} from './auth.service';
+import {AuthService} from '../auth/auth.service';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -17,7 +17,8 @@ export class InterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.authenticationService.isLoggedIn()
       && req.url.indexOf('reset-password') === -1
-      && req.url.indexOf('save-password') === -1) {
+      && req.url.indexOf('save-password') === -1
+      && req.url.indexOf('register') === -1) {
       const authReq = req.clone({
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
@@ -26,12 +27,12 @@ export class InterceptorService implements HttpInterceptor {
       });
       return next.handle(authReq);
     } else {
-        return next.handle(req).pipe(catchError(err => {
-          if (err.status === 403) {
-            this.router.navigate(['']);
-          } else {
-            return throwError(err);
-          }
+      return next.handle(req).pipe(catchError(err => {
+        if (err.status === 403) {
+          this.router.navigate(['']);
+        } else {
+          return throwError(err);
+        }
       }));
     }
   }

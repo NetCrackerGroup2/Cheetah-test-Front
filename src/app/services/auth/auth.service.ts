@@ -3,8 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, Subject, throwError} from 'rxjs';
 import {catchError, mapTo, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {User} from '../common/user/user';
-import {JwtToken} from '../common/jwtToken/jwt-token';
+import {User} from '../../common/user/user';
+import {JwtToken} from '../../common/jwtToken/jwt-token';
 
 
 @Injectable({

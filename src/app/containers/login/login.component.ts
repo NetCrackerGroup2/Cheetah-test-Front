@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {tap} from 'rxjs/operators';
 import {User} from '../../common/user/user';
 import {JwtToken} from '../../common/jwtToken/jwt-token';

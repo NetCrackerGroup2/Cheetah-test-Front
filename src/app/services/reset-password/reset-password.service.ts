@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable, of, Subject, throwError} from 'rxjs';
 import {catchError, mapTo} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
-import {RecoveryEmail} from '../common/recoveryEmail/recovery-email';
-import {ResetPassword} from '../common/resetPassword/reset-password';
-import {Status} from '../common/status/status';
+import {RecoveryEmail} from '../../common/recoveryEmail/recovery-email';
+import {ResetPassword} from '../../common/resetPassword/reset-password';
+import {Status} from '../../common/status/status';
 import {Router} from '@angular/router';
 
 @Injectable({

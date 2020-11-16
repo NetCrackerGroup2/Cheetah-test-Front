@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ResetPasswordService} from '../../services/reset-password.service';
+import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {RecoveryEmail} from '../../common/recoveryEmail/recovery-email';
 import {Router} from '@angular/router';
 

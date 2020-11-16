@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {User} from './User';
+import {Injectable} from '@angular/core';
+import {UserRegistration} from '../../common/userRegistration/userRegistration';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
@@ -7,23 +7,23 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class SignUpService {
-  private u: User;
+  private u: UserRegistration;
 
   constructor(private http: HttpClient) {
-    this.u = new User();
+    this.u = new UserRegistration();
   }
 
-  get user(): User {
+  get user(): UserRegistration {
     return this.u;
   }
 
-  set user(value: User) {
+  set user(value: UserRegistration) {
     this.u = value;
   }
 
   postRegisteredUser(): Observable<any> {
-    const newUser = JSON.stringify(this.user);
-    console.log(newUser);
-    return this.http.post('http://localhost:8080/api/register', newUser);
+
+    console.log(this.user);
+    return this.http.post<any>('http://localhost:8080/api/register', this.user);
   }
 }

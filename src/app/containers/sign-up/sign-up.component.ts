@@ -18,6 +18,6 @@ export class SignUpComponent implements OnInit {
   }
 
   regNewUser(): void {
-    this.signUpService.postRegisteredUser();
+    this.signUpService.postRegisteredUser().subscribe();
   }
 }

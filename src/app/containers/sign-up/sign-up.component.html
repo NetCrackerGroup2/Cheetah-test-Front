@@ -33,11 +33,11 @@
 
       <div class="create_user_form">
         <div class="form_title">
-          <h1>Create User</h1>
+          <h1>Create UserRegistration</h1>
         </div>
         <div class="input_item">
-          <label>Username:</label>
-          <input [(ngModel)]="signUpService.user.username" type="text" class="input" >
+          <label>Name:</label>
+          <input [(ngModel)]="signUpService.user.name" type="text" class="input" >
         </div>
         <div class="input_item">
           <label for="">Email:</label><input [(ngModel)]="signUpService.user.email" type="text" class="input">
@@ -56,13 +56,13 @@
           </div>
         </div>
         <div class="submit_input">
-          <input (click)="regNewUser()" type="submit" class="input" value="Create User">
+          <input (click)="regNewUser()" type="submit" class="input" value="Create UserRegistration">
         </div>
       </div>
 
       <div class="delete_user_form">
         <div class="form_title">
-          <h1>Delete User</h1>
+          <h1>Delete UserRegistration</h1>
         </div>
         <div class="form_item">
           <label>Username:</label>
