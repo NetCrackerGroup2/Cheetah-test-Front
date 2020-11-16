@@ -1,28 +1,21 @@
-
-
-
 <div class="login_component">
-
-
   <div class="login_container">
     <div class="login_form">
 
-      <h2 class ="signUp_text">Sign Up</h2>
-      <label class="system_message">{{message}}</label>
+      <h2 class ="signUp_text">Sign In</h2>
+      <h5 class="text-danger text-center">{{message}}</h5>
       <label class="login_label">
-        <input type="text" [(ngModel)]="email" class="login_password" placeholder="Email" >
+        <input type="email" [(ngModel)]="email" class="login_password" placeholder="Email" >
       </label>
 
       <label class="login_label">
-        <input type="text" [(ngModel)]="password" class="login_password" placeholder="Password">
+        <input type="password" [(ngModel)]="password" class="login_password" placeholder="Password">
       </label>
 
-      <input type="button" (click)="doLogIN()" value="Enter" class="login_submit">
-      <a [routerLink]="['/forgotpassword']" class="forgotPassword">Forgot Password?</a>
+      <input type="button" (click)="doLogIn()" value="Enter" class="login_submit">
+      <a [routerLink]="['/forgotpassword']" class="linkToPage">Forgot Password?</a>
 
     </div>
   </div>
-
-
 </div>
 

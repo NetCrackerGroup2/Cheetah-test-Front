@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {Observable, throwError} from 'rxjs';
@@ -8,32 +8,31 @@ import {Router} from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class InterceptorService implements HttpInterceptor{
+export class InterceptorService implements HttpInterceptor {
 
-  token: string;
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private authenticationService: AuthService,
+              private router: Router) {
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.auth.isLoggedIn()){
-      this.token = this.auth.getJwtToken();
+    if (this.authenticationService.isLoggedIn()
+      && req.url.indexOf('reset-password') === -1
+      && req.url.indexOf('save-password') === -1) {
       const authReq = req.clone({
         headers: new HttpHeaders({
-          'Content-type': 'aplication/json',
-          Authorization: `Bearer ${this.token}`
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.authenticationService.getJwtToken()}`
         })
       });
-      return next.handle(authReq).pipe(catchError(error => {
-        if (error instanceof HttpErrorResponse && error.status === 401){
-          console.log('unauthorised access.redirecting to /login');
-          this.router.navigate(['/login']);
-        }else{
-          console.log(error);
-        }
-        return throwError(error);
+      return next.handle(authReq);
+    } else {
+        return next.handle(req).pipe(catchError(err => {
+          if (err.status === 403) {
+            this.router.navigate(['']);
+          } else {
+            return throwError(err);
+          }
       }));
-
-
-
-
     }
   }
 }

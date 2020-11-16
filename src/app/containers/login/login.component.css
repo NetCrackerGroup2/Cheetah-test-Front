@@ -70,7 +70,7 @@
   height: 50px;
 
   border-color: #825930;
-  border-radius: 25px;
+  border-radius: 15px;
   background-color: #bd7d42;
   margin: 30px auto 30px;
   outline: none;
@@ -79,6 +79,7 @@
   font-style: normal;
   font-weight: normal;
   font-size: 30px;
+  color: white;
   line-height: 42px;
   text-align: center;
   opacity: 0.9;
@@ -87,7 +88,7 @@
 .login_submit:hover{
   background-color: #D98F4C;
   border: 2px white;
-  color: white;
+  color: black;
 }
 .system_message{
   font-size: 20px;
@@ -95,9 +96,13 @@
   font-family:Roboto, sans-serif;
   text-align: center;
 }
-.forgotPassword{
+.linkToPage{
   text-align: center;
   text-decoration: none;
   color: cornflowerblue;
   font-size:20px ;
+  transition: linear 0.5s ;
+}
+.linkToPage:hover{
+  color: #c3af2a;
 }
