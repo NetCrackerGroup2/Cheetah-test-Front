@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Auth-demo"
+    }
+  },
+  "defaultProject": "Auth-demo",
+  "cli": {
+    "analytics": false
+  }
 }

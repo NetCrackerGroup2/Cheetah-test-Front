@@ -1,3 +1,7 @@
+* , *:before,*:after{
+  box-sizing: border-box;
+}
+
 .login_form{
   display: flex;
   flex-direction: column;
@@ -78,7 +82,6 @@
   line-height: 42px;
   text-align: center;
   opacity: 0.9;
-
   transition: linear 0.3s;
 }
 .login_submit:hover{
