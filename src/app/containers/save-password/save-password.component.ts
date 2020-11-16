@@ -41,6 +41,8 @@ export class SavePasswordComponent implements OnInit {
             this.message = 'Reset token doesn\'t exist';
           } else if (body.message === 'token.expired') {
             this.message = 'You have already changed the password';
+          } else if (body.message === 'token.invalid') {
+            this.message = 'This link is invalid';
           }
         }
       );

@@ -11,13 +11,17 @@
       <li>
         <a href=""><i><img src="assets/sidebar_images/profiles.svg" alt="profiles"></i>Profiles</a>
       </li>
-      <li><a href=""><i><img class="sidebar_icon" src="assets/sidebar_images/project.svg" alt="project"></i>Project</a></li>
+      <li><a href=""><i><img class="sidebar_icon" src="assets/sidebar_images/project.svg" alt="project"></i>Project</a>
+      </li>
       <li><a href=""><i><img src="assets/sidebar_images/test_case.svg" alt="test_case"></i>Test case</a></li>
       <li><a href=""><i><img src="assets/sidebar_images/data_set.svg" alt="data_set"></i>Data set</a></li>
-      <li><a href=""><i><img src="assets/sidebar_images/test_scenario.svg" alt="test_scenario"></i>Test scenario</a></li>
-      <li><a href=""><i><img src="assets/sidebar_images/test_case_history.svg" alt="test_case_history"></i>Test case history</a></li>
+      <li><a href=""><i><img src="assets/sidebar_images/test_scenario.svg" alt="test_scenario"></i>Test scenario</a>
+      </li>
+      <li><a href=""><i><img src="assets/sidebar_images/test_case_history.svg" alt="test_case_history"></i>Test case
+        history</a></li>
       <li><a href=""><i><img src="assets/sidebar_images/reports.svg" alt="reports"></i>Reports</a></li>
-      <li><a href=""><i><img src="assets/sidebar_images/notifications.svg" alt="notifications"></i>Notifications</a></li>
+      <li><a href=""><i><img src="assets/sidebar_images/notifications.svg" alt="notifications"></i>Notifications</a>
+      </li>
     </ul>
     <div class="sidebar_footer">
       <ul>
@@ -30,26 +34,27 @@
   <div class="main_content">
     <h1>Admin panel</h1>
     <div class="forms_container">
-
       <div class="create_user_form">
         <div class="form_title">
           <h1>Create UserRegistration</h1>
+          <h5 class="text-danger text-center">{{message}}</h5>
+          <h5 class="text-success text-center">{{successMessage}}</h5>
         </div>
         <div class="input_item">
           <label>Name:</label>
-          <input [(ngModel)]="signUpService.user.name" type="text" class="input" >
+          <input [(ngModel)]="signUpService.user.name" type="text" class="input">
         </div>
         <div class="input_item">
           <label for="">Email:</label><input [(ngModel)]="signUpService.user.email" type="text" class="input">
         </div>
         <div class="input_item">
-          <label for="">Password:</label><input [(ngModel)]="signUpService.user.password" type="password" class="input" >
+          <label for="">Password:</label><input [(ngModel)]="signUpService.user.password" type="password" class="input">
         </div>
         <div class="input_item">
           <label for="">Role:</label>
           <div class="custom_input_item">
-            <select [(ngModel)]="signUpService.user.role" name="" id="" >
-              <option value="">Select</option>
+            <select [(ngModel)]="signUpService.user.role" name="" id="">
+              <option value="admin">Admin</option>
               <option value="engineer">Engineer</option>
               <option value="manager">Manager</option>
             </select>
