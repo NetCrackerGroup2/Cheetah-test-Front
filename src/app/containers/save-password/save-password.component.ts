@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ResetPasswordService} from '../../services/reset-password.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-save-password',
@@ -13,8 +13,11 @@ export class SavePasswordComponent implements OnInit {
   password: string;
   passwordConfirm: string;
   message: string;
+
   constructor(private resetService: ResetPasswordService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -24,24 +27,25 @@ export class SavePasswordComponent implements OnInit {
       );
 
   }
+
   resetPassword(): void {
-    if (this.password === this.passwordConfirm){
+    if (this.password === this.passwordConfirm) {
       this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe(body => {
-        console.log('before comparing');
-        console.log(body.status);
-        if (body.status === 'same.password'){
-          this.message = 'Same password as before';
-        }
-        if (body.status === 'message.resetPasswordSuc'){
-          this.message = 'password was successfully updated';
-        }
-        if (body.status === 'reset.token.null'){
-          this.message = 'Reset token doesn`t exist';
-        }
+          console.log('before comparing');
+          console.log(body.message);
+          if (body.message === 'same.password') {
+            this.message = 'Same password as before';
+          } else if (body.message === 'message.resetPasswordSuc') {
+            this.router.navigate(['']);
+          } else if (body.message === 'reset.token.null') {
+            this.message = 'Reset token doesn\'t exist';
+          } else if (body.message === 'token.expired') {
+            this.message = 'You have already changed the password';
+          }
         }
       );
-    }else{
-      this.message = 'password in confirmation doesn`t match';
+    } else {
+      this.message = 'Password in confirmation doesn\'t match';
     }
 
   }

@@ -67,7 +67,7 @@ export class AuthService {
         this.router.navigate(['']);
       }
       if (error.status === 403){
-        this.messageSubject.next('wrong login or password');
+        this.messageSubject.next('Wrong login or password');
       }
       else {
         return of(error.error);

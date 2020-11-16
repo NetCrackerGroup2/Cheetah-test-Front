@@ -93,13 +93,13 @@
   font-family:Roboto, sans-serif;
   text-align: center;
 }
-.forgotPassword{
+.linkToPage{
   text-align: center;
   text-decoration: none;
   color: cornflowerblue;
   font-size:20px ;
   transition: linear 0.5s ;
 }
-.forgotPassword:hover{
+.linkToPage:hover{
   color: #c3af2a;
 }

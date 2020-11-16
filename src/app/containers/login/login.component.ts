@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  doLogIN(): void {
+  doLogIn(): void {
     const user: User = new User(this.email, this.password);
     this.auth.login(user)
       .subscribe(data => this.token = data.accessToken);

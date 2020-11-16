@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {RecoveryEmail} from '../common/recoveryEmail/recovery-email';
 import {ResetPassword} from '../common/resetPassword/reset-password';
 import {Status} from '../common/status/status';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,10 @@ export class ResetPasswordService {
         catchError(error => {
           console.log(error.error);
           if (error.status === 200){
-            this.messageSubject.next('confirmation was sent to your email');
+            this.messageSubject.next('Confirmation was sent to your email');
           }
           if (error.status === 400){
-            this.messageSubject.next('wrong email');
+            this.messageSubject.next('Invalid email');
           }
           return of(false);
         })
