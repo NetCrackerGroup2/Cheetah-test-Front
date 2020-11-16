@@ -9,6 +9,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
 import {DesktopComponent} from './containers/desktop/desktop.component';
 import {InterceptorService} from './services/interceptor.service';
+import { SignUpComponent } from './containers/sign-up/sign-up.component';
 import { SavePasswordComponent } from './containers/save-password/save-password.component';
 
 
@@ -18,6 +19,7 @@ import { SavePasswordComponent } from './containers/save-password/save-password.
     LoginComponent,
     ForgotPasswordComponent,
     DesktopComponent,
+    SignUpComponent,
     SavePasswordComponent,
   ],
   imports: [
