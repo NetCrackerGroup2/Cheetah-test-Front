@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {tap} from 'rxjs/operators';
+import {User} from '../../common/user/user';
+import {JwtToken} from '../../common/jwtToken/jwt-token';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,23 +14,22 @@ export class LoginComponent implements OnInit {
   email: string;
   password: string;
   message: string;
+  token: string;
 
-
-
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private auth: AuthService) {
+  }
 
   ngOnInit(): void {
   }
-  doLogIN(): void{
-    this.auth.login({email: this.email , password: this.password}).pipe(tap(b => {
-      if (!b){
-        this.message = '*not proper email or password';
-      }
-      })
-    );
+
+  doLogIn(): void {
+    const user: User = new User(this.email, this.password);
+    this.auth.login(user)
+      .subscribe(data => this.token = data.accessToken);
+    this.auth.messageSubject$.subscribe(message => {
+      this.message = message;
+    });
   }
-  // forgotPassword(): void{
-  //   this.router.navigate(['/forgotpassword']);
-  // }
+
 
 }
