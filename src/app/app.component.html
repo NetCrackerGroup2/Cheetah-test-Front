@@ -24,7 +24,7 @@
     </ul>
     <div class="sidebar_footer">
       <ul>
-        <li><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
+        <li *ngIf="isAdmin"><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
         <li><a (click)="logout()" class="cursorPointer">Logout</a></li>
       </ul>
     </div>

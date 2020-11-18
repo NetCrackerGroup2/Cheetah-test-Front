@@ -14,18 +14,22 @@ export class AppComponent {
 
   constructor(private authenticationService: AuthService,
               private router: Router) {
-    this.authenticationService.user.subscribe(x => this.user = x);
-  }
-
-  get isAdmin(): boolean {
-    return this.user && this.user.role === Role.ADMIN;
+    this.authenticationService.user.subscribe(
+      x => {
+        this.user = x;
+      }
+    );
   }
 
   get isOut(): boolean {
-    console.log(this.router.url);
     return this.router.url.startsWith('/login')
       || this.router.url.startsWith('/forget-password')
       || this.router.url.startsWith('/reset-password');
+  }
+
+  get isAdmin() {
+    console.log(this.user);
+    return this.user && this.user.role === Role.ADMIN;
   }
 
   logout(): void {

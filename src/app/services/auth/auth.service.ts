@@ -33,9 +33,9 @@ export class AuthService {
 
           localStorage.setItem(this.USER_CONST, JSON.stringify(user));
 
-          this.userSubject.next(token);
+          this.userSubject.next(user);
 
-          return token;
+          return user;
         }));
   }
 

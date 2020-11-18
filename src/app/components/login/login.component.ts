@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthService
   ) {
     if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+      this.router.navigate(['dashboard']);
     }
   }
 
@@ -33,13 +33,13 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loading = true;
 
-    // const user: LoginDto = new LoginDto(this.email, this.password);
-    const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pass');
+    const user: LoginDto = new LoginDto(this.email, this.password);
+    // const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pass');
     this.authenticationService.login(user)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigate(['dashboard']);
           this.loading = false;
         },
         error: () => {
