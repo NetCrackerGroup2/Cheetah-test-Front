@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-save-password',
@@ -9,16 +10,17 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./save-password.component.css']
 })
 export class SavePasswordComponent implements OnInit, OnDestroy {
+  passwordForm: FormGroup;
   subscription: Subscription;
   loading = false;
   resetToken: string;
-  password: string;
-  passwordConfirm: string;
   message: string;
 
-  constructor(private resetService: ResetPasswordService,
-              private route: ActivatedRoute,
-              private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private resetService: ResetPasswordService,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,13 +29,24 @@ export class SavePasswordComponent implements OnInit, OnDestroy {
           this.resetToken = params.token;
         }
       );
-
+    this.passwordForm = this.formBuilder.group({
+      password: new FormControl('', [
+        Validators.required]),
+      passwordConfirm: new FormControl('')
+    });
   }
 
-  resetPassword(): void {
+  get password(): any {
+    return this.passwordForm.get('password');
+  }
+  get passwordConfirm(): any {
+    return this.passwordForm.get('passwordConfirm');
+  }
+
+  onSubmit(): void {
     this.loading = true;
-    if (this.password === this.passwordConfirm) {
-      this.subscription = this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe({
+    if (this.password.value === this.passwordConfirm.value) {
+      this.subscription = this.resetService.sendResetTokenAndPassword(this.resetToken, this.password.value).subscribe({
         next: body => {
           console.log(body.message);
           if (body.message === 'same.password') {
@@ -55,7 +68,7 @@ export class SavePasswordComponent implements OnInit, OnDestroy {
     } else {
       this.message = 'Password in confirmation doesn\'t match';
     }
-
+    this.loading = false;
   }
 
   ngOnDestroy(): void {

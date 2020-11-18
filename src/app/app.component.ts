@@ -23,7 +23,7 @@ export class AppComponent {
 
   get isOut(): boolean {
     return this.router.url.startsWith('/login')
-      || this.router.url.startsWith('/forget-password')
+      || this.router.url.startsWith('/forgot-password')
       || this.router.url.startsWith('/reset-password');
   }
 

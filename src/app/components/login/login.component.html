@@ -1,24 +1,44 @@
 <div class="login_component">
-    <div class="login_form">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login_form">
 
-      <h2 class ="signUp_text">Sign In</h2>
-      <div *ngIf="error">
-        <h5 class="text-danger text-center">{{error}}</h5>
-      </div>
-      <label class="login_label">
-        <input type="email" [(ngModel)]="email" class="login_password" placeholder="Email" >
-      </label>
-
-      <label class="login_label">
-        <input type="password" [(ngModel)]="password" class="login_password" placeholder="Password">
-      </label>
-
-      <button (click)="login()" class="login_submit">
-        Login
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
-      </button>
-      <a [routerLink]="['/forgot-password']" class="linkToPage">Forgot Password?</a>
-
+    <h2 class="signUp_text">Sign In</h2>
+    <div *ngIf="error">
+      <h5 class="text-danger text-center">{{error}}</h5>
     </div>
+    <!-- email -->
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger text-center">
+      <div *ngIf="email.errors.required">
+        <h5>Email is required</h5>
+      </div>
+      <div *ngIf="email.errors.pattern">
+        <h5>Invalid email</h5>
+      </div>
+    </div>
+    <label class="login_label">
+      <input type="email" formControlName="email" class="login_password"
+             placeholder="Email">
+    </label>
+
+    <!-- password -->
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger text-center">
+      <div *ngIf="password.errors.required">
+        <h5>Password is required</h5>
+      </div>
+      <div *ngIf="password.errors.minLength">
+        <h5> Password must be at least 6 characters long</h5>
+      </div>
+    </div>
+    <label class="login_label">
+      <input type="password" formControlName="password" class="login_password"
+             placeholder="Password">
+    </label>
+    <!-- submit -->
+    <button type="submit" class="login_submit" [disabled]="!loginForm.valid">
+      Login
+      <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
+    </button>
+    <a [routerLink]="['/forgot-password']" class="linkToPage">Forgot Password?</a>
+
+  </form>
 </div>
 

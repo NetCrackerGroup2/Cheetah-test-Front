@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth/auth.service';
 import {LoginDto} from '../../models/loginDto/loginDto';
 import {first} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +12,15 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  email: string;
-  password: string;
   message: string;
   loading = false;
   submitted = false;
   error = '';
   subscription: Subscription;
+  loginForm: FormGroup;
 
   constructor(
+    private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService
@@ -30,11 +31,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      email: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      password: new FormControl('', [Validators.required])
+    });
   }
 
-  login(): void {
+  onSubmit(): void {
     this.loading = true;
-    const user: LoginDto = new LoginDto(this.email, this.password);
+    const user: LoginDto = new LoginDto(this.email.value, this.password.value);
     // const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pass');
     this.subscription = this.authenticationService.login(user)
       .pipe(first())
@@ -50,6 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
 
+  get email(): any {return this.loginForm.get('email'); }
+  get password(): any {return this.loginForm.get('password'); }
 
   ngOnDestroy(): void {
     if (this.subscription) {

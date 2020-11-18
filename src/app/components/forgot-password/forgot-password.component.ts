@@ -21,14 +21,16 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
 
-  constructor(private formBuilder: FormBuilder,
-              private http: HttpClient,
-              private rserv: ResetPasswordService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private resetPasswordService: ResetPasswordService) {
   }
 
   ngOnInit(): void {
     this.emailForm = this.formBuilder.group({
-      email: new FormControl('', [Validators.required,
+      email: new FormControl('', [
+        Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
     });
   }
@@ -38,15 +40,13 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    console.log('On submit');
-
     this.message = '';
     this.successMessage = '';
     this.loading = true;
 
     const recoveryEmail = new RecoveryEmail();
     recoveryEmail.email = this.email.value;
-    this.subscription = this.rserv.sendResetEmail(recoveryEmail).subscribe(
+    this.subscription = this.resetPasswordService.sendResetEmail(recoveryEmail).subscribe(
       data => {
         if (data) {
           this.message = '';
@@ -54,7 +54,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         }
         this.loading = false;
       });
-    this.rserv.messageSubject$.subscribe(message => {
+    this.resetPasswordService.messageSubject$.subscribe(message => {
         this.message = message;
       }
     );
