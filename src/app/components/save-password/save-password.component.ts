@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {catchError} from 'rxjs/operators';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-save-password',
@@ -9,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class SavePasswordComponent implements OnInit {
 
+  loading = false;
   resetToken: string;
   password: string;
   passwordConfirm: string;
@@ -29,9 +32,10 @@ export class SavePasswordComponent implements OnInit {
   }
 
   resetPassword(): void {
+    this.loading = true;
     if (this.password === this.passwordConfirm) {
-      this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe(body => {
-          console.log('before comparing');
+      this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe({
+        next: body => {
           console.log(body.message);
           if (body.message === 'same.password') {
             this.message = 'Same password as before';
@@ -44,8 +48,11 @@ export class SavePasswordComponent implements OnInit {
           } else if (body.message === 'token.invalid') {
             this.message = 'This link is invalid';
           }
+        },
+        error: () => {
+          this.loading = false;
         }
-      );
+      });
     } else {
       this.message = 'Password in confirmation doesn\'t match';
     }

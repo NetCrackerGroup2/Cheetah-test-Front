@@ -1,31 +1,32 @@
 import {Injectable} from '@angular/core';
-import {UserRegistration} from '../../common/userRegistration/userRegistration';
+import {User} from '../../models/user/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ServerResponse} from '../../common/serverResponse/ServerResponse';
+import {ServerResponse} from '../../models/serverResponse/ServerResponse';
 import {catchError} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignUpService {
-  private u: UserRegistration;
+  private u: User;
 
   constructor(private http: HttpClient) {
-    this.u = new UserRegistration();
+    this.u = new User();
   }
 
-  get user(): UserRegistration {
+  get user(): User {
     return this.u;
   }
 
-  set user(value: UserRegistration) {
+  set user(value: User) {
     this.u = value;
   }
 
   postRegisteredUser(): Observable<ServerResponse> {
     console.log(this.user);
-    return this.http.post<ServerResponse>('http://localhost:8080/api/register', this.user)
+    return this.http.post<ServerResponse>(`${environment.apiUrl}/register`, this.user)
       .pipe(
         catchError(this.handleError<ServerResponse>('postRegisteredUser', new ServerResponse()))
       );

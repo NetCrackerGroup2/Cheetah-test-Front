@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {SignUpService} from '../../services/sign-up/sign-up.service';
-import {User} from '../../common/user/user';
-import {UserRegistration} from '../../common/userRegistration/userRegistration';
+import {LoginDto} from '../../models/loginDto/loginDto';
+import {User} from '../../models/user/user';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,8 +25,8 @@ export class SignUpComponent implements OnInit {
       data => {
         console.log(data);
         if (data.status === 'success') {
-          this.signUpService.user = new UserRegistration();
-          this.successMessage = 'User has been created';
+          this.signUpService.user = new User();
+          this.successMessage = 'LoginDto has been created';
           this.message = '';
         } else {
           this.message = 'Invalid input';

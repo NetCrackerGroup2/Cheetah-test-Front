@@ -3,7 +3,9 @@
     <div class="login_form">
 
       <h2 class ="signUp_text">Sign In</h2>
-      <h5 class="text-danger text-center">{{message}}</h5>
+      <div *ngIf="error">
+        <h5 class="text-danger text-center">{{error}}</h5>
+      </div>
       <label class="login_label">
         <input type="email" [(ngModel)]="email" class="login_password" placeholder="Email" >
       </label>
@@ -12,8 +14,11 @@
         <input type="password" [(ngModel)]="password" class="login_password" placeholder="Password">
       </label>
 
-      <input type="button" (click)="doLogIn()" value="Enter" class="login_submit">
-      <a [routerLink]="['/forgotpassword']" class="linkToPage">Forgot Password?</a>
+      <button (click)="login()" class="login_submit">
+        Login
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
+      </button>
+      <a [routerLink]="['/forgot-password']" class="linkToPage">Forgot Password?</a>
 
     </div>
   </div>
