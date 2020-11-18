@@ -1,54 +1,50 @@
-<div class="wrapper">
-
-  <div class="main_content">
-    <h1>Admin panel</h1>
-    <div class="forms_container">
-      <div class="create_user_form">
-        <div class="form_title">
-          <h1>Create LoginDto</h1>
-          <h5 class="text-danger text-center">{{message}}</h5>
-          <h5 class="text-success text-center">{{successMessage}}</h5>
-        </div>
-        <div class="input_item">
-          <label>Name:</label>
-          <input [(ngModel)]="signUpService.user.name" type="text" class="input">
-        </div>
-        <div class="input_item">
-          <label for="">Email:</label><input [(ngModel)]="signUpService.user.email" type="text" class="input">
-        </div>
-        <div class="input_item">
-          <label for="">Password:</label><input [(ngModel)]="signUpService.user.password" type="password" class="input">
-        </div>
-        <div class="input_item">
-          <label for="">Role:</label>
-          <div class="custom_input_item">
-            <select [(ngModel)]="signUpService.user.role" name="" id="">
-              <option value="admin">Admin</option>
-              <option value="engineer">Engineer</option>
-              <option value="manager">Manager</option>
-            </select>
-          </div>
-        </div>
-        <div class="submit_input">
-          <input (click)="regNewUser()" type="submit" class="input" value="Create User">
+<div class="main_content">
+  <h1>Admin panel</h1>
+  <div class="forms_container">
+    <div class="create_user_form">
+      <div class="form_title">
+        <h1>Create LoginDto</h1>
+        <h5 class="text-danger text-center">{{message}}</h5>
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      </div>
+      <div class="input_item">
+        <label>Name:</label>
+        <input [(ngModel)]="signUpService.user.name" type="text" class="input">
+      </div>
+      <div class="input_item">
+        <label for="">Email:</label><input [(ngModel)]="signUpService.user.email" type="text" class="input">
+      </div>
+      <div class="input_item">
+        <label for="">Password:</label><input [(ngModel)]="signUpService.user.password" type="password" class="input">
+      </div>
+      <div class="input_item">
+        <label for="">Role:</label>
+        <div class="custom_input_item">
+          <select [(ngModel)]="signUpService.user.role" name="" id="">
+            <option value="admin">Admin</option>
+            <option value="engineer">Engineer</option>
+            <option value="manager">Manager</option>
+          </select>
         </div>
       </div>
+      <div class="submit_input">
+        <input (click)="regNewUser()" type="submit" class="input" value="Create User">
+      </div>
+    </div>
 
-      <div class="delete_user_form">
-        <div class="form_title">
-          <h1>Delete LoginDto</h1>
-        </div>
-        <div class="form_item">
-          <label>Username:</label>
-          <input type="text">
-        </div>
-        <div class="form_item">
-          <input type="submit" value="Enter">
-        </div>
+    <div class="delete_user_form">
+      <div class="form_title">
+        <h1>Delete LoginDto</h1>
+      </div>
+      <div class="form_item">
+        <label>Username:</label>
+        <input type="text">
+      </div>
+      <div class="form_item">
+        <input type="submit" value="Enter">
       </div>
     </div>
   </div>
 </div>
-
 
 

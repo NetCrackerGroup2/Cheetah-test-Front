@@ -8,7 +8,7 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
