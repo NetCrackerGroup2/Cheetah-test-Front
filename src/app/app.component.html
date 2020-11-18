@@ -1,6 +1,5 @@
-
 <div class="wrapper">
-  <div class="sidebar" *ngIf="user">
+  <div class="sidebar" *ngIf="user && !isOut">
     <div class="outside_profile_image">
       <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
     </div>
@@ -19,14 +18,14 @@
       <li><a href="">Test scenario</a>
       </li>
       <li><a href="">Test case history</a></li>
-      <li><a href="">Reports</a></li>
-      <li><a href="">Notifications</a>
+      <li><a href="" class="">Reports</a></li>
+      <li><a href="" >Notifications</a>
       </li>
     </ul>
     <div class="sidebar_footer">
       <ul>
-        <li><a [routerLink]="['sign-up']">Admin Panel</a></li>
-        <li><a (click)="logout()" class="cursorPointer">Logout</a ></li>
+        <li><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
+        <li><a (click)="logout()" class="cursorPointer">Logout</a></li>
       </ul>
     </div>
   </div>

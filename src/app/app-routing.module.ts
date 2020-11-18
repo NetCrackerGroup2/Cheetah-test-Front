@@ -10,7 +10,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'forget-password', component: ForgotPasswordComponent},
   {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'reset-password', component: SavePasswordComponent},
