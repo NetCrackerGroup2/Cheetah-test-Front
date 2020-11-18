@@ -21,12 +21,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthService
-  ) {
-    // redirect to home if already logged in
-    if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
-    }
-  }
+  ) {}
 
   ngOnInit(): void {
   }
@@ -34,13 +29,13 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.loading = true;
 
-    const user: LoginDto = new LoginDto(this.email, this.password);
-    // const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pas');
+    // const user: LoginDto = new LoginDto(this.email, this.password);
+    const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pass');
     this.authenticationService.login(user)
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigateByUrl('/desktop');
+          this.router.navigateByUrl('/dashboard');
           this.loading = false;
         },
         error: () => {
