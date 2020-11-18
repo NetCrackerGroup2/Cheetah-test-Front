@@ -11,9 +11,10 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  {path: 'desktop', component: DesktopComponent},
-  {path: 'reset-password', component: SavePasswordComponent}
+  {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
+  {path: 'desktop', component: DesktopComponent, canActivate: [AuthGuard]},
+  {path: 'reset-password', component: SavePasswordComponent},
+  {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
 @NgModule({

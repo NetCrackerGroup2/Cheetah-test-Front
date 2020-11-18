@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'app-save-password',
