@@ -1,21 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
 import {LoginDto} from '../../models/loginDto/loginDto';
 import {first} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   email: string;
   password: string;
   message: string;
   loading = false;
   submitted = false;
   error = '';
+  subscription: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,10 +34,9 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.loading = true;
-
     const user: LoginDto = new LoginDto(this.email, this.password);
     // const user: LoginDto = new LoginDto('abereznikov64@gmail.com', 'pass');
-    this.authenticationService.login(user)
+    this.subscription = this.authenticationService.login(user)
       .pipe(first())
       .subscribe({
         next: () => {
@@ -50,4 +51,9 @@ export class LoginComponent implements OnInit {
   }
 
 
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

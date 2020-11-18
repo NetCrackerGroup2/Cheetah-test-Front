@@ -27,8 +27,7 @@ export class AppComponent {
       || this.router.url.startsWith('/reset-password');
   }
 
-  get isAdmin() {
-    console.log(this.user);
+  get isAdmin(): boolean {
     return this.user && this.user.role === Role.ADMIN;
   }
 

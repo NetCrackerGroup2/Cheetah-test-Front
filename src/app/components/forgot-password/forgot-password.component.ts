@@ -1,20 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {RecoveryEmail} from '../../models/recoveryEmail/recovery-email';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.css']
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit, OnDestroy {
   recoveryEmail: string;
   message: string;
   successMessage: string;
   isSent: boolean;
   loading = false;
+  subscription: Subscription;
 
   constructor(private http: HttpClient,
               private rserv: ResetPasswordService) {
@@ -30,7 +32,7 @@ export class ForgotPasswordComponent implements OnInit {
 
     const email = new RecoveryEmail();
     email.email = this.recoveryEmail;
-    this.rserv.sendResetEmail(email).subscribe(
+    this.subscription = this.rserv.sendResetEmail(email).subscribe(
       data => {
         if (data) {
           this.message = '';
@@ -43,5 +45,11 @@ export class ForgotPasswordComponent implements OnInit {
 
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

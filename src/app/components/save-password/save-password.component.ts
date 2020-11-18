@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-save-password',
   templateUrl: './save-password.component.html',
   styleUrls: ['./save-password.component.css']
 })
-export class SavePasswordComponent implements OnInit {
-
+export class SavePasswordComponent implements OnInit, OnDestroy {
+  subscription: Subscription;
   loading = false;
   resetToken: string;
   password: string;
@@ -32,7 +33,7 @@ export class SavePasswordComponent implements OnInit {
   resetPassword(): void {
     this.loading = true;
     if (this.password === this.passwordConfirm) {
-      this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe({
+      this.subscription = this.resetService.sendResetTokenAndPassword(this.resetToken, this.password).subscribe({
         next: body => {
           console.log(body.message);
           if (body.message === 'same.password') {
@@ -55,5 +56,11 @@ export class SavePasswordComponent implements OnInit {
       this.message = 'Password in confirmation doesn\'t match';
     }
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
