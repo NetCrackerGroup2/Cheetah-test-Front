@@ -11,7 +11,7 @@ import {Role} from './models/roles/role';
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'forget-password', component: ForgotPasswordComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
   {
     path: 'dashboard', component: DashboardComponent,
