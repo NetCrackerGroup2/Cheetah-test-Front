@@ -60,6 +60,7 @@ export class SavePasswordComponent implements OnInit, OnDestroy {
           } else if (body.message === 'token.invalid') {
             this.message = 'This link is invalid';
           }
+          this.loading = false;
         },
         error: () => {
           this.loading = false;
@@ -68,7 +69,7 @@ export class SavePasswordComponent implements OnInit, OnDestroy {
     } else {
       this.message = 'Password in confirmation doesn\'t match';
     }
-    this.loading = false;
+
   }
 
   ngOnDestroy(): void {
