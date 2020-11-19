@@ -5,6 +5,7 @@ import {User} from '../../models/user/user';
 import {Subscription} from 'rxjs';
 import {first} from 'rxjs/operators';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-sign-up',
@@ -41,6 +42,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
   get name(): any {return this.createForm.get('name'); }
 
   onSubmit(): void {
+    this.successMessage = '';
+    this.message = '';
+
     this.loading = true;
     this.user.email = this.email.value;
     this.user.name = this.name.value;
@@ -51,13 +55,18 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe( {
         next: data => {
-          if (data.status === 'success') {
-            this.user = new User();
-            this.successMessage = 'Account has been created';
-            this.message = '';
-          } else {
-            this.message = 'Invalid input';
-            this.successMessage = '';
+          switch (data) {
+            case environment.success: {
+              this.user = new User();
+              this.successMessage = 'Account has been created';
+              break;
+            } case environment.userExists: {
+              this.message = environment.userExists;
+              break;
+            } default: {
+              this.message = 'Server error';
+              break;
+            }
           }
           this.loading = false;
           this.createForm.reset();

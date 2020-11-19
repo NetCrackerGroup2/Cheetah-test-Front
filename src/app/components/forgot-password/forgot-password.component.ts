@@ -2,9 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ResetPasswordService} from '../../services/reset-password/reset-password.service';
 import {RecoveryEmail} from '../../models/recoveryEmail/recovery-email';
-import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-forgot-password',
@@ -47,17 +47,25 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     const recoveryEmail = new RecoveryEmail();
     recoveryEmail.email = this.email.value;
     this.subscription = this.resetPasswordService.sendResetEmail(recoveryEmail).subscribe(
-      data => {
-        if (data) {
-          this.message = '';
-          this.successMessage = 'Confirmation was sent to your email';
+      {
+        next: data => {
+          switch (data) {
+            case environment.userFetched: {
+              this.successMessage = 'Confirmation was sent to your email';
+              break;
+            }
+            case environment.invalidEmail: {
+              this.message = 'Invalid email';
+              break;
+            }
+            default: {
+              this.message = 'Server error';
+              break;
+            }
+          }
+          this.loading = false;
         }
-        this.loading = false;
       });
-    this.resetPasswordService.messageSubject$.subscribe(message => {
-        this.message = message;
-      }
-    );
   }
 
   ngOnDestroy(): void {

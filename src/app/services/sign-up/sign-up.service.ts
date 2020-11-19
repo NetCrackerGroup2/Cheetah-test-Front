@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {User} from '../../models/user/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ServerResponse} from '../../models/serverResponse/ServerResponse';
 import {catchError, map, mapTo} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
@@ -16,9 +15,11 @@ export class SignUpService {
   postRegisteredUser(user: User): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/register`, user)
       .pipe(
+        map(data => {
+          return data.status;
+        }),
         catchError(error => {
-          console.log(error.error);
-          return of(new ServerResponse());
+          return of (error);
         })
       );
   }
