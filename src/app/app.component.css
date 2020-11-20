@@ -54,16 +54,38 @@
   cursor: pointer;
 }
 
-#menu-toggle{
-
+#menu-toggle:hover{
+  background: linear-gradient(175.93deg, #878787 -10.23%, #66380e 117.03%);
 }
 
 /*sidebar list*/
 .item {
-
   font-family: Lato, serif;
   font-style: normal;
   font-size: 16px;
   color: #FFFFFF;
+}
+.row:hover{
+  color: #66380E;
+}
+
+.item:hover {
+  color: #66380E;
+}
+
+.profile_img{
+  border-radius: 50%;
+}
+
+/*admin page & logout*/
+.admin-bottom {
+  bottom: 0;
+  position: absolute;
+}
+
+/*button*/
+.button-toggle {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+  color: white;
 }
 
