@@ -1,17 +1,25 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   user: User;
+  wasClicked = false;
 
+  ngOnInit(): void {
+    $('#menu-toggle').click(e => {
+      e.preventDefault();
+      $('#wrapper').toggleClass('toggled');
+    });
+  }
   constructor(private authenticationService: AuthService,
               private router: Router) {
     this.authenticationService.user.subscribe(
@@ -19,6 +27,10 @@ export class AppComponent {
         this.user = x;
       }
     );
+  }
+
+  onClick(): void {
+    this.wasClicked = !this.wasClicked;
   }
 
   get isOut(): boolean {
@@ -34,4 +46,5 @@ export class AppComponent {
   logout(): void {
     this.authenticationService.logout();
   }
+
 }

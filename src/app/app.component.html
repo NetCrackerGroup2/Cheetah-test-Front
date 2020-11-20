@@ -1,36 +1,31 @@
-<div class="wrapper">
-  <div class="sidebar" *ngIf="user && !isOut">
-    <div class="outside_profile_image">
-      <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
-    </div>
-    <hr>
-    <ul>
-      <li>
-        <a href="">Home</a>
-      </li>
-      <li>
-        <a href="">Profiles</a>
-      </li>
-      <li><a href="">Project</a>
-      </li>
-      <li><a href="">Test case</a></li>
-      <li><a href="">Data set</a></li>
-      <li><a href="">Test scenario</a>
-      </li>
-      <li><a href="">Test case history</a></li>
-      <li><a href="" class="">Reports</a></li>
-      <li><a href="" >Notifications</a>
-      </li>
-    </ul>
-    <div class="sidebar_footer">
-      <ul>
-        <li *ngIf="isAdmin"><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
-        <li><a (click)="logout()" class="cursorPointer">Logout</a></li>
-      </ul>
+<div class="d-flex" id="wrapper">
+
+  <div class="bg-light border-right"
+       id="sidebar-wrapper" *ngIf="user && !isOut">
+    <div class="list-group list-group-flush">
+      <div class="outside_profile_image">
+        <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
+      </div>
+      <a href="" class="item text-center mt-3">Home</a>
+      <a href="" class="item text-center mt-3">Profiles</a>
+      <a href="" class="item text-center mt-3">Project</a>
+      <a href="" class="item text-center mt-3">Test case</a>
+      <a href="" class="item text-center mt-3">Data set</a>
+      <a href="" class="item text-center mt-3">Test scenario</a>
+      <a href="" class="item text-center mt-3">Test case history</a>
+      <a href="" class="item text-center mt-3">Reports</a>
+      <a href="" class="item text-center mt-3">Notifications</a>
+      <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item text-center mt-3">Admin Panel</a>
+      <a (click)="logout()" class="item text-center mt-3" id="cursor-pointer">Logout</a>
     </div>
   </div>
-
+  <nav class="border-left">
+    <button class="btn btn-primary" id="menu-toggle" (click)="onClick()"
+            [class.selected]="wasClicked">Toggle Menu</button>
+  </nav>
   <div class="container">
+
     <router-outlet></router-outlet>
   </div>
+
 </div>

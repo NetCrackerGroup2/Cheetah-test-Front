@@ -1,78 +1,69 @@
-
-.wrapper .sidebar {
-  position: fixed;
-  width: 180px;
-  height: 100%;
-  background: linear-gradient(#878787, #BD7D42);
-  padding: 20px 20px;
+/*main content*/
+#wrapper {
+  overflow-x: hidden;
 }
 
-.wrapper .sidebar .outside_profile_image {
-  background: #EBD8C6;
-  clip-path: circle();
-  margin-bottom: 10px;
-  transition: linear 0.4s;
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+}
+
+
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
 
 }
 
-.wrapper .sidebar .outside_profile_image:hover {
-  border: 5px solid #EBD8C6;
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
 }
 
-.wrapper .sidebar .profile_img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  clip-path: circle();
+.toggled{
+  margin-left: 0;
+}
+.not-toggled{
+  margin-left: -15rem;
+}
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
 }
 
-.wrapper .sidebar hr {
-  border: 0;
-  height: 0;
-  opacity: 0.2;
-  border-top: 1px solid #FFFFFF;
-}
-
-.wrapper .sidebar ul li {
-  list-style: none;
-  transition: linear 0.4s;
-  margin-top: 30px;
-}
-
-.wrapper .sidebar ul li:first-child {
-  margin-top: 10px;
-}
-
-.wrapper .sidebar a {
-  text-decoration: none;
-  font-family: Lato, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  color: #fff;
-}
-
-.wrapper .sidebar ul img {
-  padding-right: 20px;
-  width: 21px;
-  height: 21px;
-}
-
-.wrapper .sidebar ul li a {
-  width: 25px;
-}
-
-.wrapper .sidebar ul li:hover {
-  background: #CA9768;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.wrapper .sidebar .sidebar_footer {
-  position: absolute;
-  bottom: 60px;
-
-}
-.cursorPointer
+#cursor-pointer
 {
   cursor: pointer;
 }
+
+#menu-toggle{
+
+}
+
+/*sidebar list*/
+.item {
+
+  font-family: Lato, serif;
+  font-style: normal;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
