@@ -1,21 +1,36 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="wrapper">
+  <div class="sidebar" *ngIf="user && !isOut">
+    <div class="outside_profile_image">
+      <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
+    </div>
+    <hr>
+    <ul>
+      <li>
+        <a href="">Home</a>
+      </li>
+      <li>
+        <a href="">Profiles</a>
+      </li>
+      <li><a href="">Project</a>
+      </li>
+      <li><a href="">Test case</a></li>
+      <li><a href="">Data set</a></li>
+      <li><a href="">Test scenario</a>
+      </li>
+      <li><a href="">Test case history</a></li>
+      <li><a href="" class="">Reports</a></li>
+      <li><a href="" >Notifications</a>
+      </li>
+    </ul>
+    <div class="sidebar_footer">
+      <ul>
+        <li *ngIf="isAdmin"><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
+        <li><a (click)="logout()" class="cursorPointer">Logout</a></li>
+      </ul>
+    </div>
+  </div>
 
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
-
-<router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

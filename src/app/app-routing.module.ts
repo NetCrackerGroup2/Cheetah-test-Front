@@ -1,23 +1,29 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './containers/login/login.component';
-import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
-import {AuthGuard} from './guard/authguard.service';
-import {SignUpComponent} from './containers/sign-up/sign-up.component';
-import {DesktopComponent} from './containers/desktop/desktop.component';
-import {SavePasswordComponent} from './containers/save-password/save-password.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {LoginComponent} from './components/login/login.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {AuthGuard} from './helpers/authguard.service';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {SavePasswordComponent} from './components/save-password/save-password.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {Role} from './models/roles/role';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'forgotpassword', component: ForgotPasswordComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  {path: 'desktop', component: DesktopComponent},
-  {path: 'reset-password', component: SavePasswordComponent}
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
+  {
+    path: 'dashboard', component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: 'reset-password', component: SavePasswordComponent},
+  {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

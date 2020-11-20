@@ -3,14 +3,15 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginComponent} from './containers/login/login.component';
-import {FormsModule} from '@angular/forms';
+import {LoginComponent} from './components/login/login.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
-import {DesktopComponent} from './containers/desktop/desktop.component';
-import {InterceptorService} from './services/interceptor/interceptor.service';
-import {SignUpComponent} from './containers/sign-up/sign-up.component';
-import {SavePasswordComponent} from './containers/save-password/save-password.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {InterceptorService} from './helpers/interceptor/interceptor.service';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {SavePasswordComponent} from './components/save-password/save-password.component';
+import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,21 +19,20 @@ import {SavePasswordComponent} from './containers/save-password/save-password.co
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    DesktopComponent,
     SignUpComponent,
     SavePasswordComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: InterceptorService,
-    multi: true
-  }],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule {

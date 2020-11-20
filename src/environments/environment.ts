@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+  invalidEmail: 'invalid.email',
+  userFetched: 'user.fetched',
+  resetTokenNull: 'reset.token.null',
+  tokenExpired: 'token.expired',
+  invalidToken: 'token.invalid',
+  samePassword: 'same.password',
+  resetPasswordSuccess: 'message.resetPasswordSuc',
+  success: 'success',
+  userExists: 'User Already Exists'
 };
 
 /*
