@@ -48,13 +48,18 @@
   font-style: normal;
   font-size: 16px;
   color: #FFFFFF;
+  transition: linear 0.5s;
+
 }
 .row:hover{
   color: #66380E;
 }
 
 .item:hover {
+  padding: 10px;
   color: #66380E;
+  background: #CA9768;
+  border-radius: 12px;
 }
 
 .profile_img{
