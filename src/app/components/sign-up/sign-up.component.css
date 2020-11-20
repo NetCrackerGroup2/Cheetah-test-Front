@@ -8,7 +8,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 130px;
+  margin-top: 100px;
+  padding-left: 300px;
 }
 
 .create_user_form, .delete_user_form {
@@ -36,11 +37,6 @@
   color: #744D25;
 }
 
-.forms_container .form_title {
-  margin-bottom: 25px;
-  color: #000;
-  border-radius: 20px;
-}
 
 input:focus, select:focus{
   outline: none;
@@ -68,7 +64,7 @@ input:focus, select:focus{
   color: #fff;
   background: #BD7D42;
   border-radius: 15px;
-  width: 75%;
+  width: 100%;
   border: none;
   padding: 10px;
   margin-left: 10px;

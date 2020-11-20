@@ -10,8 +10,8 @@ import {InterceptorService} from './helpers/interceptor/interceptor.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {SidebarModule} from 'ng-sidebar';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SidebarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

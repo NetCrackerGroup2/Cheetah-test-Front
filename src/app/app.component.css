@@ -1,44 +1,13 @@
-/*main content*/
-#wrapper {
-  overflow-x: hidden;
-}
-
-#sidebar-wrapper {
-  min-height: 100vh;
-  margin-left: -15rem;
-  transition: all 0.25s ease-out;
-  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
-}
-
-#sidebar-wrapper .list-group {
-  width: 15rem;
-}
-
-#page-content-wrapper {
-  min-width: 100vw;
-}
-
-.toggled{
-  margin-left: -15rem;
-  transition: all 0.25s ease-out;
-}
-
-@media (min-width: 768px) {
-  #sidebar-wrapper {
-    margin-left: 0;
-  }
-  #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
-  }
-}
-
-#cursor-pointer
+.cursor-pointer
 {
   cursor: pointer;
 }
 
-#menu-toggle:hover{
+.menu-toggle{
+  color: white;
+}
+
+.menu-toggle:hover{
   background: linear-gradient(175.93deg, #878787 -10.23%, #66380e 117.03%);
 }
 
@@ -57,9 +26,8 @@
 
 .item:hover {
   padding: 10px;
-  color: #66380E;
-  background: #CA9768;
-  border-radius: 12px;
+  background: #806f5c;
+  border-radius: 20px;
 }
 
 .profile_img{
@@ -74,7 +42,36 @@
 
 /*button*/
 .button-toggle {
-  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+
+  background: linear-gradient(175.93deg, #878787 -10.23%, #5f4023 117.03%);
   color: white;
 }
+
+.button-toggle:hover {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #1c1004 117.03%);
+}
+
+/*sidebar*/
+ng-sidebar-container {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 100vh;
+  position: fixed;
+}
+
+::ng-deep .ng-sidebar {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+  padding: 2em 3em;
+  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+  display: block;
+  top: 50%;
+  right: 20px;
+  position: relative;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
 

@@ -11,11 +11,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   user: User;
-  classApplied = false;
-
-  toggleClass(): void {
-    this.classApplied = !this.classApplied;
-  }
+  opened = true;
 
   constructor(private authenticationService: AuthService,
               private router: Router) {
@@ -40,4 +36,7 @@ export class AppComponent {
     this.authenticationService.logout();
   }
 
+  toggleSidebar(): void {
+    this.opened = !this.opened;
+  }
 }
