@@ -1,73 +1,73 @@
 <div class="d-flex" id="wrapper">
-
-  <div class="border-right"
-       id="sidebar-wrapper" *ngIf="user && !isOut">
-    <div class="list-group list-group-flush">
-      <div class="text-center mt-3">
-        <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
+  <div [class.toggled]="classApplied">
+    <div class="border-right"
+         id="sidebar-wrapper" *ngIf="user && !isOut">
+      <div class="list-group list-group-flush">
+        <div class="text-center mt-3">
+          <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
+        </div>
+        <div class="row mt-3">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/home.svg" alt="Test case history" class="mr-3">
+            Home</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/profiles.svg" alt="Test case history" class="mr-3">
+            Profiles</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/project.svg" alt="Test case history" class="mr-3">
+            Project</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/test_case.svg" alt="Test case history" class="mr-3">
+            Test case</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/data_set.svg" alt="Test case history" class="mr-3">
+            Data set</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/test_scenario.svg" alt="Test case history" class="mr-3">
+            Test scenario</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
+            Test case history
+          </a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/reports.svg" alt="Test case history" class="mr-3">
+            Reports</a></div>
+        <div class="row">
+          <a href="" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/notifications.svg" alt="Test case history" class="mr-3">
+            Notifications</a>
+        </div>
       </div>
-      <div class="row mt-3">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/home.svg" alt="Test case history" class="mr-3">
-          Home</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/profiles.svg" alt="Test case history" class="mr-3">
-          Profiles</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/project.svg" alt="Test case history" class="mr-3">
-          Project</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/test_case.svg" alt="Test case history" class="mr-3">
-          Test case</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/data_set.svg" alt="Test case history" class="mr-3">
-          Data set</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/test_scenario.svg" alt="Test case history" class="mr-3">
-          Test scenario</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
-          Test case history
-        </a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/reports.svg" alt="Test case history" class="mr-3">
-          Reports</a></div>
-      <div class="row">
-        <a href="" class="item ml-5 mt-4">
-          <img src="assets/sidebar_images/notifications.svg" alt="Test case history" class="mr-3">
-          Notifications</a>
-      </div>
+      <footer class="page-footer pb-5 admin-bottom">
+        <div class="container-fluid">
+          <div class="row">
+            <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
+              Admin Panel</a>
+          </div>
+          <div class="row">
+            <a (click)="logout()" class="item ml-5 mt-4" id="cursor-pointer">
+              <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
+              Logout</a>
+          </div>
+        </div>
+      </footer>
     </div>
-    <footer class="page-footer pb-5 admin-bottom">
-      <div class="container-fluid">
-        <div class="row">
-          <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item ml-5 mt-4">
-            <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
-            Admin Panel</a>
-        </div>
-        <div class="row">
-          <a (click)="logout()" class="item ml-5 mt-4" id="cursor-pointer">
-            <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
-            Logout</a>
-        </div>
-      </div>
-    </footer>
-
   </div>
+
   <nav *ngIf="user && !isOut">
-    <button type="submit" class="btn button-toggle" id="menu-toggle" (click)="onClick()"
-            [class.selected]="wasClicked">Toggle Menu
+    <button type="submit" class="btn button-toggle" id="menu-toggle" (click)="toggleClass()">
+      Toggle Menu
     </button>
   </nav>
   <div class="container">
-
     <router-outlet></router-outlet>
   </div>
 

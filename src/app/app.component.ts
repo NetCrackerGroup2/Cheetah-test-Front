@@ -1,25 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
 import {Router} from '@angular/router';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   user: User;
-  wasClicked = false;
+  classApplied = false;
 
-  ngOnInit(): void {
-    $('#menu-toggle').click(e => {
-      e.preventDefault();
-      $('#wrapper').toggleClass('toggled');
-    });
+  toggleClass(): void {
+    this.classApplied = !this.classApplied;
   }
+
   constructor(private authenticationService: AuthService,
               private router: Router) {
     this.authenticationService.user.subscribe(
@@ -27,10 +24,6 @@ export class AppComponent implements OnInit {
         this.user = x;
       }
     );
-  }
-
-  onClick(): void {
-    this.wasClicked = !this.wasClicked;
   }
 
   get isOut(): boolean {
