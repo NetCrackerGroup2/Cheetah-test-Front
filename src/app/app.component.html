@@ -61,7 +61,7 @@
     </footer>
 
   </div>
-  <nav>
+  <nav *ngIf="user && !isOut">
     <button type="submit" class="btn button-toggle" id="menu-toggle" (click)="onClick()"
             [class.selected]="wasClicked">Toggle Menu
     </button>
