@@ -62,7 +62,7 @@
   flex-direction: row;
   justify-content: center;
 }
-.options{
+.login_submit{
   width: 300px;
   height: 50px;
 
@@ -82,7 +82,7 @@
   opacity: 0.9;
   transition: linear 0.3s;
 }
-.options:hover{
+.login_submit:hover{
   background-color: #D98F4C;
   border: 2px white;
   color: black;

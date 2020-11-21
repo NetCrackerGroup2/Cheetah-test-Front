@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around ;
-  padding-left: 500px;
+  padding-left: 800px;
 }
 
 .table-config {
@@ -10,6 +10,7 @@
   flex-direction: column;
   margin-right: 500px;
 }
+
 .options{
   width: 100px;
   border-radius: 10px;
