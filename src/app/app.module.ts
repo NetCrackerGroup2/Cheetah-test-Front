@@ -1,6 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -11,8 +10,8 @@ import {InterceptorService} from './helpers/interceptor/interceptor.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {SidebarModule} from 'ng-sidebar';
 
 @NgModule({
   declarations: [
@@ -29,6 +28,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    SidebarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

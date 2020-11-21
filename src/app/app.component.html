@@ -1,36 +1,77 @@
 <div class="wrapper">
-  <div class="sidebar" *ngIf="user && !isOut">
-    <div class="outside_profile_image">
-      <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
-    </div>
-    <hr>
-    <ul>
-      <li>
-        <a href="">Home</a>
-      </li>
-      <li>
-        <a href="">Profiles</a>
-      </li>
-      <li><a href="">Project</a>
-      </li>
-      <li><a href="">Test case</a></li>
-      <li><a href="">Data set</a></li>
-      <li><a href="">Test scenario</a>
-      </li>
-      <li><a href="">Test case history</a></li>
-      <li><a href="" class="">Reports</a></li>
-      <li><a href="" >Notifications</a>
-      </li>
-    </ul>
-    <div class="sidebar_footer">
-      <ul>
-        <li *ngIf="isAdmin"><a [routerLink]="['sign-up']" class="cursorPointer">Admin Panel</a></li>
-        <li><a (click)="logout()" class="cursorPointer">Logout</a></li>
-      </ul>
-    </div>
+  <div *ngIf="user && !isOut">
+    <ng-sidebar-container contentClass="container">
+      <ng-sidebar [opened]=opened autoCollapseWidth="1000">
+        <div class="list-group list-group-flush">
+          <div class="text-center mt-5">
+            <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="profile" class="profile_img"></a>
+          </div>
+          <div class="row mt-3">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/home.svg" alt="Test case history" class="mr-3">
+              Home</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/profiles.svg" alt="Test case history" class="mr-3">
+              Profiles</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/project.svg" alt="Test case history" class="mr-3">
+              Project</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/test_case.svg" alt="Test case history" class="mr-3">
+              Test case</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/data_set.svg" alt="Test case history" class="mr-3">
+              Data set</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/test_scenario.svg" alt="Test case history" class="mr-3">
+              Test scenario</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
+              Test case history
+            </a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/reports.svg" alt="Test case history" class="mr-3">
+              Reports</a></div>
+          <div class="row">
+            <a href="" class="item ml-5 mt-4">
+              <img src="assets/sidebar_images/notifications.svg" alt="Test case history" class="mr-3">
+              Notifications</a>
+          </div>
+        </div>
+        <footer class="page-footer pb-5 admin-bottom">
+          <div class="container-fluid">
+            <div class="row">
+              <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item ml-5 mt-4 cursor-pointer">
+                <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
+                Admin Panel</a>
+            </div>
+            <div class="row">
+              <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
+                <img src="assets/sidebar_images/back_to.svg" alt="Test case history" class="mr-3">
+                Logout</a>
+            </div>
+          </div>
+        </footer>
+      </ng-sidebar>
+    </ng-sidebar-container>
   </div>
 
-  <div class="container">
-    <router-outlet></router-outlet>
+  <div class="container-fluid">
+    <nav class="navbar" *ngIf="!isOut">
+      <div class="row">
+        <a (click)="toggleSidebar()" class="btn ml-5 cursor-pointer button-toggle">
+          Toggle Sidebar</a>
+      </div>
+    </nav>
+    <div class="text-center">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

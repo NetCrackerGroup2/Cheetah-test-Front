@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class AppComponent {
   user: User;
+  opened = true;
 
   constructor(private authenticationService: AuthService,
               private router: Router) {
@@ -33,5 +34,9 @@ export class AppComponent {
 
   logout(): void {
     this.authenticationService.logout();
+  }
+
+  toggleSidebar(): void {
+    this.opened = !this.opened;
   }
 }

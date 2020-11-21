@@ -1,78 +1,77 @@
-
-.wrapper .sidebar {
-  position: fixed;
-  width: 180px;
-  height: 100%;
-  background: linear-gradient(#878787, #BD7D42);
-  padding: 20px 20px;
-}
-
-.wrapper .sidebar .outside_profile_image {
-  background: #EBD8C6;
-  clip-path: circle();
-  margin-bottom: 10px;
-  transition: linear 0.4s;
-
-}
-
-.wrapper .sidebar .outside_profile_image:hover {
-  border: 5px solid #EBD8C6;
-}
-
-.wrapper .sidebar .profile_img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  clip-path: circle();
-}
-
-.wrapper .sidebar hr {
-  border: 0;
-  height: 0;
-  opacity: 0.2;
-  border-top: 1px solid #FFFFFF;
-}
-
-.wrapper .sidebar ul li {
-  list-style: none;
-  transition: linear 0.4s;
-  margin-top: 30px;
-}
-
-.wrapper .sidebar ul li:first-child {
-  margin-top: 10px;
-}
-
-.wrapper .sidebar a {
-  text-decoration: none;
-  font-family: Lato, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  color: #fff;
-}
-
-.wrapper .sidebar ul img {
-  padding-right: 20px;
-  width: 21px;
-  height: 21px;
-}
-
-.wrapper .sidebar ul li a {
-  width: 25px;
-}
-
-.wrapper .sidebar ul li:hover {
-  background: #CA9768;
-  border-radius: 8px;
-  padding: 10px;
-}
-
-.wrapper .sidebar .sidebar_footer {
-  position: absolute;
-  bottom: 60px;
-
-}
-.cursorPointer
+.cursor-pointer
 {
   cursor: pointer;
 }
+
+.menu-toggle{
+  color: white;
+}
+
+.menu-toggle:hover{
+  background: linear-gradient(175.93deg, #878787 -10.23%, #66380e 117.03%);
+}
+
+/*sidebar list*/
+.item {
+  font-family: Lato, serif;
+  font-style: normal;
+  font-size: 16px;
+  color: #FFFFFF;
+  transition: linear 0.5s;
+
+}
+.row:hover{
+  color: #66380E;
+}
+
+.item:hover {
+  padding: 10px;
+  background: #806f5c;
+  border-radius: 20px;
+}
+
+.profile_img{
+  border-radius: 50%;
+}
+
+/*admin page & logout*/
+.admin-bottom {
+  bottom: 0;
+  position: absolute;
+}
+
+/*button*/
+.button-toggle {
+
+  background: linear-gradient(175.93deg, #878787 -10.23%, #5f4023 117.03%);
+  color: white;
+}
+
+.button-toggle:hover {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #1c1004 117.03%);
+}
+
+/*sidebar*/
+ng-sidebar-container {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 100vh;
+  position: fixed;
+}
+
+::ng-deep .ng-sidebar {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+  padding: 2em 3em;
+  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+  display: block;
+  top: 50%;
+  right: 20px;
+  position: relative;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+

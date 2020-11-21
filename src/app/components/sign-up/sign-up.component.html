@@ -3,7 +3,7 @@
   <div class="forms_container">
     <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="create_user_form">
       <div class="form_title">
-        <h1>Create User</h1>
+        <h1 class="signUp_text">Create User</h1>
         <h5 class="text-danger text-center">{{message}}</h5>
         <h5 class="text-success text-center">{{successMessage}}</h5>
       </div>
@@ -65,14 +65,14 @@
 
     <div class="delete_user_form">
       <div class="form_title">
-        <h1>Delete User</h1>
+        <h1 class="signUp_text">Delete User</h1>
       </div>
       <div class="form_item">
         <label>Username:</label>
         <input type="text">
       </div>
       <div class="form_item">
-        <input type="submit" value="Enter">
+        <input type="submit" value="Delete">
       </div>
     </div>
   </div>
