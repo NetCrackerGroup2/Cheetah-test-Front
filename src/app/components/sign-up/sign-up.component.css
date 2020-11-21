@@ -6,13 +6,17 @@
 
 .forms_container {
   display: flex;
+}
+.forms_container {
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   margin-top: 100px;
   padding-left: 300px;
 }
 
-.create_user_form, .delete_user_form {
+
+.user_form, .delete_user_form {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25), 0 0 10px rgba(230, 230, 230, 0.5);
   text-align: center;
   padding: 35px;
@@ -83,12 +87,8 @@ input:focus, select:focus{
   color: #000;
 }
 
-.create_user_form {
-  display: flex;
-  flex-direction: column;
-}
 
-.create_user_form .input_item {
+.user_form .input_item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -97,7 +97,7 @@ input:focus, select:focus{
   width: auto;
 }
 
-.create_user_form .submit_input {
+.user_form .submit_input {
   margin-top: 15px;
 }
 
@@ -113,13 +113,7 @@ input:focus, select:focus{
   position: relative;
 }
 
-.wrapper .main_content {
-  width: 100%;
-  margin-left: 250px;
-  margin-right: 30px;
-  padding: 10px;
-  color: black;
-}
+
 #createUser {
   font-family: 'Roboto', sans-serif;
   font-size: 20px;

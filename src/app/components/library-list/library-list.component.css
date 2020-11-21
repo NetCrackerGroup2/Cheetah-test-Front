@@ -1,0 +1,31 @@
+.main-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around ;
+  padding-left: 500px;
+}
+
+.table-config {
+  width: 1000px;
+  flex-direction: column;
+  margin-right: 500px;
+}
+.options{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #bd7d42;
+  outline: none;
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: white;
+  line-height: 30px;
+  text-align: center;
+  transition: linear 0.3s;
+  border: 2px white;
+}
+.options:hover{
+  background-color: #D98F4C;
+  color: black;
+}

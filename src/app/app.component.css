@@ -1,3 +1,4 @@
+
 .cursor-pointer
 {
   cursor: pointer;
@@ -68,10 +69,6 @@ ng-sidebar-container {
   right: 20px;
   position: relative;
 }
-.wrapper {
-  display: flex;
-  width: 100%;
-  align-items: stretch;
-}
+
 
 

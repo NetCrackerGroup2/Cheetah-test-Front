@@ -6,18 +6,28 @@ import {AuthGuard} from './helpers/authguard.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {Role} from './models/roles/role';
+import {LibraryListComponent} from './components/library-list/library-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
-  {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]},
+  {path: 'reset-password', component: SavePasswordComponent},
   {
-    path: 'dashboard', component: DashboardComponent,
+    path: 'sign-up',
+    component: SignUpComponent,
     canActivate: [AuthGuard]
   },
-  {path: 'reset-password', component: SavePasswordComponent},
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'libraries',
+    component: LibraryListComponent,
+    canActivate: [AuthGuard]
+  },
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 

@@ -12,6 +12,7 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
+import { LibraryListComponent } from './components/library-list/library-list.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {SidebarModule} from 'ng-sidebar';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
+    LibraryListComponent
   ],
   imports: [
     BrowserModule,
