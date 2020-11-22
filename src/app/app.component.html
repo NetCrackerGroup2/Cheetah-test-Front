@@ -62,12 +62,15 @@
   <div class="container-fluid">
     <nav class="navbar" *ngIf="!isOut">
       <div class="row">
-        <a (click)="toggleSidebar()" class="btn ml-5 cursor-pointer button-toggle">
-          Toggle Sidebar</a>
+        <div class="col-sm">
+          <a (click)="toggleSidebar()" class="btn ml-5 cursor-pointer button-toggle">
+            Toggle Sidebar</a>
+        </div>
       </div>
     </nav>
   </div>
   <div>
+<!--    <app-search *ngIf="isSearch"></app-search>-->
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -1,14 +1,13 @@
 
-.cursor-pointer
-{
+.cursor-pointer {
   cursor: pointer;
 }
 
-.menu-toggle{
+.menu-toggle {
   color: white;
 }
 
-.menu-toggle:hover{
+.menu-toggle:hover {
   background: linear-gradient(175.93deg, #878787 -10.23%, #66380e 117.03%);
 }
 
@@ -21,7 +20,8 @@
   transition: linear 0.5s;
 
 }
-.row:hover{
+
+.row:hover {
   color: #66380E;
 }
 
@@ -31,7 +31,7 @@
   border-radius: 20px;
 }
 
-.profile_img{
+.profile_img {
   border-radius: 50%;
 }
 

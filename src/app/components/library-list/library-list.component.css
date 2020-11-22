@@ -1,3 +1,8 @@
+.footer-library{
+  flex-direction: row;
+  padding-left: 60%;
+}
+
 .main-content{
   display: flex;
   flex-direction: row;
@@ -11,29 +16,6 @@
   margin-right: 600px;
 }
 
-.options{
-  width: 100px;
-  border-radius: 10px;
-  background-color: #bd7d42;
-  outline: none;
-  font-family: Roboto,sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  color: white;
-  line-height: 30px;
-  text-align: center;
-  transition: linear 0.3s;
-  border: 2px white;
-}
-.options:hover{
-  background-color: #D98F4C;
-  color: black;
-}
-.footer-pagination{
-  text-align:center
-
-}
 
 /*pagination*/
 .pagination {
@@ -81,4 +63,13 @@
   cursor: auto;
   background-color: #fff;
   border-color: #dee2e6;
+}
+.center-search {
+  display: flex;
+  justify-content: space-around;
+}
+
+.page-padding {
+  padding-left: 900px;
+  position: fixed;
 }

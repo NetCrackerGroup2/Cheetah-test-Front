@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {Library} from '../../models/library/library';
 
@@ -9,13 +9,17 @@ import {Library} from '../../models/library/library';
   styleUrls: ['./library-list.component.css']
 })
 export class LibraryListComponent implements OnInit {
-  thePageNumber: number = 1;
-  thePageSize: number = 2;
-  theTotalElements: number = 25;
+  thePageNumber = 1;
+  thePageSize = 2;
+  theTotalElements = 5;
   libraries: Library[] = [];
 
+  searchMode = false;
+  previousKeyword: string = null;
+
   constructor(private route: ActivatedRoute,
-              private libraryService: LibraryService) {
+              private libraryService: LibraryService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,8 +27,14 @@ export class LibraryListComponent implements OnInit {
   }
 
   public listLibraries(): void {
-    this.libraries = this.libraryService
-      .getLibraryList(this.thePageNumber - 1, this.thePageSize);
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+
+    if (this.searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.handleListProducts();
+    }
+
   }
 
   public updatePageSize(pageSize: number): void {
@@ -33,4 +43,30 @@ export class LibraryListComponent implements OnInit {
     this.listLibraries();
   }
 
+  private handleListProducts(): void {
+    this.libraries = this.libraryService
+      .getLibraryList(this.thePageNumber - 1, this.thePageSize);
+    // .subscribe(data => this.libraries = data);
+  }
+
+  private handleSearchProducts(): void {
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword');
+
+    if (this.previousKeyword !== theKeyword) {
+      this.thePageNumber = 1;
+    }
+
+    this.previousKeyword = theKeyword;
+
+    console.log(`keyword=${theKeyword}, pagenumber=${this.thePageNumber}`);
+
+    this.libraryService.searchProductsPaginate(
+      this.thePageNumber - 1, this.thePageSize,
+      theKeyword).subscribe(data => this.libraries = data);
+  }
+
+  doSearch(value: string): void {
+    console.log(`value=${value}`);
+    this.router.navigateByUrl(`libraries/search/${value}`);
+  }
 }

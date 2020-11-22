@@ -28,6 +28,10 @@ export class AppComponent {
       || this.router.url.startsWith('/reset-password');
   }
 
+  get isSearch(): boolean {
+    return this.router.url.startsWith('/libraries');
+  }
+
   get isAdmin(): boolean {
     return this.user && this.user.role === Role.ADMIN;
   }

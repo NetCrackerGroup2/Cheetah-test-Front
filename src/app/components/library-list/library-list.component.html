@@ -1,64 +1,71 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm">
-      <h1 class="display-4 h1-black">Libraries</h1>
+    <h1 class="display-4 h1-black ">Libraries</h1>
+  </div>
+  <div class="row">
+    <div class="center-search">
+      <div class="form-header">
+
+        <input #myInput placeholder="Search for data ..." class="au-input au-input-xl" type="text"
+               (keyup.enter)="doSearch(myInput.value)"/>
+
+        <button class="options" (click)="doSearch(myInput.value)">
+          Search
+        </button>
+      </div>
     </div>
   </div>
-  <div class="main-content mt-5">
-      <table class="table table-striped table-config">
-        <thead class="thead">
-        <tr>
-          <th scope="col">Library Name</th>
-          <th scope="col">Library Description</th>
-          <th scope="col">Create Date</th>
-          <th scope="col" colspan="2" class="text-center">Options</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let library of libraries">
-          <td>{{library.title}}</td>
-          <td>{{library.description}}</td>
-          <td>{{library.createDate}}</td>
-          <td>
-            <button class="options">View</button>
-          </td>
-          <td>
-            <button class="options">Edit</button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-
+  <div class="main-content mt-5 row">
+    <table class="table table-striped table-config">
+      <thead class="thead">
+      <tr>
+        <th scope="col">Library Name</th>
+        <th scope="col">Library Description</th>
+        <th scope="col">Create Date</th>
+        <th scope="col" colspan="2" class="text-center">Options</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let library of libraries">
+        <td>{{library.title}}</td>
+        <td>{{library.description}}</td>
+        <td>{{library.createDate}}</td>
+        <td>
+          <button class="options">View</button>
+        </td>
+        <td>
+          <button class="options">Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
-  <div class="footer-pagination">
-    <div class="row">
-      <div class="col-md-6"></div>
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-9" style="padding-left: 30%">
-            <ngb-pagination [(page)]="thePageNumber"
-                            [pageSize]="thePageSize"
-                            [collectionSize]="theTotalElements"
-                            [maxSize]="5"
-                            [boundaryLinks]="true"
-                            (pageChange)="listLibraries()">
-            </ngb-pagination>
-          </div>
-          <br>
-          <div class="col-md-3 mt-2" style="text-align: right">
-            <br><br><br>
-            <span class="mr-2">Page Size</span>
-
-            <select (change)="updatePageSize($event.target.value)">
-              <option>1</option>
-              <option selected="true">2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </select>
-          </div>
-
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-9" style="padding-left: 900px">
+          <ngb-pagination [(page)]="thePageNumber"
+                          [pageSize]="thePageSize"
+                          [collectionSize]="theTotalElements"
+                          [maxSize]="5"
+                          [boundaryLinks]="true"
+                          (pageChange)="listLibraries()">
+          </ngb-pagination>
         </div>
+        <br>
+        <div class="col-md-3 mt-2 page-padding">
+          <br><br><br>
+          <span class="mr-2">Page Size</span>
+
+          <select (change)="updatePageSize($event.target.value)">
+            <option>1</option>
+            <option selected="true">2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+
       </div>
     </div>
   </div>

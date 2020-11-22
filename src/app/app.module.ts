@@ -14,7 +14,6 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
 import {LibraryListComponent} from './components/library-list/library-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +23,7 @@ import { SearchComponent } from './components/search/search.component';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
-    LibraryListComponent,
-    SearchComponent
+    LibraryListComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ export class LibraryService {
   }
 
   // getLibraryList(thePageNumber: number, thePageSize: number): Observable<Library[]> {
-  //
+  //   return null;
   // }
 
   getLibraryList(thePageNumber: number, thePageSize: number): Library[] {
@@ -44,5 +44,9 @@ export class LibraryService {
       return libraries.slice(0, thePageSize);
     }
 
+  }
+
+  searchProductsPaginate(thePageNumber: number, thePageSize: number, theKeyword: string): Observable<Library[]> {
+    return null;
   }
 }
