@@ -24,13 +24,22 @@ export class LibraryService {
         {title: 'Library5', description: 'this is library n5', createDate: '11.10.2020'},
       ];
       return libraries.slice(0, thePageSize);
-    } else {
+    } else if (thePageNumber === 1) {
       const libraries: Library[] = [
         {title: 'Library6', description: 'this is library n6', createDate: '1.06.2001'},
         {title: 'Library7', description: 'this is library n7', createDate: '2.10.2010'},
         {title: 'Library8', description: 'this is library n8', createDate: '3.04.2000'},
         {title: 'Library9', description: 'this is library n9', createDate: '4.03.1990'},
         {title: 'Library10', description: 'this is library n10', createDate: '5.10.2020'},
+      ];
+      return libraries.slice(0, thePageSize);
+    } else if (thePageNumber === 2) {
+      const libraries: Library[] = [
+        {title: 'Library11', description: 'this is library n6', createDate: '1.06.2001'},
+        {title: 'Library12', description: 'this is library n7', createDate: '2.10.2010'},
+        {title: 'Library13', description: 'this is library n8', createDate: '3.04.2000'},
+        {title: 'Library14', description: 'this is library n9', createDate: '4.03.1990'},
+        {title: 'Library15', description: 'this is library n10', createDate: '5.10.2020'},
       ];
       return libraries.slice(0, thePageSize);
     }

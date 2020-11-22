@@ -12,7 +12,9 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
-import { LibraryListComponent } from './components/library-list/library-list.component';
+import {LibraryListComponent} from './components/library-list/library-list.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { LibraryListComponent } from './components/library-list/library-list.com
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
-    LibraryListComponent
+    LibraryListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { LibraryListComponent } from './components/library-list/library-list.com
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     SidebarModule
   ],
   providers: [

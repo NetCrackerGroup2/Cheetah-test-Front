@@ -9,9 +9,9 @@ import {Library} from '../../models/library/library';
   styleUrls: ['./library-list.component.css']
 })
 export class LibraryListComponent implements OnInit {
-  thePageNumber = 1;
-  thePageSize = 5;
-  theTotalElements = 0;
+  thePageNumber: number = 1;
+  thePageSize: number = 2;
+  theTotalElements: number = 25;
   libraries: Library[] = [];
 
   constructor(private route: ActivatedRoute,
@@ -22,17 +22,12 @@ export class LibraryListComponent implements OnInit {
     this.listLibraries();
   }
 
-  // private listLibraries(): void {
-  //   this.libraryService.getLibraryList(this.thePageNumber - 1, this.thePageSize)
-  //     .subscribe();
-  // }
-
-  private listLibraries(): void {
+  public listLibraries(): void {
     this.libraries = this.libraryService
       .getLibraryList(this.thePageNumber - 1, this.thePageSize);
   }
 
-  private updatePageSize(pageSize: number): void {
+  public updatePageSize(pageSize: number): void {
     this.thePageSize = pageSize;
     this.thePageNumber = 1;
     this.listLibraries();
