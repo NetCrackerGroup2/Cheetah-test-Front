@@ -13,7 +13,7 @@ export class SignUpService {
   }
 
   postRegisteredUser(user: User): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/register`, user)
+    return this.http.post<any>(`${environment.apiUrl}/api/register`, user)
       .pipe(
         map(data => {
           return data.status;
