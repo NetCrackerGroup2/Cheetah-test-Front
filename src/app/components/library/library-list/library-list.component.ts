@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {LibraryService} from '../../services/library/library.service';
-import {Library} from '../../models/library/library';
+import {LibraryService} from '../../../services/library/library.service';
+import {Library} from '../../../models/library/library';
 
 @Component({
   selector: 'app-library-list',

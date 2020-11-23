@@ -6,7 +6,8 @@ import {AuthGuard} from './helpers/authguard.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {LibraryListComponent} from './components/library-list/library-list.component';
+import {LibraryListComponent} from './components/library/library-list/library-list.component';
+import {LibraryCreateCompoundComponent} from './components/library/library-create-compound/library-create-compound.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'libraries',
     component: LibraryListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'library-create-compound',
+    component: LibraryCreateCompoundComponent,
     canActivate: [AuthGuard]
   },
   {

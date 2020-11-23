@@ -12,8 +12,9 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
-import {LibraryListComponent} from './components/library-list/library-list.component';
+import {LibraryListComponent} from './components/library/library-list/library-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { LibraryCreateCompoundComponent } from './components/library/library-create-compound/library-create-compound.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
-    LibraryListComponent
+    LibraryListComponent,
+    LibraryCreateCompoundComponent
   ],
   imports: [
     BrowserModule,
