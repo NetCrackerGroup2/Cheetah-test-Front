@@ -86,3 +86,34 @@ input.au-input.au-input-xl{
   color: #fff;
   transition: all .4s ease;
 }
+.footer-library{
+  flex-direction: row;
+  padding-left: 60%;
+}
+
+.table-config {
+  width: 1000px;
+  flex-direction: column;
+  margin-right: 600px;
+}
+.search-config {
+  width: 1200px;
+  flex-direction: column;
+  margin-right: 600px;
+
+}
+.paging-config {
+  width: 100px;
+  flex-direction: column;
+
+}
+
+.nothing-found {
+  justify-content: space-around;
+}
+
+.center-search {
+  display: flex;
+  justify-content: space-around;
+}
+

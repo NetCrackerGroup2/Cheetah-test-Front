@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {Library} from '../../models/library/library';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {User} from '../../models/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -11,13 +10,12 @@ import {User} from '../../models/user/user';
 export class LibraryService {
 
   libraryOnEdit: Library;
+  libraryOnView: Library;
 
   constructor(private http: HttpClient) {
   }
 
   getLibraryList(thePageNumber: number, thePageSize: number): Observable<GetResponseLibraries> {
-
-
     const url = `${environment.apiUrl}/api/libraries?size=${thePageSize}&page=${thePageNumber}&title=`;
 
     return this.http.get<GetResponseLibraries>(url);
@@ -43,6 +41,6 @@ export class LibraryService {
 
 interface GetResponseLibraries {
   list: Library[];
-  totalElements: string;
+  totalElements: number;
 }
 

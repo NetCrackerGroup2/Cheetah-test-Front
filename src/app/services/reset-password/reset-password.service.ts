@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Observable, of, Subject, throwError} from 'rxjs';
-import {catchError, map, mapTo} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {RecoveryEmail} from '../../models/recoveryEmail/recovery-email';
 import {ResetPassword} from '../../models/resetPassword/reset-password';

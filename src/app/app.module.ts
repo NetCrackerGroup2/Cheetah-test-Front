@@ -15,6 +15,9 @@ import {SidebarModule} from 'ng-sidebar';
 import {LibraryListComponent} from './components/library-list/library-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { EditLibraryComponent } from './components/edit-library/edit-library.component';
+import { LibraryComponent } from './components/library/library.component';
+import { LibraryCreateCompoundComponent } from './components/library-create-compound/library-create-compound.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { EditLibraryComponent } from './components/edit-library/edit-library.com
     SavePasswordComponent,
     DashboardComponent,
     LibraryListComponent,
-    EditLibraryComponent
+    EditLibraryComponent,
+    LibraryComponent,
+    LibraryCreateCompoundComponent
   ],
   imports: [
     BrowserModule,

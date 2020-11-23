@@ -8,11 +8,9 @@
   background: #FFFFFF;
 
 }
-
 .button-long {
   width: 200px;
 }
-
 .user_form {
   box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02), 10px 20px 20px rgba(102, 62, 51, 0.04), 20px 30px 30px rgba(102, 62, 51, 0.06), 55px 65px 44px rgba(197, 104, 78, 0.13);
   border-radius: 24px;

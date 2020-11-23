@@ -1,18 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Library} from '../../models/library/library';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-edit-library',
   templateUrl: './edit-library.component.html',
   styleUrls: ['./edit-library.component.css']
 })
-export class EditLibraryComponent implements OnInit {
+export class EditLibraryComponent implements OnInit, OnDestroy {
   editForm: FormGroup;
   library: Library;
   loading = false;
+  editLibrarySubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
@@ -51,14 +53,21 @@ export class EditLibraryComponent implements OnInit {
     this.library.name = this.name.value;
 
     if (this.library.description !== undefined) {
-      this.libraryService.saveLibrary(this.library).subscribe( () => {
+      this.editLibrarySubscription = this.libraryService.saveLibrary(this.library).subscribe( () => {
         this.loading = false;
       });
     } else {
-      this.libraryService.createLibrary(this.library).subscribe( () => {
+      this.editLibrarySubscription = this.libraryService.createLibrary(this.library).subscribe( () => {
         this.loading = false;
       });
     }
     this.router.navigate(['libraries']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.editLibrarySubscription) {
+      this.editLibrarySubscription.unsubscribe();
+    }
+
   }
 }

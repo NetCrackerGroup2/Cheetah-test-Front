@@ -19,6 +19,7 @@ export class LibraryListComponent implements OnInit, OnDestroy {
   librarySubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
+  isFound = true;
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
@@ -26,6 +27,7 @@ export class LibraryListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     this.listLibraries();
   }
 
@@ -47,11 +49,12 @@ export class LibraryListComponent implements OnInit, OnDestroy {
       .getLibraryList(this.thePageNumber, this.thePageSize)
       .subscribe(data => {
         this.libraries = data.list;
-        this.theTotalElements = +data.totalElements;
+        this.theTotalElements = data.totalElements;
         if (this.thePageNumber * this.thePageSize >= this.theTotalElements
           && this.theTotalElements > this.thePageSize) {
           this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
         }
+        this.checkIfFound();
       });
   }
 
@@ -71,7 +74,7 @@ export class LibraryListComponent implements OnInit, OnDestroy {
       theKeyword)
       .subscribe(data => {
         this.libraries = data.list;
-        this.theTotalElements = +data.totalElements;
+        this.theTotalElements = data.totalElements;
         if (this.thePageNumber * this.thePageSize >= this.theTotalElements
           && this.theTotalElements > this.thePageSize) {
           this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
@@ -102,4 +105,13 @@ export class LibraryListComponent implements OnInit, OnDestroy {
     }
   }
 
+  goToLibrary(library: Library): void {
+    this.router.navigate([`library/${library.id}/${library.name}`]);
+  }
+
+  private checkIfFound(): void {
+    if (this.libraries?.length === 0) {
+      this.isFound = false;
+    }
+  }
 }
