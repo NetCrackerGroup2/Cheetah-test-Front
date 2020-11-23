@@ -14,6 +14,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
 import {LibraryListComponent} from './components/library-list/library-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { EditLibraryComponent } from './components/edit-library/edit-library.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
-    LibraryListComponent
+    LibraryListComponent,
+    EditLibraryComponent
   ],
   imports: [
     BrowserModule,

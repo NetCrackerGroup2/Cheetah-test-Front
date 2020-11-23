@@ -114,16 +114,7 @@ input:focus, select:focus{
 }
 
 
-#createUser {
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  padding: 5px;
-  border: 1px solid #996433;
-  border-radius: 12px;
-  background: #BD7D42;
-  color: #fff;
-  transition: all .4s ease;
-}
+
 
 #createUser:hover {
   background: #996433;

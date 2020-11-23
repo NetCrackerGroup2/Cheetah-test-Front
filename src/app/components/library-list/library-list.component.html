@@ -11,6 +11,9 @@
         <button class="options" (click)="doSearch(myInput.value)">
           Search
         </button>
+        <button class="options ml-5" (click)="createNew()">
+          Create New
+        </button>
       </div>
     </div>
   </div>
@@ -33,7 +36,7 @@
           <button class="options">View</button>
         </td>
         <td>
-          <button class="options">Edit</button>
+          <button class="options" (click)="edit(library)">Edit</button>
         </td>
       </tr>
       </tbody>

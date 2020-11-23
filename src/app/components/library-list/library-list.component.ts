@@ -1,25 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {Library} from '../../models/library/library';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-library-list',
   templateUrl: './library-list.component.html',
   styleUrls: ['./library-list.component.css']
 })
-export class LibraryListComponent implements OnInit {
+export class LibraryListComponent implements OnInit, OnDestroy {
   thePageNumber = 1;
   thePageSize = 5;
   theTotalElements = 0;
   libraries: Library[] = [];
   value = '';
-
+  librarySearchSubscription: Subscription;
+  librarySubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
 
   constructor(private route: ActivatedRoute,
-              private libraryService: LibraryService) {
+              private libraryService: LibraryService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -29,7 +32,6 @@ export class LibraryListComponent implements OnInit {
   public listLibraries(): void {
     this.searchMode = !!this.value;
 
-    console.log(this.searchMode);
     if (this.searchMode) {
       this.handleSearchProducts();
 
@@ -41,9 +43,16 @@ export class LibraryListComponent implements OnInit {
 
   private handleListProducts(): void {
     this.libraries = [];
-    this.libraryService
+    this.librarySubscription = this.libraryService
       .getLibraryList(this.thePageNumber, this.thePageSize)
-      .subscribe(this.processResult());
+      .subscribe(data => {
+        this.libraries = data.list;
+        this.theTotalElements = +data.totalElements;
+        if (this.thePageNumber * this.thePageSize >= this.theTotalElements
+          && this.theTotalElements > this.thePageSize) {
+          this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
+        }
+      });
   }
 
   private handleSearchProducts(): void {
@@ -56,7 +65,7 @@ export class LibraryListComponent implements OnInit {
 
     console.log(`keyword=${theKeyword}, pagenumber=${this.thePageNumber}`);
 
-    this.libraryService.searchProductsPaginate(
+    this.librarySearchSubscription = this.libraryService.searchProductsPaginate(
       this.thePageNumber,
       this.thePageSize,
       theKeyword)
@@ -75,15 +84,22 @@ export class LibraryListComponent implements OnInit {
     this.listLibraries();
   }
 
-  private processResult(): any {
-    return data => {
-      this.libraries = data.list;
-      this.theTotalElements = +data.totalElements;
-      if (this.thePageNumber * this.thePageSize >= this.theTotalElements
-        && this.theTotalElements > this.thePageSize) {
-        this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
-      }
-    };
-
+  edit(library: Library): void {
+    this.router.navigate([`libraries/edit/${library.id}`]);
+    this.libraryService.libraryOnEdit = library;
   }
+
+  createNew(): void {
+    this.router.navigate(['libraries/edit']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.librarySearchSubscription) {
+      this.librarySearchSubscription.unsubscribe();
+    }
+    if (this.librarySubscription) {
+      this.librarySubscription.unsubscribe();
+    }
+  }
+
 }

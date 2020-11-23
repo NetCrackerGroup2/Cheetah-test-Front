@@ -7,6 +7,7 @@ import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {LibraryListComponent} from './components/library-list/library-list.component';
+import {EditLibraryComponent} from './components/edit-library/edit-library.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -21,6 +22,16 @@ const routes: Routes = [
   {
     path: 'libraries',
     component: LibraryListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'libraries/edit/:id',
+    component: EditLibraryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'libraries/edit',
+    component: EditLibraryComponent,
     canActivate: [AuthGuard]
   },
   {

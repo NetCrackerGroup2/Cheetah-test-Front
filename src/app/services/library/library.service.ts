@@ -1,15 +1,16 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Library} from '../../models/library/library';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {AuthService} from '../auth/auth.service';
+import {User} from '../../models/user/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
+  libraryOnEdit: Library;
 
   constructor(private http: HttpClient) {
   }
@@ -25,6 +26,18 @@ export class LibraryService {
   searchProductsPaginate(thePageNumber: number, thePageSize: number, theKeyword: string): Observable<GetResponseLibraries> {
     const url = `${environment.apiUrl}/api/libraries?size=${thePageSize}&page=${thePageNumber}&title=${theKeyword}`;
     return this.http.get<GetResponseLibraries>(url);
+  }
+
+  saveLibrary(library: Library): Observable<any> {
+    const url = `${environment.apiUrl}/api/library/${library.id}/edit`;
+    console.log(library);
+    return this.http.put(url, library);
+  }
+
+  createLibrary(library: Library): Observable<any> {
+    const url = `${environment.apiUrl}/api/create-library`;
+    console.log(library);
+    return this.http.post(url, library);
   }
 }
 

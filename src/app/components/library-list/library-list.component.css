@@ -3,13 +3,6 @@
   padding-left: 60%;
 }
 
-.main-content{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around ;
-  padding-left: 800px;
-}
-
 .table-config {
   width: 1000px;
   flex-direction: column;

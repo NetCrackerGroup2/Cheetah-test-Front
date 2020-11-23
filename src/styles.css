@@ -49,6 +49,13 @@ input.au-input.au-input-xl{
   transition:all .5s ease
 }
 
+.main-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around ;
+  padding-left: 800px;
+}
+
 .options{
   width: 100px;
   border-radius: 10px;
@@ -67,4 +74,15 @@ input.au-input.au-input-xl{
 .options:hover{
   background-color: #D98F4C;
   color: black;
+}
+
+#createUser {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  padding: 5px;
+  border: 1px solid #996433;
+  border-radius: 12px;
+  background: #BD7D42;
+  color: #fff;
+  transition: all .4s ease;
 }
