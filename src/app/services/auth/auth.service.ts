@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(loginDto: LoginDto): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/login`, loginDto)
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, loginDto)
       .pipe(map(token => {
           const user: User = this.extractUserFromPayload(token.accessToken);
 

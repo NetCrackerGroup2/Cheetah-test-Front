@@ -13,7 +13,7 @@ export class ResetPasswordService {
   constructor(private http: HttpClient) { }
 
   sendResetEmail(recoveryEmail: RecoveryEmail): Observable<any>{
-    return this.http.post<any>(`${environment.apiUrl}/reset-password`, recoveryEmail)
+    return this.http.post<any>(`${environment.apiUrl}/api/reset-password`, recoveryEmail)
       .pipe(
         map(data => {
           return data.message;
@@ -27,7 +27,7 @@ export class ResetPasswordService {
 
   sendResetTokenAndPassword(resetToken: string, password: string): Observable<any> {
     const resetPasswordAttributes = new ResetPassword(resetToken, password);
-    return this.http.post<any>(`${environment.apiUrl}/save-password`, resetPasswordAttributes)
+    return this.http.post<any>(`${environment.apiUrl}/api/save-password`, resetPasswordAttributes)
       .pipe(
         map(data => {
           return data.message;
