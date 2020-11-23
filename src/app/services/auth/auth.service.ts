@@ -32,7 +32,6 @@ export class AuthService {
         const user: User = this.extractUserFromPayload(token.accessToken);
 
         localStorage.setItem(this.USER_CONST, JSON.stringify(user));
-
         this.userSubject.next(user);
 
         return user;
@@ -43,7 +42,6 @@ export class AuthService {
     try {
 
       const payload: any = jwt_decode(accessToken);
-      console.log(payload);
       const newUser: User = new User();
       newUser.email = payload.sub;
       newUser.name = payload.name;

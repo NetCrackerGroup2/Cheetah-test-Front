@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {Library} from '../../models/library/library';
 
@@ -10,16 +10,16 @@ import {Library} from '../../models/library/library';
 })
 export class LibraryListComponent implements OnInit {
   thePageNumber = 1;
-  thePageSize = 2;
-  theTotalElements = 5;
+  thePageSize = 5;
+  theTotalElements = 0;
   libraries: Library[] = [];
+  value = '';
 
   searchMode = false;
   previousKeyword: string = null;
 
   constructor(private route: ActivatedRoute,
-              private libraryService: LibraryService,
-              private router: Router) {
+              private libraryService: LibraryService) {
   }
 
   ngOnInit(): void {
@@ -27,31 +27,27 @@ export class LibraryListComponent implements OnInit {
   }
 
   public listLibraries(): void {
-    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    this.searchMode = !!this.value;
 
+    console.log(this.searchMode);
     if (this.searchMode) {
       this.handleSearchProducts();
+
     } else {
       this.handleListProducts();
     }
 
   }
 
-  public updatePageSize(pageSize: number): void {
-    this.thePageSize = pageSize;
-    this.thePageNumber = 1;
-    this.listLibraries();
-  }
-
   private handleListProducts(): void {
-    this.libraries = this.libraryService
-      .getLibraryList(this.thePageNumber - 1, this.thePageSize);
-    // .subscribe(data => this.libraries = data);
+    this.libraries = [];
+    this.libraryService
+      .getLibraryList(this.thePageNumber, this.thePageSize)
+      .subscribe(this.processResult());
   }
 
   private handleSearchProducts(): void {
-    const theKeyword: string = this.route.snapshot.paramMap.get('keyword');
-
+    const theKeyword: string = this.value;
     if (this.previousKeyword !== theKeyword) {
       this.thePageNumber = 1;
     }
@@ -61,12 +57,33 @@ export class LibraryListComponent implements OnInit {
     console.log(`keyword=${theKeyword}, pagenumber=${this.thePageNumber}`);
 
     this.libraryService.searchProductsPaginate(
-      this.thePageNumber - 1, this.thePageSize,
-      theKeyword).subscribe(data => this.libraries = data);
+      this.thePageNumber,
+      this.thePageSize,
+      theKeyword)
+      .subscribe(data => {
+        this.libraries = data.list;
+        this.theTotalElements = +data.totalElements;
+        if (this.thePageNumber * this.thePageSize >= this.theTotalElements
+          && this.theTotalElements > this.thePageSize) {
+          this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
+        }
+      });
   }
 
   doSearch(value: string): void {
-    console.log(`value=${value}`);
-    this.router.navigateByUrl(`libraries/search/${value}`);
+    this.value = value;
+    this.listLibraries();
+  }
+
+  private processResult(): any {
+    return data => {
+      this.libraries = data.list;
+      this.theTotalElements = +data.totalElements;
+      if (this.thePageNumber * this.thePageSize >= this.theTotalElements
+        && this.theTotalElements > this.thePageSize) {
+        this.libraries = this.libraries.slice(this.thePageSize * (this.thePageNumber - 1));
+      }
+    };
+
   }
 }

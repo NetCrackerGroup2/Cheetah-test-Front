@@ -2,10 +2,9 @@
   <div class="row">
     <h1 class="display-4 h1-black ">Libraries</h1>
   </div>
-  <div class="row">
-    <div class="center-search">
+  <div class="main-content row">
+    <div class="search-config">
       <div class="form-header">
-
         <input #myInput placeholder="Search for data ..." class="au-input au-input-xl" type="text"
                (keyup.enter)="doSearch(myInput.value)"/>
 
@@ -27,7 +26,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let library of libraries">
-        <td>{{library.title}}</td>
+        <td>{{library.name}}</td>
         <td>{{library.description}}</td>
         <td>{{library.createDate}}</td>
         <td>
@@ -40,10 +39,10 @@
       </tbody>
     </table>
   </div>
-  <div class="row">
-    <div class="col-md-6">
+  <div class="row main-content">
+    <div class="col-md-6 paging-config">
       <div class="row">
-        <div class="col-md-9" style="padding-left: 900px">
+        <div class="col-md-9">
           <ngb-pagination [(page)]="thePageNumber"
                           [pageSize]="thePageSize"
                           [collectionSize]="theTotalElements"
@@ -52,20 +51,6 @@
                           (pageChange)="listLibraries()">
           </ngb-pagination>
         </div>
-        <br>
-        <div class="col-md-3 mt-2 page-padding">
-          <br><br><br>
-          <span class="mr-2">Page Size</span>
-
-          <select (change)="updatePageSize($event.target.value)">
-            <option>1</option>
-            <option selected="true">2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-
       </div>
     </div>
   </div>

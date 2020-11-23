@@ -1,5 +1,6 @@
 export class Library {
-  title: string;
+  id: number;
   description: string;
+  name: string;
   createDate: string;
 }

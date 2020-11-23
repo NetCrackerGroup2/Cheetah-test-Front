@@ -15,7 +15,16 @@
   flex-direction: column;
   margin-right: 600px;
 }
+.search-config {
+  width: 1200px;
+  flex-direction: column;
+  margin-right: 600px;
+}
+.paging-config {
+  width: 100px;
+  flex-direction: column;
 
+}
 
 /*pagination*/
 .pagination {
@@ -23,53 +32,27 @@
   padding-left: 0;
   list-style: none;
   border-radius: .25rem;
+
 }
-.page-link:hover {
-  z-index: 2;
-  color: #0056b3;
-  text-decoration: none;
-  background-color: #e9ecef;
-  border-color: #dee2e6;
+ngb-pagination ::ng-deep a {
+  color: #bd7d42 !important;
 }
-.page-link {
-  position: relative;
-  display: block;
-  padding: .5rem .75rem;
-  margin-left: -1px;
-  line-height: 1.25;
-  color: #007bff;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
+
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: black;
+  background-color: lightgrey;
 }
-.page-item.active .page-link {
-  z-index: 1;
-  color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
 }
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
+
+ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
 }
-.page-item.disabled .page-link {
-  color: #6c757d;
-  pointer-events: none;
-  cursor: auto;
-  background-color: #fff;
-  border-color: #dee2e6;
-}
+
 .center-search {
   display: flex;
   justify-content: space-around;
 }
 
-.page-padding {
-  padding-left: 900px;
-  position: fixed;
-}

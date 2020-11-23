@@ -11,19 +11,21 @@ import {environment} from '../../../environments/environment';
 })
 export class InterceptorService implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthService) { }
+  constructor(private authenticationService: AuthService) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     const user = this.authenticationService.userValue;
     const isLoggedIn = user && user.accessToken;
     const isApiUrl = request.url.startsWith(environment.apiUrl);
     if (isLoggedIn && isApiUrl) {
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${user.accessToken}`
+          authorization : `Bearer ${user.accessToken}`,
         }
       });
-      // console.log(request);
+      return next.handle(request);
     }
 
     return next.handle(request);

@@ -19,11 +19,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'library/search/:keyword',
-    component: LibraryListComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'libraries',
     component: LibraryListComponent,
     canActivate: [AuthGuard]
