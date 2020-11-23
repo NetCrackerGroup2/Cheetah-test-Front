@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: process.env.BACKEND_API || 'http://localhost:8080/api',
-  // apiUrl: 'http://localhost:8080',
+  apiUrl: process.env.BACKEND_API || 'http://localhost:8080',
   invalidEmail: 'invalid.email',
   userFetched: 'user.fetched',
   resetTokenNull: 'reset.token.null',
