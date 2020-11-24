@@ -34,8 +34,6 @@ export class LibraryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.libraryId = +this.route.snapshot.paramMap.get('id');
     this.libraryName = this.route.snapshot.paramMap.get('name');
-    console.log(this.libraryId);
-    console.log(this.libraryName);
     this.listActionsAndCompounds();
   }
 

@@ -13,12 +13,10 @@ import {LibraryService} from '../../services/library/library.service';
 export class LibraryCreateCompoundComponent implements OnInit {
   createCompoundForm: FormGroup;
   library: Library;
-  createCompoundSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
-              private formBuilder: FormBuilder,
-              private router: Router) {
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -36,9 +34,5 @@ export class LibraryCreateCompoundComponent implements OnInit {
 
   get name(): any {
     return this.createCompoundForm.get('name');
-  }
-
-  onSubmit() {
-
   }
 }

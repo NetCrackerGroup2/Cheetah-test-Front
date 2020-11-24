@@ -15,6 +15,7 @@ export class EditLibraryComponent implements OnInit, OnDestroy {
   library: Library;
   loading = false;
   editLibrarySubscription: Subscription;
+  successMessage: string;
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
@@ -48,20 +49,25 @@ export class EditLibraryComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.successMessage = '';
     this.loading = true;
     this.library.description = this.description.value;
     this.library.name = this.name.value;
 
     if (this.library.description !== undefined) {
-      this.editLibrarySubscription = this.libraryService.saveLibrary(this.library).subscribe( () => {
+      this.editLibrarySubscription = this.libraryService.saveLibrary(this.library).subscribe(() => {
         this.loading = false;
+        this.editForm.reset();
+        this.successMessage = 'Library has been updated';
       });
     } else {
-      this.editLibrarySubscription = this.libraryService.createLibrary(this.library).subscribe( () => {
+      this.editLibrarySubscription = this.libraryService.createLibrary(this.library).subscribe(() => {
         this.loading = false;
+        this.editForm.reset();
+        this.successMessage = 'Library has been created';
       });
     }
-    this.router.navigate(['libraries']);
+
   }
 
   ngOnDestroy(): void {

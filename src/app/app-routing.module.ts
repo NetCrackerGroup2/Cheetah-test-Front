@@ -30,6 +30,7 @@ const routes: Routes = [
     path: 'libraries',
     component: LibraryListComponent,
     canActivate: [AuthGuard]
+
   },
   {
     path: 'library/:id/:name',

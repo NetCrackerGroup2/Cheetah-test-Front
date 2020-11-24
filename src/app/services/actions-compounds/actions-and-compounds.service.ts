@@ -15,7 +15,6 @@ export class ActionsAndCompoundsService {
   ) {
   }
 
-
   getActionsAndCompoundsList(thePageNumber: number, thePageSize: number, libraryId: number):
     Observable<GetResponseActionsAndCompounds> {
     const url = `${environment.apiUrl}/api/library/${libraryId}?size=${thePageSize}&page=${thePageNumber}&title=`;

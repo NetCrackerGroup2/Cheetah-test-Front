@@ -17,7 +17,6 @@ export class LibraryService {
 
   getLibraryList(thePageNumber: number, thePageSize: number): Observable<GetResponseLibraries> {
     const url = `${environment.apiUrl}/api/libraries?size=${thePageSize}&page=${thePageNumber}&title=`;
-
     return this.http.get<GetResponseLibraries>(url);
   }
 
@@ -27,14 +26,12 @@ export class LibraryService {
   }
 
   saveLibrary(library: Library): Observable<any> {
-    const url = `${environment.apiUrl}/api/library/${library.id}/edit`;
-    console.log(library);
+    const url = `${environment.apiUrl}/api/library/${library.id}`;
     return this.http.put(url, library);
   }
 
   createLibrary(library: Library): Observable<any> {
-    const url = `${environment.apiUrl}/api/create-library`;
-    console.log(library);
+    const url = `${environment.apiUrl}/api/libraries`;
     return this.http.post(url, library);
   }
 }

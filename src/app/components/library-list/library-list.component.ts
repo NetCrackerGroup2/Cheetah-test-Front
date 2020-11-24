@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {Library} from '../../models/library/library';
 import {Subscription} from 'rxjs';
@@ -20,6 +20,7 @@ export class LibraryListComponent implements OnInit, OnDestroy {
   searchMode = false;
   previousKeyword: string = null;
   isFound = true;
+  isRefreshed = false;
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
@@ -27,7 +28,6 @@ export class LibraryListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.listLibraries();
   }
 
@@ -65,8 +65,6 @@ export class LibraryListComponent implements OnInit, OnDestroy {
     }
 
     this.previousKeyword = theKeyword;
-
-    console.log(`keyword=${theKeyword}, pagenumber=${this.thePageNumber}`);
 
     this.librarySearchSubscription = this.libraryService.searchProductsPaginate(
       this.thePageNumber,

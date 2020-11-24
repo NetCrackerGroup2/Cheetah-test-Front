@@ -11,6 +11,7 @@
   </div>
   <div class="main-content row">
     <div class="box">
+      <h5 class="text-success text-center">{{successMessage}}</h5>
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="user_form">
         <!--Name-->
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center">

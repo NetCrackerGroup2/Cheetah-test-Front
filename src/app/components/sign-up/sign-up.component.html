@@ -25,6 +25,9 @@
         <div *ngIf="password.errors.required">
           <h5>Password is required</h5>
         </div>
+        <div *ngIf="password.errors.minlength">
+          <h5>Password must contain 8 or more characters</h5>
+        </div>
       </div>
       <label class="input_item">
         <input type="password" formControlName="password" class="input"
