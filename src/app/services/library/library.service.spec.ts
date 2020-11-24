@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InterceptorService } from './interceptor.service';
+import { LibraryService } from './library.service';
 
-describe('InterceptorService', () => {
-  let service: InterceptorService;
+describe('LibraryService', () => {
+  let service: LibraryService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(InterceptorService);
+    service = TestBed.inject(LibraryService);
   });
 
   it('should be created', () => {

@@ -57,19 +57,24 @@ export class SavePasswordComponent implements OnInit, OnDestroy {
               case environment.resetPasswordSuccess: {
                 this.router.navigate(['']);
                 break;
-              } case environment.resetTokenNull: {
+              }
+              case environment.resetTokenNull: {
                 this.message = 'Reset token doesn\'t exist';
                 break;
-              } case environment.tokenExpired: {
+              }
+              case environment.tokenExpired: {
                 this.message = 'You have already changed the password';
                 break;
-              } case environment.invalidToken: {
+              }
+              case environment.invalidToken: {
                 this.message = 'This link is invalid';
                 break;
-              } case environment.samePassword: {
+              }
+              case environment.samePassword: {
                 this.message = 'Same password as before';
                 break;
-              } default: {
+              }
+              default: {
                 this.message = 'Server error';
                 break;
               }

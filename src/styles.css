@@ -14,3 +14,106 @@ h1,h2,h3,h4,h5,h6{
   margin: 0;
 }
 
+.h1-black{
+  color: black;
+  padding-left: 300px;
+}
+.form-header{
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:-moz-box;
+  display:-ms-flexbox;
+  display:flex;
+}
+.au-input-xl{
+  min-width:935px
+}
+
+input.au-input.au-input-xl{
+  border-radius:40px!important;
+  margin-right:15px
+}
+
+.au-input{
+  line-height:43px;
+  border:1px solid #e5e5e5;
+  font-size:14px;
+  color:#666;
+  padding:0 17px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  -webkit-transition:all .5s ease;
+  -o-transition:all .5s ease;
+  -moz-transition:all .5s ease;
+  transition:all .5s ease
+}
+
+.main-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around ;
+  padding-left: 800px;
+}
+
+.options{
+  width: 100px;
+  border-radius: 10px;
+  background-color: #bd7d42;
+  outline: none;
+  font-family: Roboto,sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  color: white;
+  line-height: 30px;
+  text-align: center;
+  transition: linear 0.3s;
+  border: 2px white;
+}
+.options:hover{
+  background-color: #D98F4C;
+  color: black;
+}
+
+#createUser {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  padding: 5px;
+  border: 1px solid #996433;
+  border-radius: 12px;
+  background: #BD7D42;
+  color: #fff;
+  transition: all .4s ease;
+}
+.footer-library{
+  flex-direction: row;
+  padding-left: 60%;
+}
+
+.table-config {
+  width: 1000px;
+  flex-direction: column;
+  margin-right: 600px;
+}
+.search-config {
+  width: 1200px;
+  flex-direction: column;
+  margin-right: 600px;
+
+}
+.paging-config {
+  width: 100px;
+  flex-direction: column;
+
+}
+
+.nothing-found {
+  justify-content: space-around;
+}
+
+.center-search {
+  display: flex;
+  justify-content: space-around;
+}
+

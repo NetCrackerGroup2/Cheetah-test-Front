@@ -12,6 +12,12 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
+import {LibraryListComponent} from './components/library-list/library-list.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {EditLibraryComponent} from './components/edit-library/edit-library.component';
+import {LibraryComponent} from './components/library/library.component';
+import {LibraryCreateCompoundComponent} from './components/library-create-compound/library-create-compound.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +27,10 @@ import {SidebarModule} from 'ng-sidebar';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
+    LibraryListComponent,
+    EditLibraryComponent,
+    LibraryComponent,
+    LibraryCreateCompoundComponent
   ],
   imports: [
     BrowserModule,
@@ -28,11 +38,13 @@ import {SidebarModule} from 'ng-sidebar';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     SidebarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

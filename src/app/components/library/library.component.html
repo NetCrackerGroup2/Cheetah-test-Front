@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-4 h1-black ">{{libraryName}}</h1>
+  </div>
+  <div class="main-content row">
+    <div class="search-config">
+      <div class="form-header">
+        <input #myInput placeholder="Search for data ..." class="au-input input-long" type="text"
+               (keyup.enter)="doSearch(myInput.value)"/>
+
+        <button class="options ml-1 button-list" (click)="doSearch(myInput.value)">
+          Search
+        </button>
+        <button class="options ml-1 button-list" (click)="createCompound()">
+          Create Compound
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="main-content mt-5 row">
+    <table class="table table-striped table-config" *ngIf="isFound">
+      <caption>Actions and Compounds</caption>
+      <thead class="thead">
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Type</th>
+        <th scope="col">Compound</th>
+        <th scope="col">Options</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let actionCompound of actionsAndCompounds">
+        <td>{{actionCompound.title}}</td>
+        <td>{{actionCompound.description}}</td>
+        <td>{{actionCompound.status}}</td>
+        <td>{{actionCompound.idCompound}}</td>
+        <td>
+          <button class="options" (click)="delete()">Delete</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="nothing-found">
+      <div *ngIf="!isFound" class="alert alert-warning col-md-12" role="alert">
+        No actions or compounds found.
+      </div>
+    </div>
+
+  </div>
+  <div class="row main-content">
+    <div class="col-md-6 paging-config">
+      <div class="row">
+        <div class="col-md-9">
+          <ngb-pagination [(page)]="thePageNumber"
+                          [pageSize]="thePageSize"
+                          [collectionSize]="theTotalElements"
+                          [maxSize]="5"
+                          [boundaryLinks]="true"
+                          (pageChange)="listActionsAndCompounds()"
+                          class="ngb-pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

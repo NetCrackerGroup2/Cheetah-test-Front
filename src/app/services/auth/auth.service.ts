@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {LoginDto} from '../../models/loginDto/loginDto';
 import {environment} from '../../../environments/environment';
 import {User} from '../../models/user/user';
 import jwt_decode from 'jwt-decode';
-import {catchError, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
@@ -29,20 +29,19 @@ export class AuthService {
   login(loginDto: LoginDto): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/api/login`, loginDto)
       .pipe(map(token => {
-          const user: User = this.extractUserFromPayload(token.accessToken);
+        const user: User = this.extractUserFromPayload(token.accessToken);
 
-          localStorage.setItem(this.USER_CONST, JSON.stringify(user));
+        localStorage.setItem(this.USER_CONST, JSON.stringify(user));
+        this.userSubject.next(user);
 
-          this.userSubject.next(user);
-
-          return user;
-        }));
+        return user;
+      }));
   }
 
   extractUserFromPayload(accessToken: string): User {
-    try{
-      const payload: any = jwt_decode(accessToken);
+    try {
 
+      const payload: any = jwt_decode(accessToken);
       const newUser: User = new User();
       newUser.email = payload.sub;
       newUser.name = payload.name;
@@ -50,8 +49,7 @@ export class AuthService {
       newUser.accessToken = accessToken;
 
       return newUser;
-    }
-    catch (error){
+    } catch (error) {
       console.log(error);
       return null;
     }

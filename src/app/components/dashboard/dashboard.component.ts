@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user/user';
 import {AuthService} from '../../services/auth/auth.service';
 
@@ -9,6 +9,7 @@ import {AuthService} from '../../services/auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
   user: User;
+
   constructor(
     private authenticationService: AuthService
   ) {

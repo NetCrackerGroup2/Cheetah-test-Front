@@ -57,8 +57,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
   }
 
-  get email(): any {return this.loginForm.get('email'); }
-  get password(): any {return this.loginForm.get('password'); }
+  get email(): any {
+    return this.loginForm.get('email');
+  }
+
+  get password(): any {
+    return this.loginForm.get('password');
+  }
 
   ngOnDestroy(): void {
     if (this.subscription) {

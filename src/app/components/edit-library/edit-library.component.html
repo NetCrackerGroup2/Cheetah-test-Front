@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="display-4 h1-black ">Library Configuration</h1>
+    </div>
+    <div class="col">
+      <button class="options button-long" [routerLink]="['/libraries']">
+        Back to Libraries
+      </button>
+    </div>
+  </div>
+  <div class="main-content row">
+    <div class="box">
+      <h5 class="text-success text-center">{{successMessage}}</h5>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="user_form">
+        <!--Name-->
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center">
+          <div *ngIf="name.errors.required">
+            <h5>Name is required</h5>
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            <h5>Max length of name is 10 chars</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            Name
+          </div>
+          <div class="col">
+            <label class="input_item">
+              <input type="text" formControlName="name" class="input big-box">
+            </label>
+          </div>
+        </div>
+
+        <!--Description-->
+        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger text-center">
+          <div *ngIf="description.errors.required">
+            <h5>Description is required</h5>
+          </div>
+          <div *ngIf="description.errors.maxlength">
+            <h5>Max length of description is 50 chars</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            Description
+          </div>
+          <div class="col">
+            <label class="input_item">
+              <textarea class="input big-box description" rows="2" cols="25"
+                        formControlName="description"></textarea>
+            </label>
+          </div>
+        </div>
+
+        <!--Button-->
+        <button type="submit" class="submit_input" id="createUser" [disabled]="!editForm.valid">
+          Save
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-4 h1-black ">Libraries</h1>
+  </div>
+  <div class="main-content row">
+    <div class="search-config">
+      <div class="form-header">
+        <input #myInput placeholder="Search for data ..." class="au-input au-input-xl" type="text"
+               (keyup.enter)="doSearch(myInput.value)"/>
+
+        <button class="options" (click)="doSearch(myInput.value)">
+          Search
+        </button>
+        <button class="options ml-5" (click)="createNew()">
+          Create New
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="main-content mt-5 row">
+
+    <table class="table table-striped table-config" *ngIf="isFound">
+      <caption>All Libraries</caption>
+      <thead class="thead">
+      <tr>
+        <th scope="col">Library Name</th>
+        <th scope="col">Library Description</th>
+        <th scope="col">Create Date</th>
+        <th scope="col" colspan="2" class="text-center">Options</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let library of libraries">
+        <td>{{library.name}}</td>
+        <td>{{library.description}}</td>
+        <td>{{library.createDate}}</td>
+        <td>
+          <button class="options" (click)="goToLibrary(library)">View</button>
+        </td>
+        <td>
+          <button class="options" (click)="edit(library)">Edit</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="nothing-found">
+      <div *ngIf="!isFound" class="alert alert-warning col-md-1" role="alert">
+        No libraries found.
+      </div>
+    </div>
+
+  </div>
+  <div class="row main-content">
+    <div class="col-md-6 paging-config">
+      <div class="row">
+        <div class="col-md-9">
+          <ngb-pagination [(page)]="thePageNumber"
+                          [pageSize]="thePageSize"
+                          [collectionSize]="theTotalElements"
+                          [maxSize]="5"
+                          [boundaryLinks]="true"
+                          (pageChange)="listLibraries()"
+                          class="ngb-pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

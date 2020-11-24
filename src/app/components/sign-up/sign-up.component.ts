@@ -23,23 +23,35 @@ export class SignUpComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private signUpService: SignUpService,
-    private formBuilder: FormBuilder) {}
+    private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.createForm = this.formBuilder.group({
       email: new FormControl('', [
         Validators.required,
         Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       name: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required)
     });
   }
 
-  get email(): any {return this.createForm.get('email'); }
-  get password(): any {return this.createForm.get('password'); }
-  get role(): any {return this.createForm.get('role'); }
-  get name(): any {return this.createForm.get('name'); }
+  get email(): any {
+    return this.createForm.get('email');
+  }
+
+  get password(): any {
+    return this.createForm.get('password');
+  }
+
+  get role(): any {
+    return this.createForm.get('role');
+  }
+
+  get name(): any {
+    return this.createForm.get('name');
+  }
 
   onSubmit(): void {
     this.successMessage = '';
@@ -53,26 +65,28 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
     this.subscription = this.signUpService.postRegisteredUser(this.user)
       .pipe(first())
-      .subscribe( {
-        next: data => {
-          switch (data) {
-            case environment.success: {
-              this.user = new User();
-              this.successMessage = 'Account has been created';
-              break;
-            } case environment.userExists: {
-              this.message = environment.userExists;
-              break;
-            } default: {
-              this.message = 'Server error';
-              break;
+      .subscribe({
+          next: data => {
+            switch (data) {
+              case environment.success: {
+                this.user = new User();
+                this.successMessage = 'Account has been created';
+                break;
+              }
+              case environment.userExists: {
+                this.message = environment.userExists;
+                break;
+              }
+              default: {
+                this.message = 'Server error';
+                break;
+              }
             }
+            this.loading = false;
+            this.createForm.reset();
           }
-          this.loading = false;
-          this.createForm.reset();
         }
-      }
-    );
+      );
   }
 
   ngOnDestroy(): void {
