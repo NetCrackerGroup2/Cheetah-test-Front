@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {Library} from '../../models/library/library';
 import {Subscription} from 'rxjs';

@@ -20,6 +20,7 @@
   <div class="main-content mt-5 row">
 
     <table class="table table-striped table-config" *ngIf="isFound">
+      <caption>All Libraries</caption>
       <thead class="thead">
       <tr>
         <th scope="col">Library Name</th>
@@ -58,7 +59,8 @@
                           [collectionSize]="theTotalElements"
                           [maxSize]="5"
                           [boundaryLinks]="true"
-                          (pageChange)="listLibraries()">
+                          (pageChange)="listLibraries()"
+                          class="ngb-pagination">
           </ngb-pagination>
         </div>
       </div>
