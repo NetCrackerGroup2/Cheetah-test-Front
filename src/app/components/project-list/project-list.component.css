@@ -1,0 +1,58 @@
+.footer-library{
+  flex-direction: row;
+  padding-left: 60%;
+}
+
+.main-content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around ;
+  padding-left: 800px;
+}
+
+.table-config {
+  width: 1000px;
+  flex-direction: column;
+  margin-right: 600px;
+}
+.search-config {
+  width: 1200px;
+  flex-direction: column;
+  margin-right: 600px;
+}
+.paging-config {
+  width: 100px;
+  flex-direction: column;
+
+}
+
+/*pagination*/
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+
+}
+ngb-pagination ::ng-deep a {
+  color: #bd7d42 !important;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: black;
+  background-color: lightgrey;
+}
+
+ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
+}
+
+ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
+}
+
+.center-search {
+  display: flex;
+  justify-content: space-around;
+}
+

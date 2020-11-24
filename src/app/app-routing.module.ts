@@ -7,6 +7,7 @@ import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {LibraryListComponent} from './components/library-list/library-list.component';
+import {ProjectListComponent} from './components/project-list/project-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectListComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: '', pathMatch: 'full'}
