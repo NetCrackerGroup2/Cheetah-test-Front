@@ -4,5 +4,5 @@ export class Project {
   link: string;
   status: string;
   createDate: string;
-  ownerName: number;
+  ownerName: string;
 }

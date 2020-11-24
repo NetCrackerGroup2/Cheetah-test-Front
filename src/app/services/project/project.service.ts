@@ -26,6 +26,21 @@ export class ProjectService {
     const url = `${environment.apiUrl}/api/projects?size=${thePageSize}&page=${thePageNumber}&title=${theKeyword}`;
     return this.http.get<GetResponseProjects>(url);
   }
+
+  archiveProductsPaginate(thePageNumber: number, thePageSize: number, theStatus: string): Observable<GetResponseProjects> {
+    const url = `${environment.apiUrl}/api/projects?size=${thePageSize}&page=${thePageNumber}&status=${theStatus}`;
+    return this.http.get<GetResponseProjects>(url);
+  }
+
+  archiveProject(theProjectId: number): Observable<GetResponseProjects>{
+    const url = `${environment.apiUrl}/api/project/${theProjectId}/archive`;
+    return this.http.get<GetResponseProjects>(url);
+  }
+
+  openProjectToEdit(theProjectId: number): Observable<GetResponseProjects>{
+    const url = `${environment.apiUrl}/api/project/${theProjectId}`;
+    return this.http.get<GetResponseProjects>(url);
+  }
 }
 
 interface GetResponseProjects {

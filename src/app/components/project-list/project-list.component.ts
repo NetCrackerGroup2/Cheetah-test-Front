@@ -4,7 +4,7 @@ import {ProjectService} from '../../services/project/project.service';
 import {Project} from '../../models/project/project';
 
 @Component({
-  selector: 'app-library-list',
+  selector: 'app-project-list',
   templateUrl: './project-list.component.html',
   styleUrls: ['./project-list.component.css']
 })
@@ -14,8 +14,11 @@ export class ProjectListComponent implements OnInit {
   theTotalElements = 0;
   projects: Project[] = [];
   value = '';
+  id = 0;
+  inactive = 'inactive';
 
   searchMode = false;
+  archiveMode = false;
   previousKeyword: string = null;
 
   constructor(private route: ActivatedRoute,
@@ -33,7 +36,9 @@ export class ProjectListComponent implements OnInit {
     if (this.searchMode) {
       this.handleSearchProducts();
 
-    } else {
+    } else if (this.archiveMode){         //TODO
+      this.handleArchiveProducts();
+    } else{
       this.handleListProducts();
     }
 
@@ -70,9 +75,38 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
+  private handleArchiveProducts(): void {
+    const inactive: string = this.inactive;
+    this.projectService.archiveProductsPaginate(
+      this.thePageNumber,
+      this.thePageSize,
+      inactive).subscribe(data => {
+      this.projects = data.list;
+      this.theTotalElements = +data.totalElements;
+      if (this.thePageNumber * this.thePageSize >= this.theTotalElements
+        && this.theTotalElements > this.thePageSize) {
+        this.projects = this.projects.slice(this.thePageSize * (this.thePageNumber - 1));
+      }
+    });
+  }
+
   doSearch(value: string): void {
     this.value = value;
     this.listProjects();
+  }
+
+  goToArchive(): void{
+    this.listProjects();
+  }
+
+  doEdit(id: number): void {          //todo
+    this.id = id;
+    this.projectService.openProjectToEdit(id);
+  }
+
+  doArchive(id: number): void {       //todo
+    this.id = id;
+    this.projectService.archiveProject(id);
   }
 
   private processResult(): any {
