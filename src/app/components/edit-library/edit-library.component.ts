@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Library} from '../../models/library/library';
