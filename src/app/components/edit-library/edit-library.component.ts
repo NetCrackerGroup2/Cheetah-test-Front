@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {LibraryService} from '../../services/library/library.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Library} from '../../models/library/library';
@@ -19,8 +19,7 @@ export class EditLibraryComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private libraryService: LibraryService,
-              private formBuilder: FormBuilder,
-              private router: Router) {
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -51,10 +50,16 @@ export class EditLibraryComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     this.successMessage = '';
     this.loading = true;
+
+    let isUndefined = false;
+    if (this.library.description === undefined) {
+      isUndefined = true;
+    }
+
     this.library.description = this.description.value;
     this.library.name = this.name.value;
 
-    if (this.library.description !== undefined) {
+    if (!isUndefined) {
       this.editLibrarySubscription = this.libraryService.saveLibrary(this.library).subscribe(() => {
         this.loading = false;
         this.editForm.reset();

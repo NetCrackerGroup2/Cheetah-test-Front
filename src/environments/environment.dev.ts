@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://cheetah-test-backend-prod.herokuapp.com',
+  apiUrl: 'https://cheetah-test-backend-dev.herokuapp.com',
   invalidEmail: 'invalid.email',
   userFetched: 'user.fetched',
   resetTokenNull: 'reset.token.null',
