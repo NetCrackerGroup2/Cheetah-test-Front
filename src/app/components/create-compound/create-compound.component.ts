@@ -2,11 +2,12 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Action} from '../../models/action/action';
-import {Subject, Subscription} from 'rxjs';
+import {of, Subject, Subscription} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
 import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
+import {catchError, first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-compound',
@@ -14,6 +15,8 @@ import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound
   styleUrls: ['./create-compound.component.css']
 })
 export class CreateCompoundComponent implements OnInit, OnDestroy {
+  successMessage: string;
+  errorMessage: string;
   createCompoundForm: FormGroup;
   actions: Action[];
   addedActions: Action[] = [];
@@ -51,6 +54,8 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.errorMessage = '';
+    this.successMessage = '';
     this.loading = true;
     const actionsCreateDto: ActionCreateDto[] = [];
     for (const action of this.addedActions) {
@@ -63,9 +68,20 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     const compoundWithActions: CompoundDtoWithActions =
       new CompoundDtoWithActions(compound, actionsCreateDto);
 
-    this.createSubscription = this.actionService.createCompound(compoundWithActions).subscribe(() => {
-      this.loading = false;
-    });
+    this.createSubscription = this.actionService.createCompound(compoundWithActions)
+      .pipe(first())
+      .subscribe(
+      data => {
+        if (data) {
+          this.successMessage = 'Compound has been successfully created';
+          this.loading = false;
+          this.createCompoundForm.reset();
+          this.addedActions = [];
+        } else {
+          this.errorMessage = 'Server error';
+          this.loading = false;
+        }
+      });
   }
 
   addToList(action: Action): void {

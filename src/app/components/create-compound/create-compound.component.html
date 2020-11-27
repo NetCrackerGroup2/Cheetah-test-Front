@@ -12,6 +12,7 @@
 
   </div>
   <div class="container-sm">
+    <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
     <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
@@ -73,7 +74,7 @@
       </div>
       <div class="form-group row">
         <div class="col-md-7 text-center mx-auto my-4">
-          <button class="options">Save
+          <button class="options" [disabled]="!createCompoundForm.valid">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>
