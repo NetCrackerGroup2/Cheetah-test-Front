@@ -14,37 +14,39 @@
             </div>
             <div class="col-sm">
               <div class="button-row">
-              <button class="options ml-1 button-list" color="primary">Filter</button>
+                <button class="options ml-1 button-list" color="primary">Filter</button>
               </div>
             </div>
             <div class="col-sm">
-              <button class="options ml-1 button-list"  color="primary">Go to test case</button>
+              <button class="options ml-1 button-list" color="primary">Go to test case</button>
             </div>
           </div>
         </div>
       </div>
       <div class="col-sm">
         <table class="table table-striped table-config" *ngIf="isFound">
-          <caption>All Datasets</caption>
           <thead class="thead">
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Type</th>
-            <th scope="col">Value</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Test case</th>
           </tr>
           </thead>
           <tbody>
-<!--          <tr *ngFor="let library of libraries">-->
-<!--            <td>{{library.name}}</td>-->
-<!--            <td>{{library.description}}</td>-->
-<!--            <td>{{library.createDate}}</td>-->
-<!--            <td>-->
-<!--              <button class="options" (click)="goToLibrary(library)">View</button>-->
-<!--            </td>-->
-<!--            <td>-->
-<!--              <button class="options" (click)="edit(library)">Edit</button>-->
-<!--            </td>-->
-<!--          </tr>-->
+          <tr>
+              <td><input class="div-input-invisible" type="text"></td>
+              <td><input class="div-input-invisible" type="text"></td>
+              <td><input class="div-input-invisible" type="text"></td>
+              <td><button class="options" (click)="createDataSet()">Create</button></td>
+          </tr>
+          <tr *ngFor="let dataset of datasets">
+            <td>{{dataset.title}}</td>
+            <td>{{dataset.description}}</td>
+            <td>{{dataset.testcase_name}}</td>
+            <td>
+              <button class="options" (click)="deleteDataSet(dataset)">Delete</button>
+            </td>
+          </tr>
           </tbody>
         </table>
         <div class="nothing-found">

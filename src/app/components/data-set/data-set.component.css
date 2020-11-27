@@ -46,4 +46,8 @@
   width: 400px;
   align: rigth;
 }
+.div-input-invisible {
+  background: transparent;
+  border: none;
+}
 
