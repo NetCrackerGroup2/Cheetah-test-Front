@@ -19,7 +19,6 @@ import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
