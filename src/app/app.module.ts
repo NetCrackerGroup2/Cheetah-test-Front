@@ -12,13 +12,13 @@ import {SavePasswordComponent} from './components/save-password/save-password.co
 import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
-import {LibraryListComponent} from './components/library-list/library-list.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {EditLibraryComponent} from './components/edit-library/edit-library.component';
-import {LibraryComponent} from './components/library/library.component';
-import {LibraryCreateCompoundComponent} from './components/library-create-compound/library-create-compound.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
-
+import { GeneralLibraryComponent } from './components/general-library/general-library.component';
+import { ActionComponent } from './components/action/action.component';
+import { CompoundComponent } from './components/compound/compound.component';
+import { EditActionComponent } from './components/edit-action/edit-action.component';
+import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +28,12 @@ import {DataSetComponent} from './components/data-set/data-set.component';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
-    LibraryListComponent,
-    EditLibraryComponent,
-    LibraryComponent,
-    LibraryCreateCompoundComponent,
-    DataSetComponent
+    DataSetComponent,
+    GeneralLibraryComponent,
+    ActionComponent,
+    CompoundComponent,
+    EditActionComponent,
+    CreateCompoundComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+.main-buttons{
+  display: flex;
+  padding-left: 40%;
+  flex-direction: row;
+}
+
+.actions-compounds {
+  display: flex;
+  flex-direction: row;
+  padding-left: 30%;
+}
+

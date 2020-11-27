@@ -1,21 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
 import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
   user: User;
   opened = true;
+  authenticationServiceSubscription: Subscription;
 
   constructor(private authenticationService: AuthService,
               private router: Router) {
-    this.authenticationService.user.subscribe(
+    this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
       }
@@ -28,10 +30,6 @@ export class AppComponent {
       || this.router.url.startsWith('/reset-password');
   }
 
-  get isSearch(): boolean {
-    return this.router.url.startsWith('/libraries');
-  }
-
   get isAdmin(): boolean {
     return this.user && this.user.role === Role.ADMIN;
   }
@@ -42,5 +40,11 @@ export class AppComponent {
 
   toggleSidebar(): void {
     this.opened = !this.opened;
+  }
+
+  ngOnDestroy(): void {
+    if (this.authenticationServiceSubscription) {
+      this.authenticationServiceSubscription.unsubscribe();
+    }
   }
 }

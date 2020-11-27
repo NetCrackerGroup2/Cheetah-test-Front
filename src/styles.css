@@ -53,11 +53,12 @@ input.au-input.au-input-xl{
   display: flex;
   flex-direction: row;
   justify-content: space-around ;
-  padding-left: 800px;
+  padding-left: 50%;
 }
 
 .options{
-  width: 100px;
+  width: 150px;
+  height: 40px;
   border-radius: 10px;
   background-color: #bd7d42;
   outline: none;
@@ -70,6 +71,8 @@ input.au-input.au-input-xl{
   text-align: center;
   transition: linear 0.3s;
   border: 2px white;
+  min-width: 150px;
+  max-width: 300px;
 }
 .options:hover{
   background-color: #D98F4C;
@@ -105,15 +108,25 @@ input.au-input.au-input-xl{
 .paging-config {
   width: 100px;
   flex-direction: column;
-
 }
 
 .nothing-found {
   justify-content: space-around;
 }
 
-.center-search {
-  display: flex;
-  justify-content: space-around;
+.table-config-compounds {
+  width: 50%;
 }
-
+.input-long{
+  width: 60%;
+  border-radius: 20px;
+}
+.black{
+  color: black;
+}
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: right ;
+  padding-left: 30%;
+}

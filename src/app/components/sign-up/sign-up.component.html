@@ -44,21 +44,21 @@
                placeholder="Name">
       </label>
       <!-- role -->
-      <div class="input_item">
-        <div *ngIf="role.invalid && (role.dirty || role.touched)" class="alert alert-danger mt-1">
-          <div *ngIf="role.errors.required">
-            Role is required
-          </div>
-        </div>
-        <label for="select_role">Role:</label>
-        <div class="custom_input_item">
-          <select formControlName="role" name="" class="custom_input_item" id="select_role">
-            <option value="admin">Admin</option>
-            <option value="engineer">Engineer</option>
-            <option value="manager">Manager</option>
-          </select>
+
+      <div *ngIf="role.invalid && (role.dirty || role.touched)" class="text-danger text-center">
+        <div *ngIf="role.errors.required">
+          <h5>Role is required</h5>
         </div>
       </div>
+      <label for="select_role">Role:</label>
+      <div class="custom_input_item">
+        <select formControlName="role" name="" class="custom_input_item" id="select_role">
+          <option value="admin">Admin</option>
+          <option value="engineer">Engineer</option>
+          <option value="manager">Manager</option>
+        </select>
+      </div>
+
       <button type="submit" class="submit_input" id="createUser" [disabled]="!createForm.valid">
         Create User
         <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
