@@ -6,10 +6,9 @@ import {AuthGuard} from './helpers/authguard.service';
 import {SignUpComponent} from './components/sign-up/sign-up.component';
 import {SavePasswordComponent} from './components/save-password/save-password.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
-import {LibraryListComponent} from './components/library-list/library-list.component';
-import {EditLibraryComponent} from './components/edit-library/edit-library.component';
-import {LibraryComponent} from './components/library/library.component';
-import {LibraryCreateCompoundComponent} from './components/library-create-compound/library-create-compound.component';
+import {GeneralLibraryComponent} from './components/general-library/general-library.component';
+import {EditActionComponent} from './components/edit-action/edit-action.component';
+import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -23,28 +22,17 @@ const routes: Routes = [
   },
   {
     path: 'library-create-compound',
-    component: LibraryCreateCompoundComponent,
+    component: CreateCompoundComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'libraries',
-    component: LibraryListComponent,
-    canActivate: [AuthGuard]
-
-  },
-  {
-    path: 'library/:id/:name',
-    component: LibraryComponent,
+    path: 'general-library',
+    component: GeneralLibraryComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'libraries/edit/:id',
-    component: EditLibraryComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'libraries/edit',
-    component: EditLibraryComponent,
+    path: 'edit-action/:id/:description',
+    component: EditActionComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -52,7 +40,7 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
 
 @NgModule({
