@@ -1,11 +1,4 @@
-/*pagination*/
-.pagination {
-  display: flex;
-  padding-left: 0;
-  list-style: none;
-  border-radius: .25rem;
 
-}
 .ngb-pagination ::ng-deep a {
   color: #bd7d42 !important;
 }

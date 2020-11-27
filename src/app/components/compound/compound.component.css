@@ -1,20 +1,4 @@
-.button-list{
-  height: 40px;
-  width: 150px;
-}
 
-.input-long{
-  width: 500px;
-  border-radius: 20px;
-}
-/*pagination*/
-.pagination {
-  display: flex;
-  padding-left: 0;
-  list-style: none;
-  border-radius: .25rem;
-
-}
 .ngb-pagination ::ng-deep a {
   color: #bd7d42 !important;
 }

@@ -1,0 +1,81 @@
+<div class="container-fluid" (click)="cleanList()">
+
+  <div class="row">
+    <div class="col">
+      <h2 class="display-5 h1-black">Create Compound</h2>
+    </div>
+    <div class="col back">
+      <button class="options" [routerLink]="['/general-library']">
+        Back to Library
+      </button>
+    </div>
+
+  </div>
+  <div class="container-sm">
+    <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
+        <div *ngIf="name.errors.required">
+          <h5>Name is required</h5>
+        </div>
+        <div *ngIf="name.errors.maxlength">
+          <h5>Max length of name is 100 chars</h5>
+        </div>
+      </div>
+      <div class="form-group row">
+
+        <label for="title" class="col-sm-5 col-form-label">Title: </label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control" formControlName="name" id="title">
+        </div>
+      </div>
+      <div *ngIf="description.invalid && (description.dirty || description.touched)"
+           class="text-danger text-center mb-1">
+        <div *ngIf="description.errors.required">
+          <h5>Description is required</h5>
+        </div>
+        <div *ngIf="description.errors.maxlength">
+          <h5>Max length of description is 300 chars</h5>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="title" class="col-sm-5 col-form-label">Description: </label>
+        <div class="col-sm-7">
+          <textarea name="description" class="flex-control" id="desc" cols="30" rows="4"
+                    formControlName="description"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-5 col-form-label">Add action: </label>
+        <div id="search-component" class="col-sm-7">
+          <input
+            (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
+
+          <ul *ngIf="actions" class="search-result">
+            <li *ngFor="let action of actions | slice:0:9">
+              <a (click)="addToList(action)" target="_blank">
+                {{ action.title }}
+              </a>
+            </li>
+          </ul>
+          <div *ngIf="addedActions.length > 0">
+            <hr>
+            <em>ORDER IS IMPORTANT</em> (Click on item in list below to remove it)
+            <br>
+            Selected:
+          </div>
+
+          <ul class="added-result">
+            <li *ngFor="let action of addedActions">
+              <a (click)="remove(action)">{{ action.title }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-7 text-center mx-auto my-4">
+          <button class="options">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

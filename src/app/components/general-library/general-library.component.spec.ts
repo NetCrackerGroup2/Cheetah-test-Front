@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditLibraryComponent } from './edit-library.component';
+import { GeneralLibraryComponent } from './general-library.component';
 
-describe('EditLibraryComponent', () => {
-  let component: EditLibraryComponent;
-  let fixture: ComponentFixture<EditLibraryComponent>;
+describe('GeneralLibraryComponent', () => {
+  let component: GeneralLibraryComponent;
+  let fixture: ComponentFixture<GeneralLibraryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditLibraryComponent ]
+      declarations: [ GeneralLibraryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditLibraryComponent);
+    fixture = TestBed.createComponent(GeneralLibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
