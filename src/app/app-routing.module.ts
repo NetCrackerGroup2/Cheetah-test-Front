@@ -10,6 +10,7 @@ import {LibraryListComponent} from './components/library-list/library-list.compo
 import {EditLibraryComponent} from './components/edit-library/edit-library.component';
 import {LibraryComponent} from './components/library/library.component';
 import {LibraryCreateCompoundComponent} from './components/library-create-compound/library-create-compound.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -50,6 +51,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'data-set',
+    component: DataSetComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: '', pathMatch: 'full'}

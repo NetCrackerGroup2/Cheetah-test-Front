@@ -17,6 +17,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EditLibraryComponent} from './components/edit-library/edit-library.component';
 import {LibraryComponent} from './components/library/library.component';
 import {LibraryCreateCompoundComponent} from './components/library-create-compound/library-create-compound.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {LibraryCreateCompoundComponent} from './components/library-create-compou
     LibraryListComponent,
     EditLibraryComponent,
     LibraryComponent,
-    LibraryCreateCompoundComponent
+    LibraryCreateCompoundComponent,
+    DataSetComponent
   ],
   imports: [
     BrowserModule,
