@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="display-4 h1-black">
+        <div class="display-1 h1-black">
           <h1 class="h1-style">DataSet</h1>
         </div>
       </div>
@@ -42,7 +42,6 @@
           <tr *ngFor="let dataset of datasets">
             <td>{{dataset.title}}</td>
             <td>{{dataset.description}}</td>
-            <td>{{dataset.testcase_name}}</td>
             <td>
               <button class="options" (click)="deleteDataSet(dataset)">Delete</button>
             </td>
