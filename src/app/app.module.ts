@@ -18,12 +18,10 @@ import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
-import {FilterPipe} from './helpers/filter-pipe/filter-pipe';
 
 
 @NgModule({
   declarations: [
-    FilterPipe,
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
