@@ -29,12 +29,10 @@
           <tr>
             <th scope="col">Title</th>
             <th scope="col">Description</th>
-            <th scope="col">Test case</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-              <td><input class="div-input-invisible" type="text"></td>
               <td><input class="div-input-invisible" type="text"></td>
               <td><input class="div-input-invisible" type="text"></td>
               <td><button class="options" (click)="createDataSet()">Create</button></td>
@@ -43,14 +41,15 @@
             <td>{{dataset.title}}</td>
             <td>{{dataset.description}}</td>
             <td>
-              <button class="options" (click)="deleteDataSet(dataset)">Delete</button>
+              <button class="options" (click)="deleteDataSet(dataset.id)">Delete</button>
+              <button class="options" (click)="editDataSet(dataset)">Edit</button>
             </td>
           </tr>
           </tbody>
         </table>
         <div class="nothing-found">
           <div *ngIf="!isFound" class="alert alert-warning col-md-1" role="alert">
-            No libraries found.
+            No data sets found.
           </div>
         </div>
       </div>
