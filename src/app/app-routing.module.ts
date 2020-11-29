@@ -9,6 +9,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {CreateTestCaseComponent} from './components/create-test-case/create-test-case.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'general-library',
     component: GeneralLibraryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-test-case/:projectId',
+    component: CreateTestCaseComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ActionService} from '../../services/action/action.service';
-import {Action} from '../../models/action/action';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
+import {UserService} from '../../services/user/user.service';
+import {first} from 'rxjs/operators';
 import {TestCaseService} from '../../services/test-case/test-case.service';
 import {TestCase} from '../../models/test-case/test-case';
 
@@ -12,27 +12,66 @@ import {TestCase} from '../../models/test-case/test-case';
   templateUrl: './create-test-case.component.html',
   styleUrls: ['./create-test-case.component.css']
 })
-export class CreateTestCaseComponent implements OnInit {
+export class CreateTestCaseComponent implements OnInit, OnDestroy {
 
+  projectId: number;
   successMessage: string;
   errorMessage: string;
-  createCompoundForm: FormGroup;
-  testCases: TestCase[];
-  addedTestCases: Action[] = [];
-  searchTerm$ = new Subject<string>();
-  searchTestCaseSubscription: Subscription;
-  createSubscription: Subscription;
-  @ViewChild('term') term;
+  createTestCaseForm: FormGroup;
+  createTestCaseSubscription: Subscription;
   loading = false;
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              ) {
+              private userService: UserService,
+              private testCaseService: TestCaseService) {
 
+    this.projectId = +this.route.snapshot.paramMap.get('projectId');
   }
 
   ngOnInit(): void {
+    this.createTestCaseForm = this.formBuilder.group({
+      title: new FormControl('',
+        [Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(3)])
+    });
+  }
 
+  get title(): any {
+    return this.createTestCaseForm.get('title');
+  }
+
+  onSubmit(): void {
+    this.errorMessage = '';
+    this.successMessage = '';
+    this.loading = true;
+    const testCase: TestCase =
+      new TestCase(this.title.value, this.projectId, 'ACTIVE', 'CREATED');
+
+    this.createTestCaseSubscription = this.testCaseService.create(testCase)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data === 'Test Case Already Exists') {
+            this.errorMessage = 'Test Case Already Exists';
+          } else if (data === 'Project Not Found') {
+            this.errorMessage = 'Project Not Found';
+          } else if (data) {
+            this.successMessage = 'Test Case has been successfully created';
+            this.createTestCaseForm.reset();
+          } else {
+            this.errorMessage = 'Server error';
+          }
+
+          this.loading = false;
+        });
+  }
+
+  ngOnDestroy(): void {
+    if (this.createTestCaseSubscription) {
+      this.createTestCaseSubscription.unsubscribe();
+    }
   }
 
 }
