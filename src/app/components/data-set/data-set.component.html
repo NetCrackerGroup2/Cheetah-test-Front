@@ -42,7 +42,7 @@
             <td>{{dataset.description}}</td>
             <td>
               <button class="options" (click)="deleteDataSet(dataset.id)">Delete</button>
-              <button class="options" [routerLink]="[editDataSet(dataset.id)]">Edit</button>
+              <button class="options" [routerLink]="[editDataSet(dataset.id, dataset.title)]">Edit</button>
             </td>
           </tr>
           </tbody>
