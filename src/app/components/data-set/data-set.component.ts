@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DataSet} from '../../models/data-set/data-set';
 import {DataSetService} from '../../services/data-set/data-set.service';
 import {Subscription} from 'rxjs';
 import {AuthService} from '../../services/auth/auth.service';
-import {CompoundService} from '../../services/compound/compound.service';
 import {User} from '../../models/user/user';
 
 @Component({
@@ -14,9 +13,10 @@ import {User} from '../../models/user/user';
 })
 export class DataSetComponent implements OnInit {
   user: User;
+  theTestCaseId: number;
   thePageNumber = 1;
   thePageSize = 5;
-  theTotalElements = 0;
+  theTotalElements: number;
   dataSetId: number;
   dataSetName: string;
   isFound = true;
@@ -28,9 +28,12 @@ export class DataSetComponent implements OnInit {
   value = '';
   searchMode = false;
   previousKeyword: string = null;
+  dataSetTitle: string;
+  dataSetDescription: string;
 
   constructor(private authenticationService: AuthService,
               private router: Router,
+              private route: ActivatedRoute,
               private dataSetService: DataSetService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
@@ -40,34 +43,31 @@ export class DataSetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-  private checkIfFound(): void {
-    if (this.datasets?.length === 0) {
-      this.isFound = false;
-    }
+    this.theTestCaseId = +this.route.snapshot.paramMap.get('id');
+    this.listDataSets();
   }
 
-  listCompounds(): void {
+  listDataSets(): void {
     this.searchMode = !!this.value;
 
     if (this.searchMode) {
-      this.handleSearchCompounds();
+      this.handleSearchDataSets();
 
     } else {
-      this.handleCompounds();
+      this.handleDataSets();
     }
   }
 
-  private handleCompounds(): void {
+  private handleDataSets(): void {
     this.dataSetSubscription = this.dataSetService
-      .getDataSets(this.thePageNumber, this.thePageSize)
+      .getDataSets(this.thePageNumber, this.thePageSize, this.theTestCaseId)
       .subscribe(data => {
         this.datasets = data.dataSets;
-        this.theTotalElements = data.totalDataSets;
+        this.theTotalElements = data.totalElements;
       });
   }
 
-  private handleSearchCompounds(): void {
+  private handleSearchDataSets(): void {
     const theKeyword: string = this.value;
     if (this.previousKeyword !== theKeyword) {
       this.thePageNumber = 1;
@@ -77,22 +77,36 @@ export class DataSetComponent implements OnInit {
 
     this.dataSetSearchSubscription = this.dataSetService.searchDataSets(
       this.thePageNumber,
+      this.theTestCaseId,
       this.thePageSize,
       theKeyword)
       .subscribe(data => {
         this.datasets = data.dataSets;
-        this.theTotalElements = data.totalDataSets;
+        this.theTotalElements = data.totalElements;
       });
   }
 
-  //////////////////////////////////////////////////////////////
-
   createDataSet(): void{
-
+    const dataset1: DataSet = new DataSet();
+    dataset1.title = this.dataSetTitle;
+    dataset1.description = this.dataSetDescription;
+    dataset1.idTestCase = 2;
+    console.log(dataset1);
+    this.dataSetService.createDataSet(dataset1).subscribe();
+    this.listDataSets();
   }
 
   deleteDataSet(id: number): void {
     this.dataSetService.deleteDataSet(id).subscribe();
-    this.listCompounds();
+    this.listDataSets();
+  }
+
+  editDataSet(dataSet: DataSet): void{
+    this.listDataSets();
+  }
+
+  doSearch(value: string): void {
+    this.value = value;
+    this.listDataSets();
   }
 }

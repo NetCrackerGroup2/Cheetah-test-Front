@@ -43,7 +43,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'data-set',
+    path: 'data-set/:id',
     component: DataSetComponent,
     canActivate: [AuthGuard]
   },

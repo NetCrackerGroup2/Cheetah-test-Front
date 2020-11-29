@@ -10,12 +10,15 @@
         <div class="container">
           <div class="row">
             <div class="col-sm">
-              <input class="form-control mr-sm-2 input-long" type="text" placeholder="Search">
+              <input #myInput class="form-control mr-sm-2 input-long" type="text" placeholder="Search" (keyup.enter)="doSearch(myInput.value)">
+              <button class="options ml-1 button-list" (click)="doSearch(myInput.value)">
+                Search
+              </button>
             </div>
             <div class="col-sm">
-              <div class="button-row">
-                <button class="options ml-1 button-list" color="primary">Filter</button>
-              </div>
+<!--              <div class="button-row">-->
+<!--                <button class="options ml-1 button-list" color="primary">Filter</button>-->
+<!--              </div>-->
             </div>
             <div class="col-sm">
               <button class="options ml-1 button-list" color="primary">Go to test case</button>
@@ -33,8 +36,8 @@
           </thead>
           <tbody>
           <tr>
-              <td><input class="div-input-invisible" type="text"></td>
-              <td><input class="div-input-invisible" type="text"></td>
+              <td><input name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible" type="text"></td>
+              <td><input name="dataSetDescription" [(ngModel)]="dataSetDescription" class="div-input-invisible" type="text"></td>
               <td><button class="options" (click)="createDataSet()">Create</button></td>
           </tr>
           <tr *ngFor="let dataset of datasets">
@@ -50,6 +53,22 @@
         <div class="nothing-found">
           <div *ngIf="!isFound" class="alert alert-warning col-md-1" role="alert">
             No data sets found.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pagination">
+      <div class="col-md-6 paging-config">
+        <div class="row">
+          <div class="col-md-9">
+            <ngb-pagination [(page)]="thePageNumber"
+                            [pageSize]="thePageSize"
+                            [collectionSize]="theTotalElements"
+                            [maxSize]="5"
+                            [boundaryLinks]="true"
+                            (pageChange)="listDataSets()"
+                            class="ngb-pagination">
+            </ngb-pagination>
           </div>
         </div>
       </div>

@@ -12,23 +12,28 @@ export class DataSetService {
   constructor(private http: HttpClient) {
   }
 
-  getDataSets(thePageNumber: number, thePageSize: number): Observable<GetResponseDataSets> {
-    const url = `${environment.apiUrl}/api/data-set?&title=&size=${thePageSize}&page=${thePageNumber}`;
+  getDataSets(thePageNumber: number, thePageSize: number, theTestCase: number): Observable<GetResponseDataSets> {
+    const url = `${environment.apiUrl}/api/data-set?&title=&size=${thePageSize}&page=${thePageNumber}&idTestCase=${theTestCase}`;
     return this.http.get<GetResponseDataSets>(url);
   }
 
-  searchDataSets(thePageNumber: number, thePageSize: number, theKeyword: string): Observable<GetResponseDataSets> {
-    const url = `${environment.apiUrl}/api/data-set?&title=${theKeyword}&size=${thePageSize}&page=${thePageNumber}`;
+  searchDataSets(thePageNumber: number, theTestCaseId: number, thePageSize: number, theKeyword: string): Observable<GetResponseDataSets> {
+    const url = `${environment.apiUrl}/api/data-set?&title=${theKeyword}&size=${thePageSize}&page=${thePageNumber}&idTestCase=${theTestCaseId}`;
     return this.http.get<GetResponseDataSets>(url);
   }
 
   deleteDataSet(id: number): Observable<any> {
-    const url = `${environment.apiUrl}/api/data-set?id=${id}`;
+    const url = `${environment.apiUrl}/api/data-set?&id=${id}`;
     return this.http.delete<GetResponseDataSets>(url);
+  }
+  createDataSet(dataSet: DataSet): Observable<any> {
+    const url = `${environment.apiUrl}/api/data-set`;
+    console.log(dataSet);
+    return this.http.post<DataSet>(url, dataSet);
   }
 }
 
 interface GetResponseDataSets {
     dataSets: DataSet[];
-    totalDataSets: number;
+    totalElements: number;
 }
