@@ -13,17 +13,26 @@ export class TestCaseService {
   constructor(private http: HttpClient) {
   }
 
-  create(testCase: TestCase): Observable<any> {
+  save(testCase: TestCase, isEdit: boolean, id: number): Observable<any> {
     const url = `${environment.apiUrl}/api/test-cases`;
-    return this.http.post<TestCase>(url, testCase)
-      .pipe(
-        map(data => {
-          return data;
-        }),
-        catchError(error => {
-          return of (error);
-        })
-      );
+
+
+    if (isEdit) {
+      return this.http.put<TestCase>(`${url}/${id}`, testCase)
+        .pipe(
+          catchError(error => {
+            return of(error);
+          })
+        );
+    } else {
+      return this.http.post<TestCase>(url, testCase)
+        .pipe(
+          catchError(error => {
+            return of(error);
+          })
+        );
+    }
+
   }
 }
 

@@ -20,6 +20,8 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
   createTestCaseForm: FormGroup;
   createTestCaseSubscription: Subscription;
   loading = false;
+  isEdit = false;
+  id: number;
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -30,8 +32,16 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isEdit = this.route.snapshot.paramMap.has('title');
+
+    let titleToEdit = '';
+    if (this.isEdit) {
+      titleToEdit = this.route.snapshot.paramMap.get('title');
+      this.id = +this.route.snapshot.paramMap.get('id');
+    }
+
     this.createTestCaseForm = this.formBuilder.group({
-      title: new FormControl('',
+      title: new FormControl(titleToEdit,
         [Validators.required,
           Validators.maxLength(100),
           Validators.minLength(3)])
@@ -49,7 +59,7 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
     const testCase: TestCase =
       new TestCase(this.title.value, this.projectId, 'ACTIVE', 'CREATED');
 
-    this.createTestCaseSubscription = this.testCaseService.create(testCase)
+    this.createTestCaseSubscription = this.testCaseService.save(testCase, this.isEdit, this.id)
       .pipe(first())
       .subscribe(
         data => {
@@ -58,7 +68,7 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
           } else if (data === 'Project Not Found') {
             this.errorMessage = 'Project Not Found';
           } else if (data) {
-            this.successMessage = 'Test Case has been successfully created';
+            this.successMessage = 'Test Case has been successfully saved';
             this.createTestCaseForm.reset();
           } else {
             this.errorMessage = 'Server error';

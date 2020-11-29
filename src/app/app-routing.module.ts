@@ -37,6 +37,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'edit-test-case/:projectId/:title/:id',
+    component: CreateTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'edit-action/:id/:description',
     component: EditActionComponent,
     canActivate: [AuthGuard]
