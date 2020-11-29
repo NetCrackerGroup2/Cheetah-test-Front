@@ -10,6 +10,7 @@ import {GeneralLibraryComponent} from './components/general-library/general-libr
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: 'data-set/:id',
     component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set/:id',
+    component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

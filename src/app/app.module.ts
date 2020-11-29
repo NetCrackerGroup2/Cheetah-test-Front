@@ -19,6 +19,7 @@ import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
+import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CreateCompoundComponent } from './components/create-compound/create-com
     ActionComponent,
     CompoundComponent,
     EditActionComponent,
-    CreateCompoundComponent
+    CreateCompoundComponent,
+    EditDataSetComponent
   ],
   imports: [
     BrowserModule,

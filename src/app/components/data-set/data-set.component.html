@@ -16,9 +16,6 @@
               </button>
             </div>
             <div class="col-sm">
-<!--              <div class="button-row">-->
-<!--                <button class="options ml-1 button-list" color="primary">Filter</button>-->
-<!--              </div>-->
             </div>
             <div class="col-sm">
               <button class="options ml-1 button-list" color="primary">Go to test case</button>
@@ -45,7 +42,7 @@
             <td>{{dataset.description}}</td>
             <td>
               <button class="options" (click)="deleteDataSet(dataset.id)">Delete</button>
-              <button class="options" (click)="editDataSet(dataset)">Edit</button>
+              <button class="options" [routerLink]="[editDataSet(dataset.id)]">Edit</button>
             </td>
           </tr>
           </tbody>

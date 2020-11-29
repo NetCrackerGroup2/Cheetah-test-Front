@@ -100,8 +100,8 @@ export class DataSetComponent implements OnInit {
     this.listDataSets();
   }
 
-  editDataSet(dataSet: DataSet): void{
-    this.listDataSets();
+  editDataSet(id: number): string {
+      return `/edit-data-set/${id}`;
   }
 
   doSearch(value: string): void {
