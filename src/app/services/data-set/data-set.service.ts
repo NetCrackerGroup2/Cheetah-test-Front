@@ -28,7 +28,6 @@ export class DataSetService {
   }
   createDataSet(dataSet: DataSet): Observable<any> {
     const url = `${environment.apiUrl}/api/data-set`;
-    console.log(dataSet);
     return this.http.post<DataSet>(url, dataSet);
   }
 }

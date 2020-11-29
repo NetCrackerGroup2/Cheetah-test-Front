@@ -36,8 +36,8 @@
           </thead>
           <tbody>
           <tr>
-              <td><input name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible" type="text"></td>
-              <td><input name="dataSetDescription" [(ngModel)]="dataSetDescription" class="div-input-invisible" type="text"></td>
+              <td><input id="dataSetName" name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible" type="text"></td>
+              <td><input id="dataSetDescription" name="dataSetDescription" [(ngModel)]="dataSetDescription" class="div-input-invisible" type="text"></td>
               <td><button class="options" (click)="createDataSet()">Create</button></td>
           </tr>
           <tr *ngFor="let dataset of datasets">
