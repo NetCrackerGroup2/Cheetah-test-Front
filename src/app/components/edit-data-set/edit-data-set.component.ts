@@ -78,7 +78,7 @@ export class EditDataSetComponent implements OnInit {
 
   private handleDataSets(): void {
     this.parametersSubscription = this.parametersService
-      .getParameters(this.thePageNumber, this.thePageSize, this.dataSetId, this.parameter.type)
+      .getParameters(this.thePageNumber, this.thePageSize, this.dataSetId)
       .subscribe(data => {
         this.parameters = data.parameters;
         this.theTotalElements = data.totalElements;
@@ -95,7 +95,7 @@ export class EditDataSetComponent implements OnInit {
 
     this.parametersSubscription = this.parametersService.searchParameters(
       this.thePageNumber,
-      this.theTestCaseId,
+      this.dataSetId,
       this.thePageSize,
       theKeyword)
       .subscribe(data => {

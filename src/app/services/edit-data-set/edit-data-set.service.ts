@@ -13,13 +13,13 @@ export class EditDataSetService {
   constructor(private http: HttpClient) {
   }
 
-  getParameters(thePageNumber: number, thePageSize: number, theDataSet: number, theType: string): Observable<GetResponseParameters> {
-    const url = `${environment.apiUrl}/api/parameters?&id=${theDataSet}&type=${theType}&size=${thePageSize}&page=${thePageNumber}`;
+  getParameters(thePageNumber: number, thePageSize: number, theDataSet: number): Observable<GetResponseParameters> {
+    const url = `${environment.apiUrl}/api/parameters/${theDataSet}?&type=&size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseParameters>(url);
   }
   //
-  searchParameters(thePageNumber: number, theTestCaseId: number, thePageSize: number, theKeyword: string): Observable<GetResponseParameters> {
-    const url = `${environment.apiUrl}/api/parameters?&title=${theKeyword}&size=${thePageSize}&page=${thePageNumber}&idTestCase=${theTestCaseId}`;
+  searchParameters(thePageNumber: number, theDataSetId: number, thePageSize: number, theKeyword: string): Observable<GetResponseParameters> {
+    const url = `${environment.apiUrl}/api/parameters/${theDataSetId}?&type=${theKeyword}&size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseParameters>(url);
   }
 
@@ -29,7 +29,7 @@ export class EditDataSetService {
   }
   createParameter(parameter: Parameter): Observable<any> {
     const url = `${environment.apiUrl}/api/parameters`;
-    return this.http.post<DataSet>(url, parameter);
+    return this.http.post<Parameter>(url, parameter);
   }
 }
 
