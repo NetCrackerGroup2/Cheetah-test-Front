@@ -33,7 +33,7 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
     ActionComponent,
     CompoundComponent,
     EditActionComponent,
-    CreateCompoundComponent
+    CreateCompoundComponent,
     ProfileComponent,
     ProfilesComponent
   ],
