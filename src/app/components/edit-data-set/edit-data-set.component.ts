@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DataSet} from '../../models/data-set/data-set';
 import {AuthService} from '../../services/auth/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DataSetService} from '../../services/data-set/data-set.service';
 import {Subscription} from 'rxjs';
 import {User} from '../../models/user/user';
 import {Parameter} from '../../models/parameter/parameter';
