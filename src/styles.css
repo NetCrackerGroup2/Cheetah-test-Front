@@ -103,6 +103,7 @@ input.au-input.au-input-xl{
   width: 1200px;
   flex-direction: column;
   margin-right: 600px;
+  min-width: 600px;
 
 }
 .paging-config {
@@ -133,6 +134,7 @@ input.au-input.au-input-xl{
   justify-content: right ;
   padding-left: 30%;
 }
+
 .container-sm {
   width: 50%;
   margin-top: 7%;
@@ -215,4 +217,8 @@ ul.search-result {
 ul.added-result {
   margin-top: 0;
   padding-left: 0;
+}
+
+.pagination-footer {
+  position: fixed;
 }

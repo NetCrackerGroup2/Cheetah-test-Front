@@ -44,6 +44,11 @@ export class ProjectService {
     const url = `${environment.apiUrl}/api/project-management/projects/search/findActiveByTitle?page=${thePageNumber}&size=${thePageSize}&title=${title}`;
     return this.http.get<GetResponseProjects>(url);
   }
+
+  archive(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/project-management/projects/archive/${id}`;
+    return this.http.put<any>(url, {});
+  }
 }
 
 interface GetResponseProjects {

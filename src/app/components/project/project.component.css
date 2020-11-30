@@ -15,3 +15,4 @@
 .ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
   box-shadow: 0 0 0 0.1rem dimgrey;
 }
+

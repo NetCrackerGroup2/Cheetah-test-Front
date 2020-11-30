@@ -1,11 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from '../../models/user/user';
 import {Subscription} from 'rxjs';
-import {Compound} from '../../models/compound/compound';
 import {Project} from '../../models/project/entity/project';
-import {AuthService} from '../../services/auth/auth.service';
 import {Router} from '@angular/router';
-import {CompoundService} from '../../services/compound/compound.service';
 import {ProjectService} from '../../services/project/project.service';
 
 @Component({
@@ -20,6 +16,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
   theTotalElements = 0;
   projectSearchSubscription: Subscription;
   projectSubscription: Subscription;
+  archiveSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
@@ -78,10 +75,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
     if (this.projectSearchSubscription) {
       this.projectSearchSubscription.unsubscribe();
     }
+    if (this.archiveSubscription) {
+      this.archiveSubscription.unsubscribe();
+    }
   }
 
   doSearch(value: string): void {
     this.value = value;
+    this.listProjects();
+  }
+
+  archive(id: number): void {
+    this.projectService.archive(id).subscribe();
     this.listProjects();
   }
 }

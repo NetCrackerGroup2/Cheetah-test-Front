@@ -21,6 +21,7 @@ export class CompoundComponent implements OnInit, OnDestroy {
   theTotalElements = 0;
   compoundSearchSubscription: Subscription;
   compoundSubscription: Subscription;
+  removeSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
@@ -80,7 +81,7 @@ export class CompoundComponent implements OnInit, OnDestroy {
   }
 
   remove(id: number): void {
-    this.compoundService.remove(id).subscribe();
+    this.removeSubscription = this.compoundService.remove(id).subscribe();
     this.listCompounds();
   }
 
@@ -97,6 +98,9 @@ export class CompoundComponent implements OnInit, OnDestroy {
     }
     if (this.compoundSearchSubscription) {
       this.compoundSearchSubscription.unsubscribe();
+    }
+    if (this.removeSubscription) {
+      this.removeSubscription.unsubscribe();
     }
   }
 
