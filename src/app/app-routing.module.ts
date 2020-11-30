@@ -11,6 +11,8 @@ import {EditActionComponent} from './components/edit-action/edit-action.componen
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
 import {ProjectComponent} from './components/project/project.component';
 import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -55,6 +57,16 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'data-set/:id',
+    component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set/:idTestCase/:title/:id',
+    component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

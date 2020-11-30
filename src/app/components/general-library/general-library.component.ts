@@ -11,7 +11,7 @@ export class GeneralLibraryComponent implements OnInit {
   isAction: boolean = false;
   isCompound: boolean = true;
 
-  constructor(private router: Router,) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {

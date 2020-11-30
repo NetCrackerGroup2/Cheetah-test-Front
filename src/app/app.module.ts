@@ -18,8 +18,10 @@ import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
+import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
 
 @NgModule({
   declarations: [
@@ -29,11 +31,13 @@ import { CreateProjectComponent } from './components/create-project/create-proje
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
+    DataSetComponent,
     GeneralLibraryComponent,
     ActionComponent,
     CompoundComponent,
     EditActionComponent,
     CreateCompoundComponent,
+    EditDataSetComponent,
     ProjectComponent,
     CreateProjectComponent
   ],
