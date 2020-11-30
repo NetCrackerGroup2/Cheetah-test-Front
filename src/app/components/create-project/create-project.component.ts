@@ -106,7 +106,18 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       project.id = this.projectId;
       project.title = this.title.value;
       project.link = this.link.value;
-      this.createSubscription = this.projectService.update(project).subscribe();
+      this.createSubscription = this.projectService.update(project).subscribe(
+        data => {
+          if (data.message === 'The project has been updated!') {
+            this.successMessage = 'The project has been updated!';
+            this.createProjectForm.reset();
+            this.addedUsers = [];
+          } else {
+            this.errorMessage = 'Invalid Input';
+          }
+          this.loading = false;
+        }
+      );
     }
   }
 

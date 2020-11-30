@@ -56,10 +56,14 @@ export class ProjectService {
     return this.http.get<any>(url);
   }
 
-  update(project: Project): Observable<Project> {
-    console.log(project);
+  update(project: Project): Observable<any> {
     const url = `${environment.apiUrl}/api/project-management/projects/${project.id}`;
-    return this.http.put<any>(url, project);
+    return this.http.put<any>(url, project)
+      .pipe(
+        catchError(err => {
+          return of(err);
+        })
+      );
   }
 }
 
