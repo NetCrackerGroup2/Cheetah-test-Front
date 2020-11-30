@@ -34,5 +34,5 @@ export class EditDataSetService {
 
 interface GetResponseParameters {
   parameters: Parameter[];
-  totalElements: number;
+  totalParameters: number;
 }

@@ -79,7 +79,7 @@ export class EditDataSetComponent implements OnInit {
       .getParameters(this.thePageNumber, this.thePageSize, this.dataSetId)
       .subscribe(data => {
         this.parameters = data.parameters;
-        this.theTotalElements = data.totalElements;
+        this.theTotalElements = data.totalParameters;
       });
   }
 
@@ -98,7 +98,7 @@ export class EditDataSetComponent implements OnInit {
       theKeyword)
       .subscribe(data => {
         this.parameters = data.parameters;
-        this.theTotalElements = data.totalElements;
+        this.theTotalElements = data.totalParameters;
       });
   }
 
