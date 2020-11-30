@@ -1,0 +1,61 @@
+<div class="pagination">
+  <div class="container-fluid">
+    <div class="row">
+      <h1 class="display-4 black">Projects</h1>
+    </div>
+    <div class="row mt-5">
+      <div class="search-config">
+        <div class="form-header">
+          <input #myInput placeholder="Search for a project ..." class="au-input input-long" type="text"
+                 (keyup.enter)="doSearch(myInput.value)"/>
+
+          <button class="options ml-1 button-list" (click)="doSearch(myInput.value)">
+            Search
+          </button>
+
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 row">
+      <table class="table table-striped table-config-projects">
+        <caption>Projects</caption>
+        <thead class="thead">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Link</th>
+          <th scope="col">Status</th>
+          <th scope="col">Create Date</th>
+          <th scope="col">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let project of projects">
+          <td>{{project.title}}</td>
+          <td>{{project.link}}</td>
+          <td>{{project.status}}</td>
+          <td>{{project.createDate | date: 'dd/MM/yyyy'}}</td>
+          <td>
+            <button class="options">Remove</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row pagination">
+      <div class="col-md-6 paging-config">
+        <div class="row">
+          <div class="col-md-9">
+            <ngb-pagination [(page)]="thePageNumber"
+                            [pageSize]="thePageSize"
+                            [collectionSize]="theTotalElements"
+                            [maxSize]="5"
+                            [boundaryLinks]="true"
+                            (pageChange)="listProjects()"
+                            class="ngb-pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

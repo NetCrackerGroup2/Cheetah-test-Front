@@ -117,6 +117,9 @@ input.au-input.au-input-xl{
 .table-config-compounds {
   width: 50%;
 }
+.table-config-projects {
+  width: 70%;
+}
 .input-long{
   width: 60%;
   border-radius: 20px;

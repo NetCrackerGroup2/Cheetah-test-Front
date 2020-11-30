@@ -1,7 +1,7 @@
 export class Project {
   id: number;
-  email: string;
-  name: string;
-  role: string;
+  title: string;
+  link: string;
   status: string;
+  createDate: string;
 }

@@ -5,8 +5,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Project} from '../../models/project/entity/project';
 import {ProjectDtoWithUserIds} from '../../models/project/project-dto-with-user-ids/project-dto-with-user-ids';
-import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
-import {ProjectDto} from '../../models/project/dto/project-dto';
 import {UserDto} from '../../models/user/dto/user-dto';
 
 @Injectable({
@@ -36,4 +34,19 @@ export class ProjectService {
         catchError(err => of(err))
       );
   }
+
+  getProjects(thePageNumber: number, thePageSize: number): Observable<GetResponseProjects> {
+    const url = `${environment.apiUrl}/api/project-management/projects/active?page=${thePageNumber}&size=${thePageSize}`;
+    return this.http.get<GetResponseProjects>(url);
+  }
+
+  findProjectsByTitle(thePageNumber: number, thePageSize: number, title: string): Observable<GetResponseProjects> {
+    const url = `${environment.apiUrl}/api/project-management/projects/search/findActiveByTitle?page=${thePageNumber}&size=${thePageSize}&title=${title}`;
+    return this.http.get<GetResponseProjects>(url);
+  }
+}
+
+interface GetResponseProjects {
+  projects: Project[];
+  totalElements: number;
 }
