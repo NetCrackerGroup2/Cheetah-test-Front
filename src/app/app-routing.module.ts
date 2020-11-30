@@ -9,6 +9,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -24,6 +26,7 @@ const routes: Routes = [
     path: 'library-create-compound',
     component: CreateCompoundComponent,
     canActivate: [AuthGuard]
+
   },
   {
     path: 'general-library',
@@ -38,6 +41,16 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'data-set/:id',
+    component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set/:idTestCase/:title/:id',
+    component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
