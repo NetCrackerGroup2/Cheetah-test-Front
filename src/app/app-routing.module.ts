@@ -9,16 +9,12 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
-import {ProfileComponent} from './components/profile/profile.component';
-import {ProfilesComponent} from './components/profiles/profiles.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
-{path: 'profile', component: ProfileComponent},
-  {path: 'profiles', component: ProfilesComponent},
   {
     path: 'sign-up',
     component: SignUpComponent,
