@@ -89,4 +89,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
     this.projectService.archive(id).subscribe();
     this.listProjects();
   }
+
+  edit(id: number): void {
+    this.router.navigate([`edit-project/${id}`]);
+  }
 }

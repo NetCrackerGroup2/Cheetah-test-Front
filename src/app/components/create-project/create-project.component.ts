@@ -7,6 +7,7 @@ import {first} from 'rxjs/operators';
 import {ProjectDto} from '../../models/project/dto/project-dto';
 import {ProjectDtoWithUserIds} from '../../models/project/project-dto-with-user-ids/project-dto-with-user-ids';
 import {UserDto} from '../../models/user/dto/user-dto';
+import {Project} from '../../models/project/entity/project';
 
 @Component({
   selector: 'app-create-project',
@@ -24,6 +25,9 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   createSubscription: Subscription;
   @ViewChild('term') term;
   loading = false;
+  isEdit = false;
+  projectId: number;
+  project: Project = new Project();
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
@@ -36,6 +40,18 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isEdit = this.route.snapshot.paramMap.has('id');
+
+    if (this.isEdit) {
+      this.projectId = +this.route.snapshot.paramMap.get('id');
+      this.projectService.getProjectById(this.projectId).subscribe(
+        data => {
+          this.title.setValue(data.title);
+          this.link.setValue(data.link);
+        }
+      );
+    }
+
     this.createProjectForm = this.formBuilder.group({
       title: new FormControl('',
         [Validators.required,
@@ -47,7 +63,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           Validators.minLength(3)])
     });
   }
-
 
   get title(): any {
     return this.createProjectForm.get('title');
@@ -66,25 +81,33 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       userDtos.push(user.id);
     }
 
-    const projectDto: ProjectDto =
-      new ProjectDto(this.title.value, this.link.value);
+    if (!this.isEdit) {
+      const projectDto: ProjectDto =
+        new ProjectDto(this.title.value, this.link.value);
 
-    const projectDtoWithUserIds: ProjectDtoWithUserIds =
-      new ProjectDtoWithUserIds(projectDto, userDtos);
+      const projectDtoWithUserIds: ProjectDtoWithUserIds =
+        new ProjectDtoWithUserIds(projectDto, userDtos);
 
-    this.createSubscription = this.projectService.create(projectDtoWithUserIds)
-      .pipe(first())
-      .subscribe(
-        data => {
-          if (data.message === 'A new project has been created successfully!'){
-            this.successMessage = 'A new project has been created successfully!';
-            this.createProjectForm.reset();
-            this.addedUsers = [];
-          } else {
-            this.errorMessage = 'Invalid Input';
-          }
-          this.loading = false;
-        });
+      this.createSubscription = this.projectService.create(projectDtoWithUserIds)
+        .pipe(first())
+        .subscribe(
+          data => {
+            if (data.message === 'A new project has been created successfully!') {
+              this.successMessage = 'A new project has been created successfully!';
+              this.createProjectForm.reset();
+              this.addedUsers = [];
+            } else {
+              this.errorMessage = 'Invalid Input';
+            }
+            this.loading = false;
+          });
+    } else {
+      const project: Project = new Project();
+      project.id = this.projectId;
+      project.title = this.title.value;
+      project.link = this.link.value;
+      this.createSubscription = this.projectService.update(project).subscribe();
+    }
   }
 
   addToList(user: UserDto): void {
@@ -99,9 +122,11 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   }
 
   cleanList(): void {
-    this.searchTerm$.next();
-    this.term.nativeElement.value = '';
-    this.users = [];
+    if (!this.isEdit) {
+      this.searchTerm$.next();
+      this.term.nativeElement.value = '';
+      this.users = [];
+    }
   }
 
   ngOnDestroy(): void {

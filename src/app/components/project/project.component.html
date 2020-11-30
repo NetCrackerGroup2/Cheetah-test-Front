@@ -25,19 +25,20 @@
         <tr>
           <th scope="col">Title</th>
           <th scope="col">Link</th>
-          <th scope="col">Status</th>
           <th scope="col">Create Date</th>
-          <th scope="col" colspan="2" class="text-center">Options</th>
+          <th scope="col" colspan="3" class="text-center">Options</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let project of projects">
           <td>{{project.title}}</td>
           <td>{{project.link}}</td>
-          <td>{{project.status}}</td>
           <td>{{project.createDate | date: 'dd/MM/yyyy'}}</td>
           <td>
-            <button class="options">Edit</button>
+            <button class="options">View</button>
+          </td>
+          <td>
+            <button class="options" (click)="edit(project.id)">Edit</button>
           </td>
           <td>
             <button class="options" (click)="archive(project.id)">Archive</button>
