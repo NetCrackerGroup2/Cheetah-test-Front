@@ -16,7 +16,7 @@ export class EditDataSetService {
     const url = `${environment.apiUrl}/api/parameters/${theDataSet}?&type=&size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseParameters>(url);
   }
-  //
+
   searchParameters(thePageNumber: number, theDataSetId: number, thePageSize: number, theKeyword: string): Observable<GetResponseParameters> {
     const url = `${environment.apiUrl}/api/parameters/${theDataSetId}?&type=${theKeyword}&size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseParameters>(url);
