@@ -87,10 +87,18 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
   archive(id: number): void {
     this.projectService.archive(id).subscribe();
-    this.listProjects();
+    this.removeFromList(id);
   }
 
   edit(id: number): void {
     this.router.navigate([`edit-project/${id}`]);
+  }
+
+  removeFromList(id: number): void {
+    for (let i = 0; i < this.projects.length; i++) {
+      if (this.projects[i].id === id) {
+        this.projects.splice(i, 1);
+      }
+    }
   }
 }
