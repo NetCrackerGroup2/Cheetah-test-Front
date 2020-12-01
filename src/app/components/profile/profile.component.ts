@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginComponent } from '../login/login.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class ProfileComponent implements OnInit {
   username: string;
   email: string;
   role: string;
-  private login: LoginComponent;
 
   fileToUpload: File = null;
 
@@ -24,7 +22,6 @@ export class ProfileComponent implements OnInit {
     this.email = authService.userValue.email;
     this.role = authService.userValue.role;
   }
-
   fileInput(event: any): void {
     if (event.target.files && event.target.files[0]) {
           const reader = new FileReader();
