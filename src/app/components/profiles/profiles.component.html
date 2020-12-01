@@ -22,13 +22,16 @@
 							(click)="clickSearchEmailUsername()">
 				</div>
 				<div class="table-elem">
-					<select [(ngModel)]="role" (click)="chooseSearchRole()" 
+          <label>
+					<select [(ngModel)]="role"
+                  (click)="chooseSearchRole()"
 						class="choose-role">
 						<option value="ALL">All roles</option>
 						<option value="ADMIN">Admin</option>
 						<option value="MANAGER">Manager</option>
 						<option value="ENGINEER">Engineer</option>
 					</select>
+          </label>
 				</div>
 			</div>
 			<!-- Users -->
@@ -59,7 +62,6 @@
 						<input type="button" (click)="pressDelete(i)" [hidden]="isAdmin"
 								[(ngModel)]="deleteButton" class="button_user">
 				</div>
-				
 			</div>
 			<div class="warning-result">
 				{{existUser}}
