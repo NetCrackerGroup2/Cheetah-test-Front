@@ -1,0 +1,30 @@
+os: linux
+dist: xenial
+language: node_js
+node_js:
+- '14'
+
+branches:
+  only:
+    - main
+    - dev
+
+before_install:
+- npm install -g @angular/cli
+install:
+- npm install
+
+addons:
+  sonarcloud:
+    organization: "netcrackergroup2"
+    token: $SONARCLOUD_SECURED_TOKEN
+script:
+- sonar-scanner
+
+deploy:
+  provider: heroku
+  api_key: $HEROKU_SECURED_API_KEY
+  app:
+    main: cheetah-test-frontend-prod
+    dev: cheetah-test-frontend-dev
+

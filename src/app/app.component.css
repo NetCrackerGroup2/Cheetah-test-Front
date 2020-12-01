@@ -1,0 +1,76 @@
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.menu-toggle {
+  color: white;
+}
+
+.menu-toggle:hover {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #66380e 117.03%);
+}
+
+/*sidebar list*/
+.item {
+  font-family: Lato, serif;
+  font-style: normal;
+  font-size: 16px;
+  color: #FFFFFF;
+  transition: linear 0.5s;
+
+}
+
+.row:hover {
+  color: #66380E;
+}
+
+.item:hover {
+  padding: 10px;
+  background: #806f5c;
+  border-radius: 20px;
+}
+
+.profile_img {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+}
+
+/*admin page & logout*/
+.admin-bottom {
+  bottom: 0;
+  position: absolute;
+}
+
+/*button*/
+.button-toggle {
+
+  background: linear-gradient(175.93deg, #878787 -10.23%, #5f4023 117.03%);
+  color: white;
+}
+
+.button-toggle:hover {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #1c1004 117.03%);
+}
+
+/*sidebar*/
+ng-sidebar-container {
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 100vh;
+  position: fixed;
+}
+
+::ng-deep .ng-sidebar {
+  background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
+  padding: 2em 3em;
+  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+  display: block;
+  top: 50%;
+  right: 20px;
+  position: relative;
+}
+
+
+

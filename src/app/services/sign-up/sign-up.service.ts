@@ -1,42 +1,27 @@
 import {Injectable} from '@angular/core';
-import {UserRegistration} from '../../common/userRegistration/userRegistration';
+import {User} from '../../models/user/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import {ServerResponse} from '../../common/serverResponse/ServerResponse';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignUpService {
-  private u: UserRegistration;
-
   constructor(private http: HttpClient) {
-    this.u = new UserRegistration();
   }
 
-  get user(): UserRegistration {
-    return this.u;
-  }
-
-  set user(value: UserRegistration) {
-    this.u = value;
-  }
-
-  postRegisteredUser(): Observable<ServerResponse> {
-    console.log(this.user);
-    return this.http.post<ServerResponse>('http://localhost:8080/api/register', this.user)
+  postRegisteredUser(user: User): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/register`, user)
       .pipe(
-        catchError(this.handleError<ServerResponse>('postRegisteredUser', new ServerResponse()))
+        map(data => {
+          return data.status;
+        }),
+        catchError(error => {
+          return of (error);
+        })
       );
   }
 
-  // tslint:disable-next-line:typedef
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
 }

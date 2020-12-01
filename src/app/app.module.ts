@@ -1,38 +1,63 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LoginComponent} from './containers/login/login.component';
-import {FormsModule} from '@angular/forms';
+import {LoginComponent} from './components/login/login.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
-import {DesktopComponent} from './containers/desktop/desktop.component';
-import {InterceptorService} from './services/interceptor/interceptor.service';
-import {SignUpComponent} from './containers/sign-up/sign-up.component';
-import {SavePasswordComponent} from './containers/save-password/save-password.component';
-
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {InterceptorService} from './helpers/interceptor/interceptor.service';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {SavePasswordComponent} from './components/save-password/save-password.component';
+import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {SidebarModule} from 'ng-sidebar';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import { GeneralLibraryComponent } from './components/general-library/general-library.component';
+import { ActionComponent } from './components/action/action.component';
+import { CompoundComponent } from './components/compound/compound.component';
+import { EditActionComponent } from './components/edit-action/edit-action.component';
+import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
+import { ProjectComponent } from './components/project/project.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    DesktopComponent,
     SignUpComponent,
     SavePasswordComponent,
+    DashboardComponent,
+    DataSetComponent,
+    GeneralLibraryComponent,
+    ActionComponent,
+    CompoundComponent,
+    EditActionComponent,
+    CreateCompoundComponent,
+    ProfileComponent,
+    ProfilesComponent,
+    EditDataSetComponent,
+    ProjectComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
+    FormsModule,
+    NgbModule,
+    SidebarModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: InterceptorService,
-    multi: true
-  }],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

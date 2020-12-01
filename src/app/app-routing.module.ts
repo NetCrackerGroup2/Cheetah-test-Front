@@ -1,23 +1,93 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {LoginComponent} from './containers/login/login.component';
-import {ForgotPasswordComponent} from './containers/forgot-password/forgot-password.component';
-import {AuthGuard} from './guard/authguard.service';
-import {SignUpComponent} from './containers/sign-up/sign-up.component';
-import {DesktopComponent} from './containers/desktop/desktop.component';
-import {SavePasswordComponent} from './containers/save-password/save-password.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {LoginComponent} from './components/login/login.component';
+import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
+import {AuthGuard} from './helpers/authguard.service';
+import {SignUpComponent} from './components/sign-up/sign-up.component';
+import {SavePasswordComponent} from './components/save-password/save-password.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {GeneralLibraryComponent} from './components/general-library/general-library.component';
+import {EditActionComponent} from './components/edit-action/edit-action.component';
+import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProjectComponent} from './components/project/project.component';
+import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'forgotpassword', component: ForgotPasswordComponent},
-  {path: 'sign-up', component: SignUpComponent},
-  {path: 'desktop', component: DesktopComponent},
-  {path: 'reset-password', component: SavePasswordComponent}
+  {path: 'forgot-password', component: ForgotPasswordComponent},
+  {path: 'reset-password', component: SavePasswordComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'library-create-compound',
+    component: CreateCompoundComponent,
+    canActivate: [AuthGuard]
+
+  },
+  {
+    path: 'general-library',
+    component: GeneralLibraryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-action/:id/:description',
+    component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-project/:id',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'data-set/:id',
+    component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set/:idTestCase/:title/:id',
+    component: EditDataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -1,79 +1,68 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of, Subject, throwError} from 'rxjs';
-import {catchError, mapTo, tap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {User} from '../../common/user/user';
-import {JwtToken} from '../../common/jwtToken/jwt-token';
+import {LoginDto} from '../../models/loginDto/loginDto';
+import {environment} from '../../../environments/environment';
+import {User} from '../../models/user/user';
+import jwt_decode from 'jwt-decode';
+import {map} from 'rxjs/operators';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly JWT_TOKEN = 'JWT_TOKEN';
-  private loggedUser: string;
-  private messageSubject = new Subject<string>();
-  public messageSubject$ = this.messageSubject.asObservable();
-  constructor(private http: HttpClient, private router: Router) {
+
+  private readonly USER_CONST = 'user';
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {
+    this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(this.USER_CONST)));
+    this.user = this.userSubject.asObservable();
   }
 
-  login(user: User): Observable<JwtToken> {
-    return this.http.post<JwtToken>('http://localhost:8080/api/login', user)
-      .pipe(
-        tap((newToken: JwtToken) => {
-          console.log(`returned token: ${newToken.accessToken}`);
-          this.doLoginUser(user.email, newToken.accessToken);
-          this.router.navigate(['desktop']);
-        }),
-        catchError(this.handleError<JwtToken>('login')));
+  login(loginDto: LoginDto): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, loginDto)
+      .pipe(map(token => {
+        const user: User = this.extractUserFromPayload(token.accessToken);
+
+        localStorage.setItem(this.USER_CONST, JSON.stringify(user));
+        this.userSubject.next(user);
+
+        return user;
+      }));
   }
 
-  public doLoginUser(email: string, token: string): void {
-    this.loggedUser = email;
-    this.storeToken(token);
+  extractUserFromPayload(accessToken: string): User {
+    try {
+
+      const payload: any = jwt_decode(accessToken);
+      const newUser: User = new User();
+      newUser.email = payload.sub;
+      newUser.name = payload.name;
+      newUser.role = payload.role;
+      newUser.accessToken = accessToken;
+
+      return newUser;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
   }
 
-  private storeToken(token: string): void {
-    localStorage.setItem(this.JWT_TOKEN, token);
-  }
-
-  getJwtToken(): string {
-    return localStorage.getItem(this.JWT_TOKEN);
-  }
-
-  storeJwtToken(jwtToken: string): void {
-    localStorage.setItem(this.JWT_TOKEN, jwtToken);
-  }
-
-  isLoggedIn(): boolean {
-    return !!this.getJwtToken();
-  }
-
-  doLogoutUser(): void {
-    this.loggedUser = null;
-    this.removeToken();
+  logout(): void {
+    localStorage.removeItem(this.USER_CONST);
+    this.userSubject.next(null);
     this.router.navigate(['/login']);
   }
 
-  removeToken(): void {
-    localStorage.removeItem(this.JWT_TOKEN);
-  }
-
-  // tslint:disable-next-line:typedef
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      if (error.status === 401) {
-        this.router.navigate(['']);
-      }
-      if (error.status === 403){
-        this.messageSubject.next('Wrong login or password');
-      }
-      else {
-        return of(error.error);
-      }
-      return of(result as T);
-    };
+  public get userValue(): User {
+    return this.userSubject.value;
   }
 }
 

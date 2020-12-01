@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <h1 class="text-center display-4 h1-black">Admin panel</h1>
+  <div class="forms_container">
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()" class="user_form">
+      <div class="form_title">
+        <h1 class="signUp_text">Create User</h1>
+        <h5 class="text-danger text-center">{{message}}</h5>
+        <h5 class="text-success text-center">{{successMessage}}</h5>
+      </div>
+      <!-- email -->
+      <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger text-center">
+        <div *ngIf="email.errors.required">
+          <h5>Email is required</h5>
+        </div>
+        <div *ngIf="email.errors.pattern">
+          <h5>Invalid email</h5>
+        </div>
+      </div>
+      <label class="input_item">
+        <input type="email" formControlName="email" class="input"
+               placeholder="Email">
+      </label>
+      <!-- password -->
+      <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger text-center">
+        <div *ngIf="password.errors.required">
+          <h5>Password is required</h5>
+        </div>
+        <div *ngIf="password.errors.minlength">
+          <h5>Password must contain 8 or more characters</h5>
+        </div>
+      </div>
+      <label class="input_item">
+        <input type="password" formControlName="password" class="input"
+               placeholder="Password">
+      </label>
+      <!-- name -->
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center">
+        <div *ngIf="name.errors.required">
+          <h5>Name is required</h5>
+        </div>
+      </div>
+      <label class="input_item">
+        <input type="text" formControlName="name" class="input"
+               placeholder="Name">
+      </label>
+      <!-- role -->
+
+      <div *ngIf="role.invalid && (role.dirty || role.touched)" class="text-danger text-center">
+        <div *ngIf="role.errors.required">
+          <h5>Role is required</h5>
+        </div>
+      </div>
+      <label for="select_role">Role:</label>
+      <div class="custom_input_item">
+        <select formControlName="role" name="" class="custom_input_item" id="select_role">
+          <option value="ADMIN">Admin</option>
+          <option value="ENGINEER">Engineer</option>
+          <option value="MANAGER">Manager</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit_input" id="createUser" [disabled]="!createForm.valid">
+        Create User
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mb-1"></span>
+      </button>
+
+    </form>
+
+    <div class="delete_user_form">
+      <div class="form_title">
+        <h1 class="signUp_text">Delete User</h1>
+      </div>
+      <div class="form_item">
+        <label>Username:</label>
+        <input type="text">
+      </div>
+      <div class="form_item">
+        <input type="submit" value="Delete">
+      </div>
+    </div>
+  </div>
+</div>
+
+
