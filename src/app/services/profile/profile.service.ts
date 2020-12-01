@@ -4,6 +4,7 @@ import { User } from '../../models/user/user';
 import { environment } from '../../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,10 +28,10 @@ export class ProfileService {
   deactivateUser(email: string): object{
     const url = `${environment.apiUrl}/api/user/deactivate`;
     return this.http.post(url, email).subscribe(
-        (val) => {
+        () => {
           // console.log('POST call successful value returned in body');
         },
-        response => {
+      () => {
             // console.log('POST call in error');
         },
         () => {
