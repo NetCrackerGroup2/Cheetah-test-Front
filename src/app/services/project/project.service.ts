@@ -6,7 +6,6 @@ import {HttpClient} from '@angular/common/http';
 import {Project} from '../../models/project/entity/project';
 import {ProjectDtoWithUserIds} from '../../models/project/project-dto-with-user-ids/project-dto-with-user-ids';
 import {UserDto} from '../../models/user/dto/user-dto';
-import {ProjectDto} from '../../models/project/dto/project-dto';
 
 @Injectable({
   providedIn: 'root'
