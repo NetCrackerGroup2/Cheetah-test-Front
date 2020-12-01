@@ -13,6 +13,7 @@ import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DataSetComponent} from './components/data-set/data-set.component';
 import { GeneralLibraryComponent } from './components/general-library/general-library.component';
 import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
@@ -20,6 +21,7 @@ import { EditActionComponent } from './components/edit-action/edit-action.compon
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
+import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
+    DataSetComponent,
     GeneralLibraryComponent,
     ActionComponent,
     CompoundComponent,
@@ -36,6 +39,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
     CreateCompoundComponent,
     ProfileComponent,
     ProfilesComponent
+    EditDataSetComponent
   ],
   imports: [
     BrowserModule,
