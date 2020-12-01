@@ -23,36 +23,42 @@
 				</div>
 				<div class="table-elem">
           <label>
-					<select [(ngModel)]="role"
-                  (click)="chooseSearchRole()"
-						class="choose-role">
-						<option value="ALL">All roles</option>
-						<option value="ADMIN">Admin</option>
-						<option value="MANAGER">Manager</option>
-						<option value="ENGINEER">Engineer</option>
-					</select>
+            <select [(ngModel)]="role"
+                    (click)="chooseSearchRole()"
+              class="choose-role">
+              <option value="ALL">All roles</option>
+              <option value="ADMIN">Admin</option>
+              <option value="MANAGER">Manager</option>
+              <option value="ENGINEER">Engineer</option>
+            </select>
           </label>
 				</div>
 			</div>
 			<!-- Users -->
-			<div mdbTableCol *ngFor="let el of elements.users
+			<div *ngFor="let el of elements.users
 				let i = index" [style.background-color]="rowColorName[i]" 
 				class="table-row">
 				<div class="table-elem">
-					<input type="text" [(ngModel)]="el.name" class="table_elem"
-						[disabled]="disabledPersonalData[i]">
+          <label>
+            <input type="text" [(ngModel)]="el.name" class="table_elem"
+              [disabled]="disabledPersonalData[i]">
+          </label>
 				</div>
 				<div class="table-elem">
-					<input type="text" [(ngModel)]="el.email" class="table_elem"
-						[disabled]="disabledPersonalData[i]">
+          <label>
+            <input type="text" [(ngModel)]="el.email" class="table_elem"
+              [disabled]="disabledPersonalData[i]">
+          </label>
 				</div>
 				<div>
-					<select [(ngModel)]="el.role" [disabled]="disabledPersonalData[i]"
-						class="table_elem choose-role-table">
-						<option value="ADMIN">Admin</option>
-						<option value="MANAGER">Manager</option>
-						<option value="ENGINEER">Engineer</option>
-					</select>
+          <label>
+            <select [(ngModel)]="el.role" [disabled]="disabledPersonalData[i]"
+              class="table_elem choose-role-table">
+              <option value="ADMIN">Admin</option>
+              <option value="MANAGER">Manager</option>
+              <option value="ENGINEER">Engineer</option>
+            </select>
+          </label>
 				</div>
 				<div class="table-elem">
 					<input type="button" (click)="editPersonalInformation(i)" [hidden]="isAdmin"
