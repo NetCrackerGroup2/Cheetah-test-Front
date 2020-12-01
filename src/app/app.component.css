@@ -33,6 +33,8 @@
 
 .profile_img {
   border-radius: 50%;
+  width: 90px;
+  height: 90px;
 }
 
 /*admin page & logout*/

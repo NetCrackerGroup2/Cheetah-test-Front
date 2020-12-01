@@ -23,17 +23,9 @@
               <img src="assets/sidebar_images/project.svg" alt="Project" class="mr-3">
               Project</a></div>
           <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/test_case.svg" alt="Test case" class="mr-3">
-              Test case</a></div>
-          <div class="row">
-            <a [routerLink]="['data-set']" class="item ml-5 mt-4">
+            <a [routerLink]="['data-set/1']" class="item ml-5 mt-4">
               <img src="assets/sidebar_images/data_set.svg" alt="Data set" class="mr-3">
               Data set</a></div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/test_scenario.svg" alt="Test scenario" class="mr-3">
-              Test scenario</a></div>
           <div class="row">
             <a class="item ml-5 mt-4">
               <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
@@ -48,11 +40,6 @@
             <a [routerLink]="['']" class="item ml-5 mt-4">
               <img src="assets/sidebar_images/notifications.svg" alt="Notifications" class="mr-3">
               Notifications</a>
-          </div>
-          <div class="row">
-            <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item ml-5 mt-4 cursor-pointer">
-              <img src="assets/sidebar_images/back_to.svg" alt="Admin Panel" class="mr-3">
-              Admin Panel</a>
           </div>
           <div class="row">
             <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">

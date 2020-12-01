@@ -5,12 +5,12 @@
     <div class="forms_container">
       <div class="profile_from">
         <div class="outside_profile_image">
-          <img [src]="url" 
+          <img [src]="url"
             alt="profile" class="profile_img">
         </div>
 
         <div>
-          <button type="button" 
+          <button type="button"
             class="upload_photo_input upload_photo_text">
             <label for="file">
               Upload new photo
@@ -20,7 +20,7 @@
                 (change)="fileInput($event)"/>
         </div>
 
-        
+
         <div class="username_text">
           {{username}}
         </div>
@@ -28,7 +28,7 @@
         <div class="role text">
           role: {{role}}
         </div>
-        
+
         <div class="email text">
           email: {{email}}
         </div>
