@@ -82,7 +82,7 @@ export class CompoundComponent implements OnInit, OnDestroy {
 
   remove(id: number): void {
     this.removeSubscription = this.compoundService.remove(id).subscribe();
-    this.listCompounds();
+    this.removeFromList(id);
   }
 
   get isAdmin(): boolean {
@@ -107,5 +107,13 @@ export class CompoundComponent implements OnInit, OnDestroy {
   doSearch(value: string): void {
     this.value = value;
     this.listCompounds();
+  }
+
+  removeFromList(id: number): void {
+    for (let i = 0; i < this.compounds.length; i++) {
+      if (this.compounds[i].id === id) {
+        this.compounds.splice(i, 1);
+      }
+    }
   }
 }
