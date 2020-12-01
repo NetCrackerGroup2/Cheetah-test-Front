@@ -38,7 +38,7 @@ import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.c
     EditActionComponent,
     CreateCompoundComponent,
     ProfileComponent,
-    ProfilesComponent
+    ProfilesComponent,
     EditDataSetComponent
   ],
   imports: [
