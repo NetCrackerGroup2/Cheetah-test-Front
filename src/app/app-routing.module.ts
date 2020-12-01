@@ -11,6 +11,8 @@ import {EditActionComponent} from './components/edit-action/edit-action.componen
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
 import {ProjectComponent} from './components/project/project.component';
 import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
@@ -20,6 +22,16 @@ const routes: Routes = [
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'sign-up',
     component: SignUpComponent,
     canActivate: [AuthGuard]
@@ -28,6 +40,7 @@ const routes: Routes = [
     path: 'library-create-compound',
     component: CreateCompoundComponent,
     canActivate: [AuthGuard]
+
   },
   {
     path: 'general-library',
