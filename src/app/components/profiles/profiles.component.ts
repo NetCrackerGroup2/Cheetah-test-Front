@@ -97,7 +97,7 @@ export class ProfilesComponent implements OnInit {
 
   editPersonalInformation(i: any): void {
     if (this.textOnButtonUpdate[i] === 'Edit') {
-      if (confirm('Do you are want to deactivate user?') === true){
+      if (confirm('Do you want to edit user?') === true){
         // this.disabledPersonalData[i] = !this.disabledPersonalData[i];
         this.isDeactivate = false;
         this.authService.user.subscribe(elem =>
@@ -148,7 +148,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   pressDelete(i: any): void {
-    if (confirm('Do you are want to deactivate user?') === true){
+    if (confirm('Do you want to deactivate user?') === true){
       this.textAgreeConfirmPanel = 'Deactivate';
       this.isDeactivate = true;
       this.authService.user.subscribe(elem =>

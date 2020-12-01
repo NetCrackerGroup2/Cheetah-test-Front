@@ -9,6 +9,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProjectComponent} from './components/project/project.component';
+import {CreateProjectComponent} from './components/create-project/create-project.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
@@ -48,6 +50,21 @@ const routes: Routes = [
   {
     path: 'edit-action/:id/:description',
     component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-project/:id',
+    component: CreateProjectComponent,
     canActivate: [AuthGuard]
   },
   {
