@@ -17,7 +17,6 @@ export class ProfilesComponent implements OnInit {
   searchUsername = '';
   searchEmail = '';
   searchRole = '';
-
   existUser = '';
 
   adminPassword = '';
@@ -140,7 +139,7 @@ export class ProfilesComponent implements OnInit {
               this.textOnButtonUpdate[this.indexUseToDeactivate] = 'Save';
             }
         },
-        error => alert('Incorrect password'));
+      () => alert('Incorrect password'));
     this.adminPassword = '';
   }
 
