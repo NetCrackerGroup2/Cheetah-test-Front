@@ -9,6 +9,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 
@@ -17,6 +19,16 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'sign-up',
     component: SignUpComponent,

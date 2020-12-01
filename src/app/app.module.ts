@@ -19,6 +19,8 @@ import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
 import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 
 @NgModule({
@@ -35,6 +37,8 @@ import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.c
     CompoundComponent,
     EditActionComponent,
     CreateCompoundComponent,
+    ProfileComponent,
+    ProfilesComponent,
     EditDataSetComponent
   ],
   imports: [
