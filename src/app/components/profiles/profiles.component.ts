@@ -6,7 +6,6 @@ import {LoginDto} from '../../models/loginDto/loginDto';
 import { User } from 'src/app/models/user/user';
 
 
-
 @Component({
   selector: 'app-profiles',
   templateUrl: './profiles.component.html',
