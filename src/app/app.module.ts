@@ -18,7 +18,8 @@ import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
-import { CreateTestCaseComponent } from './components/create-test-case/create-test-case.component';
+import { CreateTestCaseComponent } from './components/test-case/create-test-case/create-test-case.component';
+import { TestCaseComponent } from './components/test-case/test-case-list/test-case.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { CreateTestCaseComponent } from './components/create-test-case/create-te
     CompoundComponent,
     EditActionComponent,
     CreateCompoundComponent,
-    CreateTestCaseComponent
+    CreateTestCaseComponent,
+    TestCaseComponent
   ],
   imports: [
     BrowserModule,

@@ -79,6 +79,10 @@ input.au-input.au-input-xl{
   color: black;
 }
 
+.options:focus {
+  outline: none;
+}
+
 #createUser {
   font-family: 'Roboto', sans-serif;
   font-size: 20px;
@@ -117,13 +121,16 @@ input.au-input.au-input-xl{
 .table-config-compounds {
   width: 50%;
 }
+
 .input-long{
   width: 60%;
   border-radius: 20px;
 }
+
 .black{
   color: black;
 }
+
 .pagination {
   display: flex;
   flex-direction: row;

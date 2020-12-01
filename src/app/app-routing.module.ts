@@ -9,13 +9,15 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
-import {CreateTestCaseComponent} from './components/create-test-case/create-test-case.component';
+import {CreateTestCaseComponent} from './components/test-case/create-test-case/create-test-case.component';
+import {TestCaseComponent} from './components/test-case/test-case-list/test-case.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
+  {path: 'testcases', component: TestCaseComponent},
   {
     path: 'sign-up',
     component: SignUpComponent,

@@ -1,0 +1,55 @@
+.container {
+  width: 100%;
+  margin-left: 300px;
+  position : absolute;
+}
+
+table {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color: #414141;
+  width: auto;
+}
+
+.search, .search:hover {
+  border: none;
+  border-bottom: 2px solid #000;
+  border-radius: 0;
+}
+
+input[type='checkbox'] {
+   width: 20px;
+   height: 20px;
+}
+
+th {
+  color: #878787;
+  border: none;
+  text-align: center;
+}
+
+.options {
+  width: auto;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 0;
+}
+
+button:hover {
+  border: none;
+}
+
+.btn-primary:active, .btn-primary:visited {
+  background-color: #8064A2 !important;
+}
+
+.page-link {
+  border: none;
+  color: black;
+  font-family: 'Lato', sans-serif;
+}
+
+.page {
+  background: #EEF2F5;
+  border-radius: 5px;
+}

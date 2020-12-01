@@ -31,8 +31,14 @@
   border-radius: 20px;
 }
 
-.profile_img {
+.profile_img, .profile_img:focus {
   border-radius: 50%;
+  transition: linear 0.35s;
+}
+
+.profile_img:hover {
+  outline: none;
+  border: 5px solid #EBD8C6;
 }
 
 /*admin page & logout*/
@@ -55,7 +61,7 @@
 /*sidebar*/
 ng-sidebar-container {
   min-width: 300px;
-  max-width: 300px;
+  max-width: 310px;
   min-height: 100vh;
   position: fixed;
 }
@@ -63,12 +69,14 @@ ng-sidebar-container {
 ::ng-deep .ng-sidebar {
   background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
   padding: 2em 3em;
-  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
   display: block;
   top: 50%;
   right: 20px;
   position: relative;
 }
 
+a:hover {
+  text-decoration: none;
+}
 
 

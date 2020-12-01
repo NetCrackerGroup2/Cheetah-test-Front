@@ -2,10 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
-import {UserService} from '../../services/user/user.service';
+import {UserService} from '../../../services/user/user.service';
 import {first} from 'rxjs/operators';
-import {TestCaseService} from '../../services/test-case/test-case.service';
-import {TestCase} from '../../models/test-case/test-case';
+import {TestCaseService} from '../../../services/test-case/test-case.service';
+import {TestCase} from '../../../models/test-case/test-case';
 
 @Component({
   selector: 'app-create-test-case',
