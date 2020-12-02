@@ -1,21 +1,19 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Action} from '../../models/action/action';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-action',
   templateUrl: './action.component.html',
   styleUrls: ['./action.component.css']
 })
-export class ActionComponent implements OnInit, OnDestroy {
+export class ActionComponent implements OnInit {
   thePageNumber = 1;
   thePageSize = 5;
   theTotalElements = 0;
-  actionSearchSubscription: Subscription;
-  actionSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
@@ -45,8 +43,9 @@ export class ActionComponent implements OnInit, OnDestroy {
   }
 
   private handleActions(): void {
-    this.actionSubscription = this.actionService
+    this.actionService
       .getActions(this.thePageNumber, this.thePageSize)
+      .pipe(take(1))
       .subscribe(data => {
         this.actions = data.list;
         this.theTotalElements = data.totalElements;
@@ -61,23 +60,15 @@ export class ActionComponent implements OnInit, OnDestroy {
 
     this.previousKeyword = theKeyword;
 
-    this.actionSearchSubscription = this.actionService.searchActions(
+    this.actionService.searchActions(
       this.thePageNumber,
       this.thePageSize,
       theKeyword)
+      .pipe(take(1))
       .subscribe(data => {
         this.actions = data.list;
         this.theTotalElements = data.totalElements;
       });
-  }
-
-  ngOnDestroy(): void {
-    if (this.actionSubscription) {
-      this.actionSubscription.unsubscribe();
-    }
-    if (this.actionSearchSubscription) {
-      this.actionSearchSubscription.unsubscribe();
-    }
   }
 
   doSearch(value: string): void {

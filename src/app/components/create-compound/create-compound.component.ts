@@ -1,28 +1,26 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Action} from '../../models/action/action';
-import {Subject, Subscription} from 'rxjs';
+import {Subject} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
 import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
-import {first} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-compound',
   templateUrl: './create-compound.component.html',
   styleUrls: ['./create-compound.component.css']
 })
-export class CreateCompoundComponent implements OnInit, OnDestroy {
+export class CreateCompoundComponent implements OnInit {
   successMessage: string;
   errorMessage: string;
   createCompoundForm: FormGroup;
   actions: Action[];
   addedActions: Action[] = [];
   searchTerm$ = new Subject<string>();
-  searchActionSubscription: Subscription;
-  createSubscription: Subscription;
   @ViewChild('term') term;
   loading = false;
 
@@ -30,7 +28,8 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
               private formBuilder: FormBuilder,
               private actionService: ActionService) {
 
-    this.searchActionSubscription = this.actionService.search(this.searchTerm$)
+    this.actionService.search(this.searchTerm$)
+      .pipe(take(1))
       .subscribe(results => {
         this.actions = results;
       });
@@ -68,8 +67,8 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     const compoundWithActions: CompoundDtoWithActions =
       new CompoundDtoWithActions(compound, actionsCreateDto);
 
-    this.createSubscription = this.actionService.createCompound(compoundWithActions)
-      .pipe(first())
+    this.actionService.createCompound(compoundWithActions)
+      .pipe(take(1))
       .subscribe(
       data => {
         if (data) {
@@ -99,14 +98,5 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     this.searchTerm$.next();
     this.term.nativeElement.value = '';
     this.actions = [];
-  }
-
-  ngOnDestroy(): void {
-    if (this.searchActionSubscription) {
-      this.searchActionSubscription.unsubscribe();
-    }
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
-    }
   }
 }

@@ -1,19 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Action} from '../../models/action/action';
 import {ActionService} from '../../services/action/action.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-action',
   templateUrl: './edit-action.component.html',
   styleUrls: ['./edit-action.component.css']
 })
-export class EditActionComponent implements OnInit, OnDestroy {
+export class EditActionComponent implements OnInit {
   editForm: FormGroup;
   loading = false;
-  editActionSubscription: Subscription;
   successMessage: string;
   action: Action;
 
@@ -37,19 +36,15 @@ export class EditActionComponent implements OnInit, OnDestroy {
     return this.editForm.get('description');
   }
 
-  ngOnDestroy(): void {
-    if (this.editActionSubscription) {
-      this.editActionSubscription.unsubscribe();
-    }
-  }
-
   onSubmit(): void {
     this.successMessage = '';
     this.loading = true;
-    this.actionService.save(this.action.id, this.description.value).subscribe(() => {
-        this.successMessage = 'Description has been successfully updated';
-        this.loading = false;
-      }
-    );
+    this.actionService.save(this.action.id, this.description.value)
+      .pipe(take(1))
+      .subscribe(() => {
+          this.successMessage = 'Description has been successfully updated';
+          this.loading = false;
+        }
+      );
   }
 }

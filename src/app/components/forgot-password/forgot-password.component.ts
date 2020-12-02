@@ -20,7 +20,6 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   loading = false;
   subscription: Subscription;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,

@@ -1,27 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Compound} from '../../models/compound/compound';
 import {AuthService} from '../../services/auth/auth.service';
 import {User} from '../../models/user/user';
 import {Role} from '../../models/roles/role';
-import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {CompoundService} from '../../services/compound/compound.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-compound',
   templateUrl: './compound.component.html',
   styleUrls: ['./compound.component.css']
 })
-export class CompoundComponent implements OnInit, OnDestroy {
+export class CompoundComponent implements OnInit {
 
   user: User;
-  authenticationServiceSubscription: Subscription;
   thePageNumber = 1;
   thePageSize = 5;
   theTotalElements = 0;
-  compoundSearchSubscription: Subscription;
-  compoundSubscription: Subscription;
-  removeSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
@@ -30,11 +26,13 @@ export class CompoundComponent implements OnInit, OnDestroy {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private compoundService: CompoundService) {
-    this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
-      x => {
-        this.user = x;
-      }
-    );
+    this.authenticationService.user
+      .pipe(take(1))
+      .subscribe(
+        x => {
+          this.user = x;
+        }
+      );
   }
 
   ngOnInit(): void {
@@ -54,8 +52,9 @@ export class CompoundComponent implements OnInit, OnDestroy {
   }
 
   private handleCompounds(): void {
-    this.compoundSubscription = this.compoundService
+    this.compoundService
       .getCompounds(this.thePageNumber, this.thePageSize)
+      .pipe(take(1))
       .subscribe(data => {
         this.compounds = data.compounds;
         this.theTotalElements = data.totalCompounds;
@@ -70,10 +69,11 @@ export class CompoundComponent implements OnInit, OnDestroy {
 
     this.previousKeyword = theKeyword;
 
-    this.compoundSearchSubscription = this.compoundService.searchCompounds(
+    this.compoundService.searchCompounds(
       this.thePageNumber,
       this.thePageSize,
       theKeyword)
+      .pipe(take(1))
       .subscribe(data => {
         this.compounds = data.compounds;
         this.theTotalElements = data.totalCompounds;
@@ -81,39 +81,19 @@ export class CompoundComponent implements OnInit, OnDestroy {
   }
 
   remove(id: number): void {
-    this.removeSubscription = this.compoundService.remove(id).subscribe();
-    this.removeFromList(id);
+    this.compoundService.remove(id)
+      .pipe(take(1))
+      .subscribe(
+        () => this.listCompounds()
+      );
   }
 
   get isAdmin(): boolean {
     return this.user && this.user.role === Role.ADMIN;
   }
 
-  ngOnDestroy(): void {
-    if (this.authenticationServiceSubscription) {
-      this.authenticationServiceSubscription.unsubscribe();
-    }
-    if (this.compoundSubscription) {
-      this.compoundSubscription.unsubscribe();
-    }
-    if (this.compoundSearchSubscription) {
-      this.compoundSearchSubscription.unsubscribe();
-    }
-    if (this.removeSubscription) {
-      this.removeSubscription.unsubscribe();
-    }
-  }
-
   doSearch(value: string): void {
     this.value = value;
     this.listCompounds();
-  }
-
-  removeFromList(id: number): void {
-    for (let i = 0; i < this.compounds.length; i++) {
-      if (this.compounds[i].id === id) {
-        this.compounds.splice(i, 1);
-      }
-    }
   }
 }

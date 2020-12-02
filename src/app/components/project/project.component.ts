@@ -3,20 +3,18 @@ import {Subscription} from 'rxjs';
 import {Project} from '../../models/project/entity/project';
 import {Router} from '@angular/router';
 import {ProjectService} from '../../services/project/project.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.css']
 })
-export class ProjectComponent implements OnInit, OnDestroy {
+export class ProjectComponent implements OnInit {
   project: Project;
   thePageNumber = 1;
   thePageSize = 5;
   theTotalElements = 0;
-  projectSearchSubscription: Subscription;
-  projectSubscription: Subscription;
-  archiveSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
@@ -42,8 +40,9 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   private handleProjects(): void {
-    this.projectSubscription = this.projectService
+    this.projectService
       .getProjects(this.thePageNumber, this.thePageSize)
+      .pipe(take(1))
       .subscribe(data => {
         this.projects = data.projects;
         this.theTotalElements = data.totalElements;
@@ -58,26 +57,15 @@ export class ProjectComponent implements OnInit, OnDestroy {
 
     this.previousKeyword = theKeyword;
 
-    this.projectSearchSubscription = this.projectService.findProjectsByTitle(
+    this.projectService.findProjectsByTitle(
       this.thePageNumber,
       this.thePageSize,
       theKeyword)
+      .pipe(take(1))
       .subscribe(data => {
         this.projects = data.projects;
         this.theTotalElements = data.totalElements;
       });
-  }
-
-  ngOnDestroy(): void {
-    if (this.projectSubscription) {
-      this.projectSubscription.unsubscribe();
-    }
-    if (this.projectSearchSubscription) {
-      this.projectSearchSubscription.unsubscribe();
-    }
-    if (this.archiveSubscription) {
-      this.archiveSubscription.unsubscribe();
-    }
   }
 
   doSearch(value: string): void {
@@ -86,19 +74,14 @@ export class ProjectComponent implements OnInit, OnDestroy {
   }
 
   archive(id: number): void {
-    this.projectService.archive(id).subscribe();
-    this.removeFromList(id);
+    this.projectService.archive(id)
+      .pipe(take(1))
+      .subscribe(
+        () => this.listProjects()
+      );
   }
 
   edit(id: number): void {
     this.router.navigate([`edit-project/${id}`]);
-  }
-
-  removeFromList(id: number): void {
-    for (let i = 0; i < this.projects.length; i++) {
-      if (this.projects[i].id === id) {
-        this.projects.splice(i, 1);
-      }
-    }
   }
 }
