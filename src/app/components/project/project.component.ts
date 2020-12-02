@@ -1,5 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {Project} from '../../models/project/entity/project';
 import {Router} from '@angular/router';
 import {ProjectService} from '../../services/project/project.service';
@@ -77,7 +76,9 @@ export class ProjectComponent implements OnInit {
     this.projectService.archive(id)
       .pipe(take(1))
       .subscribe(
-        () => this.listProjects()
+        () => {
+          this.listProjects();
+        }
       );
   }
 

@@ -1,4 +1,6 @@
-
+.project-width {
+  min-width: 800px;
+}
 .ngb-pagination ::ng-deep a {
   color: #bd7d42 !important;
 }

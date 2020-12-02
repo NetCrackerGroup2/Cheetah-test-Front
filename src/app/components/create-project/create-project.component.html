@@ -1,15 +1,15 @@
-<div class="container-fluid" (click)="cleanList()">
-
-  <div class="row">
-    <div class="col">
-      <h2 class="display-5 h1-black">Create Project</h2>
+<div (click)="cleanList()">
+  <div class="main-content">
+    <div class="row mt-5">
+      <div class="col mt-4">
+        <h2 class="display-4 black">Create Project</h2>
+      </div>
+      <div class="col mt-5">
+        <button class="options" [routerLink]="['/projects']">
+          Back to Projects
+        </button>
+      </div>
     </div>
-    <div class="col back">
-      <button class="options" [routerLink]="['/projects']">
-        Back to Projects
-      </button>
-    </div>
-
   </div>
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
@@ -49,7 +49,7 @@
         <label for="title" class="col-sm-5 col-form-label">Link: </label>
         <div class="col-sm-7">
           <input type="text" name="description" class="form-control" id="desc"
-                    formControlName="link">
+                 formControlName="link">
         </div>
       </div>
       <div class="form-group row" *ngIf="!isEdit">
@@ -80,7 +80,7 @@
       </div>
       <div class="form-group row">
         <div class="col-md-7 text-center mx-auto my-4">
-          <button class="options" [disabled]="!createProjectForm.valid">Save
+          <button class="options-table" [disabled]="!createProjectForm.valid">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>

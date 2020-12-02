@@ -1,20 +1,19 @@
 <div class="container-fluid">
-  <div class="row">
-    <h1 class="display-4 h1-black ">Library</h1>
-  </div>
-  <div class="main-buttons">
-    <button class="options " (click)="viewActions()">
+  <div class="row main-buttons mt-5 mb-5">
+
+    <h1 class="display-4 black mr-5">Library</h1>
+    <button class="options mt-4 col-1" (click)="viewActions()">
       View Actions
     </button>
-    <button class="options  ml-1" (click)="viewCompounds()">
+    <button class="options ml-1 mt-4 col-1" (click)="viewCompounds()">
       View Compounds
     </button>
-    <button class="options  ml-1" (click)="createCompound()">
+    <button class="options ml-1 mt-4 col-1" (click)="createCompound()">
       Create Compound
     </button>
 
   </div>
-  <div class="actions-compounds row">
+  <div class="main-content">
     <div *ngIf="isAction">
       <app-action></app-action>
     </div>

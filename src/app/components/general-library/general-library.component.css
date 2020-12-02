@@ -1,7 +1,7 @@
 .main-buttons{
   display: flex;
-  padding-left: 40%;
   flex-direction: row;
+  padding-left: 20%;
 }
 
 .actions-compounds {
