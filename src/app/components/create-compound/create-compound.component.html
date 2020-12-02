@@ -14,6 +14,7 @@
 
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
+    <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
     <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
