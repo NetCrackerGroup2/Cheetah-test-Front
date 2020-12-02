@@ -56,7 +56,8 @@ export class ProfilesComponent implements OnInit {
 
   indexUseToDeactivate = 0;
 
-  isAdmin = true;
+  isAdmin = [];
+  isAdminEdit = true;
 
   isDeactivate = false;
 
@@ -76,7 +77,17 @@ export class ProfilesComponent implements OnInit {
       totalElements: 8
     };
     if (authService.userValue.role === 'ADMIN'){
-      this.isAdmin = false;
+      this.isAdminEdit = false;
+      this.isAdmin = new Array<boolean>
+      (this.pageSize).fill(false, 0, this.pageSize);
+      for (let i = 0; i < this.pageSize; i++){
+        if (this.elements.users[i].email === this.authService.userValue.email) {
+          this.isAdmin[i] = true;
+        }
+      }
+    } else {
+      this.isAdmin = new Array<boolean>
+      (this.pageSize).fill(true, 0, this.pageSize);
     }
     this.profileService.getSearchUser(this.searchUsername,
       this.searchEmail, this.searchRole,
