@@ -1,26 +1,27 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Action} from '../../models/action/action';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
 import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
-import {take} from 'rxjs/operators';
+import {first, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-compound',
   templateUrl: './create-compound.component.html',
   styleUrls: ['./create-compound.component.css']
 })
-export class CreateCompoundComponent implements OnInit {
+export class CreateCompoundComponent implements OnInit, OnDestroy {
   successMessage: string;
   errorMessage: string;
   createCompoundForm: FormGroup;
   actions: Action[];
   addedActions: Action[] = [];
   searchTerm$ = new Subject<string>();
+  searchActionSubscription: Subscription;
   @ViewChild('term') term;
   loading = false;
 
@@ -28,8 +29,7 @@ export class CreateCompoundComponent implements OnInit {
               private formBuilder: FormBuilder,
               private actionService: ActionService) {
 
-    this.actionService.search(this.searchTerm$)
-      .pipe(take(1))
+    this.searchActionSubscription = this.actionService.search(this.searchTerm$)
       .subscribe(results => {
         this.actions = results;
       });
@@ -98,5 +98,11 @@ export class CreateCompoundComponent implements OnInit {
     this.searchTerm$.next();
     this.term.nativeElement.value = '';
     this.actions = [];
+  }
+
+  ngOnDestroy(): void {
+    if (this.searchActionSubscription) {
+      this.searchActionSubscription.unsubscribe();
+    }
   }
 }

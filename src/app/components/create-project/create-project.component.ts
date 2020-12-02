@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectService} from '../../services/project/project.service';
 import {take} from 'rxjs/operators';
@@ -14,13 +14,14 @@ import {Project} from '../../models/project/entity/project';
   templateUrl: './create-project.component.html',
   styleUrls: ['./create-project.component.css']
 })
-export class CreateProjectComponent implements OnInit {
+export class CreateProjectComponent implements OnInit, OnDestroy {
   successMessage: string;
   errorMessage: string;
   createProjectForm: FormGroup;
   users: UserDto[];
   addedUsers: UserDto[] = [];
   searchTerm$ = new Subject<string>();
+  searchUserSubscription: Subscription;
   @ViewChild('term') term;
   loading = false;
   isEdit = false;
@@ -31,8 +32,7 @@ export class CreateProjectComponent implements OnInit {
               private formBuilder: FormBuilder,
               private projectService: ProjectService) {
 
-    this.projectService.search(this.searchTerm$)
-      .pipe(take(1))
+    this.searchUserSubscription = this.projectService.search(this.searchTerm$)
       .subscribe(results => {
         this.users = results;
       });
@@ -43,14 +43,12 @@ export class CreateProjectComponent implements OnInit {
 
     if (this.isEdit) {
       this.projectId = +this.route.snapshot.paramMap.get('id');
-      this.projectService.getProjectById(this.projectId)
-        .pipe(take(1))
-        .subscribe(
-          data => {
-            this.title.setValue(data.title);
-            this.link.setValue(data.link);
-          }
-        );
+      this.projectService.getProjectById(this.projectId).subscribe(
+        data => {
+          this.title.setValue(data.title);
+          this.link.setValue(data.link);
+        }
+      );
     }
 
     this.createProjectForm = this.formBuilder.group({
@@ -103,7 +101,6 @@ export class CreateProjectComponent implements OnInit {
             this.loading = false;
           });
     } else {
-
       const project: Project = new Project();
       project.id = this.projectId;
       project.title = this.title.value;
@@ -111,17 +108,17 @@ export class CreateProjectComponent implements OnInit {
       this.projectService.update(project)
         .pipe(take(1))
         .subscribe(
-          data => {
-            if (data.message === 'The project has been updated!') {
-              this.successMessage = 'The project has been updated!';
-              this.createProjectForm.reset();
-              this.addedUsers = [];
-            } else {
-              this.errorMessage = 'Invalid Input';
-            }
-            this.loading = false;
+        data => {
+          if (data.message === 'The project has been updated!') {
+            this.successMessage = 'The project has been updated!';
+            this.createProjectForm.reset();
+            this.addedUsers = [];
+          } else {
+            this.errorMessage = 'Invalid Input';
           }
-        );
+          this.loading = false;
+        }
+      );
     }
   }
 
@@ -143,4 +140,11 @@ export class CreateProjectComponent implements OnInit {
       this.users = [];
     }
   }
+
+  ngOnDestroy(): void {
+    if (this.searchUserSubscription) {
+      this.searchUserSubscription.unsubscribe();
+    }
+  }
+
 }
