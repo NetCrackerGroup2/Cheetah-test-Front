@@ -67,17 +67,28 @@
             </li>
           </ul>
 
-          <div *ngIf="addedUsers.length > 0">
+          <div *ngIf="addedUsers.length > 0" class="text-break">
             <hr>
             <br>
             Selected:
-          </div>
-          <div cdkDropList (cdkDropListDropped)="drop($event)">
-            <ul class="added-result">
-              <li cdkDrag *ngFor="let user of addedUsers">
-                <a (click)="remove(user)">{{ user.email }}</a>
-              </li>
-            </ul>
+            <div class="row thead">
+              <div class="col-1"></div>
+              <div class="col-5">Email</div>
+              <div class="col-3">Name</div>
+            </div>
+            <div *ngFor="let user of addedUsers" class="row">
+              <div class="col-1">
+                <img src="assets/sidebar_images/remove.png"
+                     class="x_img cursor-pointer" alt="remove"
+                     (click)="remove(user)">
+              </div>
+              <div class="col-5">
+                {{ user.email }}
+              </div>
+              <div class="col-3">
+                {{ user.name }}
+              </div>
+            </div>
           </div>
         </div>
       </div>

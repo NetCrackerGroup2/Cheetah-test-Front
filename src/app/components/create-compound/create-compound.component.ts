@@ -7,6 +7,8 @@ import {ActionService} from '../../services/action/action.service';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
 import {take} from 'rxjs/operators';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {UserDto} from '../../models/user/dto/user-dto';
 
 @Component({
   selector: 'app-create-compound',
@@ -107,6 +109,10 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     if (this.searchActionSubscription) {
       this.searchActionSubscription.unsubscribe();
     }
+  }
+
+  drop($event: CdkDragDrop<UserDto[]>): void {
+    moveItemInArray(this.addedActions, $event.previousIndex, $event.currentIndex);
   }
 
 }

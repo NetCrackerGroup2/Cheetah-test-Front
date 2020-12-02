@@ -148,7 +148,4 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     }
   }
 
-  drop($event: CdkDragDrop<UserDto[]>): void {
-    moveItemInArray(this.addedUsers, $event.previousIndex, $event.currentIndex);
-  }
 }
