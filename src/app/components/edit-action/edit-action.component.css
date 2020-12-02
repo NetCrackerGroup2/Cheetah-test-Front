@@ -4,3 +4,8 @@ form {
   border-radius: 20px;
   min-width: 200px;
 }
+label {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: black;
+}
