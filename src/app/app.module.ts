@@ -24,6 +24,7 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
 import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { CreateProjectComponent } from './components/create-project/create-proje
     HttpClientModule,
     FormsModule,
     NgbModule,
-    SidebarModule
+    SidebarModule,
+    DragDropModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

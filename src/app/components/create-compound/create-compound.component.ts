@@ -7,7 +7,7 @@ import {ActionService} from '../../services/action/action.service';
 import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
-import {first, take} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-compound',
@@ -105,4 +105,5 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
       this.searchActionSubscription.unsubscribe();
     }
   }
+
 }

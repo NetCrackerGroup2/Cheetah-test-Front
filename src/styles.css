@@ -189,6 +189,7 @@ ul.search-result {
 }
 
 ul.added-result {
+  color: black;
   margin-top: 0;
   padding-left: 0;
 }

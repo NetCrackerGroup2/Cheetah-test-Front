@@ -65,17 +65,19 @@
               </a>
             </li>
           </ul>
+
           <div *ngIf="addedUsers.length > 0">
             <hr>
             <br>
             Selected:
           </div>
-
-          <ul class="added-result">
-            <li *ngFor="let user of addedUsers">
-              <a (click)="remove(user)">{{ user.email }}</a>
-            </li>
-          </ul>
+          <div cdkDropList (cdkDropListDropped)="drop($event)">
+            <ul class="added-result">
+              <li cdkDrag *ngFor="let user of addedUsers">
+                <a (click)="remove(user)">{{ user.email }}</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="form-group row">

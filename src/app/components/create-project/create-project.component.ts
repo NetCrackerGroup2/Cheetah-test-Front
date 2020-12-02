@@ -8,6 +8,7 @@ import {ProjectDto} from '../../models/project/dto/project-dto';
 import {ProjectDtoWithUserIds} from '../../models/project/project-dto-with-user-ids/project-dto-with-user-ids';
 import {UserDto} from '../../models/user/dto/user-dto';
 import {Project} from '../../models/project/entity/project';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-create-project',
@@ -147,4 +148,7 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
     }
   }
 
+  drop($event: CdkDragDrop<UserDto[]>): void {
+    moveItemInArray(this.addedUsers, $event.previousIndex, $event.currentIndex);
+  }
 }
