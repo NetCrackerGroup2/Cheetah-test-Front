@@ -1,7 +1,10 @@
 <div>
   <div *ngIf="user && !isOut">
-    <ng-sidebar-container contentClass="container">
-      <ng-sidebar [opened]=opened autoCollapseWidth="1000">
+    <ng-sidebar-container>
+      <ng-sidebar
+        [opened]=opened
+        autoCollapseWidth="1000"
+        mode="over">
         <div class="list-group list-group-flush">
           <div class="text-center mt-5">
             <a [routerLink]="['profile']">
@@ -48,9 +51,13 @@
           </div>
         </div>
       </ng-sidebar>
+      <div ng-sidebar-content>
+        <div class="contents">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </ng-sidebar-container>
   </div>
-
   <div class="container-fluid">
     <nav class="navbar" *ngIf="!isOut">
       <div class="row">
@@ -61,7 +68,5 @@
       </div>
     </nav>
   </div>
-  <div>
-    <router-outlet></router-outlet>
-  </div>
+
 </div>

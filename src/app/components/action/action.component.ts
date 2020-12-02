@@ -36,7 +36,6 @@ export class ActionComponent implements OnInit {
 
     if (this.searchMode) {
       this.handleSearchActions();
-
     } else {
       this.handleActions();
     }

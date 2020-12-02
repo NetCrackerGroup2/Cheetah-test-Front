@@ -56,13 +56,15 @@
 
 /*sidebar*/
 ng-sidebar-container {
-  min-width: 300px;
-  max-width: 300px;
-  min-height: 100vh;
   position: fixed;
 }
 
+.contents {
+  padding: 0 2em;
+}
+
 ::ng-deep .ng-sidebar {
+  width: 300px;
   background: linear-gradient(175.93deg, #878787 -10.23%, #BD7D42 117.03%);
   padding: 2em 3em;
   box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
@@ -72,5 +74,13 @@ ng-sidebar-container {
   position: relative;
 }
 
+.demo-sidebar.ng-sidebar--opened.ng-sidebar--over {
+  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+}
+
+::ng-deep aside {
+  background-color: #fff;
+  padding: 2em 1em;
+}
 
 
