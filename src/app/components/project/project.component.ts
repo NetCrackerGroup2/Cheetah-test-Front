@@ -83,6 +83,6 @@ export class ProjectComponent implements OnInit {
   }
 
   edit(id: number): void {
-    this.router.navigate([`edit-project/${id}`]);
+    this.router.navigate([`projects/edit-project/${id}`]);
   }
 }

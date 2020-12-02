@@ -48,7 +48,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-action/:id/:description',
+    path: 'general-library/edit-action/:id/:description',
     component: EditActionComponent,
     canActivate: [AuthGuard]
   },
@@ -63,7 +63,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-project/:id',
+    path: 'projects/edit-project/:id',
     component: CreateProjectComponent,
     canActivate: [AuthGuard]
   },

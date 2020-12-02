@@ -15,7 +15,8 @@
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
     <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
     <form [formGroup]="createProjectForm" (ngSubmit)="onSubmit()">
-      <div *ngIf="title.invalid && (title.dirty || title.touched)" class="text-danger text-center mb-1">
+      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+           class="text-danger text-center mb-1">
         <div *ngIf="title.errors.required">
           <h5>Title is required</h5>
         </div>

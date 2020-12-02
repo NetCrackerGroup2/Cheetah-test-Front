@@ -44,6 +44,7 @@ export class EditActionComponent implements OnInit {
       .subscribe(() => {
           this.successMessage = 'Description has been successfully updated';
           this.loading = false;
+          this.editForm.reset();
         }
       );
   }
