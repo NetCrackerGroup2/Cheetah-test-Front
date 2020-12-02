@@ -25,6 +25,7 @@ import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.c
 import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ActionsInCompoundComponent } from './components/actions-in-compound/actions-in-compound.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ProfilesComponent,
     EditDataSetComponent,
     ProjectComponent,
-    CreateProjectComponent
+    CreateProjectComponent,
+    ActionsInCompoundComponent
   ],
   imports: [
     BrowserModule,

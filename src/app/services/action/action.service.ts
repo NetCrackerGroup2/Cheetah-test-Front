@@ -52,6 +52,10 @@ export class ActionService {
     return this.http.get<Action>(url);
   }
 
+  getActionsByCompoundId(compoundId: number): Observable<Action[]> {
+    const url = `${environment.apiUrl}/api/library/${compoundId}/all-actions`;
+    return this.http.get<Action[]>(url);
+  }
 }
 
 interface GetResponseActions {

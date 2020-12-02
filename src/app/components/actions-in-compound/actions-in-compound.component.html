@@ -1,0 +1,25 @@
+<div class="main-content">
+  <div class="row mt-5">
+    <h1 class="display-4 black">Actions In "{{ compoundName }}"</h1>
+  </div>
+  <div *ngIf="actions?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+    No actions found.
+  </div>
+  <div class="mt-5 row" *ngIf="actions.length !== 0">
+    <div class="custom-table black">
+      <div class="row thead">
+        <div class="col-2">Title</div>
+        <div class="col-4">Description</div>
+        <div class="col-2">Type</div>
+      </div>
+
+      <div class="mt-5 stripped">
+        <div class="row mt-2" *ngFor="let action of actions">
+          <div class="col-2">{{action.title}}</div>
+          <div class="col-4">{{action.description}}</div>
+          <div class="col-2">{{action.type}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
