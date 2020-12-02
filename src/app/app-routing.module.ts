@@ -48,7 +48,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'general-library/edit-action/:id/:description',
+    path: 'general-library/edit-action/:id',
+    component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'general-library/compounds/${id}',
     component: EditActionComponent,
     canActivate: [AuthGuard]
   },

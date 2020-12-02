@@ -27,8 +27,8 @@ export class ActionComponent implements OnInit {
     this.listActions();
   }
 
-  edit(id: number, description: string): void {
-    this.router.navigate([`general-library/edit-action/${id}/${description}`]);
+  edit(id: number): void {
+    this.router.navigate([`general-library/edit-action/${id}`]);
   }
 
   listActions(): void {

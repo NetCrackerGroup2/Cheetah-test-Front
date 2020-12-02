@@ -46,6 +46,12 @@ export class ActionService {
     const url = `${environment.apiUrl}/api/library`;
     return this.http.post<CompoundDtoWithActions>(url, compoundWithActions);
   }
+
+  getAction(id: number): Observable<Action> {
+    const url = `${environment.apiUrl}/api/library/actions/${id}`;
+    return this.http.get<Action>(url);
+  }
+
 }
 
 interface GetResponseActions {

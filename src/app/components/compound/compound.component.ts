@@ -96,4 +96,8 @@ export class CompoundComponent implements OnInit {
     this.value = value;
     this.listCompounds();
   }
+
+  view(id: number): void {
+    this.router.navigate([`/general-library/compounds/${id}`]);
+  }
 }

@@ -22,14 +22,17 @@ export class EditActionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.action = new Action();
-    this.action.id = +this.route.snapshot.paramMap.get('id');
-    this.action.description = this.route.snapshot.paramMap.get('description');
-
     this.editForm = this.formBuilder.group({
-      description: new FormControl(this.action.description,
+      description: new FormControl('',
         [Validators.required, Validators.maxLength(300)])
     });
+    this.action = new Action();
+    this.action.id = +this.route.snapshot.paramMap.get('id');
+    this.actionService.getAction(this.action.id)
+      .pipe(take(1))
+      .subscribe(
+        data => this.description.setValue(data.description)
+      );
   }
 
   get description(): any {
