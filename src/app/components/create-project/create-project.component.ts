@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectService} from '../../services/project/project.service';
-import {first} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 import {ProjectDto} from '../../models/project/dto/project-dto';
 import {ProjectDtoWithUserIds} from '../../models/project/project-dto-with-user-ids/project-dto-with-user-ids';
 import {UserDto} from '../../models/user/dto/user-dto';
@@ -22,7 +22,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   addedUsers: UserDto[] = [];
   searchTerm$ = new Subject<string>();
   searchUserSubscription: Subscription;
-  createSubscription: Subscription;
   @ViewChild('term') term;
   loading = false;
   isEdit = false;
@@ -88,8 +87,8 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       const projectDtoWithUserIds: ProjectDtoWithUserIds =
         new ProjectDtoWithUserIds(projectDto, userDtos);
 
-      this.createSubscription = this.projectService.create(projectDtoWithUserIds)
-        .pipe(first())
+      this.projectService.create(projectDtoWithUserIds)
+        .pipe(take(1))
         .subscribe(
           data => {
             if (data.message === 'A new project has been created successfully!') {
@@ -106,7 +105,9 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
       project.id = this.projectId;
       project.title = this.title.value;
       project.link = this.link.value;
-      this.createSubscription = this.projectService.update(project).subscribe(
+      this.projectService.update(project)
+        .pipe(take(1))
+        .subscribe(
         data => {
           if (data.message === 'The project has been updated!') {
             this.successMessage = 'The project has been updated!';
@@ -143,9 +144,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.searchUserSubscription) {
       this.searchUserSubscription.unsubscribe();
-    }
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
     }
   }
 

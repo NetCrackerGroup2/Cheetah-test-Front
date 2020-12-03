@@ -15,6 +15,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
+import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -48,8 +49,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-action/:id/:description',
+    path: 'general-library/edit-action/:id',
     component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'general-library/compounds/:id',
+    component: ActionsInCompoundComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -63,7 +69,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-project/:id',
+    path: 'projects/edit-project/:id',
     component: CreateProjectComponent,
     canActivate: [AuthGuard]
   },

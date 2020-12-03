@@ -1,13 +1,14 @@
 .container-fluid {
   padding-top: -50px;
-  padding-left: 5%;
 }
 
 form {
   padding: 5% 5% 0 5%;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  min-width: 200px;
 }
+
 
 label {
   font-size: 1.6em;
@@ -25,6 +26,6 @@ input, textarea, select {
 button {
   background: #BD7D42;
   border-radius: 15px;
-  width: 70%;
+  width: 60%;
 
 }
