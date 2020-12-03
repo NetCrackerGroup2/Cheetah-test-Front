@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActionResult} from '../../../models/action-result/ActionResult';
 import {ActionStatus} from '../../../models/action-result/ActionStatus';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-test-case-info',
@@ -11,8 +13,11 @@ import {ActionStatus} from '../../../models/action-result/ActionStatus';
 export class TestCaseInfoComponent implements OnInit {
   detailsSwitch: number;
   actionResults: ActionResult[] = [];
+  testCaseId: number;
+  isCompleted: boolean;
 
-  constructor() {
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.testCaseId = route.snapshot.params.idTestCase;
 
   }
 
@@ -81,5 +86,13 @@ export class TestCaseInfoComponent implements OnInit {
     } else {
       this.detailsSwitch = index;
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/data-set', this.testCaseId]);
+  }
+
+  viewPDF(): void {
+
   }
 }

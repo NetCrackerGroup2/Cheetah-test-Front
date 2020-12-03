@@ -1,6 +1,12 @@
 <div class="main-content">
-  <div class="row">
-    <h1 class="display-4 black">Test-Case Info</h1>
+  <div class="row mt-5 mb-5 main-buttons">
+    <h1 class="display-4 black col-lg-4 col-md-12 col-sm-12">Test-Case {{testCaseId}} Info</h1>
+    <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" *ngIf="isCompleted" (click)="viewPDF()">
+      View PDF File
+    </button>
+    <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" (click)="goBack()">
+      Go Back
+    </button>
   </div>
   <div class="row mt-5">
     <div class="search-config">
