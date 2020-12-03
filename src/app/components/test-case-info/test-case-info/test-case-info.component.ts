@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActionResult} from '../../../models/action-result/ActionResult';
 import {ActionStatus} from '../../../models/action-result/ActionStatus';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-test-case-info',
@@ -22,47 +21,53 @@ export class TestCaseInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.doSearch('');
+    this.getActions('');
   }
 
-  doSearch(title: string): void {
+  getActions(title: string): void {
     this.actionResults = [
       {
-        action: {id: 123, type: 'read', title: 'test1', description: 'description1', libraryId: 132},
+        action: {compoundId: 123, actionType: 'read', element: 'test1', argument: 'arg1'},
         status: ActionStatus.SUCCESSFUL,
         description: 'lol',
         screenshotUrl: 'idk.com'
       },
       {
-        action: {id: 1, type: 'afe', title: 'wfa', description: 'dewfafscription1', libraryId: 1232},
+        action: {compoundId: 344, actionType: 'readaasd', element: 'tes1dgt1', argument: 'arg1'},
+        status: ActionStatus.SUCCESSFUL,
+        description: 'lolfbb',
+        screenshotUrl: 'idk.cbafom'
+      }, {
+        action: {compoundId: 455, actionType: 'reasdgad', element: 'teasfgst1', argument: 'arg1'},
         status: ActionStatus.FAILED,
-        description: 'dd',
-        screenshotUrl: 'idfk.com'
-      },
-      {
-        action: {id: 1233, type: 'red', title: 'tesdft1', description: 'descrasdfiption1', libraryId: 132},
+        description: 'lolbab',
+        screenshotUrl: 'idkafb.com'
+      }, {
+        action: {compoundId: 1234, actionType: 'readgd', element: 'tesat1', argument: 'arg1'},
         status: ActionStatus.SUCCESSFUL,
-        description: 'lol',
-        screenshotUrl: 'idk.com'
-      },
-      {
-        action: {id: 1123, type: 'read', title: 'tesasdt1', description: 'desasdfcription1', libraryId: 1332},
+        description: 'lobbl',
+        screenshotUrl: 'idkafb.com'
+      }, {
+        action: {compoundId: 566, actionType: 'reaghhad', element: 'tehst1', argument: 'arg1'},
+        status: ActionStatus.FAILED,
+        description: 'lodasfl',
+        screenshotUrl: 'idafk.com'
+      }, {
+        action: {compoundId: 146, actionType: 'rerqad', element: 'testhh1', argument: 'arg1'},
         status: ActionStatus.SUCCESSFUL,
-        description: 'logl',
-        screenshotUrl: 'idk.com'
-      },
-      {
-        action: {id: 11423, type: 'reasfd', title: 'testfsds1', description: 'descrsdfiption1', libraryId: 1432},
+        description: 'lofal',
+        screenshotUrl: 'iabfdk.com'
+      }, {
+        action: {compoundId: 146, actionType: 'rehad', element: 'teafst1', argument: 'arg1'},
         status: ActionStatus.SUCCESSFUL,
-        description: 'lol',
+        description: 'lvvvol',
         screenshotUrl: 'idk.com'
+      }, {
+        action: {compoundId: 2355, actionType: 'reafgd', element: 'thsfest1', argument: 'arg1'},
+        status: ActionStatus.FAILED,
+        description: 'lovvl',
+        screenshotUrl: 'idabfk.com'
       },
-      {
-        action: {id: 11623, type: 'reasfgsd', title: 'tesfdgt1', description: 'descrisdfgption1', libraryId: 1352},
-        status: ActionStatus.SUCCESSFUL,
-        description: 'lofgl',
-        screenshotUrl: 'idk.com'
-      }
 
     ]
     ;
@@ -92,7 +97,7 @@ export class TestCaseInfoComponent implements OnInit {
     this.router.navigate(['/data-set', this.testCaseId]);
   }
 
-  viewPDF(): void {
-
+  sendReport(): void {
+    this.router.navigate(['/test-scenario', this.testCaseId, 'send-report']);
   }
 }

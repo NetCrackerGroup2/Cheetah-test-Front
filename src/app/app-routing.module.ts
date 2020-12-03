@@ -16,6 +16,7 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -91,6 +92,11 @@ const routes: Routes = [
   {
     path: 'test-scenario/:idTestCase/info',
     component: TestCaseInfoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-scenario/:idTestCase/send-report',
+    component: SendReportComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

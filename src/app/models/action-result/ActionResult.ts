@@ -1,8 +1,9 @@
-import {Action} from '../action/action';
+
 import {ActionStatus} from './ActionStatus';
+import {ActionProperties} from './ActionProperties';
 
 export class ActionResult{
-  action: Action;
+  action: ActionProperties;
   status: ActionStatus;
   description: string;
   screenshotUrl: string;

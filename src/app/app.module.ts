@@ -26,6 +26,7 @@ import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { TestCaseInfoComponent } from './components/test-case-info/test-case-info/test-case-info.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SendReportComponent } from './components/send-report/send-report.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EditDataSetComponent,
     ProjectComponent,
     CreateProjectComponent,
-    TestCaseInfoComponent
+    TestCaseInfoComponent,
+    SendReportComponent
   ],
   imports: [
     BrowserModule,
