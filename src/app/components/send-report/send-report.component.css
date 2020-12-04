@@ -2,3 +2,28 @@
   display: flex;
   justify-content: space-around;
 }
+.send-report-form{
+  margin: 0 auto;
+  width: 30vw;
+  border-radius: 20px;
+  background-color: #f2e5d9;
+}
+label {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: black;
+}
+
+input, textarea, select {
+  border: 1px solid #BD7D42;
+  border-radius: 0;
+  resize: none;
+  width: 90%;
+}
+
+button {
+  background: #BD7D42;
+  border-radius: 15px;
+  width: 60%;
+
+}

@@ -7,5 +7,42 @@
   </div>
 
 
-  <div class="container-sm"></div>
+  <div class="container-sm send-report-form mt-5 pt-3">
+    <h5 class="text-success text-center mt-3 mb-1">{{successMessage}}</h5>
+    <h5 class="text-danger text-center mt-3 mb-1">{{errorMessage}}</h5>
+    <form [formGroup]="sendReportForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row mt-3">
+        <label class="col-lg-4 col-md-12 col-sm-12 col-form-label">Enter Email </label>
+        <div id="search-component" class="col-lg-6 col-md-12 col-sm-12">
+          <input
+            (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
+
+          <ul *ngIf="users" class="search-result">
+            <li *ngFor="let user of users | slice:0:9">
+              <a (click)="addToList(user.email)" target="_blank">
+                {{ user.email }}
+              </a>
+            </li>
+          </ul>
+          <div *ngIf="addedEmails.length > 0">
+            Selected:
+          </div>
+
+          <ul class="added-result">
+            <li *ngFor="let email of addedEmails">
+              <a (click)="remove(email)">{{ email }}</a>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-7 text-center mx-auto my-4">
+          <button class="options-table" [disabled]="addedEmails.length === 0" >Send Reports
+            <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
