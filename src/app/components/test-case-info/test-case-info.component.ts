@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActionResult} from '../../../models/action-result/ActionResult';
-import {ActionStatus} from '../../../models/action-result/ActionStatus';
+import {ActionResult} from '../../models/action-result/ActionResult';
+import {ActionStatus} from '../../models/action-result/ActionStatus';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

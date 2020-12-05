@@ -1,0 +1,14 @@
+<div class="main-content">
+  <div class="row mt-5 send-report">
+    <h1 class="display-4 black">Running Test Cases</h1>
+    <button class="options ml-1 mt-3 mr-5" (click)="goBack()">
+      Go Back
+    </button>
+  </div>
+
+  <div align="center" class="mt-5">
+    <circle-progress [percent]="this.percent" [animation]="true" [animationDuration]="1000" [radius]="200">
+    </circle-progress>
+  </div>
+
+</div>

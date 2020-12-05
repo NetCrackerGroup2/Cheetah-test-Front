@@ -7,20 +7,20 @@
   </div>
 
 
-  <div class="container-sm send-report-form mt-5 pt-3">
+  <div class="container-sm text-center mt-5 ">
     <h5 class="text-success text-center mt-3 mb-1">{{successMessage}}</h5>
     <h5 class="text-danger text-center mt-3 mb-1">{{errorMessage}}</h5>
     <form [formGroup]="sendReportForm" (ngSubmit)="onSubmit()">
       <div class="form-group row mt-3">
         <label class="col-lg-4 col-md-12 col-sm-12 col-form-label">Enter Email </label>
-        <div id="search-component" class="col-lg-6 col-md-12 col-sm-12">
+        <div id="search-component" class="col-lg-8 col-md-12 col-sm-12">
           <input
             (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
 
-          <ul *ngIf="users" class="search-result">
+          <ul *ngIf="users" class="search-result ">
             <li *ngFor="let user of users | slice:0:9">
-              <a (click)="addToList(user.email)" target="_blank">
-                {{ user.email }}
+              <a (click)="addToList(user.email)" target="_blank" >
+                {{ user.email+'('+user.name+')'}}
               </a>
             </li>
           </ul>

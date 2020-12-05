@@ -24,10 +24,11 @@ import { ProfilesComponent } from './components/profiles/profiles.component';
 import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
 import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
-import { TestCaseInfoComponent } from './components/test-case-info/test-case-info/test-case-info.component';
+import { TestCaseInfoComponent } from './components/test-case-info/test-case-info.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SendReportComponent } from './components/send-report/send-report.component';
-
+import { NgCircleProgressModule } from 'ng-circle-progress';
+import { CircularDiagramComponent } from './components/circular-diagram/circular-diagram/circular-diagram.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,8 @@ import { SendReportComponent } from './components/send-report/send-report.compon
     ProjectComponent,
     CreateProjectComponent,
     TestCaseInfoComponent,
-    SendReportComponent
+    SendReportComponent,
+    CircularDiagramComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,19 @@ import { SendReportComponent } from './components/send-report/send-report.compon
     FormsModule,
     NgbModule,
     SidebarModule,
-    DragDropModule
+    DragDropModule,
+    NgCircleProgressModule.forRoot({
+      backgroundColor: '#F1F1F1',
+      backgroundPadding: -18,
+      radius: 60,
+      toFixed: 0,
+      maxPercent: 100,
+      outerStrokeWidth: 10,
+      outerStrokeColor: '#FF6347',
+      innerStrokeColor: '#32CD32',
+      innerStrokeWidth: 1,
+      showInnerStroke: false,
+      startFromZero: false})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

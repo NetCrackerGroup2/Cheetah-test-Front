@@ -13,7 +13,6 @@ export class SendReportService {
   }
 
   sendReports(emails: string[], idTestCase: number): Observable<any> {
-    //todo
     const url = `${environment.apiUrl}/api/${idTestCase}/send-report`;
     return this.http.post<any>(url, emails);
   }
