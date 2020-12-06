@@ -13,8 +13,8 @@
 }
 
 .input-long{
-  width: 500px;
-  border-radius: 20px;
+  width: 100%;
+  border-radius: 10px;
 }
 
 /*pagination*/
