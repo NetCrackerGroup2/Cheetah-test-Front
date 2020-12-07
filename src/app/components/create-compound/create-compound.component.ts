@@ -4,10 +4,11 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Action} from '../../models/action/action';
 import {Subject, Subscription} from 'rxjs';
 import {ActionService} from '../../services/action/action.service';
-import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
 import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
-import {first} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {UserDto} from '../../models/user/dto/user-dto';
 
 @Component({
   selector: 'app-create-compound',
@@ -15,15 +16,15 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./create-compound.component.css']
 })
 export class CreateCompoundComponent implements OnInit, OnDestroy {
+
   successMessage: string;
   errorMessage: string;
   createCompoundForm: FormGroup;
   actions: Action[];
   addedActions: Action[] = [];
   searchTerm$ = new Subject<string>();
-  searchActionSubscription: Subscription;
-  createSubscription: Subscription;
   @ViewChild('term') term;
+  searchActionSubscription: Subscription;
   loading = false;
 
   constructor(private route: ActivatedRoute,
@@ -59,9 +60,11 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     this.errorMessage = '';
     this.successMessage = '';
     this.loading = true;
-    const actionsCreateDto: ActionCreateDto[] = [];
+    const actionsCreateDto: Action[] = [];
     for (const action of this.addedActions) {
-      actionsCreateDto.push(new ActionCreateDto(action.id));
+      const newAction: Action = new Action();
+      newAction.id = action.id;
+      actionsCreateDto.push(newAction);
     }
 
     const compound: CompoundCreateDto =
@@ -70,19 +73,20 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     const compoundWithActions: CompoundDtoWithActions =
       new CompoundDtoWithActions(compound, actionsCreateDto);
 
-    this.createSubscription = this.actionService.createCompound(compoundWithActions)
-      .pipe(first())
+    this.actionService.createCompound(compoundWithActions)
+      .pipe(take(1))
       .subscribe(
       data => {
-        if (data) {
+        if (data.id) {
           this.successMessage = 'Compound has been successfully created';
-          this.loading = false;
           this.createCompoundForm.reset();
           this.addedActions = [];
+        } else if (data === 'Entity with such signature already exists') {
+          this.errorMessage = 'Entity with such name already exists';
         } else {
           this.errorMessage = 'Server error';
-          this.loading = false;
         }
+        this.loading = false;
       });
   }
 
@@ -107,8 +111,10 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
     if (this.searchActionSubscription) {
       this.searchActionSubscription.unsubscribe();
     }
-    if (this.createSubscription) {
-      this.createSubscription.unsubscribe();
-    }
   }
+
+  drop($event: CdkDragDrop<UserDto[]>): void {
+    moveItemInArray(this.addedActions, $event.previousIndex, $event.currentIndex);
+  }
+
 }

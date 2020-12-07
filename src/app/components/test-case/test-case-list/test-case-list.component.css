@@ -4,6 +4,11 @@
   position : absolute;
 }
 
+.alert-warning {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
 table {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
@@ -52,4 +57,24 @@ button:hover {
 .page {
   background: #EEF2F5;
   border-radius: 5px;
+}
+
+.project-width {
+  min-width: 800px;
+}
+.ngb-pagination ::ng-deep a {
+  color: #bd7d42 !important;
+}
+
+.ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: black;
+  background-color: lightgrey;
+}
+
+.ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
+}
+
+.ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
 }

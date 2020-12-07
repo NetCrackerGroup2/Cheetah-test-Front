@@ -53,15 +53,15 @@
       <label for="select_role">Role:</label>
       <div class="custom_input_item">
         <select formControlName="role" name="" class="custom_input_item" id="select_role">
-          <option value="admin">Admin</option>
-          <option value="engineer">Engineer</option>
-          <option value="manager">Manager</option>
+          <option value="ADMIN">Admin</option>
+          <option value="ENGINEER">Engineer</option>
+          <option value="MANAGER">Manager</option>
         </select>
       </div>
 
       <button type="submit" class="submit_input" id="createUser" [disabled]="!createForm.valid">
         Create User
-        <span *ngIf="loading" class="spinner-border spinner-border-sm mb-2"></span>
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mb-1"></span>
       </button>
 
     </form>

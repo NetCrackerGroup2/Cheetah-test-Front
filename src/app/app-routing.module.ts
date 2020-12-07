@@ -9,15 +9,31 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProjectComponent} from './components/project/project.component';
+import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
+import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
+import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {CreateTestCaseComponent} from './components/test-case/create-test-case/create-test-case.component';
-import {TestCaseComponent} from './components/test-case/test-case-list/test-case.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
-  {path: 'testcases', component: TestCaseComponent},
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'sign-up',
     component: SignUpComponent,
@@ -27,6 +43,7 @@ const routes: Routes = [
     path: 'library-create-compound',
     component: CreateCompoundComponent,
     canActivate: [AuthGuard]
+
   },
   {
     path: 'general-library',
@@ -34,18 +51,28 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'create-test-case/:projectId',
-    component: CreateTestCaseComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit-test-case/:projectId/:title/:id',
-    component: CreateTestCaseComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'edit-action/:id/:description',
+    path: 'general-library/edit-action/:id',
     component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'general-library/compounds/:id',
+    component: ActionsInCompoundComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/edit-project/:id',
+    component: CreateProjectComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -53,8 +80,34 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'data-set/:id',
+    component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set/:idTestCase/:title/:id',
+    component: EditDataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-cases/:id',
+    component: TestCaseListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-cases/create-test-case',
+    component: CreateTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-cases/edit-test-case/:id',
+    component: CreateTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

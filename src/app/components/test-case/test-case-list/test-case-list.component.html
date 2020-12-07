@@ -1,0 +1,67 @@
+<div class="container my-5">
+  <div class="container-fluid pb-5 row">
+    <div class="col-md-auto mt-3">
+      <h1 class="d-inline-block p-0" style="color: black">Project No. {{projectId}}</h1>
+    </div>
+    <div class="col">
+      <div class="md-form active-black mb-3 mt-3 p-1">
+        <input #searchInput class="form-control search" (keyup.enter)="search(searchInput.value)" placeholder="Search" aria-label="Search">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <button [routerLink]="['/test-cases/create-test-case']" type="button" class="options m-1">Create new</button>
+      <button type="button" class="options m-1">Filter</button>
+      <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
+      <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
+      <button type="button" class="options m-1">Last Report Details</button>
+      <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
+    </div>
+  </div>
+  <table class="table table-striped table-hover col-lg-12 col-md-12 col-sm-12">
+    <thead>
+    <tr>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>
+      <th scope="col">Add to Test</th>
+      <th scope="col">Options</th>
+    </tr>
+    </thead>
+    <tr *ngFor="let testCase of testCases">
+      <td class="py-4 px-4">{{testCase.title}}</td>
+      <td class="py-4 px-4">{{testCase.status}}</td>
+      <td class="text-center">
+        <div class="form-check py-2">
+          <input type="checkbox" class="form-check-input" [checked]="isCheckedTestCase(testCase)"
+                 (change)="handleRunTestCases(testCase)">
+        </div>
+      </td>
+      <td class="row">
+        <button type="button" class="options">View</button>
+        <button type="button" class="options">Edit</button>
+        <button type="button" class="options">Report details</button>
+        <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"
+                type="button" class="options">Deactivate</button>
+      </td>
+    </tr>
+  </table>
+  <div class="alert alert-warning col-lg-11 col-md-8 col-sm-6 my-2 text-center" *ngIf="testCases.length == 0" role="alert">
+    There are no founded test cases
+  </div>
+  <div class="row pagination mt-3">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-9">
+          <ngb-pagination [(page)]="pageNum"
+                          [pageSize]="pageSize"
+                          [collectionSize]="totalElements"
+                          [maxSize]="5"
+                          [boundaryLinks]="true"
+                          (pageChange)="showTestCaseList()"
+                          class="ngb-pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

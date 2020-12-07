@@ -32,7 +32,31 @@ export class TestCaseService {
           })
         );
     }
+  }
 
+  getTestCases(projectId: number, pageNum: number, pageSize: number): Observable<GetResponseTestCases> {
+    const url = `${environment.apiUrl}/api/test-cases/${projectId}?page=${pageNum}&size=${pageSize}`;
+    return this.http.get<GetResponseTestCases>(url);
+  }
+
+  findTestCaseByTitle(projectId: number, pageNum: number, pageSize: number, keyword: string): Observable<GetResponseTestCases> {
+    const url = `${environment.apiUrl}/api/test-cases/search/findByTitle/${projectId}?page=${pageNum}&size=${pageSize}&keyword=${keyword}`;
+    return this.http.get<GetResponseTestCases>(url);
+  }
+
+  updateTestCase(testCase: TestCase): Observable<any> {
+    const url = `${environment.apiUrl}/api/test-cases/${testCase.id}`;
+    return this.http.put<any>(url, testCase)
+      .pipe(
+        catchError(err => {
+            return of(err);
+        })
+      );
+  }
+
+  deactivateTestCase(id: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/test-cases/${id}`;
+    return this.http.delete<any>(url, {});
   }
 }
 
