@@ -81,6 +81,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   deactivateTestCase(id: number): void {
+    this.runTestCasesList = this.runTestCasesList.filter(t => t.id !== id);
     this.testCaseService.deactivateTestCase(id)
       .pipe(take(1))
       .subscribe(() => this.showTestCaseList());

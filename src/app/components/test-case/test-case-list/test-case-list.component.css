@@ -1,7 +1,5 @@
 .container {
-  width: 100%;
-  margin-left: 300px;
-  position : absolute;
+  margin-left: 20%;
 }
 
 .alert-warning {
@@ -13,7 +11,6 @@ table {
   font-family: 'Lato', sans-serif;
   font-weight: bold;
   color: #414141;
-  width: auto;
 }
 
 .search, .search:hover {
@@ -34,7 +31,6 @@ th {
 }
 
 .options {
-  width: auto;
   border-radius: 5px;
   margin-left: 10px;
   padding: 0;
@@ -62,6 +58,7 @@ button:hover {
 .project-width {
   min-width: 800px;
 }
+
 .ngb-pagination ::ng-deep a {
   color: #bd7d42 !important;
 }
