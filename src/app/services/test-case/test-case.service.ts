@@ -35,23 +35,18 @@ export class TestCaseService {
   }
 
   getTestCases(projectId: number, pageNum: number, pageSize: number): Observable<GetResponseTestCases> {
-    const url = `${environment.apiUrl}/api/test-cases/${projectId}?page=${pageNum}&size=${pageSize}`;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/test-cases?page=${pageNum}&size=${pageSize}`;
     return this.http.get<GetResponseTestCases>(url);
+  }
+
+  getTestCaseById(projectId: number, id: number): Observable<TestCase> {
+    const url = `${environment.apiUrl}/api/projects/${projectId}/test-cases/${id}`;
+    return this.http.get<TestCase>(url);
   }
 
   findTestCaseByTitle(projectId: number, pageNum: number, pageSize: number, keyword: string): Observable<GetResponseTestCases> {
-    const url = `${environment.apiUrl}/api/test-cases/search/findByTitle/${projectId}?page=${pageNum}&size=${pageSize}&keyword=${keyword}`;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/test-cases/search/findByTitle?page=${pageNum}&size=${pageSize}&keyword=${keyword}`;
     return this.http.get<GetResponseTestCases>(url);
-  }
-
-  updateTestCase(testCase: TestCase): Observable<any> {
-    const url = `${environment.apiUrl}/api/test-cases/${testCase.id}`;
-    return this.http.put<any>(url, testCase)
-      .pipe(
-        catchError(err => {
-            return of(err);
-        })
-      );
   }
 
   deactivateTestCase(id: number): Observable<any> {

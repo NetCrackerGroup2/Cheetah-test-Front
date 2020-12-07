@@ -3,16 +3,17 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {UserService} from '../../../services/user/user.service';
-import {first} from 'rxjs/operators';
+import {first, take} from 'rxjs/operators';
 import {TestCaseService} from '../../../services/test-case/test-case.service';
 import {TestCase} from '../../../models/test-case/test-case';
+import {ProjectService} from '../../../services/project/project.service';
 
 @Component({
   selector: 'app-create-test-case',
-  templateUrl: './create-test-case.component.html',
-  styleUrls: ['./create-test-case.component.css']
+  templateUrl: './test-case-configuration.component.html',
+  styleUrls: ['./test-case-configuration.component.css']
 })
-export class CreateTestCaseComponent implements OnInit, OnDestroy {
+export class TestCaseConfigurationComponent implements OnInit, OnDestroy {
 
   projectId: number;
   successMessage: string;
@@ -26,19 +27,25 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private userService: UserService,
-              private testCaseService: TestCaseService) {
+              private testCaseService: TestCaseService,
+  ) {
 
     this.projectId = +this.route.snapshot.paramMap.get('projectId');
   }
 
   ngOnInit(): void {
-    this.isEdit = this.route.snapshot.paramMap.has('title');
+    this.isEdit = this.route.snapshot.paramMap.has('id');
+    const titleToEdit = '';
 
-    let titleToEdit = '';
     if (this.isEdit) {
-      titleToEdit = this.route.snapshot.paramMap.get('title');
       this.id = +this.route.snapshot.paramMap.get('id');
+      this.testCaseService.getTestCaseById(this.projectId, this.id).subscribe(
+        data => {
+          this.title.setValue(data.title);
+        }
+      );
     }
+
 
     this.createTestCaseForm = this.formBuilder.group({
       title: new FormControl(titleToEdit,
@@ -83,6 +90,4 @@ export class CreateTestCaseComponent implements OnInit, OnDestroy {
       this.createTestCaseSubscription.unsubscribe();
     }
   }
-
-
 }

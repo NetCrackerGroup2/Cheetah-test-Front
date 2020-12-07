@@ -1,7 +1,7 @@
 <div class="container my-5">
   <div class="container-fluid pb-5 row">
     <div class="col-md-auto mt-3">
-      <h1 class="d-inline-block p-0" style="color: black">Project No. {{projectId}}</h1>
+      <h3 class="d-inline-block p-0" style="color: black">{{currentProject.title}}</h3>
     </div>
     <div class="col">
       <div class="md-form active-black mb-3 mt-3 p-1">
@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <button [routerLink]="['/test-cases/create-test-case']" type="button" class="options m-1">Create new</button>
+      <button type="button" class="options m-1" (click)="create()">Create new</button>
       <button type="button" class="options m-1">Filter</button>
       <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
       <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
@@ -37,7 +37,7 @@
       </td>
       <td class="row">
         <button type="button" class="options">View</button>
-        <button type="button" class="options">Edit</button>
+        <button type="button" class="options" (click)="edit(testCase.id)">Edit</button>
         <button type="button" class="options">Report details</button>
         <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"
                 type="button" class="options">Deactivate</button>

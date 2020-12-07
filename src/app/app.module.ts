@@ -27,7 +27,7 @@ import { CreateProjectComponent } from './components/create-project/create-proje
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActionsInCompoundComponent } from './components/actions-in-compound/actions-in-compound.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
-import {CreateTestCaseComponent} from './components/test-case/create-test-case/create-test-case.component';
+import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import {CreateTestCaseComponent} from './components/test-case/create-test-case/c
     CreateProjectComponent,
     ActionsInCompoundComponent,
     TestCaseListComponent,
-    CreateTestCaseComponent
+    TestCaseConfigurationComponent
   ],
   imports: [
     BrowserModule,

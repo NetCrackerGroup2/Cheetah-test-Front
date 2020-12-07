@@ -87,6 +87,6 @@ export class ProjectComponent implements OnInit {
   }
 
   showTestCases(id: number): void {
-    this.router.navigate(['test-cases/', id]);
+    this.router.navigate(['projects', id, 'test-cases']);
   }
 }

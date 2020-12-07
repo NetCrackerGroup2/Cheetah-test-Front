@@ -3,6 +3,8 @@ import {TestCase} from '../../../models/test-case/test-case';
 import {TestCaseService} from '../../../services/test-case/test-case.service';
 import {take} from 'rxjs/operators';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ProjectService} from '../../../services/project/project.service';
+import {Project} from '../../../models/project/entity/project';
 
 @Component({
   selector: 'app-testcase',
@@ -15,6 +17,7 @@ export class TestCaseListComponent implements OnInit {
   runTestCasesList: TestCase[] = [];
 
   projectId: number;
+  currentProject: Project;
   previousKeyword: string = null;
   searchValue = '';
   searchMode = false;
@@ -22,8 +25,21 @@ export class TestCaseListComponent implements OnInit {
   pageSize = 5;
   totalElements = 0;
 
-  constructor(private route: ActivatedRoute, private router: Router, private testCaseService: TestCaseService) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private testCaseService: TestCaseService,
+              private projectService: ProjectService
+  ) {
     this.projectId = +this.route.snapshot.paramMap.get('id');
+    this.currentProject = new Project();
+    this.projectService.getProjectById(this.projectId).subscribe( data => {
+        this.currentProject.id = data.id;
+        this.currentProject.title = data.title;
+        this.currentProject.createDate = data.createDate;
+        this.currentProject.status = data.status;
+        this.currentProject.link = data.link;
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -41,13 +57,6 @@ export class TestCaseListComponent implements OnInit {
   }
 
   private handleSearchTestCases(): void {
-      // const keyword: string = this.searchValue;
-      // if (this.previousKeyword !== keyword) {
-      //   this.pageNum = 1;
-      // }
-      //
-      // this.previousKeyword = keyword;
-
       this.testCaseService.findTestCaseByTitle(
         this.projectId,
         this.pageNum,
@@ -102,5 +111,17 @@ export class TestCaseListComponent implements OnInit {
       else {
         this.runTestCasesList.push(testCase);
       }
+  }
+
+  create(): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', 'create-test-case']);
+  }
+
+  edit(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', 'edit-test-case', id]);
+  }
+
+  view(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', id]);
   }
 }
