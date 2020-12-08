@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+.main_content {
+  margin-left: 250px;
+  margin-right: 30px;
+  padding: 10px;
+  color: black;
+}
+
+.button_user {
+  background-color: #BD7D42;
+  color: #FFFFFF;
+  font-family: Lato, sans-serif;
+  font-style: normal;
+
+  border: 1px solid white;
+  border-radius: 0.5vw;
+  width: 7vw;
+  height: 100%;
+}
+
+.panel-confirm {
+  pointer-events: visibleFill;
+  display: flex;
+  position: absolute;
+  left: 39vw;
+  top: 25vh;
+  width: 25vw;
+  height: 20vh;
+  background: radial-gradient(circle farthest-side at 50% 50%, #996633 50%, transparent);
+}
+
+.password-field {
+  display: flex;
+  position: relative;
+  margin-left: 3vw;
+  margin-top: 4vh;
+  width: 20vw;
+  height: 4vh;
+  font-family: Lato, sans-serif;
+  font-style: normal;
+  font-size: 4vh;
+}
+
+.button-confirm {
+  display: block;
+  position: absolute;
+  font-family: Lato, sans-serif;
+  font-style: normal;
+  border-color: transparent;
+  font-size: 2vh;
+  color: white;
+  width: 10vw;
+  height: 4vh;
+  border-radius: 0.5vw;
+  margin-left: 8vw;
+}
+
+.button-submit {
+  background-color: #CC0000;
+  margin-top: 9vh;
+}
+
+.button-close {
+  background-color: #BD7D42;
+  margin-top: 15vh;
+}
+
+.choose-role {
+  border: rgba(0, 0, 00, 0.0);
+  height: 100%;
+  width: 100%;
+  text-align-last:center;
+}
+
+.choose-role-table {
+  border: rgba(0, 0, 00, 0.0);
+  background: rgba(0, 0, 00, 0.0);
+  text-align-last: center;
+}
+
+.title {
+  display: flex;
+  position: absolute;
+  top: 2vh;
+  left: 40vw;
+  font-size: 2vw;
+}
+
+.warning-result {
+  display:flex;
+  position: relative;
+  align-items:center;
+  font-family: Lato, sans-serif;
+  font-style: normal;
+  color: gray;
+  left: 22vw;
+  top: 20vh;
+}
+
+.pagination {
+  display: table;
+  position: absolute;
+  left: 45vw;
+  top: 85vh;
+  font-size: 1vw;
+}
+
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color: #BD7D42 !important;
+  border: rgba(0, 0, 00, 0.0);
+  box-shadow: 5px 5px 10px #BD7D42;
+}
+
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  border: rgba(0, 0, 00, 0.0);
+  color: #BD7D42 !important;
+  box-shadow: 5px 5px 10px #BD7D42;
+}
+
+
+.table-main {
+  display: table;
+  position: absolute;
+  top: 15vh;
+  left: 30%;
+  width: 10vw;
+  font-size: 1vw;
+}
+
+.table-body {
+  display: table-row-group;
+  position: relative;
+}
+
+.table-row {
+  display: table-row;
+}
+
+.table-elem {
+  display: table-cell;
+  height: 5vh;
+}
+
+.table_elem {
+  border: rgba(0, 0, 00, 0.0);
+  background: rgba(0, 0, 00, 0.0);
+  font-family: Lato, sans-serif;
+  font-style: normal;
+  text-align: center;
+  width: 15vw;
+  height: 100%;
+}

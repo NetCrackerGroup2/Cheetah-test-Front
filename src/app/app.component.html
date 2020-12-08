@@ -1,77 +1,75 @@
 <div>
-  <div *ngIf="user && !isOut">
-    <ng-sidebar-container contentClass="container">
-      <ng-sidebar [opened]=opened autoCollapseWidth="1000">
-        <div class="list-group list-group-flush">
-          <div class="text-center mt-5">
-            <a href=""><img src="assets/sidebar_images/img_example.jpg" alt="Profile Image" class="profile_img"></a>
-          </div>
-          <div class="row mt-3">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/home.svg" alt="Home" class="mr-3">
-              Home</a></div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/profiles.svg" alt="Profiles" class="mr-3">
-              Profiles</a></div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/project.svg" alt="Project" class="mr-3">
-              Project</a></div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/test_case.svg" alt="Test case" class="mr-3">
-              Test case</a></div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/data_set.svg" alt="Data set" class="mr-3">
-              Data set</a></div>
-          <div class="row">
-            <a [routerLink]="['general-test-scenario/1']" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/test_scenario.svg" alt="Test scenario" class="mr-3">
-              Test scenario</a>
-          </div>
-          <div class="row">
-            <a href="" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
-              Test case history
-            </a></div>
-          <div class="row">
-            <a [routerLink]="['general-library']" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/library.png" alt="Notifications" class="mr-3">
-              Library</a>
-          </div>
-          <div class="row">
-            <a [routerLink]="['']" class="item ml-5 mt-4">
-              <img src="assets/sidebar_images/notifications.svg" alt="Notifications" class="mr-3">
-              Notifications</a>
-          </div>
-          <div class="row">
-            <a *ngIf="isAdmin" [routerLink]="['sign-up']" class="item ml-5 mt-4 cursor-pointer">
-              <img src="assets/sidebar_images/back_to.svg" alt="Admin Panel" class="mr-3">
-              Admin Panel</a>
-          </div>
-          <div class="row">
-            <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
-              <img src="assets/sidebar_images/back_to.svg" alt="Logout" class="mr-3">
-              Logout</a>
-          </div>
+  <ng-sidebar-container>
+    <ng-sidebar
+      *ngIf="user && !isOut"
+      [opened]=opened
+      autoCollapseWidth="1000"
+      mode="over">
+      <div class="list-group list-group-flush">
+        <div class="text-center mt-5">
+          <a [routerLink]="['profile']">
+            <img src="../assets/sidebar_images/img_example.jpg" alt="Profile Image" class="profile_img">
+          </a>
         </div>
-      </ng-sidebar>
-    </ng-sidebar-container>
-  </div>
-
-  <div class="container-fluid">
-    <nav class="navbar" *ngIf="!isOut">
-      <div class="row">
-        <div class="col-sm">
-          <a (click)="toggleSidebar()" class="btn ml-5 cursor-pointer button-toggle">
-            Toggle Sidebar</a>
+        <div class="row mt-3">
+          <a class="item ml-5 mt-4">
+            <img src="../assets/sidebar_images/home.svg" alt="Home" class="mr-3">
+            Home</a></div>
+        <div class="row">
+          <a [routerLink]="['profiles']" class="item ml-5 mt-4">
+            <img src="../assets/sidebar_images/profiles.svg" alt="Profiles" class="mr-3">
+            Profiles
+          </a>
+        </div>
+        <div class="row">
+          <a [routerLink]="['projects']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/project.svg" alt="Project" class="mr-3">
+            Project</a></div>
+        <div class="row">
+          <a [routerLink]="['data-set/2']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/data_set.svg" alt="Data set" class="mr-3">
+            Data set</a></div>
+        <div class="row">
+          <a [routerLink]="['general-test-scenario/1']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/test_scenario.svg" alt="Test scenario" class="mr-3">
+            Test scenario</a>
+        </div>
+        <div class="row">
+          <a class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
+            Test case history
+          </a></div>
+        <div class="row">
+          <a [routerLink]="['general-library']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/library.png" alt="Notifications" class="mr-3">
+            Library</a>
+        </div>
+        <div class="row">
+          <a [routerLink]="['']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/notifications.svg" alt="Notifications" class="mr-3">
+            Notifications</a>
+        </div>
+        <div class="row">
+          <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
+            <img src="assets/sidebar_images/back_to.svg" alt="Logout" class="mr-3">
+            Logout</a>
         </div>
       </div>
-    </nav>
-  </div>
-  <div>
-    <router-outlet></router-outlet>
-  </div>
+    </ng-sidebar>
+    <div ng-sidebar-content>
+      <div class="contents">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </ng-sidebar-container>
+</div>
+<div class="container-fluid">
+  <nav class="navbar" *ngIf="!isOut">
+    <div class="row">
+      <div class="col">
+        <a (click)="toggleSidebar()" class="btn ml-5 cursor-pointer button-toggle">
+          Toggle Sidebar</a>
+      </div>
+    </div>
+  </nav>
 </div>

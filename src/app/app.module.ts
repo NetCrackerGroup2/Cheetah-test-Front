@@ -13,11 +13,19 @@ import {ErrorInterceptor} from './helpers/interceptor/error.interceptor';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DataSetComponent} from './components/data-set/data-set.component';
 import { GeneralLibraryComponent } from './components/general-library/general-library.component';
 import { ActionComponent } from './components/action/action.component';
 import { CompoundComponent } from './components/compound/compound.component';
 import { EditActionComponent } from './components/edit-action/edit-action.component';
 import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
+import { ProjectComponent } from './components/project/project.component';
+import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ActionsInCompoundComponent } from './components/actions-in-compound/actions-in-compound.component';
 import { TestScenarioComponent } from './components/test-scenario/test-scenario.component';
 import { GeneralTestScenarioComponent } from './components/general-test-scenario/general-test-scenario.component';
 import { CreateTestScenarioComponent } from './components/create-test-scenario/create-test-scenario.component';
@@ -30,10 +38,18 @@ import { CreateTestScenarioComponent } from './components/create-test-scenario/c
     SignUpComponent,
     SavePasswordComponent,
     DashboardComponent,
+    DataSetComponent,
     GeneralLibraryComponent,
     ActionComponent,
     CompoundComponent,
     EditActionComponent,
+    CreateCompoundComponent,
+    ProfileComponent,
+    ProfilesComponent,
+    EditDataSetComponent,
+    ProjectComponent,
+    CreateProjectComponent,
+    ActionsInCompoundComponent,
     CreateCompoundComponent,
     TestScenarioComponent,
     GeneralTestScenarioComponent,
@@ -46,7 +62,8 @@ import { CreateTestScenarioComponent } from './components/create-test-scenario/c
     HttpClientModule,
     FormsModule,
     NgbModule,
-    SidebarModule
+    SidebarModule,
+    DragDropModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

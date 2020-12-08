@@ -1,0 +1,67 @@
+<div class="main-content">
+  <div class="row mt-5">
+    <h1 class="display-4 black">Projects</h1>
+  </div>
+  <div class="row mt-5">
+    <div class="search-config">
+
+      <input #myInput placeholder="Search for a project ..."
+             class="au-input input-long mt-1" type="text"
+             (keyup.enter)="doSearch(myInput.value)"/>
+
+      <button class="options ml-1 mt-1" (click)="doSearch(myInput.value)">
+        Search
+      </button>
+      <button class="options ml-1 mt-1" [routerLink]="['/create-project']">
+        Create New
+      </button>
+    </div>
+  </div>
+  <div *ngIf="projects?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+    No projects found.
+  </div>
+  <div class="mt-5 row" *ngIf="projects.length !== 0">
+    <div class="custom-table project-width black">
+      <div class="row thead">
+        <div class="col-2">Title</div>
+        <div class="col-2">Link</div>
+        <div class="col-2">Create Date</div>
+        <div class="col-3">Options</div>
+      </div>
+      <div class="mt-5 stripped">
+        <div class="row mt-2" *ngFor="let project of projects">
+          <div class="col-2">{{project.title}}</div>
+          <div class="col-2">{{project.link}}</div>
+          <div class="col-1">{{project.createDate | date: 'dd/MM/yyyy'}}</div>
+          <div class="col-1 pt-2">
+            <button class="options-table">View</button>
+          </div>
+          <div class="col-1 pt-2">
+            <button class="options-table" (click)="edit(project.id)">Edit</button>
+          </div>
+          <div class="col-1 pt-2">
+            <button class="options-table" (click)="archive(project.id)">
+              Archive
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row pagination mt-3">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-9">
+          <ngb-pagination [(page)]="thePageNumber"
+                          [pageSize]="thePageSize"
+                          [collectionSize]="theTotalElements"
+                          [maxSize]="5"
+                          [boundaryLinks]="true"
+                          (pageChange)="listProjects()"
+                          class="ngb-pagination">
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,13 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProjectComponent} from './components/project/project.component';
+import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
+import {DataSetComponent} from './components/data-set/data-set.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
+import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
 import {GeneralTestScenarioComponent} from "./components/general-test-scenario/general-test-scenario.component";
 import {CreateTestScenarioComponent} from "./components/create-test-scenario/create-test-scenario.component";
 
@@ -18,6 +25,16 @@ const routes: Routes = [
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: SavePasswordComponent},
   {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profiles',
+    component: ProfilesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'sign-up',
     component: SignUpComponent,
     canActivate: [AuthGuard]
@@ -26,6 +43,7 @@ const routes: Routes = [
     path: 'library-create-compound',
     component: CreateCompoundComponent,
     canActivate: [AuthGuard]
+
   },
   {
     path: 'general-library',
@@ -43,13 +61,43 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-action/:id/:description',
+    path: 'general-library/edit-action/:id',
     component: EditActionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'general-library/compounds/:id',
+    component: ActionsInCompoundComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects',
+    component: ProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/edit-project/:id',
+    component: CreateProjectComponent,
     canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'data-set/:id',
+    component: DataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-data-set',
+    component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

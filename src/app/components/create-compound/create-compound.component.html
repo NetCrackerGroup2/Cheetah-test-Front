@@ -16,6 +16,7 @@
   </div>
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
+    <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
     <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
@@ -61,11 +62,29 @@
               </a>
             </li>
           </ul>
-          <div *ngIf="addedActions.length > 0">
+          <div cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="addedActions?.length > 0">
             <hr>
-            <em>ORDER IS IMPORTANT</em> (Click on item in list below to remove it)
+            <em>ORDER IS IMPORTANT</em>
             <br>
-            Selected:
+
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-2">Action</div>
+              <div class="col-2">Order</div>
+            </div>
+            <div cdkDrag *ngFor="let action of addedActions" class="row cursor-pointer">
+              <div class="col-1">
+                <img src="assets/sidebar_images/remove.png"
+                     class="x_img cursor-pointer" alt="remove"
+                     (click)="remove(action)">
+              </div>
+              <div class="col-2">
+                {{ action.title }}
+              </div>
+              <div class="col-2">
+                {{ addedActions.indexOf(action) + 1 }}
+              </div>
+            </div>
           </div>
 
           <ul class="added-result">
@@ -77,11 +96,12 @@
       </div>
       <div class="form-group row">
         <div class="col-md-7 text-center mx-auto my-4">
-          <button class="options" [disabled]="!createCompoundForm.valid">Save
+          <button class="options-table" [disabled]="!createCompoundForm.valid">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>
       </div>
     </form>
   </div>
+
 </div>

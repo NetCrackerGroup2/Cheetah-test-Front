@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-lg-3 col-md-6">
+        <div class="display-1 h1-black">
+          <h3 class="h1-style">Parameters of {{dataSetTitle}}</h3>
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-12 col-md-12">
+        <div class="row">
+          <div class="col-sm-12 col-lg-6 col-md-6">
+            <input #myInput class="form-control mr-sm-2 input-long" type="text" placeholder="Search"
+                   (keyup.enter)="doSearch(myInput.value)">
+          </div>
+            <div class="col-sm-6 col-lg-2 col-md-3">
+              <button class="options ml-1 button-list" (click)="doSearch(myInput.value)">
+                Search
+              </button>
+            </div>
+            <div class="col-sm-6 col-lg-2 col-md-3">
+              <button [routerLink]="[backToDataSet()]" class="options ml-1 button-list" color="primary">Go to data sets
+              </button>
+            </div>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table aria-descriptionby="parameters" class="table table-striped table-config" *ngIf="isFound">
+          <caption></caption>
+          <thead class="thead">
+          <tr>
+            <th scope="col">Value</th>
+            <th scope="col">Type</th>
+            <th scope="col">Options</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><input id="parameterValue" name="parameterValue" [(ngModel)]="parameterValue"
+                       class="div-input-invisible" type="text"></td>
+            <td><input id="parameterType" name="parameterType" [(ngModel)]="parameterType" class="div-input-invisible"
+                       type="text"></td>
+            <td>
+              <button class="options" (click)="createParameter()">Create</button>
+            </td>
+          </tr>
+          <tr *ngFor="let parameter of parameters">
+            <td>{{parameter.value}}</td>
+            <td>{{parameter.type}}</td>
+            <td>
+              <button class="options" (click)="deleteParameter(parameter.id)">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="nothing-found">
+          <div *ngIf="!isFound" class="alert alert-warning col-md-1" role="alert">
+            No data sets found.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row pagination">
+      <div class="col-md-6 col-sm-12 col-lg-4 paging-config">
+        <div class="row">
+          <div class="col-md-9 col-sm-12 col-lg-6">
+            <ngb-pagination [(page)]="thePageNumber"
+                            [pageSize]="thePageSize"
+                            [collectionSize]="theTotalElements"
+                            [maxSize]="5"
+                            [boundaryLinks]="true"
+                            (pageChange)="listParameters()"
+                            class="ngb-pagination">
+            </ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
