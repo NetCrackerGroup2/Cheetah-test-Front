@@ -107,12 +107,12 @@
 }
 
 .pagination {
-  display: table;
-  position: absolute;
-  left: 45vw;
-  top: 85vh;
-  font-size: 1vw;
-}
+   display: table;
+   position: absolute;
+   left: 45vw;
+   top: 85vh;
+   font-size: 1vw;
+ }
 
 
 ngb-pagination ::ng-deep ul > li.active > a {

@@ -2,10 +2,11 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
-import {ProfileService} from '../../services/profile/profile.service';
+
 import {User} from '../../models/user/user';
 import {take} from 'rxjs/operators';
 import {SendReportService} from '../../services/send-report/send-report.service';
+import {ProfilesService} from '../../services/profiles/profiles.service';
 
 @Component({
   selector: 'app-send-report',
@@ -27,12 +28,12 @@ export class SendReportComponent implements OnInit {
 
 
   constructor(private router: Router, private route: ActivatedRoute,
-              private formBuilder: FormBuilder, private profileService: ProfileService,
+              private formBuilder: FormBuilder, private profilesService: ProfilesService,
               private sendReportService: SendReportService) {
     this.testCaseId = route.snapshot.params.idTestCase;
     this.projectId = route.snapshot.params.idProject;
 
-    this.searchProfilesSubscription = this.profileService.search(this.searchTerm$)
+    this.searchProfilesSubscription = this.profilesService.search(this.searchTerm$)
       .subscribe(results => {
         this.users = results;
       });

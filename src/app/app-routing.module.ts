@@ -16,6 +16,10 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
+import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
+import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
+import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
@@ -93,6 +97,31 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'history-test-case',
+    component: HistoryTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:id/test-cases',
+    component: TestCaseListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/create-test-case',
+    component: TestCaseConfigurationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/edit-test-case/:id',
+    component: TestCaseConfigurationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/last-report-details',
+    component: LastReportDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'projects/:idProject/test-cases/:idTestCase',
     component: TestCaseInfoComponent,
     canActivate: [AuthGuard]
@@ -114,6 +143,7 @@ const routes: Routes = [
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

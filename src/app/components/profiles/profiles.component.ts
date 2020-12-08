@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-
-import {AuthService} from '../../services/auth/auth.service';
-import {GetUser, ProfileService} from '../../services/profile/profile.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { ProfilesService, GetUser } from '../../services/profiles/profiles.service';
 import {LoginDto} from '../../models/loginDto/loginDto';
 import {User} from 'src/app/models/user/user';
 
@@ -56,8 +55,7 @@ export class ProfilesComponent implements OnInit {
 
   indexUseToDeactivate = 0;
 
-  isAdmin = [];
-  isAdminEdit = true;
+  isAdmin = true;
 
   isDeactivate = false;
 
@@ -70,24 +68,17 @@ export class ProfilesComponent implements OnInit {
         .subscribe(elem => { this.elements = elem; });
   }
 
-  constructor(private profileService: ProfileService,
+  constructor(private profileService: ProfilesService,
               private authService: AuthService) {
     this.elements = {
       users: [],
       totalElements: 8
     };
+
     if (authService.userValue.role === 'ADMIN'){
-      this.isAdminEdit = false;
-      this.isAdmin = new Array<boolean>
-      (this.pageSize).fill(false, 0, this.pageSize);
-      for (let i = 0; i < this.pageSize; i++){
-        if (this.elements.users[i].email === this.authService.userValue.email) {
-          this.isAdmin[i] = true;
-        }
-      }
+      this.isAdmin = false;
     } else {
-      this.isAdmin = new Array<boolean>
-      (this.pageSize).fill(true, 0, this.pageSize);
+      this.isAdmin = true;
     }
     this.profileService.getSearchUser(this.searchUsername,
       this.searchEmail, this.searchRole,
@@ -159,14 +150,18 @@ export class ProfilesComponent implements OnInit {
   }
 
   pressDelete(i: any): void {
-    if (confirm('Do you want to deactivate user?') === true){
-      this.textAgreeConfirmPanel = 'Deactivate';
-      this.isDeactivate = true;
-      this.authService.user.subscribe(elem =>
-        this.user = elem);
-      this.styleDeactivate = 'pointer-events: none; opacity: 0.3;';
-      this.disabledPasswordAdmin = false;
-      this.indexUseToDeactivate = i;
+    if (this.elements.users[i].email === this.authService.userValue.email) {
+      alert('You cannot deactivate yourself!');
+    } else {
+      if (confirm('Do you want to deactivate user?') === true) {
+        this.textAgreeConfirmPanel = 'Deactivate';
+        this.isDeactivate = true;
+        this.authService.user.subscribe(elem =>
+          this.user = elem);
+        this.styleDeactivate = 'pointer-events: none; opacity: 0.3;';
+        this.disabledPasswordAdmin = false;
+        this.indexUseToDeactivate = i;
+      }
     }
   }
 

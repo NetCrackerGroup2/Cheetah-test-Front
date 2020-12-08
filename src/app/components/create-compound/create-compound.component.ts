@@ -40,7 +40,9 @@ export class CreateCompoundComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createCompoundForm = this.formBuilder.group({
       name: new FormControl('',
-        [Validators.required, Validators.maxLength(100)]),
+        [Validators.required,
+          Validators.maxLength(100),
+        Validators.minLength(3)]),
       description: new FormControl('',
         [Validators.required, Validators.maxLength(300)])
     });
