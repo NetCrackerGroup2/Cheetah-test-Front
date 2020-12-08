@@ -26,6 +26,7 @@ import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActionsInCompoundComponent } from './components/actions-in-compound/actions-in-compound.component';
+import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ActionsInCompoundComponent } from './components/actions-in-compound/act
     EditDataSetComponent,
     ProjectComponent,
     CreateProjectComponent,
-    ActionsInCompoundComponent
+    ActionsInCompoundComponent,
+    HistoryTestCaseComponent
   ],
   imports: [
     BrowserModule,

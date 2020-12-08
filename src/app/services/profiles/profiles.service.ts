@@ -8,7 +8,7 @@ import { Observable, Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService {
+export class ProfilesService {
 
   UserOnView: User;
 

@@ -16,6 +16,8 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
+import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -86,6 +88,11 @@ const routes: Routes = [
   {
     path: 'edit-data-set/:idTestCase/:title/:id',
     component: EditDataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'history-test-case',
+    component: HistoryTestCaseComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
