@@ -1,0 +1,77 @@
+.container {
+  margin-left: 20%;
+}
+
+.alert-warning {
+  font-family: 'Lato', sans-serif;
+  font-size: 16px;
+}
+
+table {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color: #414141;
+}
+
+.search, .search:hover {
+  border: none;
+  border-bottom: 2px solid #000;
+  border-radius: 0;
+}
+
+input[type='checkbox'] {
+   width: 20px;
+   height: 20px;
+}
+
+th {
+  color: #878787;
+  border: none;
+  text-align: center;
+}
+
+.options {
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 0;
+}
+
+button:hover {
+  border: none;
+}
+
+.btn-primary:active, .btn-primary:visited {
+  background-color: #8064A2 !important;
+}
+
+.page-link {
+  border: none;
+  color: black;
+  font-family: 'Lato', sans-serif;
+}
+
+.page {
+  background: #EEF2F5;
+  border-radius: 5px;
+}
+
+.project-width {
+  min-width: 800px;
+}
+
+.ngb-pagination ::ng-deep a {
+  color: #bd7d42 !important;
+}
+
+.ngb-pagination ::ng-deep .page-item.active .page-link {
+  border-color: black;
+  background-color: lightgrey;
+}
+
+.ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
+}
+
+.ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.1rem dimgrey;
+}
