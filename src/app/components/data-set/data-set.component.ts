@@ -104,4 +104,8 @@ export class DataSetComponent implements OnInit {
     this.value = value;
     this.listDataSets();
   }
+
+  goBack(): void{
+    this.router.navigate(['projects', this.theTestCaseId, 'test-cases']);
+  }
 }
