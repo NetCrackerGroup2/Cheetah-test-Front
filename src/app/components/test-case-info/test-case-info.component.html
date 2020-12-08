@@ -22,13 +22,13 @@
       <div class="mt-5 stripped ">
         <div *ngFor="let actionResult of actionResults; let i = index">
           <div class="row mt-2">
-            <div class="col-lg-2 col-md-6 col-sm-12">{{actionResult.action.actionType}}</div>
+            <div class="col-lg-2 col-md-6 col-sm-12">{{actionResult.actionType}}</div>
 
             <div id="status" class="col-lg-2 col-md-6 col-sm-12"
-                 [ngStyle]="{'color': isSuccessful(actionResult.status)}">
-              {{actionResult.status}}
+                 [ngStyle]="{'color': isSuccessful(actionResult.result)}">
+              {{actionResult.result}}
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12">{{actionResult.screenshotUrl}}</div>
+            <div class="col-lg-4 col-md-6 col-sm-12">{{actionResult.screenshotURL}}</div>
             <div class="col-lg-2 col-md-6 col-sm-12 pt-12 ">
               <button class="options-table" (click)="getDetails(i)">View Details</button>
             </div>
@@ -36,10 +36,9 @@
           </div>
           <div *ngIf="showDetails(i)">
             <div class="row mt-2">
-              <div class="col-lg-2 col-md-12 col-sm-12">Compound Id: {{actionResult.action.compoundId}}</div>
-              <div class="col-lg-2 col-md-12 col-sm-12">Element: {{actionResult.action.element}}</div>
-              <div class="col-lg-2 col-md-12 col-sm-12">Argument: {{actionResult.action.argument}}</div>
-              <div class="col-lg-4 col-md-12 col-sm-12">Description: {{actionResult.description}}</div>
+              <div class="col-lg-2 col-md-12 col-sm-12">Compound Id: {{actionResult.compoundId}}</div>
+              <div class="col-lg-2 col-md-12 col-sm-12">Element: {{actionResult.element}}</div>
+              <div class="col-lg-2 col-md-12 col-sm-12">Argument: {{actionResult.argument}}</div>
             </div>
           </div>
 
@@ -48,21 +47,6 @@
     </div>
   </div>
 </div>
-<!--<div class="row pagination mt-3">
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-md-9">
-        <ngb-pagination [(page)]="thePageNumber"
-                        [pageSize]="thePageSize"
-                        [collectionSize]="theTotalElements"
-                        [maxSize]="5"
-                        [boundaryLinks]="true"
-                        (pageChange)="listActions()"
-                        class="ngb-pagination">
-        </ngb-pagination>
-      </div>
-    </div>
-  </div>
-</div>-->
+
 
 

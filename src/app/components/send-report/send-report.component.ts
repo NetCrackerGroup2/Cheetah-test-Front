@@ -4,9 +4,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {ProfileService} from '../../services/profile/profile.service';
 import {User} from '../../models/user/user';
-import {ActionCreateDto} from '../../models/action-create-dto/action-create-dto';
-import {CompoundCreateDto} from '../../models/compoundDto/compound-create-dto';
-import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
 import {take} from 'rxjs/operators';
 import {SendReportService} from '../../services/send-report/send-report.service';
 
@@ -17,6 +14,7 @@ import {SendReportService} from '../../services/send-report/send-report.service'
 })
 export class SendReportComponent implements OnInit {
   testCaseId: number;
+  projectId: number;
   successMessage: string;
   errorMessage: string;
   sendReportForm: FormGroup;
@@ -32,6 +30,7 @@ export class SendReportComponent implements OnInit {
               private formBuilder: FormBuilder, private profileService: ProfileService,
               private sendReportService: SendReportService) {
     this.testCaseId = route.snapshot.params.idTestCase;
+    this.projectId = route.snapshot.params.idProject;
 
     this.searchProfilesSubscription = this.profileService.search(this.searchTerm$)
       .subscribe(results => {
@@ -47,7 +46,7 @@ export class SendReportComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/test-scenario', this.testCaseId, 'info']);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId]);
   }
 
   email(): any {
@@ -71,7 +70,7 @@ export class SendReportComponent implements OnInit {
     console.log('sending');
     this.successMessage = '';
     this.loading = true;
-    this.sendReportService.sendReports(this.addedEmails, this.testCaseId)
+    this.sendReportService.sendReports(this.addedEmails, this.testCaseId, this.projectId)
       .pipe(take(1))
       .subscribe(
         data => {

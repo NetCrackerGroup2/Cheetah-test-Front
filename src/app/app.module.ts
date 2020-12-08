@@ -14,21 +14,23 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {SidebarModule} from 'ng-sidebar';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DataSetComponent} from './components/data-set/data-set.component';
-import { GeneralLibraryComponent } from './components/general-library/general-library.component';
-import { ActionComponent } from './components/action/action.component';
-import { CompoundComponent } from './components/compound/compound.component';
-import { EditActionComponent } from './components/edit-action/edit-action.component';
-import { CreateCompoundComponent } from './components/create-compound/create-compound.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ProfilesComponent } from './components/profiles/profiles.component';
-import { EditDataSetComponent } from './components/edit-data-set/edit-data-set.component';
-import { ProjectComponent } from './components/project/project.component';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
-import { TestCaseInfoComponent } from './components/test-case-info/test-case-info.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { SendReportComponent } from './components/send-report/send-report.component';
-import { NgCircleProgressModule } from 'ng-circle-progress';
-import { CircularDiagramComponent } from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {GeneralLibraryComponent} from './components/general-library/general-library.component';
+import {ActionComponent} from './components/action/action.component';
+import {CompoundComponent} from './components/compound/compound.component';
+import {EditActionComponent} from './components/edit-action/edit-action.component';
+import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {ProfilesComponent} from './components/profiles/profiles.component';
+import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
+import {ProjectComponent} from './components/project/project.component';
+import {CreateProjectComponent} from './components/create-project/create-project.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
+import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,7 @@ import { CircularDiagramComponent } from './components/circular-diagram/circular
     TestCaseInfoComponent,
     SendReportComponent,
     CircularDiagramComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

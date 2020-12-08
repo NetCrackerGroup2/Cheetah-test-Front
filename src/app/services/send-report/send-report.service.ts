@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -12,8 +11,8 @@ export class SendReportService {
   constructor(private http: HttpClient) {
   }
 
-  sendReports(emails: string[], idTestCase: number): Observable<any> {
-    const url = `${environment.apiUrl}/api/${idTestCase}/send-report`;
+  sendReports(emails: string[], idTestCase: number, idProject: number): Observable<any> {
+    const url = `${environment.apiUrl}/api/projects/${idProject}/test-cases/${idTestCase}/send-report`;
     return this.http.post<any>(url, emails);
   }
 }
