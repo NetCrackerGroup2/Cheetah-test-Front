@@ -122,7 +122,7 @@ export class TestCaseListComponent implements OnInit {
     this.router.navigate(['projects', this.projectId, 'test-cases', 'edit-test-case', id]);
   }
 
-  view(id: number): void {
+  getReportDetails(id: number): void {
     this.router.navigate(['projects', this.projectId, 'test-cases', id]);
   }
 }

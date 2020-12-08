@@ -18,8 +18,6 @@
         <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
       </div>
     </div>
-
-
   </div>
   <table class="table table-striped table-hover col-lg-12 col-md-12 col-sm-12">
     <thead>
@@ -40,9 +38,8 @@
         </div>
       </td>
       <td class="row">
-        <button type="button" class="options mt-1">View</button>
+        <button type="button" class="options mt-1" (click)="getReportDetails(testCase.id)">Report details</button>
         <button type="button" class="options mt-1" (click)="edit(testCase.id)">Edit</button>
-        <button type="button" class="options mt-1">Report details</button>
         <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"
                 type="button" class="options mt-1">Deactivate</button>
       </td>
