@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CircularDiagramComponent } from './circular-diagram.component';
+import {CircularDiagramComponent} from './circular-diagram.component';
 
 describe('CircularDiagramComponent', () => {
   let component: CircularDiagramComponent;

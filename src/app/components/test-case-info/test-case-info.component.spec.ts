@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TestCaseInfoComponent } from './test-case-info.component';
+import {TestCaseInfoComponent} from './test-case-info.component';
 
 describe('TestCaseInfoComponent', () => {
   let component: TestCaseInfoComponent;

@@ -1,4 +1,4 @@
-import { CompoundDtoWithActions } from './compound-dto-with-actions';
+import {CompoundDtoWithActions} from './compound-dto-with-actions';
 
 describe('CreateCompoundDto', () => {
   it('should create an instance', () => {

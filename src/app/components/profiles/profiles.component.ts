@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { AuthService } from '../../services/auth/auth.service';
-import { ProfileService, GetUser } from '../../services/profile/profile.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {GetUser, ProfileService} from '../../services/profile/profile.service';
 import {LoginDto} from '../../models/loginDto/loginDto';
-import { User } from 'src/app/models/user/user';
+import {User} from 'src/app/models/user/user';
 
 
 @Component({

@@ -25,6 +25,12 @@ import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.com
 import {ProjectComponent} from './components/project/project.component';
 import {CreateProjectComponent} from './components/create-project/create-project.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
