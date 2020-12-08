@@ -51,7 +51,7 @@ import { LastReportDetailsComponent } from './components/test-case/last-report-d
     ProjectComponent,
     CreateProjectComponent,
     ActionsInCompoundComponent,
-    HistoryTestCaseComponent
+    HistoryTestCaseComponent,
     TestCaseListComponent,
     TestCaseConfigurationComponent,
     LastReportDetailsComponent

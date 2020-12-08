@@ -95,6 +95,7 @@ const routes: Routes = [
   {
     path: 'history-test-case',
     component: HistoryTestCaseComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'projects/:id/test-cases',
