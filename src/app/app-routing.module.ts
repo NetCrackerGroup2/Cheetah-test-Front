@@ -18,6 +18,10 @@ import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.com
 import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
 import {GeneralTestScenarioComponent} from "./components/general-test-scenario/general-test-scenario.component";
 import {CreateTestScenarioComponent} from "./components/create-test-scenario/create-test-scenario.component";
+import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
+import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
+import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -98,6 +102,31 @@ const routes: Routes = [
   {
     path: 'edit-data-set',
     component: EditDataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'history-test-case',
+    component: HistoryTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:id/test-cases',
+    component: TestCaseListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/create-test-case',
+    component: TestCaseConfigurationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/edit-test-case/:id',
+    component: TestCaseConfigurationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/last-report-details',
+    component: LastReportDetailsComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

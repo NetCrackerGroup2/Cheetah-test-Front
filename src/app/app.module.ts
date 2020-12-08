@@ -29,6 +29,10 @@ import { ActionsInCompoundComponent } from './components/actions-in-compound/act
 import { TestScenarioComponent } from './components/test-scenario/test-scenario.component';
 import { GeneralTestScenarioComponent } from './components/general-test-scenario/general-test-scenario.component';
 import { CreateTestScenarioComponent } from './components/create-test-scenario/create-test-scenario.component';
+import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
+import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
+import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,11 @@ import { CreateTestScenarioComponent } from './components/create-test-scenario/c
     TestScenarioComponent,
     GeneralTestScenarioComponent,
     CreateTestScenarioComponent,
+    ActionsInCompoundComponent,
+    HistoryTestCaseComponent,
+    TestCaseListComponent,
+    TestCaseConfigurationComponent,
+    LastReportDetailsComponent
   ],
   imports: [
     BrowserModule,
