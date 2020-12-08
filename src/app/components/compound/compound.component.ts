@@ -97,7 +97,13 @@ export class CompoundComponent implements OnInit {
     this.listCompounds();
   }
 
-  view(id: number): void {
-    this.router.navigate([`/general-library/compounds/${id}`]);
+  view(compound: Compound): void {
+    this.router.navigate([`/general-library/compounds/${compound.id}`],
+      {
+        queryParams: {
+          compoundTitle: compound.title,
+          compoundDescription: compound.description
+        }
+      });
   }
 }

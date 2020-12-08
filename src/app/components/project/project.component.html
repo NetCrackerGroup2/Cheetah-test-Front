@@ -17,7 +17,10 @@
       </button>
     </div>
   </div>
-  <div class="mt-5 row">
+  <div *ngIf="projects?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+    No projects found.
+  </div>
+  <div class="mt-5 row" *ngIf="projects.length !== 0">
     <div class="custom-table project-width black">
       <div class="row thead">
         <div class="col-2">Title</div>

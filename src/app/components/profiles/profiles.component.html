@@ -61,11 +61,11 @@
           </label>
 				</div>
 				<div class="table-elem">
-					<input type="button" (click)="editPersonalInformation(i)" [hidden]="isAdmin"
+					<input type="button" (click)="editPersonalInformation(i)" [hidden]="isAdminEdit"
 							[(ngModel)]="textOnButtonUpdate[i]" class="button_user">
 				</div>
 				<div class="table-elem">
-						<input type="button" (click)="pressDelete(i)" [hidden]="isAdmin"
+						<input type="button" (click)="pressDelete(i)" [hidden]="isAdmin[i]"
 								[(ngModel)]="deleteButton" class="button_user">
 				</div>
 			</div>

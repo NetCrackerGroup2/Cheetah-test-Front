@@ -15,6 +15,7 @@ import {ProfileComponent} from './components/profile/profile.component';
 import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
+import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
@@ -57,8 +58,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'general-library/compounds/${id}',
-    component: EditActionComponent,
+    path: 'general-library/compounds/:id',
+    component: ActionsInCompoundComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -87,7 +88,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-data-set/:idTestCase/:title/:id',
+    path: 'edit-data-set',
     component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },

@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Action} from '../../models/action/action';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {ActionDto} from '../../models/actionDto/action-dto';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {CompoundDtoWithActions} from '../../models/compound-actions-dto/compound-dto-with-actions';
+import {Compound} from '../../models/compound/compound';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,10 @@ export class ActionService {
 
   save(id: number, description: string): Observable<any> {
     const url = `${environment.apiUrl}/api/library/actions/${id}`;
-    return this.http.put<GetResponseActions>(url, new ActionDto(description));
+    return this.http.put<GetResponseActions>(url, new ActionDto(description))
+      .pipe(
+        catchError(err => of(err))
+      );
   }
 
   search(terms: Observable<string>): Observable<Action[]> {
@@ -38,13 +42,16 @@ export class ActionService {
   }
 
   searchEntries(term: any): Observable<Action[]> {
-      const url = `${environment.apiUrl}/api/library/actions/all?title=${term}`;
-      return this.http.get<Action[]>(url);
+    const url = `${environment.apiUrl}/api/library/actions/all?title=${term}`;
+    return this.http.get<Action[]>(url);
   }
 
   createCompound(compoundWithActions: CompoundDtoWithActions): Observable<any> {
     const url = `${environment.apiUrl}/api/library`;
-    return this.http.post<CompoundDtoWithActions>(url, compoundWithActions);
+    return this.http.post<CompoundDtoWithActions>(url, compoundWithActions)
+      .pipe(
+        catchError(err => of(err))
+      );
   }
 
   getAction(id: number): Observable<Action> {
@@ -52,6 +59,22 @@ export class ActionService {
     return this.http.get<Action>(url);
   }
 
+  getActionsByCompoundId(compoundId: number): Observable<Action[]> {
+    const url = `${environment.apiUrl}/api/library/${compoundId}/all-actions`;
+    return this.http.get<Action[]>(url);
+  }
+
+  saveOrder(compound: Compound, actions: Action[]): Observable<any> {
+    const url = `${environment.apiUrl}/api/library/${compound.id}`;
+
+    const compoundWithActions: CompoundDtoWithActions =
+      new CompoundDtoWithActions(compound, actions);
+
+    return this.http.put<any>(url, compoundWithActions)
+      .pipe(
+        catchError(err => of(err))
+      );
+  }
 }
 
 interface GetResponseActions {

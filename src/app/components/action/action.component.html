@@ -13,7 +13,10 @@
     </button>
   </div>
 </div>
-<div class="mt-5 row">
+<div *ngIf="actions?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+  No actions found.
+</div>
+<div class="mt-5 row" *ngIf="actions.length !== 0">
   <div class="custom-table black">
     <div class="row thead">
       <div class="col-2">Title</div>

@@ -24,12 +24,7 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 import {ProjectComponent} from './components/project/project.component';
 import {CreateProjectComponent} from './components/create-project/create-project.component';
-import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {SendReportComponent} from './components/send-report/send-report.component';
-import {NgCircleProgressModule} from 'ng-circle-progress';
-import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
-import {NotificationsComponent} from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +45,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
     EditDataSetComponent,
     ProjectComponent,
     CreateProjectComponent,
+    ActionsInCompoundComponent,
     TestCaseInfoComponent,
     SendReportComponent,
     CircularDiagramComponent,
