@@ -14,7 +14,7 @@
         <button type="button" class="options m-1">Filter</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
-        <button type="button" class="options m-1">Last Report Details</button>
+        <button (click)="getLastReportDetails()" type="button" class="options m-1">Last Report Details</button>
         <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
       </div>
     </div>

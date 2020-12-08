@@ -125,4 +125,8 @@ export class TestCaseListComponent implements OnInit {
   getReportDetails(id: number): void {
     this.router.navigate(['projects', this.projectId, 'test-cases', id]);
   }
+
+  getLastReportDetails(): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', 'last-report-details']);
+  }
 }
