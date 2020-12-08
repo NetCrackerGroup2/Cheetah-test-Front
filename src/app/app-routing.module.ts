@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {AuthGuard} from './helpers/authguard.service';
@@ -20,6 +20,10 @@ import {HistoryTestCaseComponent} from './components/history-test-case/history-t
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
 import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -115,6 +119,26 @@ const routes: Routes = [
   {
     path: 'projects/:projectId/test-cases/last-report-details',
     component: LastReportDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase',
+    component: TestCaseInfoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/send-report',
+    component: SendReportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-scenario/:idTestScenario',
+    component: CircularDiagramComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

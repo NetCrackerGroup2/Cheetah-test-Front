@@ -1,4 +1,4 @@
-import { RecoveryEmail } from './recovery-email';
+import {RecoveryEmail} from './recovery-email';
 
 describe('RecoveryEmail', () => {
   it('should create an instance', () => {

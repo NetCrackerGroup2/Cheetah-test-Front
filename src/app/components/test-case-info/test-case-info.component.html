@@ -1,0 +1,52 @@
+<div class="main-content">
+  <div class="row mt-5 mb-5 main-buttons">
+    <h1 class="display-4 black col-lg-4 col-md-12 col-sm-12">Test-Case {{testCaseId}} Info</h1>
+    <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" *ngIf=" true"
+            (click)="sendReport()">
+      Send Report
+    </button>
+    <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" (click)="goBack()">
+      Go Back
+    </button>
+  </div>
+
+  <div class="mt-5 row">
+    <div class="custom-table black">
+      <div class="row thead">
+        <div class="col-lg-2 col-md-6 col-sm-12">Action Type</div>
+        <div class="col-lg-2 col-md-6 col-sm-12">Status</div>
+        <div class="col-lg-4 col-md-6 col-sm-12">Screenshot Url</div>
+        <div class="col-lg-4 col-md-6 col-sm-12">Options</div>
+      </div>
+
+      <div class="mt-5 stripped ">
+        <div *ngFor="let actionResult of actionResults; let i = index">
+          <div class="row mt-2">
+            <div class="col-lg-2 col-md-6 col-sm-12">{{actionResult.actionType}}</div>
+
+            <div id="status" class="col-lg-2 col-md-6 col-sm-12"
+                 [ngStyle]="{'color': isSuccessful(actionResult.result)}">
+              {{actionResult.result}}
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">{{actionResult.screenshotURL}}</div>
+            <div class="col-lg-2 col-md-6 col-sm-12 pt-12 ">
+              <button class="options-table" (click)="getDetails(i)">View Details</button>
+            </div>
+
+          </div>
+          <div *ngIf="showDetails(i)">
+            <div class="row mt-2">
+              <div class="col-lg-2 col-md-12 col-sm-12">Compound Id: {{actionResult.compoundId}}</div>
+              <div class="col-lg-2 col-md-12 col-sm-12">Element: {{actionResult.element}}</div>
+              <div class="col-lg-2 col-md-12 col-sm-12">Argument: {{actionResult.argument}}</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

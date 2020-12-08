@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { ResetPasswordService } from './reset-password.service';
+import {ResetPasswordService} from './reset-password.service';
 
 describe('ResetPasswordService', () => {
   let service: ResetPasswordService;
