@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-4 h1-black ">Test Scenario</h1>
+  </div>
+  <div class="main-buttons">
+
+<!--    <button class = "options" (click)="createTestScenario()">-->
+<!--      Create Test Scenario-->
+<!--    </button>-->
+    <button class = "options" [routerLink]="createTestScenario()">
+      Create Test Scenario
+    </button>
+    <button class="options  ml-1" (click)="createCompound()">
+      Create Compound
+    </button>
+    <button class="options  ml-1" (click)="goToTestCase()">
+      Go to Test Case
+    </button>
+  </div>
+  <div class = "main">
+    <app-test-scenario></app-test-scenario>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.main-buttons{
+  display: flex;
+  padding-left: 40%;
+  flex-direction: row;
+}
+.main {
+  display: flex;
+  flex-direction: row;
+  padding-left: 30%;
+}

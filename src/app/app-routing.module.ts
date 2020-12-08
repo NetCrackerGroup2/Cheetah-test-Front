@@ -9,6 +9,8 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {GeneralLibraryComponent} from './components/general-library/general-library.component';
 import {EditActionComponent} from './components/edit-action/edit-action.component';
 import {CreateCompoundComponent} from './components/create-compound/create-compound.component';
+import {GeneralTestScenarioComponent} from "./components/general-test-scenario/general-test-scenario.component";
+import {CreateTestScenarioComponent} from "./components/create-test-scenario/create-test-scenario.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -28,6 +30,16 @@ const routes: Routes = [
   {
     path: 'general-library',
     component: GeneralLibraryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create-test-scenario/:id',
+    component: CreateTestScenarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'general-test-scenario/:id',
+    component: GeneralTestScenarioComponent,
     canActivate: [AuthGuard]
   },
   {

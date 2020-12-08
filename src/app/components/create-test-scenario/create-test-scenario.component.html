@@ -2,12 +2,10 @@
 
   <div class="row">
     <div class="col">
-      <h2 class="display-5 h1-black">Create Compound</h2>
+      <h2 class="display-5 h1-black">Create Test Scenario</h2>
     </div>
     <div class="col back">
-      <button class="options" [routerLink]="['/general-library']">
-        Back to Library
-      </button>
+
       <button class="options ml-1" [routerLink]="['/general-test-scenario']">
         Back to Test Scenario
       </button>
@@ -16,7 +14,7 @@
   </div>
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
-    <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="createTestScenarioForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
           <h5>Name is required</h5>
@@ -32,6 +30,7 @@
           <input type="text" class="form-control" formControlName="name" id="title">
         </div>
       </div>
+
       <div *ngIf="description.invalid && (description.dirty || description.touched)"
            class="text-danger text-center mb-1">
         <div *ngIf="description.errors.required">
@@ -48,20 +47,39 @@
                     formControlName="description"></textarea>
         </div>
       </div>
+
+
       <div class="form-group row">
         <label class="col-sm-5 col-form-label">Add action: </label>
-        <div id="search-component" class="col-sm-7">
+        <div id="search-component-act" class="col-sm-7">
           <input
-            (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
+            (keyup)="searchTermAct$.next($event.target.value)" #termA class="form-control">
 
           <ul *ngIf="actions" class="search-result">
             <li *ngFor="let action of actions | slice:0:9">
-              <a (click)="addToList(action)" target="_blank">
+              <a (click)="addToListAct(action)" target="_blank">
                 {{ action.title }}
               </a>
             </li>
           </ul>
-          <div *ngIf="addedActions.length > 0">
+        </div>
+
+        <label class="col-sm-5 col-form-label">Add compound: </label>
+        <div id="search-component-comp" class="col-sm-7">
+          <input
+            (keyup)="searchTermComp$.next($event.target.value)" #termC class="form-control">
+
+          <ul *ngIf="compounds" class="search-result">
+            <li *ngFor="let compound of compounds | slice:0:9">
+              <a (click)="addToListComp(compound)" target="_blank">
+                {{ compound.title }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <div *ngIf="addedActionsAndCompounds.length > 0">
             <hr>
             <em>ORDER IS IMPORTANT</em> (Click on item in list below to remove it)
             <br>
@@ -69,19 +87,23 @@
           </div>
 
           <ul class="added-result">
-            <li *ngFor="let action of addedActions">
-              <a (click)="remove(action)">{{ action.title }}</a>
+            <li *ngFor="let actComp of addedActionsAndCompounds">
+              <a (click)="removeActAndComp(actComp)">{{ actComp.getKind() }}{{": " + actComp.getTitle() }}</a>
             </li>
           </ul>
+
         </div>
       </div>
+
+
       <div class="form-group row">
         <div class="col-md-7 text-center mx-auto my-4">
-          <button class="options" [disabled]="!createCompoundForm.valid">Save
+          <button class="options" [disabled]="!createTestScenarioForm.valid">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>
       </div>
+
     </form>
   </div>
 </div>
