@@ -3,7 +3,7 @@ import {Observable, of} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {TestCase} from '../../models/test-case/test-case';
-import {catchError, map} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

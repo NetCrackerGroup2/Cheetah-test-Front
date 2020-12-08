@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {UserService} from '../../../services/user/user.service';
-import {first, take} from 'rxjs/operators';
+import {first} from 'rxjs/operators';
 import {TestCaseService} from '../../../services/test-case/test-case.service';
 import {TestCase} from '../../../models/test-case/test-case';
-import {ProjectService} from '../../../services/project/project.service';
 
 @Component({
   selector: 'app-create-test-case',

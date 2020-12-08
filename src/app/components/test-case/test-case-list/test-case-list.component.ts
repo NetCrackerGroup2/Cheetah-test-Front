@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TestCase} from '../../../models/test-case/test-case';
 import {TestCaseService} from '../../../services/test-case/test-case.service';
 import {take} from 'rxjs/operators';
