@@ -19,6 +19,7 @@ export class EditDataSetComponent implements OnInit {
   isFound = true;
   authenticationServiceSubscription: Subscription;
   parametersSearchSubscription: Subscription;
+  private querySubscription: Subscription;
   parametersSubscription: Subscription;
   value = '';
   searchMode = false;
@@ -40,12 +41,17 @@ export class EditDataSetComponent implements OnInit {
         this.user = x;
       }
     );
+    this.querySubscription = route.queryParams.subscribe(
+      (queryParam: any) => {
+        this.dataSetId = queryParam['idDataSet'];
+        this.theTestCaseId = queryParam['idTestCase'];
+        this.dataSetTitle = queryParam['title'];
+        console.log(this.dataSetTitle);
+      }
+    );
   }
 
   ngOnInit(): void {
-    this.dataSetId = +this.route.snapshot.paramMap.get('id');
-    this.theTestCaseId = +this.route.snapshot.paramMap.get('idTestCase');
-    this.dataSetTitle = this.route.snapshot.paramMap.get('title');
     this.listParameters();
   }
 

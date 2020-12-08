@@ -34,7 +34,7 @@
           <div class="col-2">{{project.link}}</div>
           <div class="col-1">{{project.createDate | date: 'dd/MM/yyyy'}}</div>
           <div class="col-1 pt-2">
-            <button class="options-table">View</button>
+            <button class="options-table" (click)="showTestCases(project.id)">View</button>
           </div>
           <div class="col-1 pt-2">
             <button class="options-table" (click)="edit(project.id)">Edit</button>
