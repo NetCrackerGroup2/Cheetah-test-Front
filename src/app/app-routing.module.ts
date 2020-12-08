@@ -93,7 +93,6 @@ const routes: Routes = [
   {
     path: 'history-test-case',
     component: HistoryTestCaseComponent,
-    canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
