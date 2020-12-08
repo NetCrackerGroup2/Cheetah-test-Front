@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {ProfileService} from '../../services/profile/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +18,8 @@ export class ProfileComponent implements OnInit {
 
   url = 'assets/sidebar_images/img_example.jpg';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private profileService: ProfileService) {
     this.username = authService.userValue.name;
     this.email = authService.userValue.email;
     this.role = authService.userValue.role;
@@ -29,6 +31,7 @@ export class ProfileComponent implements OnInit {
               this.url = elem.target.result;
           };
           reader.readAsDataURL(event.target.files[0]);
+          this.profileService.postUploadFile(event.target.fields);
     }
   }
 
