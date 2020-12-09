@@ -90,7 +90,7 @@ export class DataSetComponent implements OnInit {
     const dataset1: DataSet = new DataSet();
     dataset1.title = this.dataSetTitle;
     dataset1.description = this.dataSetDescription;
-    dataset1.idTestCase = 2;
+    dataset1.idTestCase = this.theTestCaseId;
     this.dataSetService.createDataSet(dataset1).subscribe();
     this.listDataSets();
   }
