@@ -14,7 +14,7 @@ import {Project} from '../../../models/project/entity/project';
 export class TestCaseListComponent implements OnInit {
 
   testCases: TestCase[] = [];
-  runTestCasesList: TestCase[] = [];
+  runTestCaseIdsList: number[] = [];
 
   projectId: number;
   currentProject: Project;
@@ -81,7 +81,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   deactivateTestCase(id: number): void {
-    this.runTestCasesList = this.runTestCasesList.filter(t => t.id !== id);
+    this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
     this.testCaseService.deactivateTestCase(id)
       .pipe(take(1))
       .subscribe(() => this.showTestCaseList());
@@ -93,24 +93,16 @@ export class TestCaseListComponent implements OnInit {
   }
 
   runTestCases(): void {
-    console.log(this.runTestCasesList);
+    console.log(this.runTestCaseIdsList);
   }
 
-  isCheckedTestCase(testCase: TestCase): boolean {
-      for (const tC of this.runTestCasesList) {
-        if (testCase.id === tC.id) {
-          return true;
-        }
-      }
-      return false;
-  }
 
-  handleRunTestCases(testCase: TestCase): void {
-      if (this.isCheckedTestCase(testCase)) {
-        this.runTestCasesList = this.runTestCasesList.filter(t => t.id !== testCase.id);
+  handleRunTestCases(id: number): void {
+      if (this.runTestCaseIdsList.includes(id)) {
+        this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
       }
       else {
-        this.runTestCasesList.push(testCase);
+        this.runTestCaseIdsList.push(id);
       }
   }
 
@@ -126,7 +118,15 @@ export class TestCaseListComponent implements OnInit {
     this.router.navigate(['projects', this.projectId, 'test-cases', id]);
   }
 
-  getLastReportDetails(): void {
-    this.router.navigate(['projects', this.projectId, 'test-cases', 'last-report-details']);
+  getTestCaseHistory(): void {
+    this.router.navigate(['projects', this.projectId, 'history-test-case']);
+  }
+
+  viewDataSet(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'data-set', id]);
+  }
+
+  viewTestScenario(id: number): void {
+    // Go to test scenario page
   }
 }

@@ -29,7 +29,6 @@ import { ActionsInCompoundComponent } from './components/actions-in-compound/act
 import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
-import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
 
 @NgModule({
   declarations: [
@@ -53,8 +52,7 @@ import { LastReportDetailsComponent } from './components/test-case/last-report-d
     ActionsInCompoundComponent,
     HistoryTestCaseComponent,
     TestCaseListComponent,
-    TestCaseConfigurationComponent,
-    LastReportDetailsComponent
+    TestCaseConfigurationComponent
   ],
   imports: [
     BrowserModule,

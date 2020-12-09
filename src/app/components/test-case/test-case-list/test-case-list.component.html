@@ -11,10 +11,10 @@
       </div>
       <div class="col-lg-6 col-md-12">
         <button type="button" class="options m-1" (click)="create()">Create new</button>
-        <button type="button" class="options m-1">Filter</button>
+<!--        <button type="button" class="options m-1">Filter</button>-->
+        <button type="button" class="options m-1" (click)="getTestCaseHistory()">Test case history</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
-        <button (click)="getLastReportDetails()" type="button" class="options m-1">Last Report Details</button>
         <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
       </div>
     </div>
@@ -34,12 +34,13 @@
       <td class="py-4 px-4">{{testCase.status}}</td>
       <td class="text-center">
         <div class="form-check py-2">
-          <input type="checkbox" class="form-check-input" [checked]="isCheckedTestCase(testCase)"
-                 (change)="handleRunTestCases(testCase)">
+          <input type="checkbox" class="form-check-input" [checked]="this.runTestCaseIdsList.includes(testCase.id)"
+                 (change)="handleRunTestCases(testCase.id)">
         </div>
       </td>
       <td class="row">
-        <button [routerLink]="['/data-set', testCase.id]" type="button" class="options mt-1">View</button>
+        <button type="button" class="options mt-1" (click)="viewDataSet(testCase.id)">Data Set</button>
+        <button type="button" class="options mt-1" (click)="viewTestScenario(testCase.id)">Test Scenario</button>
         <button type="button" class="options mt-1" (click)="getReportDetails(testCase.id)">Report details</button>
         <button type="button" class="options mt-1" (click)="edit(testCase.id)">Edit</button>
         <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"
