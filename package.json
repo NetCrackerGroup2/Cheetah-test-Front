@@ -23,6 +23,8 @@
     "@angular/platform-browser": "~10.1.2",
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
+    "@fullcalendar/angular": "^5.4.0",
+    "@fullcalendar/daygrid": "^5.4.0",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "@types/jest": "^26.0.16",
     "@types/mocha": "^8.0.4",

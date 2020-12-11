@@ -1,5 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -35,6 +37,7 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +66,8 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
     SendReportComponent,
     TestCaseInfoComponent,
     CircularDiagramComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +89,9 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
       innerStrokeColor: '#32CD32',
       innerStrokeWidth: 1,
       showInnerStroke: false,
-      startFromZero: false})
+      startFromZero: false
+    }),
+    FullCalendarModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
