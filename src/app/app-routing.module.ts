@@ -24,6 +24,7 @@ import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
+import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -77,8 +78,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/edit-project/:id',
+    path: 'projects/:id/edit-project',
     component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/edit-watchers',
+    component: EditWatchersComponent,
     canActivate: [AuthGuard]
   },
   {
