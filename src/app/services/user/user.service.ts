@@ -4,7 +4,6 @@ import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {UserDto} from '../../models/user/dto/user-dto';
-import {Project} from '../../models/project/entity/project';
 import {Ids} from '../../models/ids/ids';
 
 @Injectable({
