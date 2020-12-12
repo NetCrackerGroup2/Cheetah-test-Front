@@ -33,6 +33,7 @@
     "jwt-decode": "^3.1.2",
     "ng-circle-progress": "^1.6.0",
     "rxjs": "~6.6.0",
+    "rxjs-websockets": "^8.0.1",
     "sidebar": "^1.0.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

@@ -11,13 +11,13 @@ export class NotificationsService {
   constructor(private http: HttpClient) {
   }
 
-  getNotifications(page: number, size: number): Observable<GetResponceNotifications> {
+  getNotifications(page: number, size: number): Observable<GetResponseNotifications> {
     const url = `${environment.apiUrl}/api/notifications?page=${page}&size=${size}`;
-    return this.http.get<GetResponceNotifications>(url);
+    return this.http.get<GetResponseNotifications>(url);
   }
 }
 
-export class GetResponceNotifications {
+export class GetResponseNotifications {
   notifications: Notification[];
   totalElements: number;
 }
