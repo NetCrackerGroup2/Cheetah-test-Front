@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Calendar, CalendarOptions, FullCalendarComponent} from '@fullcalendar/angular';
+import {Calendar, DateSelectArg, CalendarOptions, FullCalendarComponent} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -7,8 +7,8 @@ import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataSetService} from "../../services/data-set/data-set.service";
 import {Subscription} from "rxjs";
-import {DataSet} from "../../models/data-set/data-set";
-import {DateDto} from "../../models/date/date-dto";
+import {DatePostDto} from "../../models/date/date-post-dto";
+import {DateGetDto} from "../../models/date/date-get-dto";
 import {CalendarService} from "../../services/calendar/calendar.service";
 import {User} from "../../models/user/user";
 
@@ -21,9 +21,9 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions = null;
   authenticationServiceSubscription: Subscription;
   datesSubscription: Subscription;
-  dates: DateDto[] = [];
+  dates: DateGetDto[] = [];
   datesService: CalendarService;
-  date: DateDto;
+  dateToPost: DatePostDto;
   user: User;
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listDates();
+   // this.listDates();
     this.calendarOptions = {
       initialView: 'dayGridMonth',
       events: [
@@ -49,26 +49,20 @@ export class CalendarComponent implements OnInit {
         {title: 'test-3', date: '2021-01-14'}],
       eventColor: '#378006',
       editable: true,
+      selectable: true,
+      selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
-      dateClick: this.handleDateClick.bind(this),
-      customButtons: {
-        testCaseButton: {
-          text: 'Add TestCase',
-          click: function () {
-            alert('clicked the custom button!');
-          }
-        }
-      },
+      select: this.handleDateClick.bind(this),
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,testCaseButton'
+        right: 'dayGridMonth,timeGridWeek'
       },
     };
   }
 
-  handleDateClick(arg) {
-    console.log(arg);
+  handleDateClick(selectInfo: DateSelectArg): void {
+    this.router.navigate(['calendar/add-event'], {queryParams: {date: selectInfo.startStr}});
   }
 
   listDates(): void {

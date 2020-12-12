@@ -25,6 +25,7 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -145,6 +146,11 @@ const routes: Routes = [
   {
     path: 'calendar',
     component: CalendarComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar/add-event',
+    component: AddCalendarEventComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
