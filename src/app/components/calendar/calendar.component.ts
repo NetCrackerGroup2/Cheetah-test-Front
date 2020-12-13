@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Calendar, DateSelectArg, CalendarOptions, FullCalendarComponent} from '@fullcalendar/angular';
+import {Calendar, DateSelectArg, CalendarOptions, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -53,24 +53,21 @@ export class CalendarComponent implements OnInit {
       selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       select: this.handleDateClick.bind(this),
-      customButtons: {
-        deleteEvent: {
-          text: 'Delete event',
-          click: function () {
-
-          }
-        }
-      },
+      eventClick: this.handleEventClick.bind(this),
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,deleteEvent'
+        right: 'dayGridMonth,timeGridWeek'
       },
     };
   }
 
   handleDateClick(selectInfo: DateSelectArg): void {
-    this.router.navigate(['calendar/add-event'], {queryParams: {date: selectInfo.startStr}});
+    this.router.navigate(['calendar/add-event'], {queryParams: {dateStart: selectInfo.startStr, dateFinish: selectInfo.endStr, time: selectInfo.start.getTime()}});
+  }
+
+  handleEventClick(clickInfo: EventClickArg): void {
+    this.router.navigate(['calendar/edit-event'], {queryParams: {eventTitle: clickInfo.event.title, eventDate: clickInfo.event.startStr, eventTimeHour: clickInfo.event.start.getHours(), eventTimeMin: clickInfo.event.start.getMinutes()}});
   }
 
   listDates(): void {

@@ -3,11 +3,11 @@ import {User} from "../../models/user/user";
 import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AddCalendarEventService} from "../../services/add-calendar-event/add-calendar-event.service";
 import {first, take} from "rxjs/operators";
 import {FormGroup} from "@angular/forms";
 import {TestCase} from "../../models/test-case/test-case";
 import {DatePostDto} from "../../models/date/date-post-dto";
+import {CalendarEventService} from "../../services/calendar-event/calendar-event.service";
 
 @Component({
   selector: 'app-add-calendar-event',
@@ -17,7 +17,9 @@ import {DatePostDto} from "../../models/date/date-post-dto";
 export class AddCalendarEventComponent implements OnInit {
   user: User;
   dateDto: DatePostDto;
-  date: Date;
+  dateStart: Date;
+  dateFinish: Date;
+  time: string;
   createEventForm: FormGroup;
   loading = false;
   successMessage: string;
@@ -32,7 +34,7 @@ export class AddCalendarEventComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private addEventService: AddCalendarEventService) {
+              private eventService: CalendarEventService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
@@ -40,7 +42,9 @@ export class AddCalendarEventComponent implements OnInit {
     );
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
-        this.date = queryParam['date'];
+        this.dateStart = queryParam['dateStart'];
+        this.dateFinish = queryParam['dateFinish'];
+        this.time = queryParam['time'];
       }
     );
   }

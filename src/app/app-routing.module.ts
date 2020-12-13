@@ -24,9 +24,9 @@ import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
-import { DeleteCalendarEventComponent } from './components/delete-calendar-event/delete-calendar-event.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {AddCalendarEventComponent} from './components/add-calendar-event/add-calendar-event.component';
+import {EditCalendarEventComponent} from "./components/edit-calendar-event/edit-calendar-event.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -155,8 +155,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'calendar/delete-event',
-    component: DeleteCalendarEventComponent,
+    path: 'calendar/edit-event',
+    component: EditCalendarEventComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

@@ -40,7 +40,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-import { DeleteCalendarEventComponent } from './components/delete-calendar-event/delete-calendar-event.component';
+import { EditCalendarEventComponent } from './components/edit-calendar-event/edit-calendar-event.component';
 
 
 @NgModule({
@@ -73,7 +73,7 @@ import { DeleteCalendarEventComponent } from './components/delete-calendar-event
     NotificationsComponent,
     CalendarComponent,
     AddCalendarEventComponent,
-    DeleteCalendarEventComponent,
+    EditCalendarEventComponent,
   ],
   imports: [
     BrowserModule,
