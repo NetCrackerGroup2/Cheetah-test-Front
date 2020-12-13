@@ -1,16 +1,22 @@
-<div class="main-content">
+<div class="main-content ml-5">
   <div class="row main-buttons mt-5 mb-5">
     <h1 class="display-4 black mr-5">Notifications</h1>
   </div>
 
-  <div class="mt-5 row">
+  <div class="mt-5 row" *ngIf="newNotifications$ | async as newNotifications">
+    <h4 class="notification-class-title">New notifications</h4>
     <div class="custom-table black">
-
       <div class="mt-5 stripped">
-        <div class="row mt-3" *ngFor="let notification of notifications">
-          <div class="col-lg-6 col-md-6 col-sm-12">Test case "{{notification.name}}" was completed</div>
-          <div class="col-lg-2 col-md-6 col-sm-12 pt-2">
-            <button class="options-table" (click)="goToRunDetails(notification.testCaseId)">
+        <div class="row mt-3" *ngFor="let newNotification of newNotifications">
+          <div class="font-weight-bold col-lg-6 col-md-6 col-sm-12 pt-2">Test case {{newNotification.testCaseId}} was completed</div>
+          <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
+            {{newNotification.date | date: 'hh:mm  dd-mm-yyyy'}}
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12 pt-2">
+            {{newNotification.description}} Click on the link below to see more information:
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12 pt-2">
+            <button class="options-table" (click)="goToRunDetails(newNotification.testCaseId)">
               View Details
             </button>
           </div>
@@ -19,18 +25,23 @@
     </div>
   </div>
 
-  <div class="row pagination mt-3">
-    <div class=" col-lg-6 col-md-6 col-sm-12">
-      <div class="row">
-        <div >
-          <ngb-pagination [(page)]="thePageNumber"
-                          [pageSize]="thePageSize"
-                          [collectionSize]="totalElements"
-                          [maxSize]="5"
-                          [boundaryLinks]="true"
-                          (pageChange)="getNotifications(this.thePageNumber, this.thePageSize)"
-                          class="ngb-pagination">
-          </ngb-pagination>
+  <div class="mt-5 row" *ngIf="oldNotifications$ | async as oldNotifications">
+    <h4 class="notification-class-title">Old notifications</h4>
+    <div class="custom-table black">
+      <div class="mt-5 stripped">
+        <div class="row mt-3" *ngFor="let oldNotification of oldNotifications">
+          <div class="font-weight-bold col-lg-6 col-md-6 col-sm-12 pt-2">Test case {{oldNotification.testCaseId}} was completed</div>
+          <div class="col-lg-4 col-md-6 col-sm-12 pt-2">
+            {{oldNotification.date | date: 'hh:mm  dd-mm-yyyy'}}
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12 pt-2">
+            {{oldNotification.description}} Click on the link below to see more information:
+          </div>
+          <div class="col-lg-10 col-md-12 col-sm-12 pt-2">
+            <button class="options-table" (click)="goToRunDetails(oldNotification.testCaseId)">
+              View Details
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -3,7 +3,11 @@ import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {WebsocketService} from './services/websocket/websocket.service';
+import {WS} from './services/websocket/websocket.events';
+import {Notification, ReadStatus} from './models/websocket/notification';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +18,30 @@ export class AppComponent implements OnDestroy{
   user: User;
   opened = true;
   authenticationServiceSubscription: Subscription;
+  private notifications$: Observable<Notification[]>;
+  private newNotificationsCount$: Observable<number>;
 
   constructor(private authenticationService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private websocketService: WebsocketService
+  ) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
       }
     );
+    this.websocketService.status.subscribe(
+      {next: () => {
+          this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
+          this.newNotificationsCount$ = this.notifications$.pipe(
+            map(
+              (notifications) => notifications.filter((notification) => notification.readStatus === ReadStatus.UNREAD).length
+            )
+          );
+          this.websocketService.send('get-notifications');
+        }
+      }
+     );
   }
 
   get isOut(): boolean {
@@ -47,4 +67,5 @@ export class AppComponent implements OnDestroy{
       this.authenticationServiceSubscription.unsubscribe();
     }
   }
+
 }

@@ -45,6 +45,11 @@
             Notifications</a>
         </div>
         <div class="row">
+          <div class="new-notifications-count mt-2 ml-5 p-1" *ngIf="newNotificationsCount$ | async as newNotificationsCount">
+              + {{newNotificationsCount}} new notifications
+          </div>
+        </div>
+        <div class="row">
           <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
             <img src="assets/sidebar_images/back_to.svg" alt="Logout" class="mr-3">
             Logout</a>
@@ -52,7 +57,7 @@
       </div>
     </ng-sidebar>
     <div ng-sidebar-content>
-      <div class="contents">
+      <div class="contents ml-5">
         <router-outlet></router-outlet>
       </div>
     </div>

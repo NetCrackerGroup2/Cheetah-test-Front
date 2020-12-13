@@ -13,7 +13,15 @@
   font-size: 16px;
   color: #FFFFFF;
   transition: linear 0.5s;
+}
 
+.new-notifications-count {
+  background-color: #f54949;
+  font-family: Lato, serif;
+  font-style: normal;
+  font-size: 16px;
+  color: #FFFFFF;
+  border-radius: 10px;
 }
 
 .row:hover {

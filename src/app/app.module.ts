@@ -35,6 +35,8 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
+import {WebsocketModule} from './services/websocket/websocket.module';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
     FormsModule,
     NgbModule,
     SidebarModule,
+    WebsocketModule,
     DragDropModule,
     NgCircleProgressModule.forRoot({
       backgroundColor: '#F1F1F1',

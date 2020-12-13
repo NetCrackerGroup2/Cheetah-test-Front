@@ -1,12 +1,12 @@
 export enum NotificationStatus {
-  COMPLETE,
-  FAILED,
-  IN_PROCESS
+  COMPLETE = 'COMPLETE',
+  FAILED = 'FAILED',
+  IN_PROCESS = 'IN_PROCESS'
 }
 
 export enum ReadStatus {
-  READ,
-  UNREAD
+  READ = 'READ',
+  UNREAD = 'UNREAD'
 }
 
 export interface Notification {
