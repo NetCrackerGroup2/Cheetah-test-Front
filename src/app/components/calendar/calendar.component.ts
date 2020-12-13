@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.listDates();
+    // this.listDates();
     this.calendarOptions = {
       initialView: 'dayGridMonth',
       events: [
@@ -48,7 +48,7 @@ export class CalendarComponent implements OnInit {
         {title: 'test-2', date: '2020-12-23'},
         {title: 'test-3', date: '2021-01-14'}],
       eventColor: '#378006',
-      editable: true,
+      // editable: true,
       selectable: true,
       selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],

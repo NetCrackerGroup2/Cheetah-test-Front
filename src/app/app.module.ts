@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { CronEditorModule } from 'ngx-cron-editor';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -39,6 +38,8 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -95,7 +96,8 @@ import { AddCalendarEventComponent } from './components/add-calendar-event/add-c
       startFromZero: false
     }),
     FullCalendarModule,
-    CronEditorModule
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
