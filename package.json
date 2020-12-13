@@ -36,6 +36,7 @@
     "rxjs-websockets": "^8.0.1",
     "sidebar": "^1.0.2",
     "tslib": "^2.0.0",
+    "ws": "^7.4.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

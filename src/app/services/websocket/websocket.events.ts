@@ -1,11 +1,11 @@
 export const WS = {
   ON: {
-    NOTIFICATIONS_AMOUNT: 'notifications-amount',
-    TEST_CASE_EXECUTION_STARTED: 'test-case-execution-started',
-    TEST_CASE_EXECUTION_FINISHED: 'test-case-execution-finished',
+    NOTIFICATIONS: 'notifications',
+    TEST_CASE_ACTIONS: 'test-case-execution-actions',
   },
   SEND: {
     DELETE_NOTIFICATION: 'delete-notification',
     NOTIFICATIONS_VIEWED: 'notifications-viewed',
+    GET_NOTIFICATIONS: 'get-notifications',
   }
 };
