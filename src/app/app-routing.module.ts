@@ -26,6 +26,7 @@ import {CircularDiagramComponent} from './components/circular-diagram/circular-d
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
+import { DeleteCalendarEventComponent } from './components/delete-calendar-event/delete-calendar-event.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -151,6 +152,11 @@ const routes: Routes = [
   {
     path: 'calendar/add-event',
     component: AddCalendarEventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar/delete-event',
+    component: DeleteCalendarEventComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}

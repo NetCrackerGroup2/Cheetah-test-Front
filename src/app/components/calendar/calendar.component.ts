@@ -53,10 +53,18 @@ export class CalendarComponent implements OnInit {
       selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       select: this.handleDateClick.bind(this),
+      customButtons: {
+        deleteEvent: {
+          text: 'Delete event',
+          click: function () {
+
+          }
+        }
+      },
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek'
+        right: 'dayGridMonth,timeGridWeek,deleteEvent'
       },
     };
   }
