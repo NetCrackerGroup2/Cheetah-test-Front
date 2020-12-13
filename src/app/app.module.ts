@@ -36,6 +36,7 @@ import {CircularDiagramComponent} from './components/circular-diagram/circular-d
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
+import { TestCaseDetailsComponent } from './components/test-case-details/test-case-details.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.
     TestCaseInfoComponent,
     CircularDiagramComponent,
     NotificationsComponent,
-    EditWatchersComponent
+    EditWatchersComponent,
+    TestCaseDetailsComponent,
   ],
   imports: [
     BrowserModule,

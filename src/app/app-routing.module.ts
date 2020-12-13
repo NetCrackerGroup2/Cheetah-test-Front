@@ -25,6 +25,7 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
+import { TestCaseDetailsComponent } from './components/test-case-details/test-case-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -135,6 +136,11 @@ const routes: Routes = [
   {
     path: 'projects/:idProject/test-cases/:idTestCase/send-report',
     component: SendReportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/details',
+    component: TestCaseDetailsComponent,
     canActivate: [AuthGuard]
   },
   {
