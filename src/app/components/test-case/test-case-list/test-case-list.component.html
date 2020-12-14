@@ -24,14 +24,14 @@
     <thead>
     <tr>
       <th scope="col">Description</th>
-      <th scope="col">Status</th>
+      <th scope="col">Result</th>
       <th scope="col">Add to Test</th>
       <th scope="col">Options</th>
     </tr>
     </thead>
     <tr *ngFor="let testCase of testCases">
       <td class="py-4 px-4">{{testCase.title}}</td>
-      <td class="py-4 px-4">{{testCase.status}}</td>
+      <td class="py-4 px-4">{{testCase.result}}</td>
       <td class="text-center">
         <div class="form-check py-2">
           <input type="checkbox" class="form-check-input" [checked]="this.runTestCaseIdsList.includes(testCase.id)"

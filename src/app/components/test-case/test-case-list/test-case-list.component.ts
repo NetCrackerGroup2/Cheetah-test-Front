@@ -93,7 +93,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   runTestCases(): void {
-    console.log(this.runTestCaseIdsList);
+    this.testCaseService.runTestCases(this.runTestCaseIdsList);
   }
 
 

@@ -53,6 +53,10 @@ export class TestCaseService {
     const url = `${environment.apiUrl}/api/test-cases/${id}`;
     return this.http.delete<any>(url, {});
   }
+
+  runTestCases(runTestCaseIdsList: number[]): void {
+
+  }
 }
 
 interface GetResponseTestCases {
