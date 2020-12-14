@@ -5,9 +5,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {DataSetService} from "../../services/data-set/data-set.service";
 import {Subscription} from "rxjs";
-import {DatePostDto} from "../../models/date/date-post-dto";
 import {DateGetDto} from "../../models/date/date-get-dto";
 import {CalendarService} from "../../services/calendar/calendar.service";
 import {User} from "../../models/user/user";
@@ -22,8 +20,7 @@ export class CalendarComponent implements OnInit {
   authenticationServiceSubscription: Subscription;
   datesSubscription: Subscription;
   dates: DateGetDto[] = [];
-  datesService: CalendarService;
-  dateToPost: DatePostDto;
+  events: Event[] = [];
   user: User;
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
@@ -31,7 +28,7 @@ export class CalendarComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private dataSetService: DataSetService) {
+              private datesService: CalendarService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
@@ -40,15 +37,12 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.listDates();
+    this.handleDates();
+    console.log(this.dates);
     this.calendarOptions = {
       initialView: 'dayGridMonth',
-      events: [
-        {title: 'test-1', date: '2020-12-10'},
-        {title: 'test-2', date: '2020-12-23'},
-        {title: 'test-3', date: '2021-01-14'}],
+      events: [{title: "test-1", date:"2020-12-12"}],
       eventColor: '#378006',
-      // editable: true,
       selectable: true,
       selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
@@ -63,15 +57,11 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateClick(selectInfo: DateSelectArg): void {
-    this.router.navigate(['calendar/add-event'], {queryParams: {dateStart: selectInfo.startStr, dateFinish: selectInfo.endStr, time: selectInfo.start.getTime()}});
+    this.router.navigate(['calendar/add-event'], {queryParams: {dateStart: selectInfo.startStr, time: selectInfo.start}});
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    this.router.navigate(['calendar/edit-event'], {queryParams: {eventTitle: clickInfo.event.title, eventDate: clickInfo.event.startStr, eventTimeHour: clickInfo.event.start.getHours(), eventTimeMin: clickInfo.event.start.getMinutes()}});
-  }
-
-  listDates(): void {
-    this.handleDates();
+    this.router.navigate(['calendar/edit-event'], {queryParams: {dateStart: clickInfo.event.startStr, time: clickInfo.event.start}});
   }
 
   private handleDates(): void {
@@ -80,6 +70,8 @@ export class CalendarComponent implements OnInit {
       .subscribe(data => {
         this.dates = data.dates;
       });
+    console.log(this.dates);
   }
+
 }
 

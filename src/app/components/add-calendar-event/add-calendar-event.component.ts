@@ -8,6 +8,9 @@ import {FormGroup} from "@angular/forms";
 import {TestCase} from "../../models/test-case/test-case";
 import {DatePostDto} from "../../models/date/date-post-dto";
 import {CalendarEventService} from "../../services/calendar-event/calendar-event.service";
+import * as parser from 'cron-parser';
+import {CalendarService} from "../../services/calendar/calendar.service";
+import {TestCaseService} from "../../services/test-case/test-case.service";
 
 @Component({
   selector: 'app-add-calendar-event',
@@ -34,7 +37,8 @@ export class AddCalendarEventComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private eventService: CalendarEventService) {
+              private datesService: CalendarService,
+              private testCaseService: TestCaseService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
@@ -43,7 +47,6 @@ export class AddCalendarEventComponent implements OnInit {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.dateStart = queryParam['dateStart'];
-        this.dateFinish = queryParam['dateFinish'];
         this.time = queryParam['time'];
       }
     );
@@ -54,7 +57,7 @@ export class AddCalendarEventComponent implements OnInit {
   }
 
   private handleTestCases(): void {
-    // this.addEventService
+    // this.testCaseService
     //   .getTestCases(this.user.email)
     //   .pipe(take(1))
     //   .subscribe(data => {
@@ -64,36 +67,15 @@ export class AddCalendarEventComponent implements OnInit {
 
   addToDto(testCase: TestCase): void{
     this.dateDto.testCaseId = testCase.id;
+    // this.dateDto.executionCronDate = parser.parseExpression("* * * * * * * ", this.dateStart).next().toString();
   }
 
   createEvent(): void {
 
   }
 
-  onSubmit(): void {
-    this.errorMessage = '';
-    this.successMessage = '';
-    this.loading = true;
 
-    // this.createEventSubscription = this.addEventService.save(testCase, this.isEdit, this.id)
-    //   .pipe(first())
-    //   .subscribe(
-    //     data => {
-    //       if (data === 'Test Case Already Exists') {
-    //         this.errorMessage = 'Test Case Already Exists';
-    //       } else if (data === 'Project Not Found') {
-    //         this.errorMessage = 'Project Not Found';
-    //       } else if (data) {
-    //         this.successMessage = 'Test Case has been successfully saved';
-    //         this.createEventForm.reset();
-    //       } else {
-    //         this.errorMessage = 'Server error';
-    //       }
-    //
-    //       this.loading = false;
-    //     });
-  }
-  get title(): any {
-    return this.createEventForm.get('title');
+  onSubmit(): void {
+
   }
 }
