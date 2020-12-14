@@ -11,13 +11,18 @@
       </div>
       <div class="col-lg-6 col-md-12">
         <button type="button" class="options m-1" (click)="create()">Create new</button>
-<!--        <button type="button" class="options m-1">Filter</button>-->
         <button type="button" class="options m-1" (click)="getTestCaseHistory()">Test case history</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
         <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
       </div>
     </div>
+  </div>
+  <div *ngIf="isRun" class="alert alert-success">
+    Test cases are being executed successfully!
+  </div>
+  <div *ngIf="noSelectedRunTestCases" class="alert alert-warning">
+    There no selected test cases to run
   </div>
   <table class="table table-striped table-hover col-lg-12 col-md-12 col-sm-12">
     <caption></caption>

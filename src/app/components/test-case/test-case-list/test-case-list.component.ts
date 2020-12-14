@@ -6,6 +6,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../../services/project/project.service';
 import {Project} from '../../../models/project/entity/project';
 
+import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-testcase',
   templateUrl: './test-case-list.component.html',
@@ -24,6 +27,8 @@ export class TestCaseListComponent implements OnInit {
   pageNum = 1;
   pageSize = 5;
   totalElements = 0;
+  isRun = false;
+  noSelectedRunTestCases = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -93,7 +98,19 @@ export class TestCaseListComponent implements OnInit {
   }
 
   runTestCases(): void {
-    this.testCaseService.runTestCases(this.runTestCaseIdsList);
+    this.noSelectedRunTestCases = !!!this.runTestCaseIdsList.length;
+    if (this.noSelectedRunTestCases) {
+      window.setTimeout(() =>
+        $('.alert-warning').fadeTo(500, 0).slideUp(500, () =>
+          this.noSelectedRunTestCases = false), 4000);
+    }
+    else {
+      this.isRun = true;
+      window.setTimeout(() =>
+        $('.alert-success').fadeTo(500, 0).slideUp(500, () => this.isRun = false), 4000);
+      console.log(this.runTestCaseIdsList);
+      this.testCaseService.runTestCases(this.runTestCaseIdsList).subscribe();
+    }
   }
 
 
