@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DataSetComponent } from './data-set.component';
+import {DataSetComponent} from './data-set.component';
 
 describe('DataSetComponent', () => {
   let component: DataSetComponent;
