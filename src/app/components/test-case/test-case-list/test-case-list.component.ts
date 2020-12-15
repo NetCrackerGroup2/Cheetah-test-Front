@@ -6,6 +6,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ProjectService} from '../../../services/project/project.service';
 import {Project} from '../../../models/project/entity/project';
 
+import * as $ from 'jquery';
+
+
 @Component({
   selector: 'app-testcase',
   templateUrl: './test-case-list.component.html',
@@ -14,7 +17,7 @@ import {Project} from '../../../models/project/entity/project';
 export class TestCaseListComponent implements OnInit {
 
   testCases: TestCase[] = [];
-  runTestCasesList: TestCase[] = [];
+  runTestCaseIdsList: number[] = [];
 
   projectId: number;
   currentProject: Project;
@@ -24,6 +27,8 @@ export class TestCaseListComponent implements OnInit {
   pageNum = 1;
   pageSize = 5;
   totalElements = 0;
+  isRun = false;
+  noSelectedRunTestCases = false;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -81,7 +86,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   deactivateTestCase(id: number): void {
-    this.runTestCasesList = this.runTestCasesList.filter(t => t.id !== id);
+    this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
     this.testCaseService.deactivateTestCase(id)
       .pipe(take(1))
       .subscribe(() => this.showTestCaseList());
@@ -93,24 +98,28 @@ export class TestCaseListComponent implements OnInit {
   }
 
   runTestCases(): void {
-    console.log(this.runTestCasesList);
+    this.noSelectedRunTestCases = !!!this.runTestCaseIdsList.length;
+    if (this.noSelectedRunTestCases) {
+      window.setTimeout(() =>
+        $('.alert-warning').fadeTo(500, 0).slideUp(500, () =>
+          this.noSelectedRunTestCases = false), 4000);
+    }
+    else {
+      this.isRun = true;
+      window.setTimeout(() =>
+        $('.alert-success').fadeTo(500, 0).slideUp(500, () => this.isRun = false), 4000);
+      console.log(this.runTestCaseIdsList);
+      this.testCaseService.runTestCases(this.runTestCaseIdsList).subscribe();
+    }
   }
 
-  isCheckedTestCase(testCase: TestCase): boolean {
-      for (const tC of this.runTestCasesList) {
-        if (testCase.id === tC.id) {
-          return true;
-        }
-      }
-      return false;
-  }
 
-  handleRunTestCases(testCase: TestCase): void {
-      if (this.isCheckedTestCase(testCase)) {
-        this.runTestCasesList = this.runTestCasesList.filter(t => t.id !== testCase.id);
+  handleRunTestCases(id: number): void {
+      if (this.runTestCaseIdsList.includes(id)) {
+        this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
       }
       else {
-        this.runTestCasesList.push(testCase);
+        this.runTestCaseIdsList.push(id);
       }
   }
 
@@ -126,7 +135,15 @@ export class TestCaseListComponent implements OnInit {
     this.router.navigate(['projects', this.projectId, 'test-cases', id]);
   }
 
-  getLastReportDetails(): void {
-    this.router.navigate(['projects', this.projectId, 'test-cases', 'last-report-details']);
+  getTestCaseHistory(): void {
+    this.router.navigate(['projects', this.projectId, 'history-test-case']);
+  }
+
+  viewDataSet(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'data-set']);
+  }
+
+  viewTestScenario(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'test-scenario']);
   }
 }
