@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {TestCase} from '../../models/test-case/test-case';
 import {catchError} from 'rxjs/operators';
+import {TestCaseDto} from '../../models/test-case/test-case-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,16 @@ export class TestCaseService {
   deactivateTestCase(id: number): Observable<any> {
     const url = `${environment.apiUrl}/api/test-cases/${id}`;
     return this.http.delete<any>(url, {});
+  }
+
+  runTestCases(runTestCaseIdsList: number[]): Observable<any> {
+    const url = `${environment.apiUrl}/api/run-test-cases`;
+    const testCaseDto: TestCaseDto = new TestCaseDto(runTestCaseIdsList);
+    return this.http.post<any>(url, testCaseDto).pipe(
+      catchError(error => {
+        return of(error);
+      })
+    );
   }
 }
 

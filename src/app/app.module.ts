@@ -36,6 +36,7 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
+import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
 import {MatOptionModule} from "@angular/material/core";
@@ -74,6 +75,8 @@ import { EditCalendarEventComponent } from './components/edit-calendar-event/edi
     CalendarComponent,
     AddCalendarEventComponent,
     EditCalendarEventComponent,
+    NotificationsComponent,
+    EditWatchersComponent
   ],
   imports: [
     BrowserModule,

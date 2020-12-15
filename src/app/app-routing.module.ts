@@ -19,7 +19,6 @@ import {ActionsInCompoundComponent} from './components/actions-in-compound/actio
 import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
-import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
@@ -27,6 +26,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {AddCalendarEventComponent} from './components/add-calendar-event/add-calendar-event.component';
 import {EditCalendarEventComponent} from "./components/edit-calendar-event/edit-calendar-event.component";
+import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -80,8 +80,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/edit-project/:id',
+    path: 'projects/:id/edit-project',
     component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/edit-watchers',
+    component: EditWatchersComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -90,17 +95,17 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'data-set/:id',
+    path: 'projects/:projectId/test-cases/:id/data-set',
     component: DataSetComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-data-set',
+    path: 'projects/:projectId/test-cases/:id/data-set/edit-data-set',
     component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'history-test-case',
+    path: 'projects/:id/history-test-case',
     component: HistoryTestCaseComponent,
     canActivate: [AuthGuard]
   },
@@ -117,11 +122,6 @@ const routes: Routes = [
   {
     path: 'projects/:projectId/test-cases/edit-test-case/:id',
     component: TestCaseConfigurationComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'projects/:projectId/test-cases/last-report-details',
-    component: LastReportDetailsComponent,
     canActivate: [AuthGuard]
   },
   {

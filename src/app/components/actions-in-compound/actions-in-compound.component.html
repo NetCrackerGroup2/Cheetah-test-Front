@@ -16,18 +16,18 @@
   <div class="mt-5 row" *ngIf="actions.length !== 0">
     <div class="custom-table black">
       <div class="row thead">
+        <div class="col-2">Order</div>
         <div class="col-2">Title</div>
         <div class="col-4">Description</div>
         <div class="col-2">Type</div>
-        <div class="col-2">Order</div>
       </div>
       <div class="mt-5 stripped">
         <div cdkDropList (cdkDropListDropped)="drop($event)">
           <div class="row mt-2" cdkDrag *ngFor="let action of actions">
+            <div class="col-2">{{actions.indexOf(action) + 1}}</div>
             <div class="col-2">{{action.title}}</div>
             <div class="col-4">{{action.description}}</div>
             <div class="col-2">{{action.type}}</div>
-            <div class="col-2">{{actions.indexOf(action) + 1}}</div>
             <div class="col-1">
               <img src="assets/sidebar_images/remove.png"
                    class="x_img cursor-pointer" alt="remove"
