@@ -29,13 +29,13 @@ import { ActionsInCompoundComponent } from './components/actions-in-compound/act
 import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
-import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {SendReportComponent} from './components/send-report/send-report.component';
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +60,6 @@ import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.
     HistoryTestCaseComponent,
     TestCaseListComponent,
     TestCaseConfigurationComponent,
-    LastReportDetailsComponent,
     SendReportComponent,
     TestCaseInfoComponent,
     CircularDiagramComponent,

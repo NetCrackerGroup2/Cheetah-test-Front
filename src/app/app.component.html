@@ -12,7 +12,7 @@
           </a>
         </div>
         <div class="row mt-3">
-          <a class="item ml-5 mt-4">
+          <a [routerLink]="['dashboard']" class="item ml-5 mt-4">
             <img src="../assets/sidebar_images/home.svg" alt="Home" class="mr-3">
             Home</a></div>
         <div class="row">
@@ -25,15 +25,6 @@
           <a [routerLink]="['projects']" class="item ml-5 mt-4">
             <img src="assets/sidebar_images/project.svg" alt="Project" class="mr-3">
             Project</a></div>
-        <div class="row">
-          <a [routerLink]="['data-set/2']" class="item ml-5 mt-4">
-            <img src="assets/sidebar_images/data_set.svg" alt="Data set" class="mr-3">
-            Data set</a></div>
-        <div class="row">
-          <a [routerLink]="['history-test-case']"  class="item ml-5 mt-4">
-            <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
-            Test case history
-          </a></div>
         <div class="row">
           <a [routerLink]="['general-library']" class="item ml-5 mt-4">
             <img src="assets/sidebar_images/library.png" alt="Notifications" class="mr-3">
