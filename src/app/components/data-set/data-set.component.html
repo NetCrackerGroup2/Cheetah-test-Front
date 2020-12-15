@@ -47,8 +47,7 @@
             <td>{{dataset.description}}</td>
             <td>
               <button class="options ml-1" (click)="deleteDataSet(dataset.id)">Delete</button>
-              <button class="options ml-1" [routerLink]="['/edit-data-set']"
-                      [queryParams]="{idTestCase: theTestCaseId, idDataSet: dataset.id, title: dataset.title}">Edit
+              <button class="options ml-1" (click)="goEdit(dataset)">Edit
               </button>
             </td>
           </tr>

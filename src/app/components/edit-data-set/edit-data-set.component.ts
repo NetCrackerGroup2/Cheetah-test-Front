@@ -31,6 +31,7 @@ export class EditDataSetComponent implements OnInit {
   theTotalElements: number;
   parameters: Parameter[] = [];
   parameter: Parameter = null;
+  theProjectId: number;
 
   constructor(private authenticationService: AuthService,
               private router: Router,
@@ -44,14 +45,14 @@ export class EditDataSetComponent implements OnInit {
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.dataSetId = queryParam['idDataSet'];
-        this.theTestCaseId = queryParam['idTestCase'];
         this.dataSetTitle = queryParam['title'];
-        console.log(this.dataSetTitle);
       }
     );
   }
 
   ngOnInit(): void {
+    this.theProjectId = +this.route.snapshot.paramMap.get('projectId');
+    this.theTestCaseId = +this.route.snapshot.paramMap.get('id');
     this.listParameters();
   }
 
@@ -109,7 +110,7 @@ export class EditDataSetComponent implements OnInit {
   }
 
   backToDataSet(): string{
-    return `/data-set/${this.theTestCaseId}`;
+    return `projects/${this.theProjectId}/test-cases/${this.theTestCaseId}/data-set`;
   }
 
   deleteParameter(id: number): void{

@@ -83,12 +83,12 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'data-set/:id',
+    path: 'projects/:projectId/test-cases/:id/data-set',
     component: DataSetComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-data-set',
+    path: 'projects/:projectId/test-cases/:id/data-set/edit-data-set',
     component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
