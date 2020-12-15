@@ -140,7 +140,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   viewDataSet(id: number): void {
-    this.router.navigate(['projects', this.projectId, 'data-set', id]);
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'data-set']);
   }
 
   viewTestScenario(id: number): void {
