@@ -1,4 +1,4 @@
-import { ActionDto } from './action-dto';
+import {ActionDto} from './action-dto';
 
 describe('ActionDto', () => {
   it('should create an instance', () => {

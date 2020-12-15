@@ -29,6 +29,13 @@ import { ActionsInCompoundComponent } from './components/actions-in-compound/act
 import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
+import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +59,13 @@ import {TestCaseConfigurationComponent} from './components/test-case/test-case-c
     ActionsInCompoundComponent,
     HistoryTestCaseComponent,
     TestCaseListComponent,
-    TestCaseConfigurationComponent
+    TestCaseConfigurationComponent,
+    LastReportDetailsComponent,
+    SendReportComponent,
+    TestCaseInfoComponent,
+    CircularDiagramComponent,
+    NotificationsComponent,
+    EditWatchersComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +75,19 @@ import {TestCaseConfigurationComponent} from './components/test-case/test-case-c
     FormsModule,
     NgbModule,
     SidebarModule,
-    DragDropModule
+    DragDropModule,
+    NgCircleProgressModule.forRoot({
+      backgroundColor: '#F1F1F1',
+      backgroundPadding: -18,
+      radius: 60,
+      toFixed: 0,
+      maxPercent: 100,
+      outerStrokeWidth: 10,
+      outerStrokeColor: '#FF6347',
+      innerStrokeColor: '#32CD32',
+      innerStrokeWidth: 1,
+      showInnerStroke: false,
+      startFromZero: false})
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

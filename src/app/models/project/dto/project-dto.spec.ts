@@ -1,4 +1,4 @@
-import { ProjectDto } from './project-dto';
+import {ProjectDto} from './project-dto';
 
 describe('ProjectDto', () => {
   it('should create an instance', () => {
