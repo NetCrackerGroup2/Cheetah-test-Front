@@ -108,7 +108,7 @@ export class DataSetComponent implements OnInit {
   }
 
   goEdit(dataset: DataSet):void{
-    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', 'edit-data-set'], { queryParams: { idDataSet: dataset.id, title: dataset.id } });
+    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', 'edit-data-set'], { queryParams: { idDataSet: dataset.id, title: dataset.title } });
   }
 
   goBack(): void{

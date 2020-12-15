@@ -110,7 +110,7 @@ export class EditDataSetComponent implements OnInit {
   }
 
   backToDataSet(): string{
-    return `projects/${this.theProjectId}/test-cases/${this.theTestCaseId}/data-set`;
+    return `/projects/${this.theProjectId}/test-cases/${this.theTestCaseId}/data-set`;
   }
 
   deleteParameter(id: number): void{
