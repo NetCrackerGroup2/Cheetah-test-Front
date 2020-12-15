@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
+  /*apiUrl: 'https://cheetah-test-backend-dev.herokuapp.com',*/
   invalidEmail: 'invalid.email',
   userFetched: 'user.fetched',
   resetTokenNull: 'reset.token.null',
@@ -14,7 +15,7 @@ export const environment = {
   resetPasswordSuccess: 'message.resetPasswordSuc',
   success: 'success',
   userExists: 'User Already Exists',
-  ws: 'ws://localhost:6759'
+  ws: 'ws://localhost:8080/notifications'
 };
 
 /*

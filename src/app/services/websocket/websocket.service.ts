@@ -1,6 +1,6 @@
-import {Inject, Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {IWebsocketService, IWsMessage} from './websocket.interfaces';
-import {config, WebSocketSubject, WebSocketSubjectConfig} from 'rxjs/internal-compatibility';
+import {WebSocketSubject, WebSocketSubjectConfig} from 'rxjs/internal-compatibility';
 import {distinctUntilChanged, filter, map, share, takeWhile} from 'rxjs/operators';
 import {interval, Observable, Observer, Subject, SubscriptionLike} from 'rxjs';
 import {environment} from '../../../environments/environment';
@@ -59,7 +59,7 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
       .subscribe((isConnected) => {
         this.isConnected = isConnected;
 
-        if (!this.reconnection$ && typeof(isConnected) === 'boolean' && !isConnected) {
+        if (!this.reconnection$ && typeof (isConnected) === 'boolean' && !isConnected) {
           this.reconnect();
         }
       });
@@ -115,10 +115,11 @@ export class WebsocketService implements IWebsocketService, OnDestroy {
 
 
   public send(event: string, data: any = {}): void {
-    console.log(this.isConnected);
 
+    console.log(this.isConnected);
+    console.log(event, this.isConnected);
     if (event && this.isConnected) {
-      this.websocket$.next({ event, data });
+      this.websocket$.next({event, data});
     } else {
       console.error('Send error!');
     }
