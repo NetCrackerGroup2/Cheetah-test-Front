@@ -7,3 +7,9 @@
   flex-direction: row;
   padding-left: 20%;
 }
+.description_label{
+  font-weight: 500;
+}
+.image_container{
+  background-size: cover;
+}
