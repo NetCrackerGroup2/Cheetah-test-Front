@@ -30,56 +30,10 @@ export class TestCaseInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getActions();
     this.connectToWs();
   }
 
   getActions(): void {
-    /* this.actionResults = [
-       {
-         action: {compoundId: 123, actionType: 'read', element: 'test1', argument: 'arg1'},
-         status: ActionStatus.SUCCESSFUL,
-         description: 'lol',
-         screenshotUrl: 'idk.com'
-       },
-       {
-         action: {compoundId: 344, actionType: 'readaasd', element: 'tes1dgt1', argument: 'arg1'},
-         status: ActionStatus.SUCCESSFUL,
-         description: 'lolfbb',
-         screenshotUrl: 'idk.cbafom'
-       }, {
-         action: {compoundId: 455, actionType: 'reasdgad', element: 'teasfgst1', argument: 'arg1'},
-         status: ActionStatus.FAILED,
-         description: 'lolbab',
-         screenshotUrl: 'idkafb.com'
-       }, {
-         action: {compoundId: 1234, actionType: 'readgd', element: 'tesat1', argument: 'arg1'},
-         status: ActionStatus.SUCCESSFUL,
-         description: 'lobbl',
-         screenshotUrl: 'idkafb.com'
-       }, {
-         action: {compoundId: 566, actionType: 'reaghhad', element: 'tehst1', argument: 'arg1'},
-         status: ActionStatus.FAILED,
-         description: 'lodasfl',
-         screenshotUrl: 'idafk.com'
-       }, {
-         action: {compoundId: 146, actionType: 'rerqad', element: 'testhh1', argument: 'arg1'},
-         status: ActionStatus.SUCCESSFUL,
-         description: 'lofal',
-         screenshotUrl: 'iabfdk.com'
-       }, {
-         action: {compoundId: 146, actionType: 'rehad', element: 'teafst1', argument: 'arg1'},
-         status: ActionStatus.SUCCESSFUL,
-         description: 'lvvvol',
-         screenshotUrl: 'idk.com'
-       }, {
-         action: {compoundId: 2355, actionType: 'reafgd', element: 'thsfest1', argument: 'arg1'},
-         status: ActionStatus.FAILED,
-         description: 'lovvl',
-         screenshotUrl: 'idabfk.com'
-       },
-
-     ];*/
     this.tciService.getActions(this.testCaseId).subscribe(data => {
       this.actionResults = data;
     });
@@ -97,14 +51,6 @@ export class TestCaseInfoComponent implements OnInit {
 
   showDetails(index: number): boolean {
     return this.detailsSwitch === index;
-  }
-
-  getDetails(index: number): void {
-    if (this.detailsSwitch === index) {
-      this.detailsSwitch = -1;
-    } else {
-      this.detailsSwitch = index;
-    }
   }
 
   goBack(): void {
@@ -146,11 +92,6 @@ export class TestCaseInfoComponent implements OnInit {
 export class ProgressMessage {
   event: string;
   data: TestCaseProgressReport;
-
-  constructor(message: any) {
-    this.event = message.event;
-    this.data = new TestCaseProgressReport(message.data);
-  }
 }
 
 export class TestCaseProgressReport {
@@ -158,12 +99,5 @@ export class TestCaseProgressReport {
   completed: ActionResult[];
   idTestCase: number;
 
-  constructor(data: any) {
-    this.totalActionResults = data.totalActionResults;
-    for (const actionResult of data.completed) {
-      this.completed.push(new ActionResult(actionResult));
-    }
-    this.idTestCase = data.idTestCase;
-  }
 }
 
