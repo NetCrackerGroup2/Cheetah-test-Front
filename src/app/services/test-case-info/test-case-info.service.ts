@@ -14,6 +14,7 @@ export class TestCaseInfoService {
 
   getActions(idTestCase: number): Observable<ActionResult[]> {
     const url = `${environment.apiUrl}/api/run-test-case/action?id=${idTestCase}`;
+    console.log('sending in :' + url);
     return this.http.get<ActionResult[]>(url);
   }
 }

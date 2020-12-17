@@ -122,7 +122,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:idProject/test-cases/:idTestCase',
+    path: 'projects/:idProject/test-cases/:idTestCase/:idHTC',
     component: TestCaseInfoComponent,
     canActivate: [AuthGuard]
   },
