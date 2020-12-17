@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
+    "@stomp/stompjs": "^6.0.0",
     "@types/jest": "^26.0.16",
     "@types/mocha": "^8.0.4",
     "angular": "^1.8.2",
