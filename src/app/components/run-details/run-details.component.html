@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="row mt-5 mb-5 main-buttons">
-    <h1 class="display-4 black col-lg-7 col-md-12 col-sm-12">Test Case {{testCaseId}} Run Details</h1>
+    <h1 class="display-4 black col-lg-7 col-md-12 col-sm-12 text-wrap">Test Case {{testCaseId}} Run Details</h1>
     <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" (click)="goBack()">
       Go Back
     </button>
@@ -11,7 +11,7 @@
       <div class="row thead">
         <div class="col-lg-2 col-md-6 col-sm-12">Action Type</div>
         <div class="col-lg-2 col-md-6 col-sm-12">Status</div>
-        <div class="col-lg-6 col-md-6 col-sm-12">Description</div>
+        <div class="col-lg-4 col-md-6 col-sm-12">Description</div>
         <div class="col-lg-2 col-md-6 col-sm-12">Options</div>
       </div>
 
@@ -24,7 +24,7 @@
                  [ngStyle]="{'color': isSuccessful(actionResult.status)}">
               {{actionResult.status}}
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">{{actionResult.resultDescription}}</div>
+            <div class="col-lg-4 col-md-6 col-sm-12">{{actionResult.resultDescription}}</div>
             <div class="col-lg-2 col-md-6 col-sm-12 pt-12 ">
               <button class="options-table" (click)="getDetails(i)">View Details</button>
             </div>
@@ -32,11 +32,20 @@
           </div>
           <div *ngIf="showDetails(i)">
             <div class="row mt-2">
-              <div class="col-lg-6 col-md-12 col-sm-12">Element: {{actionResult.action.element}}</div>
-              <div class="col-lg-6 col-md-12 col-sm-12">Argument: {{actionResult.action.argument}}</div>
+              <div class="col-lg-5 col-md-12 col-sm-12">
+                <div class="description_label">Element:</div>
+                <div> {{actionResult.action.element}}</div>
+              </div>
+              <div class="col-lg-5 col-md-12 col-sm-12 ml-1">
+                <div class="description_label">Argument:</div>
+                <div> {{actionResult.action.argument}}</div>
+              </div>
             </div>
-            <div class="row mt-1">
-              <img class="img-fluid" src="{{actionResult.screenshotUrl}}"  alt="screenshot image">
+            <div class="row mt-2">
+              <div class="col-lg-10 col-md-12 col-sm-12">
+                <div class="description_label">Screenshot:</div>
+                <img alt="screenshot" class="img-fluid" src="{{actionResult.screenshotUrl}}">
+              </div>
             </div>
           </div>
 
