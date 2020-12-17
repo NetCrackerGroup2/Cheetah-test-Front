@@ -16,6 +16,7 @@ import {ProfilesService} from '../../services/profiles/profiles.service';
 export class SendReportComponent implements OnInit {
   testCaseId: number;
   projectId: number;
+  idHTC: number;
   successMessage: string;
   errorMessage: string;
   sendReportForm: FormGroup;
@@ -32,6 +33,7 @@ export class SendReportComponent implements OnInit {
               private sendReportService: SendReportService) {
     this.testCaseId = route.snapshot.params.idTestCase;
     this.projectId = route.snapshot.params.idProject;
+    this.idHTC = route.snapshot.params.idHTC;
 
     this.searchProfilesSubscription = this.profilesService.search(this.searchTerm$)
       .subscribe(results => {
@@ -42,12 +44,12 @@ export class SendReportComponent implements OnInit {
   ngOnInit(): void {
     this.sendReportForm = this.formBuilder.group({
       email: new FormControl('',
-        [Validators.email, Validators.maxLength(100)])
+        [Validators.maxLength(100)])
     });
   }
 
   goBack(): void {
-    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId]);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, this.idHTC]);
   }
 
   email(): any {
@@ -68,7 +70,6 @@ export class SendReportComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('sending');
     this.successMessage = '';
     this.loading = true;
     this.sendReportService.sendReports(this.addedEmails, this.testCaseId, this.projectId)

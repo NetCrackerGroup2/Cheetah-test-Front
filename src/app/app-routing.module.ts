@@ -127,7 +127,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:idProject/test-cases/:idTestCase/send-report',
+    path: 'projects/:idProject/test-cases/:idTestCase/:idHTC/send-report',
     component: SendReportComponent,
     canActivate: [AuthGuard]
   },
