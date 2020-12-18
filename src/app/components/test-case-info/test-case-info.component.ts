@@ -56,11 +56,11 @@ export class TestCaseInfoComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/projects', this.projectId, 'test-cases']);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, 'history']);
   }
 
   sendReport(): void {
 
-    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, this.idHTC, 'send-report']);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, 'history', this.idHTC, 'send-report']);
   }
 }

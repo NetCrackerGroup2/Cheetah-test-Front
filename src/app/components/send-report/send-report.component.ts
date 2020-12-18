@@ -49,7 +49,7 @@ export class SendReportComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, this.idHTC]);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, 'history', this.idHTC]);
   }
 
   email(): any {
