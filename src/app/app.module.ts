@@ -36,7 +36,6 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
