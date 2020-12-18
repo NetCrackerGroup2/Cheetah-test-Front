@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { RunDetailsComponent } from './run-details.component';
+import {RunDetailsComponent} from './run-details.component';
 
 describe('RunDetailsComponent', () => {
   let component: RunDetailsComponent;

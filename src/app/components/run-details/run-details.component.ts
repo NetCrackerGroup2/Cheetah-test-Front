@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActionResult, ActionResultStatus} from '../../models/action-result/ActionResult';
 import {User} from '../../models/user/user';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -18,6 +18,7 @@ export class RunDetailsComponent implements OnInit {
   isCompleted: boolean;
   connection: WebSocket;
   user: User;
+
   constructor(private route: ActivatedRoute, private router: Router,
               private authenticationService: AuthService) {
     this.testCaseId = route.snapshot.params.idTestCase;
@@ -28,6 +29,7 @@ export class RunDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.connectToWs();
   }
+
   isSuccessful(actionStatus: ActionResultStatus): string {
     if (actionStatus === ActionResultStatus.SUCCESS) {
       return 'green';
@@ -51,8 +53,9 @@ export class RunDetailsComponent implements OnInit {
   goBack(): void {
     this.router.navigate(['/projects', this.projectId, 'test-cases']);
   }
-  connectToWs(): void {
 
+  connectToWs(): void {
+    // todo replace that code with websocket service from notifications
     const ws = Stomp.over(() => {
       return new WebSocket('ws://localhost:8080/notifications');
     });
