@@ -9,15 +9,18 @@
           <input #searchInput class="form-control search" (keyup.enter)="search(searchInput.value)" placeholder="Search" aria-label="Search">
         </div>
       </div>
-      <div class="col-lg-8 col-md-12">
-
-        <button type="button" class="options m-1" (click)="filter()">Filter</button>
+      <div class="col-lg-8 col-md-12 p-0">
+        <select class="p-1 filter options">
+          <option selected="selected">
+            Filter by
+          </option>
+          <option>CREATED test cases</option>
+          <option>FAILED test cases </option>
+        </select>
         <button type="button" class="options m-1" (click)="create()">Create new test case</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
-
       </div>
-    </div>
   </div>
   <div *ngIf="isRun" class="alert alert-success">
     Test cases are being executed successfully!
