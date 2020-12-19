@@ -30,6 +30,7 @@ export class DataSetComponent implements OnInit {
   previousKeyword: string = null;
   dataSetTitle: string;
   dataSetDescription: string;
+  theProjectId: number;
 
   constructor(private authenticationService: AuthService,
               private router: Router,
@@ -44,6 +45,7 @@ export class DataSetComponent implements OnInit {
 
   ngOnInit(): void {
     this.theTestCaseId = +this.route.snapshot.paramMap.get('id');
+    this.theProjectId = +this.route.snapshot.paramMap.get('projectId');
     this.listDataSets();
   }
 
@@ -90,7 +92,7 @@ export class DataSetComponent implements OnInit {
     const dataset1: DataSet = new DataSet();
     dataset1.title = this.dataSetTitle;
     dataset1.description = this.dataSetDescription;
-    dataset1.idTestCase = 2;
+    dataset1.idTestCase = this.theTestCaseId;
     this.dataSetService.createDataSet(dataset1).subscribe();
     this.listDataSets();
   }
@@ -103,5 +105,13 @@ export class DataSetComponent implements OnInit {
   doSearch(value: string): void {
     this.value = value;
     this.listDataSets();
+  }
+
+  goEdit(dataset: DataSet):void{
+    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', 'edit-data-set'], { queryParams: { idDataSet: dataset.id, title: dataset.title } });
+  }
+
+  goBack(): void{
+    this.router.navigate(['projects', this.theTestCaseId, 'test-cases']);
   }
 }
