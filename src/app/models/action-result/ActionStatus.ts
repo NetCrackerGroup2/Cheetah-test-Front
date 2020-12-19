@@ -1,5 +1,4 @@
-export enum ActionStatus{
-  COMPLETE = 'COMPLETE',
-  FAILED = 'FAILED',
-  CREATED = 'CREATED'
+export enum ActionStatus {
+  SUCCESS = 'SUCCESS',
+  FAIL = 'FAIL'
 }
