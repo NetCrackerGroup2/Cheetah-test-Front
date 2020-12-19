@@ -22,10 +22,10 @@
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
       </div>
   </div>
-  <div *ngIf="isRun" class="alert alert-success">
+  <div *ngIf="isRun" class="alert alert-success mt-3">
     Test cases are being executed successfully!
   </div>
-  <div *ngIf="noSelectedRunTestCases" class="alert alert-warning">
+  <div *ngIf="noSelectedRunTestCases" class="alert alert-warning mt-3">
     There no selected test cases to run
   </div>
   <table class="table table-striped table-hover col-lg-12 col-md-12 col-sm-12">
