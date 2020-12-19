@@ -4,17 +4,18 @@
       <div class="col-lg-auto mt-3">
         <h3 class="d-inline-block p-0" style="color: black">{{currentProject.title}}</h3>
       </div>
-      <div class="col-lg-3 col-md-10">
+      <div class="col-lg-6 col-md-10">
         <div class="md-form active-black mb-3 mt-3 p-1">
           <input #searchInput class="form-control search" (keyup.enter)="search(searchInput.value)" placeholder="Search" aria-label="Search">
         </div>
       </div>
-      <div class="col-lg-6 col-md-12">
+      <div class="col-lg-8 col-md-12">
 
+        <button type="button" class="options m-1" (click)="filter()">Filter</button>
         <button type="button" class="options m-1" (click)="create()">Create new test case</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
-       
+
       </div>
     </div>
   </div>

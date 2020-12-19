@@ -146,4 +146,8 @@ export class TestCaseListComponent implements OnInit {
   viewTestScenario(id: number): void {
     this.router.navigate(['projects', this.projectId, 'test-cases', id, 'test-scenario']);
   }
+
+  filter() {
+
+  }
 }
