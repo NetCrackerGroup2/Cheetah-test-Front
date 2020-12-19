@@ -75,7 +75,6 @@ export class TestCaseConfigurationComponent implements OnInit, OnDestroy {
             this.errorMessage = 'Project Not Found';
           } else if (data) {
             this.successMessage = 'Test Case has been successfully saved';
-            this.createTestCaseForm.reset();
           } else {
             this.errorMessage = 'Server error';
           }
