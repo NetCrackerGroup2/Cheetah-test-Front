@@ -4,13 +4,12 @@ import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {first, take} from "rxjs/operators";
-import {FormGroup} from "@angular/forms";
-import {TestCase} from "../../models/test-case/test-case";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DatePostDto} from "../../models/date/date-post-dto";
-import {CalendarEventService} from "../../services/calendar-event/calendar-event.service";
 import * as parser from 'cron-parser';
+declare var $: any;
 import {CalendarService} from "../../services/calendar/calendar.service";
-import {TestCaseService} from "../../services/test-case/test-case.service";
+import {TestCaseDate} from "../../models/date/test-case-date";
 
 @Component({
   selector: 'app-add-calendar-event',
@@ -19,17 +18,14 @@ import {TestCaseService} from "../../services/test-case/test-case.service";
 })
 export class AddCalendarEventComponent implements OnInit {
   user: User;
-  dateDto: DatePostDto;
-  dateStart: Date;
-  dateFinish: Date;
-  time: string;
+  dateDto: DatePostDto = new DatePostDto();
+  dateStart: string;
   createEventForm: FormGroup;
   loading = false;
-  successMessage: string;
-  errorMessage: string;
   createEventSubscription: Subscription;
-  testCases: TestCase[];
+  testCases: TestCaseDate[] = [];
   authenticationServiceSubscription: Subscription;
+  searchTestCaseSubscription: Subscription;
   private querySubscription: Subscription;
   searchTerm$ = new Subject<string>();
   @ViewChild('term') term;
@@ -37,41 +33,52 @@ export class AddCalendarEventComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private datesService: CalendarService,
-              private testCaseService: TestCaseService) {
+              private formBuilder: FormBuilder,
+              private datesService: CalendarService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
-      }
-    );
+      });
+    this.searchTestCaseSubscription = this.datesService.search(this.searchTerm$)
+      .subscribe(results => {
+        this.testCases = results;
+      });
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
         this.dateStart = queryParam['dateStart'];
-        this.time = queryParam['time'];
+        if(this.dateStart.length == 10){
+          this.dateStart = this.dateStart + "T00:00:00+00:00";
+        }
       }
     );
   }
 
   ngOnInit(): void {
-    this.handleTestCases();
+    this.createEventForm = this.formBuilder.group({
+      name: new FormControl('',
+        [Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(3)]),
+      description: new FormControl('',
+        [Validators.required, Validators.maxLength(300)])
+    });
   }
 
-  private handleTestCases(): void {
-    // this.testCaseService
-    //   .getTestCases(this.user.email)
-    //   .pipe(take(1))
-    //   .subscribe(data => {
-    //     this.testCases = data;
-    //   });
-  }
-
-  addToDto(testCase: TestCase): void{
+  addToDto(testCase: TestCaseDate): void{
     this.dateDto.testCaseId = testCase.id;
-    // this.dateDto.executionCronDate = parser.parseExpression("* * * * * * * ", this.dateStart).next().toString();
+    if(testCase.repeatable == null) {
+      this.dateDto.repeatable = false;
+    } else {
+      this.dateDto.repeatable = true;
+    }
+    this.dateDto.executionCronDate = this.dateStart;
+    $('#testCase_input').val(testCase.title);
   }
 
   createEvent(): void {
-
+    this.datesService
+      .createDates(this.dateDto)
+      .subscribe();
   }
 
 

@@ -5,7 +5,7 @@ import {FormGroup} from "@angular/forms";
 import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {CalendarEventService} from "../../services/calendar-event/calendar-event.service";
+import {CalendarService} from "../../services/calendar/calendar.service";
 
 @Component({
   selector: 'app-edit-calendar-event',
@@ -28,7 +28,7 @@ export class EditCalendarEventComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private eventService: CalendarEventService) {
+              private eventService: CalendarService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;

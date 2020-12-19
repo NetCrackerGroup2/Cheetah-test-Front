@@ -1,14 +1,22 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Calendar, DateSelectArg, CalendarOptions, EventClickArg, EventApi, FullCalendarComponent} from '@fullcalendar/angular';
+import {
+  Calendar,
+  DateSelectArg,
+  CalendarOptions,
+  EventClickArg,
+  FullCalendarComponent,
+  EventApi,
+} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import {AuthService} from "../../services/auth/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {DateGetDto} from "../../models/date/date-get-dto";
-import {CalendarService} from "../../services/calendar/calendar.service";
-import {User} from "../../models/user/user";
+import {AuthService} from '../../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
+import {CalendarService} from '../../services/calendar/calendar.service';
+import {User} from '../../models/user/user';
+import {TestCaseDate} from '../../models/date/test-case-date';
+declare var $: any;
 
 @Component({
   selector: 'app-calendar',
@@ -19,8 +27,8 @@ export class CalendarComponent implements OnInit {
   calendarOptions: CalendarOptions = null;
   authenticationServiceSubscription: Subscription;
   datesSubscription: Subscription;
-  dates: DateGetDto[] = [];
-  events: Event[] = [];
+  dates: TestCaseDate[] = [];
+  eventsList: Array<{title: string, startStr: string}> = [];
   user: User;
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
@@ -38,16 +46,15 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.handleDates();
-    console.log(this.dates);
     this.calendarOptions = {
       initialView: 'dayGridMonth',
-      events: [{title: "test-1", date:"2020-12-12"}],
       eventColor: '#378006',
       selectable: true,
       selectMirror: true,
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       select: this.handleDateClick.bind(this),
       eventClick: this.handleEventClick.bind(this),
+      events: [],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -57,21 +64,23 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateClick(selectInfo: DateSelectArg): void {
-    this.router.navigate(['calendar/add-event'], {queryParams: {dateStart: selectInfo.startStr, time: selectInfo.start}});
+    this.router.navigate(['calendar/add-event'], {queryParams: {dateStart: selectInfo.startStr}});
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    this.router.navigate(['calendar/edit-event'], {queryParams: {dateStart: clickInfo.event.startStr, time: clickInfo.event.start}});
+    this.router.navigate(['calendar/edit-event'], {queryParams: {dateStart: clickInfo.event.startStr}});
   }
 
   private handleDates(): void {
     this.datesSubscription = this.datesService
       .getDates()
       .subscribe(data => {
-        this.dates = data.dates;
+        data.forEach((date: TestCaseDate) => {
+          this.dates.push(date);
+          this.eventsList.push({title: date.title, startStr: date.executionCronDate});
+        });
+        $('#datesCalendar').fullCalendar('renderEvents', this.eventsList, true);    // Придумай что-то
       });
-    console.log(this.dates);
   }
-
 }
 
