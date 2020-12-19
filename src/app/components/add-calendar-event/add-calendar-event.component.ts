@@ -3,10 +3,8 @@ import {User} from "../../models/user/user";
 import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {first, take} from "rxjs/operators";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DatePostDto} from "../../models/date/date-post-dto";
-import * as parser from 'cron-parser';
 declare var $: any;
 import {CalendarService} from "../../services/calendar/calendar.service";
 import {TestCaseDate} from "../../models/date/test-case-date";
@@ -79,6 +77,7 @@ export class AddCalendarEventComponent implements OnInit {
     this.datesService
       .createDates(this.dateDto)
       .subscribe();
+    this.router.navigate(['/calendar']);
   }
 
 
