@@ -1,10 +1,20 @@
-import {ActionStatus} from './ActionStatus';
+export class ActionResult {
+  action: SeleniumAction;
+  status: ActionResultStatus;
+  resultDescription: string;
+  screenshotUrl: string;
 
-export class ActionResult{
+}
+
+export class SeleniumAction {
+  actionId: number;
   compoundId: number;
-  result: ActionStatus;
-  screenshotURL: string;
   actionType: string;
   element: string;
   argument: string;
+}
+
+export enum ActionResultStatus {
+  SUCCESS = 'SUCCESS',
+  FAIL = 'FAIL'
 }

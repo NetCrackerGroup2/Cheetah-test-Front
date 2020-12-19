@@ -1,10 +1,6 @@
 <div class="main-content">
   <div class="row mt-5 mb-5 main-buttons">
-    <h1 class="display-4 black col-lg-4 col-md-12 col-sm-12 text-center">History Test Case {{htcTitle}} Info</h1>
-    <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" *ngIf=" true"
-            (click)="sendReport()">
-      Send Report
-    </button>
+    <h1 class="display-4 black col-lg-7 col-md-12 col-sm-12 text-wrap">Test Case {{testCaseId}} Run Details</h1>
     <button class="options ml-lg-3 mt-4 col-lg-1 col-md-12 col-sm-12" (click)="goBack()">
       Go Back
     </button>
@@ -16,15 +12,16 @@
         <div class="col-lg-2 col-md-6 col-sm-12">Action Type</div>
         <div class="col-lg-2 col-md-6 col-sm-12">Status</div>
         <div class="col-lg-4 col-md-6 col-sm-12">Description</div>
-        <div class="col-lg-4 col-md-6 col-sm-12">Options</div>
+        <div class="col-lg-2 col-md-6 col-sm-12">Options</div>
       </div>
       <div *ngIf="actionResults.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
-        No actions found in history test case.
+        No actions completed currently.
       </div>
+
       <div class="mt-5 stripped ">
         <div *ngFor="let actionResult of actionResults; let i = index">
           <div class="row mt-2">
-            <div class="col-lg-2 col-md-6 col-sm-12">{{actionResult.actionType}}</div>
+            <div class="col-lg-2 col-md-6 col-sm-12">{{actionResult.action.actionType}}</div>
 
             <div id="status" class="col-lg-2 col-md-6 col-sm-12"
                  [ngStyle]="{'color': isSuccessful(actionResult.status)}">
@@ -40,11 +37,11 @@
             <div class="row mt-2">
               <div class="col-lg-5 col-md-12 col-sm-12">
                 <div class="description_label">Element:</div>
-                <div> {{actionResult.element}}</div>
+                <div> {{actionResult.action.element}}</div>
               </div>
               <div class="col-lg-5 col-md-12 col-sm-12 ml-1">
                 <div class="description_label">Argument:</div>
-                <div> {{actionResult.argument}}</div>
+                <div> {{actionResult.action.argument}}</div>
               </div>
             </div>
             <div class="row mt-2">
@@ -60,5 +57,6 @@
     </div>
   </div>
 </div>
+
 
 

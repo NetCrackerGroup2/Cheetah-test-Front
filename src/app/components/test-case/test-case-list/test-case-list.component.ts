@@ -37,7 +37,7 @@ export class TestCaseListComponent implements OnInit {
   ) {
     this.projectId = +this.route.snapshot.paramMap.get('id');
     this.currentProject = new Project();
-    this.projectService.getProjectById(this.projectId).subscribe( data => {
+    this.projectService.getProjectById(this.projectId).subscribe(data => {
         this.currentProject.id = data.id;
         this.currentProject.title = data.title;
         this.currentProject.createDate = data.createDate;
@@ -48,27 +48,26 @@ export class TestCaseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.showTestCaseList();
+    this.showTestCaseList();
   }
 
   public showTestCaseList(): void {
-     this.searchMode = !!this.searchValue;
-     if (this.searchMode) {
-       this.handleSearchTestCases();
-     }
-     else {
-       this.handleTestCases();
-     }
+    this.searchMode = !!this.searchValue;
+    if (this.searchMode) {
+      this.handleSearchTestCases();
+    } else {
+      this.handleTestCases();
+    }
   }
 
   private handleSearchTestCases(): void {
-      this.testCaseService.findTestCaseByTitle(
-        this.projectId,
-        this.pageNum,
-        this.pageSize,
-        this.searchValue
-      ).pipe(take(1))
-        .subscribe(data => {
+    this.testCaseService.findTestCaseByTitle(
+      this.projectId,
+      this.pageNum,
+      this.pageSize,
+      this.searchValue
+    ).pipe(take(1))
+      .subscribe(data => {
           this.testCases = data.testCaseList;
           this.totalElements = data.totalElements;
         }
@@ -103,8 +102,7 @@ export class TestCaseListComponent implements OnInit {
       window.setTimeout(() =>
         $('.alert-warning').fadeTo(500, 0).slideUp(500, () =>
           this.noSelectedRunTestCases = false), 4000);
-    }
-    else {
+    } else {
       this.isRun = true;
       window.setTimeout(() =>
         $('.alert-success').fadeTo(500, 0).slideUp(500, () => this.isRun = false), 4000);
@@ -115,12 +113,11 @@ export class TestCaseListComponent implements OnInit {
 
 
   handleRunTestCases(id: number): void {
-      if (this.runTestCaseIdsList.includes(id)) {
-        this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
-      }
-      else {
-        this.runTestCaseIdsList.push(id);
-      }
+    if (this.runTestCaseIdsList.includes(id)) {
+      this.runTestCaseIdsList = this.runTestCaseIdsList.filter(i => i !== id);
+    } else {
+      this.runTestCaseIdsList.push(id);
+    }
   }
 
   create(): void {
@@ -132,7 +129,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   getReportDetails(id: number): void {
-    this.router.navigate(['projects', this.projectId, 'test-cases', id]);
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'run-details']);
   }
 
   getTestCaseHistory(): void {
