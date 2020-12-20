@@ -55,10 +55,7 @@ export class CalendarComponent implements OnInit {
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       select: this.handleDateClick.bind(this),
       eventClick: this.handleEventClick.bind(this),
-      events: [{
-        title: "something",
-        start: "2020-12-24",
-      }],
+      events: [],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -91,22 +88,14 @@ export class CalendarComponent implements OnInit {
       .subscribe(data => {
         data.forEach((date: TestCaseDate) => {
             this.dates.push(date);
-            // this.eventsList.push({title: date.title, startStr: date.executionCronDate});
-            $('datesCalendar').events.addEvent({
-              id: date.id,
-              title: date.title,
-              start: date.executionCronDate
-            }, true);
+            this.calendarComponent.getApi().addEvent({
+                id: date.id.toString(),
+                title: date.title,
+                start: date.executionCronDate
+              });
           }
         );
       });
-    // this.eventsList.forEach(even => {
-    //   $('datesCalendar').events.addEvent({
-    //     title: even.title,
-    //     start: even.startStr
-    //   }, true);
-    //   }
-    // );
   }
 }
 
