@@ -3,7 +3,8 @@ import {ActionResult, ActionResultStatus} from '../../models/action-result/Actio
 import {User} from '../../models/user/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth/auth.service';
-import {Stomp} from '@stomp/stompjs';
+import {WebsocketService} from '../../services/websocket/websocket.service';
+import {WS} from '../../services/websocket/websocket.events';
 
 @Component({
   selector: 'app-run-details',
@@ -18,16 +19,29 @@ export class RunDetailsComponent implements OnInit {
   isCompleted: boolean;
   connection: WebSocket;
   user: User;
+  totalActionResults: number;
 
-  constructor(private route: ActivatedRoute, private router: Router,
-              private authenticationService: AuthService) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private authenticationService: AuthService,
+              private websocketService: WebsocketService
+              ) {
     this.testCaseId = route.snapshot.params.idTestCase;
     this.projectId = route.snapshot.params.idProject;
     this.user = this.authenticationService.userValue;
   }
 
   ngOnInit(): void {
-    this.connectToWs();
+    this.subscribeOnMessages();
+  }
+
+  subscribeOnMessages(): void {
+    this.websocketService.on(WS.ON.TEST_CASE_ACTIONS).subscribe((data: TestCaseProgressReport) => {
+      if (data.idTestCase === this.testCaseId) {
+        this.actionResults = data.completed;
+        this.totalActionResults = data.totalActionResults;
+      }
+    });
   }
 
   isSuccessful(actionStatus: ActionResultStatus): string {
@@ -52,32 +66,6 @@ export class RunDetailsComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/projects', this.projectId, 'test-cases']);
-  }
-
-  connectToWs(): void {
-    // todo replace that code with websocket service from notifications
-    const ws = Stomp.over(() => {
-      return new WebSocket('ws://localhost:8080/notifications');
-    });
-
-    ws.connect({}, () => {
-      ws.subscribe('/user/queue/notifications', message => {
-        const parsedMessage: ProgressMessage = JSON.parse(message.body) as ProgressMessage;
-        // console.log(parsedMessage);
-        console.log('event has name: ' + parsedMessage.event);
-        console.log('event has idtestcase:' + parsedMessage.data.idTestCase);
-        console.log('event id test case compares to :' + this.testCaseId);
-        console.log(parsedMessage.event === 'test-case-execution-actions');
-        console.log(parsedMessage.data.idTestCase === this.testCaseId);
-        // tslint:disable-next-line:triple-equals
-        if (parsedMessage.event === 'test-case-execution-actions' && parsedMessage.data.idTestCase == this.testCaseId) {
-          this.actionResults = parsedMessage.data.completed;
-          console.log(this.actionResults);
-          console.log(parsedMessage.data.completed);
-        }
-      });
-      ws.send('/notifications', {Authorization: `${this.user.accessToken}`}, JSON.stringify({event: 'get-notifications', data: {}}));
-    });
   }
 }
 
