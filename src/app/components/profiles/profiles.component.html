@@ -1,96 +1,103 @@
 <div class="main_content">
-	<h1 class="title" [style]="styleDeactivate">Profiles</h1>
-	<div class="table-body" [style]="styleDeactivate">
-		<div class="table-main">
-			<!-- Head -->
-			<div class="table-row">
-				<div *ngFor="let head of headElements" 
-					class="table-elem center">
-					{{head}}
-				</div>
-			</div>
-			<div class="table-row">
-				<div class="table-elem">
-					<input type="text" (keyup)="usernameAndEmailOnInput($event)"
-							class="table_elem" [(ngModel)]="searchUsername"
-							placeholder="Search Username"
-							(click)="clickSearchEmailUsername()">
-				</div>
-				<div class="table-elem">
-					<input type="text" (keyup)="usernameAndEmailOnInput($event)" class="table_elem"
-							[(ngModel)]="searchEmail" placeholder="Search Email"
-							(click)="clickSearchEmailUsername()">
-				</div>
-				<div class="table-elem">
+  <div class="text-center">
+    <h1 class="display-4 black mt-lg-5" [style]="styleDeactivate">Profiles</h1>
+  </div>
+  <div class="table-body" [style]="styleDeactivate">
+    <div class="container  p-lg-5">
+      <!-- Head -->
+      <div class="row ml-5">
+        <div *ngFor="let head of headElements"
+             class="col-lg-3 center">
+          {{head}}
+        </div>
+      </div>
+      <div class="row ml-5">
+        <div class="col-lg-3">
+          <input type="text" (keyup)="usernameAndEmailOnInput($event)"
+                 class="table_elem" [(ngModel)]="searchUsername"
+                 placeholder="Search Username"
+                 (click)="clickSearchEmailUsername()">
+        </div>
+        <div class="col-lg-3">
+          <input type="text" (keyup)="usernameAndEmailOnInput($event)" class="table_elem"
+                 [(ngModel)]="searchEmail" placeholder="Search Email"
+                 (click)="clickSearchEmailUsername()">
+        </div>
+        <div class="col-lg-3 center">
           <label>
             <select [(ngModel)]="role"
                     (click)="chooseSearchRole()"
-              class="choose-role">
+                    class="choose-role">
               <option value="ALL">All roles</option>
               <option value="ADMIN">Admin</option>
               <option value="MANAGER">Manager</option>
               <option value="ENGINEER">Engineer</option>
             </select>
           </label>
-				</div>
-			</div>
-			<!-- Users -->
-			<div *ngFor="let el of elements.users
-				let i = index" [style.background-color]="rowColorName[i]" 
-				class="table-row">
-				<div class="table-elem">
+        </div>
+      </div>
+      <!-- Users -->
+      <div *ngFor="let el of elements.users
+				let i = index" [style.background-color]="rowColorName[i]"
+           class="row ml-5">
+        <div class="col-lg-3">
           <label>
             <input type="text" [(ngModel)]="el.name" class="table_elem"
-              [disabled]="disabledPersonalData[i]">
+                   [disabled]="disabledPersonalData[i]">
           </label>
-				</div>
-				<div class="table-elem">
+        </div>
+        <div class="col-lg-3">
           <label>
             <input type="text" [(ngModel)]="el.email" class="table_elem"
-              [disabled]="disabledPersonalData[i]">
+                   [disabled]="disabledPersonalData[i]">
           </label>
-				</div>
-				<div>
+        </div>
+        <div class="col-lg-3">
           <label>
             <select [(ngModel)]="el.role" [disabled]="disabledPersonalData[i]"
-              class="table_elem choose-role-table">
+                    class="table_elem choose-role-table">
               <option value="ADMIN">Admin</option>
               <option value="MANAGER">Manager</option>
               <option value="ENGINEER">Engineer</option>
             </select>
           </label>
-				</div>
-				<div class="table-elem">
-					<input type="button" (click)="editPersonalInformation(i)" [hidden]="isAdmin"
-							[(ngModel)]="textOnButtonUpdate[i]" class="button_user">
-				</div>
-				<div class="table-elem">
-						<input type="button" (click)="pressDelete(i)" [hidden]="isAdmin"
-								[(ngModel)]="deleteButton" class="button_user">
-				</div>
-			</div>
-			<div class="warning-result">
-				{{existUser}}
-			</div>
-		</div>
-	</div>
-	<ngb-pagination [style]="styleDeactivate"
-					[(page)]="numPage"
-					[collectionSize]="elements.totalElements"
-					[pageSize] = "pageSize"
-					[maxSize]="3"
-					[rotate]="true"
-					[boundaryLinks]="true"
-					(pageChange)="pageChange(numPage)"
-					class="pagination">
-	</ngb-pagination>
-	<div [hidden]="disabledPasswordAdmin" class="panel-confirm">
-		<input id="password" type="password" class="password-field" 
-			placeholder="Admin password" [(ngModel)]="adminPassword">
-		<input type="button" (click)="confirmClose()" value="Close"
-			class="button-confirm button-close">
-		<input type="button" (click)="confirmAdminPassword()" [value]="textAgreeConfirmPanel"
-			class="button-confirm button-submit">
-	</div>
+        </div>
+        <div class="table-elem">
+          <input type="button" (click)="editPersonalInformation(i)" [hidden]="isAdmin"
+                 [(ngModel)]="textOnButtonUpdate[i]" class="button_user">
+        </div>
+        <div class="table-elem">
+          <input type="button" (click)="pressDelete(i)" [hidden]="isAdmin"
+                 [(ngModel)]="deleteButton" class="button_user">
+        </div>
+      </div>
+      <div class="warning-result">
+        {{existUser}}
+      </div>
+    </div>
+  </div>
+  <ngb-pagination [style]="styleDeactivate"
+                  [(page)]="numPage"
+                  [collectionSize]="elements.totalElements"
+                  [pageSize] = "pageSize"
+                  [maxSize]="3"
+                  [rotate]="true"
+                  [boundaryLinks]="true"
+                  (pageChange)="pageChange(numPage)"
+                  class="pagination">
+  </ngb-pagination>
+  <div [hidden]="disabledPasswordAdmin" class="panel-confirm">
+    <input id="password" type="password" class="password-field"
+           placeholder="Admin password" [(ngModel)]="adminPassword">
+    <input type="button" (click)="confirmClose()" value="Close"
+           class="button-confirm button-close">
+    <input type="button" (click)="confirmAdminPassword()" [value]="textAgreeConfirmPanel"
+           class="button-confirm button-submit">
+  </div>
+  <div class="row mt-10">
+    <div class="col-md-10"></div>
+    <input type="button"  (click)="createUser()" [hidden]="isAdmin"
+           class="button_user col-md-1" value="Create User">
+  </div>
 
 </div>
