@@ -35,7 +35,6 @@ import {CircularDiagramComponent} from './components/circular-diagram/circular-d
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import {WebsocketModule} from './services/websocket/websocket.module';
-import {environment} from '../environments/environment';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
 

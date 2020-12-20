@@ -17,6 +17,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   notifications$: Observable<Notification[]>;
   oldNotifications$: Observable<Notification[]>;
   newNotifications$: Observable<Notification[]>;
+  newNotifications: Notification[];
+
 
   constructor(
     private router: Router,
@@ -31,25 +33,28 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.oldNotifications$ = this.notifications$.pipe(
       map((notifications) => notifications.filter((notification) => ReadStatus.READ === notification.readStatus))
     );
+
+    this.newNotifications$.subscribe({
+      next: (notifications) => {
+        this.newNotifications = notifications;
+      }
+    });
+
     this.websocketService.send(WS.SEND.GET_NOTIFICATIONS);
   }
 
   goToRunDetails(idTestCase: number): void {
-    this.router.navigate(['/test-scenario', idTestCase, 'info']);
+    this.router.navigate([`test-scenario/${idTestCase}/info`]);
+  }
+
+  deleteNotification(id: number): void {
+    this.websocketService.send(WS.SEND.DELETE_NOTIFICATION, id);
   }
 
   ngOnDestroy(): void {
-    if (this.newNotifications$) {
-      this.newNotifications$.subscribe({
-        next: (notifications) => {
-          let newNotifications: Notification[];
-          newNotifications = notifications;
-          if (newNotifications) {
-            const ids: number[] = newNotifications.map((notification) => notification.id);
-            this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, ids);
-          }
-        }
-      });
+    if (this.newNotifications.length > 0) {
+      const ids: number[] = this.newNotifications.map((notification) => notification.id);
+      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, ids);
     }
   }
 }

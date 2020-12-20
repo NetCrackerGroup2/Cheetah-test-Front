@@ -1,4 +1,4 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
@@ -14,7 +14,7 @@ import {map} from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnInit, OnDestroy{
   user: User;
   opened = true;
   authenticationServiceSubscription: Subscription;
@@ -30,18 +30,16 @@ export class AppComponent implements OnDestroy{
         this.user = x;
       }
     );
-    this.websocketService.status.subscribe(
-      {next: () => {
-          this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
-          this.newNotificationsCount$ = this.notifications$.pipe(
-            map(
-              (notifications) => notifications.filter((notification) => notification.readStatus === ReadStatus.UNREAD).length
-            )
-          );
-          this.websocketService.send('get-notifications');
-        }
-      }
-     );
+  }
+
+  ngOnInit(): void {
+    this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
+    this.newNotificationsCount$ = this.notifications$.pipe(
+      map(
+        (notifications) => notifications.filter((notification) => notification.readStatus === ReadStatus.UNREAD).length
+      )
+    );
+    this.websocketService.send('get-notifications');
   }
 
   get isOut(): boolean {

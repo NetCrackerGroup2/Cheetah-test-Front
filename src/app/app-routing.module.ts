@@ -138,8 +138,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'test-scenario/:idTestScenario',
-    component: CircularDiagramComponent,
+    path: 'test-scenario/:idTestCase/info',
+    component: RunDetailsComponent,
     canActivate: [AuthGuard]
   },
   {

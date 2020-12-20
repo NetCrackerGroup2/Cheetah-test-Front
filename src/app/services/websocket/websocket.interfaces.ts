@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 
 export interface IWebsocketService {
-  status: Observable<boolean>;
   on<T>(event: string): Observable<T>;
   send(event: string, data: any): void;
 }
