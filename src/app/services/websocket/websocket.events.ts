@@ -7,5 +7,6 @@ export const WS = {
     DELETE_NOTIFICATION: 'delete-notification',
     NOTIFICATIONS_VIEWED: 'notifications-viewed',
     GET_NOTIFICATIONS: 'get-notifications',
+    GET_TEST_CASE_RESULTS_INFO : 'get-test-case-results-info',
   }
 };

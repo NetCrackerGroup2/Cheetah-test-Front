@@ -33,6 +33,7 @@ export class RunDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeOnMessages();
+    this.websocketService.send(WS.SEND.GET_TEST_CASE_RESULTS_INFO);
   }
 
   subscribeOnMessages(): void {
