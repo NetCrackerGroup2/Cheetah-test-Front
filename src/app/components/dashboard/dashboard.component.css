@@ -1,5 +1,10 @@
 .container {
   margin-left: 20%;
+  overflow-x: hidden;
+}
+
+.container-fluid {
+  overflow: hidden;
 }
 
 .card {
@@ -24,10 +29,19 @@ img {
   height: 60px;
 }
 
+.greeting {
+  animation: fadeInRight; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 3s; /* don't forget to set a duration! */
+}
+
 .dashboard-item {
   height: 360px;
   overflow: auto;
   box-shadow: 0 2px 18px 0 rgba(0,0,0,0.5);
+}
+
+h1, h2, h3, table {
+  font-weight: lighter;
 }
 
 .dashboard-item::-webkit-scrollbar-track
@@ -50,3 +64,6 @@ img {
   background-color: #555;
 }
 
+ngx-charts-advanced-pie-chart {
+  width: 100px;
+}

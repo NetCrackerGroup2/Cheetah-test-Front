@@ -37,7 +37,7 @@ import {NgCircleProgressModule} from 'ng-circle-progress';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {BarChartModule, LineChartModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
+import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -95,7 +95,8 @@ import {BarChartModule, LineChartModule, PieChartModule, PolarChartModule} from 
     LineChartModule,
     BarChartModule,
     PolarChartModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NumberCardModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

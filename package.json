@@ -29,6 +29,7 @@
     "@types/jest": "^26.0.16",
     "@types/mocha": "^8.0.4",
     "angular": "^1.8.2",
+    "animate.css": "^4.1.1",
     "bootstrap": "^4.5.3",
     "cdk": "^1.76.0",
     "express": "^4.17.1",

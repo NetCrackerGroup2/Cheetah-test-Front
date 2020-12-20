@@ -1,11 +1,11 @@
 <div class="container mt-5 mb-5">
 
-  <div class="container-fluid text-center justify-content-lg-center">
+  <div class="greeting container-fluid text-center justify-content-lg-center">
     <div>
       <img class="w-25 h-25" src="https://github.com/NetCrackerGroup2/Cheetah-test/blob/dev/src/main/resources/image/mail.png?raw=true" alt="Cheetah Test">
     </div>
     <div>
-      <h1 style="color: #996633; font-weight: lighter">Welcome to Cheetah Test, {{user.name}}!</h1>
+      <h1 class="" style="color: #996633; font-weight: lighter">Welcome to Cheetah Test, {{user.name}}!</h1>
     </div>
   </div>
 
@@ -96,12 +96,13 @@
     </div>
   </div>
 
+
   <!-- Projects stats -->
-  <div class="container-fluid p-0 mt-5 row">
-    <div class="container-fluid row justify-content-lg-between">
-      <div>
-        <h3>Last project statistics</h3>
-      </div>
+  <div class="container-fluid mt-5 row">
+    <div>
+      <h3>Last project statistics</h3>
+    </div>
+    <div class="container-fluid mt-4 row justify-content-lg-start">
       <div>
         <div class="card" style="width: 25em;">
           <div class="card-body w-auto row">
@@ -117,9 +118,9 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="ml-lg-3">
         <div class="card" style="width: 25em;">
-          <div class="card-body w-auto row">
+          <div class="card-body row">
             <div class="m-3">
               <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M9.828 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 0 1 1-.98h3.672a1 1 0 0 1 .707.293z"/>
@@ -162,7 +163,7 @@
         <div>
           <ngx-charts-line-chart class="col"
             [view]="[650,400]"
-            [results]="saleData"
+            [results]="amountOfProjects"
             [xAxisLabel]="'Date'"
             [yAxisLabel]="'Quantity of created projects'"
             [showXAxisLabel]="true"
@@ -175,4 +176,39 @@
       </div>
     </div>
   </div>
+
+  <!-- Test Cases Statistics -->
+  <div class="text-center mt-3">
+    <h3>Test cases statistics</h3>
+  </div>
+  <div class="container-fluid justify-content-lg-center row">
+      <div>
+        <ngx-charts-pie-grid
+          [view]="[680, 350]"
+          [scheme]="testCasesColorScheme"
+          [results]="testCaseStats">
+        </ngx-charts-pie-grid>
+      </div>
+    <div>
+      <table class="ml-2 table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Planned test cases</th>
+            <th>Date of execution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hotline Project</td>
+            <td>Test register button</td>
+            <td class="text-right">20.12.20</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
 </div>

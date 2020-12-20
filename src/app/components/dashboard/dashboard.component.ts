@@ -61,11 +61,6 @@ export class DashboardComponent implements OnInit {
     new UserProject(9, 'Juno Project', 'Watcher')
   ];
 
-  single: any[];
-  multi: any[];
-
-  view: any[] = [700, 400];
-
   // options
   showXAxis = true;
   showYAxis = true;
@@ -75,15 +70,31 @@ export class DashboardComponent implements OnInit {
   xAxisLabel = 'Country';
   showYAxisLabel = true;
   yAxisLabel = 'Population';
-
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
 
-  // line, area
-  autoScale = true;
+  view: any[] = [800, 200];
+  testCaseStats = [
+    {
+      "name": "Sucesseful",
+      "value": 125
+    },
+    {
+      "name": "Failed",
+      "value": 78
+    },
+    {
+      "name": "Not yet started",
+      "value": 29
+    }
+  ];
+  testCasesColorScheme = {
+    domain: ['#24c215', '#d41313', '#585858']
+  };
 
-  saleData = [
+  autoScale = true;
+  amountOfProjects = [
     {
       "name": "Total projects",
       "series": [
