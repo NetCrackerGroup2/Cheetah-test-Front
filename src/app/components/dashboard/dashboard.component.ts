@@ -106,6 +106,7 @@ export class DashboardComponent implements OnInit {
       ]
     },
   ];
+  totalTodayProjects = 3;
 
   constructor(
     private authenticationService: AuthService,
