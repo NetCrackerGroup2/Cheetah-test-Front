@@ -61,6 +61,52 @@ export class DashboardComponent implements OnInit {
     new UserProject(9, 'Juno Project', 'Watcher')
   ];
 
+  single: any[];
+  multi: any[];
+
+  view: any[] = [700, 400];
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+
+  colorScheme = {
+    domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
+  };
+
+  // line, area
+  autoScale = true;
+
+  saleData = [
+    {
+      "name": "Total projects",
+      "series": [
+        {
+          "value": 3,
+          "name": "2020-12-20T14:38:08.093Z"
+        },
+        {
+          "value": 6,
+          "name": "2020-12-19T14:38:08.093Z"
+        },
+        {
+          "value": 2,
+          "name": "2020-12-18T14:38:08.093Z"
+        },
+        {
+          "value": 7,
+          "name": "2020-12-13T14:38:08.093Z"
+        },
+      ]
+    },
+  ];
+
   constructor(
     private authenticationService: AuthService,
     private router: Router

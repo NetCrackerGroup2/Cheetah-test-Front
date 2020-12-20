@@ -36,6 +36,7 @@ import {NotificationsComponent} from './components/notifications/notifications.c
 import {NgCircleProgressModule} from 'ng-circle-progress';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
+import {BarChartModule, LineChartModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,12 @@ import { RunDetailsComponent } from './components/run-details/run-details.compon
       innerStrokeColor: '#32CD32',
       innerStrokeWidth: 1,
       showInnerStroke: false,
-      startFromZero: false})
+      startFromZero: false
+    }),
+    PieChartModule,
+    LineChartModule,
+    BarChartModule,
+    PolarChartModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
