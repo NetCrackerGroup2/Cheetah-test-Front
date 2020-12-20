@@ -15,7 +15,7 @@
       <h3>Users</h3>
     </div>
     <div class="container-fluid row mt-3 justify-content-lg-between">
-      <div class="card" style="width: 18em;">
+      <div class="border-dance card" style="width: 18em;">
         <div class="card-body w-auto row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="card" style="width: 18em;">
+      <div class="border-dance card" style="width: 18em;">
         <div class="card-body w-auto row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <div class="card" style="width: 18em;">
+      <div class="border-dance card" style="width: 18em;">
         <div class="card-body w-auto row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -159,7 +159,7 @@
       </div>
 
       <div>
-        <h3 class="text-right black">Project Activity</h3>
+        <h3 class="text-right black">Project Activity for 7 days</h3>
         <div>
           <ngx-charts-line-chart class="col"
             [view]="[650,400]"
@@ -181,6 +181,13 @@
   <div class="text-center mt-3">
     <h3>Test cases statistics</h3>
   </div>
+  <label>
+    <select>
+      <option *ngFor="let project of userProjects">
+        {{project.projectTitle}}
+      </option>
+    </select>
+  </label>
   <div class="container-fluid justify-content-lg-center row">
       <div>
         <ngx-charts-pie-grid

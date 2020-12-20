@@ -2,11 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user/user';
 import {AuthService} from '../../services/auth/auth.service';
 import {RecentUser} from '../../models/dashboard/RecentUser';
-
-
-import * as $ from 'jquery';
 import {UserProject} from '../../models/dashboard/UserProject';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class DashboardComponent implements OnInit {
   user: User;
   totalUsers: number[] = [2, 10, 78];
-  // userProject: UserProject[];
+  userProject: UserProject[];
   plannedTestCases: [];
   totalArchivedProjects = 18;
   recentUsers: RecentUser[] = [
@@ -60,21 +57,9 @@ export class DashboardComponent implements OnInit {
     new UserProject(8, 'Ebay Project', 'Watcher'),
     new UserProject(9, 'Juno Project', 'Watcher')
   ];
-
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
-
-  view: any[] = [800, 200];
   testCaseStats = [
     {
       "name": "Sucesseful",
@@ -92,8 +77,6 @@ export class DashboardComponent implements OnInit {
   testCasesColorScheme = {
     domain: ['#24c215', '#d41313', '#585858']
   };
-
-  autoScale = true;
   amountOfProjects = [
     {
       "name": "Total projects",

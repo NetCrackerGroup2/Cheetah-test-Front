@@ -9,9 +9,38 @@
 
 .card {
   transition: linear 0.38s;
-  border: 5px dashed #ecddce;
-  border-radius: 15px;
 }
+
+.size2{
+  background:black;
+  width:300px;
+  height:100px;
+}
+
+
+.border-dance {
+  border: 0;
+  background:
+    linear-gradient(90deg, #ecddce 50%, transparent 50%),
+    linear-gradient(90deg, #ecddce 50%, transparent 50%),
+    linear-gradient(0deg, #ecddce 50%, transparent 50%),
+    linear-gradient(0deg, #ecddce 50%, transparent 50%);
+
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px;
+  background-position: 0 0, 200px 100px, 0 100px, 200px 0;
+  padding: 10px;
+  animation: border-dance 1s infinite linear;
+}
+@keyframes border-dance {
+  0% {
+    background-position: left top, right bottom, left bottom, right   top;
+  }
+  100% {
+    background-position: left 15px top, right 15px bottom , left bottom 15px , right   top 15px;
+  }
+}
+
 
 ngx-charts-line-chart {
   font-family: 'Lato', sans-serif;
@@ -30,7 +59,7 @@ img {
 }
 
 .greeting {
-  animation: fadeInRight; /* referring directly to the animation's @keyframe declaration */
+  animation: fadeInDown; /* referring directly to the animation's @keyframe declaration */
   animation-duration: 3s; /* don't forget to set a duration! */
 }
 
