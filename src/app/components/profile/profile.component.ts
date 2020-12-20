@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {ProfileService} from '../../services/profile/profile.service';
+import {Router} from '@angular/router';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-profile',
@@ -16,14 +18,19 @@ export class ProfileComponent implements OnInit {
 
   fileToUpload: File = null;
 
-  url = 'assets/sidebar_images/img_example.jpg';
+  url: string;
 
   constructor(private authService: AuthService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              private router: Router,
+              private app: AppComponent) {
     this.username = authService.userValue.name;
     this.email = authService.userValue.email;
     this.role = authService.userValue.role;
+    profileService.getPhotoURL(this.email).subscribe(
+      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
   }
+
   fileInput(event: any): void {
     if (event.target.files && event.target.files[0]) {
           const reader = new FileReader();
@@ -31,7 +38,8 @@ export class ProfileComponent implements OnInit {
               this.url = elem.target.result;
           };
           reader.readAsDataURL(event.target.files[0]);
-          this.profileService.postUploadFile(event.target.fields);
+          this.profileService.postUploadFile(event.target.files[0], this.email);
+          this.app.setUrl(event);
     }
   }
 

@@ -27,6 +27,7 @@ import {CalendarComponent} from './components/calendar/calendar.component';
 import {AddCalendarEventComponent} from './components/add-calendar-event/add-calendar-event.component';
 import {EditCalendarEventComponent} from "./components/edit-calendar-event/edit-calendar-event.component";
 import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
+import {RunDetailsComponent} from './components/run-details/run-details.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -125,13 +126,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:idProject/test-cases/:idTestCase',
+    path: 'projects/:idProject/test-cases/:idTestCase/history/:idHTC',
     component: TestCaseInfoComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:idProject/test-cases/:idTestCase/send-report',
+    path: 'projects/:idProject/test-cases/:idTestCase/history/:idHTC/send-report',
     component: SendReportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/run-details',
+    component: RunDetailsComponent,
     canActivate: [AuthGuard]
   },
   {
