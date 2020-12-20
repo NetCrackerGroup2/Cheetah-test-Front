@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://cheetah-test-backend-dev.herokuapp.com',
-  // apiUrl: 'http://localhost:8080',
+  // apiUrl: 'https://cheetah-test-backend-dev.herokuapp.com',
+  apiUrl: 'http://localhost:8080',
   invalidEmail: 'invalid.email',
   userFetched: 'user.fetched',
   resetTokenNull: 'reset.token.null',
