@@ -54,7 +54,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.newNotifications.length > 0) {
       const ids: number[] = this.newNotifications.map((notification) => notification.id);
-      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, {notifications: ids});
+      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, ids);
     }
   }
 }
