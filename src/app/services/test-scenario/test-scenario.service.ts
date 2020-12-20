@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {TestScenario} from "../../models/test-scenario/test-scenario";
 import {TestScenarioCreateDto} from "../../models/test-scenario-create-dto/test-scenario-create-dto";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -13,31 +14,32 @@ export class TestScenarioService {
   constructor(private http: HttpClient) {
   }
 
-
-  // TO DO
-  getTestScenarios(thePageNumber: number, thePageSize: number): Observable<GetResponseTestScenarios> {
-    const url = `${environment.apiUrl}/api/test-scenarios?&title=&size=${thePageSize}&page=${thePageNumber}`;
+  getTestScenarios(thePageNumber: number, thePageSize: number, theTestCaseId: number): Observable<GetResponseTestScenarios> {
+    const url = `${environment.apiUrl}/api/test-scenarios/${theTestCaseId}/all?size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseTestScenarios>(url);
   }
 
-  searchTestScenarios(thePageNumber: number, thePageSize: number, theKeyword: string): Observable<GetResponseTestScenarios> {
-    const url = `${environment.apiUrl}/api/test-scenarios?&title=${theKeyword}&size=${thePageSize}&page=${thePageNumber}`;
+
+  searchTestScenarios(thePageNumber: number, thePageSize: number, theTestCaseId: number, theKeyword: string): Observable<GetResponseTestScenarios> {
+    const url = `${environment.apiUrl}/api/test-scenarios/${theTestCaseId}?title=${theKeyword}&size=${thePageSize}&page=${thePageNumber}`;
     return this.http.get<GetResponseTestScenarios>(url);
   }
 
   remove(id: number): Observable<any> {
-    const url = `${environment.apiUrl}/api/test-scenario/${id}`;
-    return this.http.delete<GetResponseTestScenarios>(url);
+    const url = `${environment.apiUrl}/api/test-scenarios?id=${id}`;
+    return this.http.delete<any>(url);
   }
-
 
   createTestScenario(testScenarioCreateDto: TestScenarioCreateDto): Observable<any> {
     const url = `${environment.apiUrl}/api/test-scenarios`;
-    return  this.http.post<TestScenarioCreateDto>(url, testScenarioCreateDto);
+    return  this.http.post<TestScenarioCreateDto>(url, testScenarioCreateDto)
+    .pipe(
+      catchError(err => of(err))
+    );
   }
 }
 
 interface GetResponseTestScenarios {
   testScenarios: TestScenario[];
-  totaltestScenarios: number;
+  totalElements: number;
 }

@@ -30,9 +30,6 @@ export class CompoundService {
       switchMap(term => this.searchEntries(term)));
   }
 
-  // /api/test-scenarios/comp-scenarios/all?title=
-  //
-
   searchEntries(term: any): Observable<Compound[]> {
     const url = `${environment.apiUrl}/api/library/all?title=${term}`;
     return this.http.get<Compound[]>(url);

@@ -1,0 +1,89 @@
+<div class="main-content" (click)="cleanList()">
+  <div class="row mt-5">
+    <h1 class="col display-4 black">Actions In "{{ testScenarioTitle }}"</h1>
+    <div class="col mt-5">
+      <button class="options" [routerLink]="['/general-library']">
+        Back to Library
+      </button>
+    </div>
+  </div>
+  <div>
+    <!--    *ngIf="actScenarios?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">-->
+    No actions found.
+  </div>
+
+  <h5 class="text-success text-center mb-1 mt-1">{{successMessage}}</h5>
+  <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
+  <div class="mt-5 row" >
+    <!--    class="mt-5 row" *ngIf="actScenarios.length !== 0">-->
+    <div class="custom-table black">
+      <div class="row thead">
+        <div class="col-1">Order</div>
+        <div class="col-2">Title</div>
+        <div class="col-2">Type</div>
+      </div>
+      <div class="mt-5 stripped">
+        <div class="row mt-2" *ngFor="let actScen of actScenarios">
+          <div class="col-1">{{actScen.priority}}</div>
+          <div class="col-2">{{actScen.actionTitle}}</div>
+          <div class="col-2">{{actScen.actionType}}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col add-action">
+      <h4 class="col-sm-5">Choose the parameters (one per action) </h4>
+      <div class="col-4">
+        <input
+          (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
+
+        <ul *ngIf="parameters" class="search-result col-12">
+          <li *ngFor="let parameter of parameters | slice:0:9">
+            <a (click)="addToList(parameter)" target="_blank" >
+              {{ "Type: " + parameter.type }}{{" Value: " + parameter.value }}
+
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="dragAndDrop" class="col-sm-12">
+      <div cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="addedParameters.length > 0">
+        <hr>
+          <em class="text-dark">ORDER IS IMPORTANT</em>
+        <br>
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-3 text-dark">Chosen parameters:</div>
+          <div class="col-2 text-dark">Order</div>
+        </div>
+        <div cdkDrag *ngFor="let param of addedParameters" class="row cursor-pointer">
+          <div class="col-1">
+            <img src="assets/sidebar_images/remove.png"
+                 class="x_img cursor-pointer" alt="remove"
+                 (click)="removeParameter(param)">
+          </div>
+          <div class="col-3">
+            {{ "Type: " + param.type }}{{" Value: " + param.value }}
+          </div>
+          <div class="col-2">
+            {{ addedParameters.indexOf(param) + 1 }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col">
+      <div class="col-md-7 mt-3" (click)="save()">
+        <button class="options-table">Save
+          <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</div>

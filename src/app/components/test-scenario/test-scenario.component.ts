@@ -1,41 +1,40 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {User} from "../../models/user/user";
 import {Role} from '../../models/roles/role';
-import {Subscription} from "rxjs";
 import {TestScenario} from "../../models/test-scenario/test-scenario";
 import {AuthService} from "../../services/auth/auth.service";
 import {TestScenarioService} from "../../services/test-scenario/test-scenario.service";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-test-scenario',
   templateUrl: './test-scenario.component.html',
   styleUrls: ['./test-scenario.component.css']
 })
-export class TestScenarioComponent implements OnInit, OnDestroy {
-
-
+export class TestScenarioComponent implements OnInit {
 
   user: User;
-  authenticationServiceSubscription: Subscription;
   thePageNumber = 1;
   thePageSize = 5;
   theTotalElements = 0;
-  testScenarioSearchSubscription: Subscription;
-  testScenarioSubscription: Subscription;
   searchMode = false;
   previousKeyword: string = null;
   value = '';
   testScenarios: TestScenario[] = [];
 
+  @Input() theTestCaseId;
+
   constructor(private authenticationService: AuthService,
               private router: Router,
               private testScenarioService: TestScenarioService) {
-    this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
-      x => {
-        this.user = x;
-      }
-    );
+    this.authenticationService.user
+      .pipe(take(1))
+      .subscribe(
+        x => {
+          this.user = x;
+        }
+      );
   }
 
   ngOnInit(): void {
@@ -54,11 +53,12 @@ export class TestScenarioComponent implements OnInit, OnDestroy {
   }
 
   private handleTestScenarios(): void {
-    this.testScenarioSubscription = this.testScenarioService
-      .getTestScenarios(this.thePageNumber, this.thePageSize)
+    this.testScenarioService
+      .getTestScenarios(this.thePageNumber, this.thePageSize, this.theTestCaseId)
+      .pipe(take(1))
       .subscribe(data => {
         this.testScenarios = data.testScenarios;
-        this.theTotalElements = data.totaltestScenarios;
+        this.theTotalElements = data.totalElements;
       });
   }
 
@@ -66,37 +66,42 @@ export class TestScenarioComponent implements OnInit, OnDestroy {
     const theKeyword: string = this.value;
     if (this.previousKeyword !== theKeyword) {
       this.thePageNumber = 1;
-  }
+    }
 
-    this.testScenarioSearchSubscription = this.testScenarioService.searchTestScenarios(
+    this.previousKeyword = theKeyword;
+
+    this.testScenarioService.searchTestScenarios(
       this.thePageNumber,
       this.thePageSize,
+      this.theTestCaseId,
       theKeyword)
+      .pipe(take(1))
       .subscribe(data => {
         this.testScenarios = data.testScenarios;
-        this.theTotalElements = data.totaltestScenarios;
+        this.theTotalElements = data.totalElements;
+      });
+  }
+
+  view(testScenario: TestScenario): void {
+    this.router.navigate([`/test-case/${testScenario.id}/${testScenario.idTestCase}`],
+      {
+        queryParams: {
+          testScenarioTitle: testScenario.title,
+          testScenarioDescription: testScenario.description
+        }
       });
   }
 
   remove(id: number): void {
-    this.testScenarioService.remove(id).subscribe();
-    this.listTestScenarios();
+    this.testScenarioService.remove(id)
+      .pipe(take(1))
+      .subscribe(
+       // () => this.listTestScenarios()
+      );
   }
 
   get isAdmin(): boolean {
     return this.user && this.user.role === Role.ADMIN;
-  }
-
-  ngOnDestroy(): void {
-    if (this.authenticationServiceSubscription) {
-      this.authenticationServiceSubscription.unsubscribe();
-    }
-    if (this.testScenarioSubscription){
-      this.testScenarioSubscription.unsubscribe();
-    }
-    if (this.testScenarioSearchSubscription) {
-      this.testScenarioSearchSubscription.unsubscribe();
-    }
   }
 
   doSearch(value: string): void {

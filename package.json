@@ -27,6 +27,7 @@
     "@types/jest": "^26.0.15",
     "@types/mocha": "^8.0.4",
     "angular": "^1.8.2",
+    "angular-drag-drop": "^3.2.0",
     "bootstrap": "^4.5.3",
     "cdk": "^1.76.0",
     "express": "^4.17.1",

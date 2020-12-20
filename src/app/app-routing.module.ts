@@ -22,6 +22,8 @@ import {HistoryTestCaseComponent} from './components/history-test-case/history-t
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
 import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
+import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
+import {TestScenarioComponent} from "./components/test-scenario/test-scenario.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -62,6 +64,16 @@ const routes: Routes = [
   {
     path: 'general-test-scenario/:id',
     component: GeneralTestScenarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-scenario/:id',
+    component: TestScenarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-case/:idTestScenario/:idTestCase',
+    component: ActionsInTestScenarioComponent,
     canActivate: [AuthGuard]
   },
   {

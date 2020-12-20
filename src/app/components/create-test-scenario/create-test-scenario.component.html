@@ -6,7 +6,7 @@
     </div>
     <div class="col back">
 
-      <button class="options ml-1" [routerLink]="['/general-test-scenario']">
+      <button class="options ml-1" (click)="goBack()">
         Back to Test Scenario
       </button>
     </div>
@@ -14,6 +14,7 @@
   </div>
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
+    <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
     <form [formGroup]="createTestScenarioForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
@@ -77,22 +78,33 @@
             </li>
           </ul>
         </div>
-
-        <div>
-          <div *ngIf="addedActionsAndCompounds.length > 0">
+        <div id="dragAndDrop" class="col-sm-12">
+          <div cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="addedActionsAndCompounds.length > 0">
             <hr>
-            <em>ORDER IS IMPORTANT</em> (Click on item in list below to remove it)
+            <em class="text-dark">ORDER IS IMPORTANT</em>
             <br>
-            Selected:
+
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-6 text-dark">Actions and Compounds</div>
+              <div class="col-2 text-dark">Order</div>
+            </div>
+            <div cdkDrag *ngFor="let actComp of addedActionsAndCompounds" class="row cursor-pointer">
+              <div class="col-1">
+                <img src="assets/sidebar_images/remove.png"
+                     class="x_img cursor-pointer" alt="remove"
+                     (click)="removeActAndComp(actComp)">
+              </div>
+              <div class="col-6">
+                {{ actComp.getKind() }}{{": " + actComp.getTitle() }}
+              </div>
+              <div class="col-2">
+                {{ addedActionsAndCompounds.indexOf(actComp) + 1 }}
+              </div>
+            </div>
           </div>
-
-          <ul class="added-result">
-            <li *ngFor="let actComp of addedActionsAndCompounds">
-              <a (click)="removeActAndComp(actComp)">{{ actComp.getKind() }}{{": " + actComp.getTitle() }}</a>
-            </li>
-          </ul>
-
         </div>
+
       </div>
 
 
@@ -103,7 +115,6 @@
           </button>
         </div>
       </div>
-
     </form>
   </div>
 </div>

@@ -33,6 +33,7 @@ import { HistoryTestCaseComponent } from './components/history-test-case/history
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
 import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
+import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { LastReportDetailsComponent } from './components/test-case/last-report-d
     HistoryTestCaseComponent,
     TestCaseListComponent,
     TestCaseConfigurationComponent,
-    LastReportDetailsComponent
+    LastReportDetailsComponent,
+    ActionsInTestScenarioComponent
   ],
   imports: [
     BrowserModule,
