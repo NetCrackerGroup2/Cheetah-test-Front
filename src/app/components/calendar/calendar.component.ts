@@ -73,7 +73,6 @@ export class CalendarComponent implements OnInit {
       if (+clickInfo.event.id === date.id) {
         this.router.navigate(['calendar/edit-event'], {
           queryParams: {
-            dateStart: clickInfo.event.startStr,
             testCaseId: clickInfo.event.id,
             repeatable: date.repeatable
           }

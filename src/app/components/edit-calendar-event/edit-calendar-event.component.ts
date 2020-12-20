@@ -1,11 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from "../../models/user/user";
 import {DatePostDto} from "../../models/date/date-post-dto";
-import {FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subject, Subscription} from "rxjs";
 import {AuthService} from "../../services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CalendarService} from "../../services/calendar/calendar.service";
+import {strict} from "assert";
+import {DataSet} from "../../models/data-set/data-set";
 
 declare var $: any;
 
@@ -16,8 +18,7 @@ declare var $: any;
 })
 export class EditCalendarEventComponent implements OnInit {
   user: User;
-  dateDto: DatePostDto;
-  dateStart: Date;
+  dateDto: DatePostDto = new DatePostDto();
   dateFinish: Date;
   time: string;
   editEventForm: FormGroup;
@@ -31,6 +32,7 @@ export class EditCalendarEventComponent implements OnInit {
   constructor(private authenticationService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
               private сalendarService: CalendarService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
@@ -39,22 +41,34 @@ export class EditCalendarEventComponent implements OnInit {
     );
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
-        this.dateStart = queryParam['dateStart'];
-        this.dateDto.testCaseId = queryParam['testCaseId'];
+        this.dateDto.testCaseId = +queryParam['testCaseId'];
         if (queryParam['repeatable'] === 'true') {
           this.dateDto.repeatable = true;
         } else {
           this.dateDto.repeatable = false;
         }
+        console.log(this.dateDto);
       }
     );
   }
 
   ngOnInit(): void {
-    $('newDate').min = Date.now();
+    $('#newDate').min = Date.now();
+    this.editEventForm = this.formBuilder.group({
+      name: new FormControl('',
+        [Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(3)]),
+      description: new FormControl('',
+        [Validators.required, Validators.maxLength(300)])
+    });
   }
 
   onSubmit(): void {
+    let newDate = new Date($('#newDate').val());
+    let newTime = document.querySelector('input[type="time"]');
+    // @ts-ignore
+    this.dateDto.executionCronDate = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + "T" + newTime.value + ":00:+00:00";
     this.datesSubscription = this.сalendarService
       .editEvent(this.dateDto).subscribe();
     this.router.navigate(['/calendar']);

@@ -12,11 +12,11 @@
       <form [formGroup]="editEventForm" (ngSubmit)="onSubmit()">
         <label class="col-sm-5 col-form-label">New day: </label>
         <div class="col-sm-7">
-          <input type="date" min="1990-01-01" id="newDate" class="form-control">
+          <input type="date" id="newDate" class="form-control">
         </div>
           <label class="col-sm-5 col-form-label">New time: </label>
         <div class="col-sm-7">
-          <input id="newTime" type="time" class="form-control">
+          <input id="newTime" type="time" class="form-control .select">
         </div>
         <div class="form-group row">
           <div class="col-sm-12 col-lg-4 col-md-6 text-center mx-auto my-4">
