@@ -16,6 +16,7 @@ import {Subscription} from 'rxjs';
 import {CalendarService} from '../../services/calendar/calendar.service';
 import {User} from '../../models/user/user';
 import {TestCaseDate} from '../../models/date/test-case-date';
+
 declare var $: any;
 
 @Component({
@@ -28,7 +29,7 @@ export class CalendarComponent implements OnInit {
   authenticationServiceSubscription: Subscription;
   datesSubscription: Subscription;
   dates: TestCaseDate[] = [];
-  eventsList: Array<{title: string, startStr: string}> = [];
+  eventsList: Array<{ title: string, startStr: string }> = [];
   user: User;
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
@@ -54,7 +55,10 @@ export class CalendarComponent implements OnInit {
       plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
       select: this.handleDateClick.bind(this),
       eventClick: this.handleEventClick.bind(this),
-      events: [],
+      events: [{
+        title: "something",
+        start: "2020-12-24",
+      }],
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
@@ -68,7 +72,17 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg): void {
-    this.router.navigate(['calendar/edit-event'], {queryParams: {dateStart: clickInfo.event.startStr}});
+    this.dates.forEach((date: TestCaseDate) => {
+      if (+clickInfo.event.id === date.id) {
+        this.router.navigate(['calendar/edit-event'], {
+          queryParams: {
+            dateStart: clickInfo.event.startStr,
+            testCaseId: clickInfo.event.id,
+            repeatable: date.repeatable
+          }
+        });
+      }
+    });
   }
 
   private handleDates(): void {
@@ -76,11 +90,23 @@ export class CalendarComponent implements OnInit {
       .getDates()
       .subscribe(data => {
         data.forEach((date: TestCaseDate) => {
-          this.dates.push(date);
-          this.eventsList.push({title: date.title, startStr: date.executionCronDate});
-        });
-        $('#datesCalendar').fullCalendar('renderEvents', this.eventsList, true);    // Придумай что-то
+            this.dates.push(date);
+            // this.eventsList.push({title: date.title, startStr: date.executionCronDate});
+            $('datesCalendar').events.addEvent({
+              id: date.id,
+              title: date.title,
+              start: date.executionCronDate
+            }, true);
+          }
+        );
       });
+    // this.eventsList.forEach(even => {
+    //   $('datesCalendar').events.addEvent({
+    //     title: even.title,
+    //     start: even.startStr
+    //   }, true);
+    //   }
+    // );
   }
 }
 

@@ -41,5 +41,9 @@ export class CalendarService {
     const url = `${environment.apiUrl}/api/schedule-test-case`;
     return this.http.post<DatePostDto>(url, date);
   }
+  editEvent(date: DatePostDto): Observable<any>{
+    const url = `${environment.apiUrl}/api/schedule-test-case`;
+    return this.http.put<any>(url, date);
+  }
 }
 
