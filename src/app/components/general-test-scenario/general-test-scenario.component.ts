@@ -25,6 +25,7 @@ export class GeneralTestScenarioComponent implements OnInit {
   }
 
   goToTestCase(): void {
+    // this.router.navigate([`projects/${this.theTestCaseId}/test-cases`]);
     this.router.navigate(['']);
   }
 }

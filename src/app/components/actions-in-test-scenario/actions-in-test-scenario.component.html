@@ -7,15 +7,13 @@
       </button>
     </div>
   </div>
-  <div>
-    <!--    *ngIf="actScenarios?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">-->
-    No actions found.
+  <div *ngIf="actScenarios?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+  No actions found.
   </div>
 
   <h5 class="text-success text-center mb-1 mt-1">{{successMessage}}</h5>
   <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
-  <div class="mt-5 row" >
-    <!--    class="mt-5 row" *ngIf="actScenarios.length !== 0">-->
+  <div class="mt-5 row" *ngIf="actScenarios.length !== 0">
     <div class="custom-table black">
       <div class="row thead">
         <div class="col-1">Order</div>
