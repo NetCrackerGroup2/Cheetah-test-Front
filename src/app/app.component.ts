@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy{
   user: User;
   opened = true;
   authenticationServiceSubscription: Subscription;
+
   private notifications$: Observable<Notification[]>;
   private newNotificationsCount$: Observable<number>;
 
@@ -30,6 +31,8 @@ export class AppComponent implements OnInit, OnDestroy{
         this.user = x;
       }
     );
+    profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
   }
 
   ngOnInit(): void {
@@ -66,4 +69,13 @@ export class AppComponent implements OnInit, OnDestroy{
     }
   }
 
+  setUrl(event: any): void{
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (elem: any) => {
+        this.url = elem.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
 }
