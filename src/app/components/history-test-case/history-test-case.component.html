@@ -1,14 +1,12 @@
 <div class="text-center">
   <h1 class="display-4 black mt-lg-5">History</h1>
   <h4 class="display-5 black">test case</h4>
+  <h4 class="display-5 black">"{{titleTestCase}}"</h4>
 </div>
 
 <div class="container  p-lg-5">
   <div class="row ml-5">
     <div class="col-lg-2">
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-6 h4 black">
-      Title
     </div>
     <div class="col-lg-4 col-md-4 col-sm-4 h4 black">
       Date completed
@@ -23,14 +21,15 @@
     <div class="row ml-5 align-items-center">
       <div class="col-lg-2">
       </div>
-      <div class="col-lg-4 col-md-6 col-sm-6 h5 text-dark">
-        {{test.title}}
-      </div>
       <div class="col-lg-4 col-md-4 col-sm-4 h5 text-dark">
         {{test.dataCompleted | date: 'medium'}}
       </div>
       <div class="col-lg-2 col-md-2 col-sm-2 h5" [style]="styleFailedOrCompleted[i]" >
         {{test.result}}
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-2 h5">
+        <input type="button" (click)="detailsTestCase(test.id, test.dataCompleted)"
+               class="options-table" value="Details">
       </div>
     </div>
   </div>

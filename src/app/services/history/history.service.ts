@@ -11,9 +11,10 @@ export class HistoryService {
 
   constructor(private http: HttpClient) { }
 
-  getHistoryTestCase(pageSize: number,
+  getHistoryTestCase(id: number,
+                     pageSize: number,
                      pageNum: number): Observable<GetHistoryTestCase> {
-    const url = `${environment.apiUrl}/api/history/test-case?size=${pageSize}&page=${pageNum}`;
+    const url = `${environment.apiUrl}/api/history/test-case?id=${id}&size=${pageSize}&page=${pageNum}`;
     return this.http.get<GetHistoryTestCase>(url);
   }
 }

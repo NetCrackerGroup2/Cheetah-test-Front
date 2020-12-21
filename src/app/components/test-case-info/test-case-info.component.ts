@@ -56,7 +56,9 @@ export class TestCaseInfoComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, 'history']);
+    const title = this.htcTitle;
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.testCaseId, 'history'],
+      {queryParams: {title}});
   }
 
   sendReport(): void {

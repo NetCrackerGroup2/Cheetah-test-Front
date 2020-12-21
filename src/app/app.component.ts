@@ -31,8 +31,10 @@ export class AppComponent implements OnInit, OnDestroy{
         this.user = x;
       }
     );
-    profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
-      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
+    if (this.authenticationService.userValue !== null) {
+      profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+        (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
+    }
   }
 
   ngOnInit(): void {
@@ -77,5 +79,9 @@ export class AppComponent implements OnInit, OnDestroy{
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+  }
+  loadPhoto(): void {
+    this.profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
   }
 }
