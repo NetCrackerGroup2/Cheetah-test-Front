@@ -4,6 +4,25 @@ import {AuthService} from '../../services/auth/auth.service';
 import {RecentUser} from '../../models/dashboard/RecentUser';
 import {UserProject} from '../../models/dashboard/UserProject';
 import {Router} from '@angular/router';
+import {DashboardService} from '../../services/dashboard/dashboard.service';
+import {ProjectActivityData} from '../../models/dashboard/ProjectActivityData';
+import {UserService} from '../../services/user/user.service';
+import {PlannedTestCase} from '../../models/dashboard/PlannedTestCase';
+
+
+function getTestCaseStats(data: number[]): any {
+  const status = ['Successful', 'Failed', 'Not started yet'];
+  const stats = [];
+  for (let i = 0; i < 3; i++) {
+    stats.push(
+      {
+        name: status[i],
+        value: data[i]
+      }
+    );
+  }
+  return stats;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -12,58 +31,24 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
   user: User;
-  totalUsers: number[] = [2, 10, 78];
-  userProject: UserProject[];
-  plannedTestCases: [];
+  userId: number;
+  isAdmin = false;
+  totalUsers: number[] = [];
+  userProjects: UserProject[] = [];
+  plannedTestCases: PlannedTestCase[] = [];
   totalArchivedProjects = 18;
-  recentUsers: RecentUser[] = [
-    new RecentUser(
-      'https://maskicharly.nethouse.ru/static/img/0000/0000/8083/8083665.kmx1pufmfy.jpg?1',
-      'Danil Solovjov',
-      'Engineer',
-      '21:22'
-    ),
-    new RecentUser(
-      'https://maskicharly.nethouse.ru/static/img/0000/0000/8083/8083665.kmx1pufmfy.jpg?1',
-      'Dima Gorovenko',
-      'Admin',
-      '20:00'
-    ),
-    new RecentUser(
-      'https://maskicharly.nethouse.ru/static/img/0000/0000/8083/8083665.kmx1pufmfy.jpg?1',
-      'Kate Babanina',
-      'Engineer',
-      '17:20'
-    ),
-    new RecentUser(
-      'https://maskicharly.nethouse.ru/static/img/0000/0000/8083/8083665.kmx1pufmfy.jpg?1',
-      'Alex Bereznikov',
-      'Engineer',
-      '13:11'
-    ),
-    new RecentUser(
-      'https://maskicharly.nethouse.ru/static/img/0000/0000/8083/8083665.kmx1pufmfy.jpg?1',
-      'Dima Rozhko',
-      'Engineer',
-      '14:44'
-    )
+  recentUsers: RecentUser[];
+  projectActivity: ProjectActivityData;
 
-  ];
-  userProjects: UserProject[] = [
-    new UserProject(2, 'HotlineProject', 'Developer'),
-    new UserProject(3, 'Rozetka Project', 'Watcher'),
-    new UserProject(5, 'Github Project', 'Watcher'),
-    new UserProject(7, 'Olx Project', 'Developer'),
-    new UserProject(8, 'Ebay Project', 'Watcher'),
-    new UserProject(9, 'Juno Project', 'Watcher')
-  ];
+
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
+  // testCaseStats = [];
   testCaseStats = [
     {
       "name": "Sucesseful",
-      "value": 125
+      "value": 154
     },
     {
       "name": "Failed",
@@ -77,41 +62,73 @@ export class DashboardComponent implements OnInit {
   testCasesColorScheme = {
     domain: ['#24c215', '#d41313', '#585858']
   };
-  amountOfProjects = [
+
+  single = [
     {
-      "name": "Total projects",
-      "series": [
+      name: 'Karthikeyan',
+      series: [
         {
-          "value": 3,
-          "name": "2020-12-20T14:38:08.093Z"
+          name: '2016',
+          value: '15000'
         },
         {
-          "value": 6,
-          "name": "2020-12-19T14:38:08.093Z"
+          name: '2017',
+          value: '20000'
         },
         {
-          "value": 2,
-          "name": "2020-12-18T14:38:08.093Z"
+          name: '2018',
+          value: '25000'
         },
         {
-          "value": 7,
-          "name": "2020-12-13T14:38:08.093Z"
-        },
-      ]
+          name: '2019',
+          value: '30000'
+        }
+      ],
     },
   ];
-  totalTodayProjects = 3;
+  totalTodayProjects: number;
 
   constructor(
     private authenticationService: AuthService,
+    private dashboardService: DashboardService,
+    private userService: UserService,
     private router: Router
   ) {
     this.user = this.authenticationService.userValue;
+    this.userId = 2;
+    this.isAdmin = this.user.role === 'ADMIN';
+    this.dashboardService.getTotalUsers().subscribe(
+      data => this.totalUsers = data
+    );
+    this.dashboardService.getRecentUsers()
+      .subscribe(data => this.recentUsers = data);
+    this.dashboardService.getAmountOfArchivedProjects()
+      .subscribe(data => this.totalArchivedProjects = data);
+    this.dashboardService.getTodayProjects()
+      .subscribe(data => this.totalTodayProjects = data);
+    this.dashboardService.getProjectActivity().subscribe(
+      data => this.projectActivity = data
+    );
+    this.dashboardService.getUserProjectsBy(2).subscribe(
+      data => this.userProjects = data
+    );
+    if (this.user.role === 'ENGINEER') {
+      this.dashboardService.getPlannedTestCasesForEngineer(this.userId)
+        .subscribe(data => this.plannedTestCases = data);
+    }
+    else if (this.user.role === 'MANAGER') {
+      this.dashboardService.getPlannedTestCasesForManager()
+        .subscribe(data => this.plannedTestCases = data);
+    }
+    this.dashboardService.getTestCaseStatsByProjectId(1)
+      .subscribe(data => this.testCaseStats = getTestCaseStats(data));
   }
 
   ngOnInit(): void {
 
   }
+
+
 
   goToProject(projectId: number): void {
     this.router.navigate(['projects', projectId, 'test-cases']);

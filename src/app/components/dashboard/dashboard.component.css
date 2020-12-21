@@ -59,7 +59,7 @@ img {
 }
 
 .greeting {
-  animation: fadeInDown; /* referring directly to the animation's @keyframe declaration */
+  animation: fadeInRight; /* referring directly to the animation's @keyframe declaration */
   animation-duration: 3s; /* don't forget to set a duration! */
 }
 
@@ -95,4 +95,10 @@ h1, h2, h3, table {
 
 ngx-charts-advanced-pie-chart {
   width: 100px;
+}
+
+select {
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  padding: 7px;
 }

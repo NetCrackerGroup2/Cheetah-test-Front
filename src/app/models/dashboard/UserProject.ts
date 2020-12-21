@@ -1,11 +1,11 @@
 export class UserProject {
-  projectId: number;
-  projectTitle: string;
+  id: number;
+  title: string;
   userStatus: string;
 
-  constructor(projectId: number, projectTitle: string, userStatus: string) {
-    this.projectId = projectId;
-    this.projectTitle = projectTitle;
+  constructor(id: number, title: string, userStatus: string) {
+    this.id = id;
+    this.title = title;
     this.userStatus = userStatus;
   }
 }

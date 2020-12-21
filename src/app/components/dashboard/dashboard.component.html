@@ -72,18 +72,20 @@
                   <div class="container-fluid justify-content-lg-between row">
                     <div class="container-fluid row">
                       <div class="mr-2">
-                        <img src="{{recentUser.imgUrl}}" alt="{{recentUser.fullName}}">
+                        <img
+                          src="{{recentUser.photoUrl == null ? './assets/anonymous.jpg' : recentUser.photoUrl}}"
+                          alt="Anonymous">
                       </div>
                       <div>
-                        <h5>{{recentUser.fullName}}</h5>
-                        <h6 style="color: gray; font-weight: bold">{{recentUser.userRole}}</h6>
+                        <h5>{{recentUser.name | titlecase}}</h5>
+                        <h6 style="color: gray; font-weight: bold">{{recentUser.role | titlecase}}</h6>
                       </div>
                     </div>
                   </div>
                 </td>
                 <td class="text-center">
                   <div class="mt-2">
-                    <h5>at {{recentUser.date}}</h5>
+                    <h5>at {{recentUser.time}}</h5>
                   </div>
                 </td>
               </tr>
@@ -91,8 +93,6 @@
             </table>
           </div>
         </div>
-
-
     </div>
   </div>
 
@@ -149,8 +149,11 @@
             </tr>
             </thead>
             <tbody>
+            <tr *ngIf="userProjects.length === 0">
+              <td colspan="2">No projects yet</td>
+            </tr>
             <tr *ngFor="let userProject of userProjects">
-              <td><a (click)="goToProject(userProject.projectId)">{{userProject.projectTitle}}</a></td>
+              <td><a (click)="goToProject(userProject.id)">{{userProject.title}}</a></td>
               <td>{{userProject.userStatus}}</td>
             </tr>
             </tbody>
@@ -163,7 +166,7 @@
         <div>
           <ngx-charts-line-chart class="col"
             [view]="[650,400]"
-            [results]="amountOfProjects"
+            [results]="projectActivity"
             [xAxisLabel]="'Date'"
             [yAxisLabel]="'Quantity of created projects'"
             [showXAxisLabel]="true"
@@ -181,13 +184,20 @@
   <div class="text-center mt-3">
     <h3>Test cases statistics</h3>
   </div>
-  <label>
-    <select>
-      <option *ngFor="let project of userProjects">
-        {{project.projectTitle}}
-      </option>
-    </select>
-  </label>
+  <div class="row"> <!-- *ngIf="this.user.role === 'ENGINEER'" -->
+    <div>
+      <h5 class="m-1 black">Select a project: </h5>
+    </div>
+    <div>
+      <label>
+        <select>
+          <option *ngFor="let project of userProjects">
+            {{project.title}}
+          </option>
+        </select>
+      </label>
+    </div>
+  </div>
   <div class="container-fluid justify-content-lg-center row">
       <div>
         <ngx-charts-pie-grid
@@ -206,16 +216,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Hotline Project</td>
-            <td>Test register button</td>
-            <td class="text-right">20.12.20</td>
+          <tr *ngIf="plannedTestCases.length === 0">
+            <td colspan="3" class="text-center">You do not have any planned test cases!</td>
+          </tr>
+          <tr *ngFor="let plTestCase of plannedTestCases">
+            <td>{{plTestCase.titleProject}}</td>
+            <td>{{plTestCase.titleTestCase}}</td>
+            <td class="text-right">{{plTestCase.cronDate}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-
-
-
 </div>

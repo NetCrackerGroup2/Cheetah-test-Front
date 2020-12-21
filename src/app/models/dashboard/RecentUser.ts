@@ -1,13 +1,13 @@
 export class RecentUser {
-  imgUrl: string;
-  fullName: string;
-  userRole: string;
-  date: string;
+  name: string;
+  role: string;
+  time: string;
+  photoUrl: string;
 
-  constructor(imgUrl: string, fullName: string, userRole: string, date: string) {
-    this.imgUrl = imgUrl;
-    this.fullName = fullName;
-    this.userRole = userRole;
-    this.date = date;
+  constructor(name: string, role: string, time: string, photoUrl: string) {
+    this.name = name;
+    this.role = role;
+    this.time = time;
+    this.photoUrl = photoUrl;
   }
 }
