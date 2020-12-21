@@ -74,7 +74,7 @@ import { RunDetailsComponent } from './components/run-details/run-details.compon
     AddCalendarEventComponent,
     EditCalendarEventComponent,
     NotificationsComponent,
-    EditWatchersComponent
+    EditWatchersComponent,
     EditWatchersComponent,
     RunDetailsComponent
   ],
