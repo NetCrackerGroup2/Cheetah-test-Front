@@ -19,7 +19,7 @@
             {{newNotification.description}} Click on the link below to see more information:
           </div>
           <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
-            <button class="options-table" (click)="goToRunDetails(newNotification.testCaseId)">
+            <button class="options-table" (click)="goToRunDetails(newNotification.testCaseId, newNotification.htcId,newNotification.projectId, newNotification.notificationStatus)">
               View Details
             </button>
           </div>
@@ -44,7 +44,7 @@
             {{oldNotification.description}} Click on the link below to see more information:
           </div>
           <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
-            <button class="options-table" (click)="goToRunDetails(oldNotification.testCaseId)">
+            <button class="options-table" (click)="goToRunDetails(oldNotification.testCaseId,oldNotification.htcId,oldNotification.projectId, oldNotification.notificationStatus)">
               View Details
             </button>
           </div>

@@ -25,7 +25,7 @@ export class RunDetailsComponent implements OnInit {
               private router: Router,
               private authenticationService: AuthService,
               private websocketService: WebsocketService
-              ) {
+  ) {
     this.testCaseId = route.snapshot.params.idTestCase;
     this.projectId = route.snapshot.params.idProject;
     this.user = this.authenticationService.userValue;
@@ -33,12 +33,12 @@ export class RunDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeOnMessages();
-    this.websocketService.send(WS.SEND.GET_TEST_CASE_RESULTS_INFO);
+    // this.websocketService.send(WS.SEND.GET_TEST_CASE_RESULTS_INFO, this.testCaseId);
   }
 
   subscribeOnMessages(): void {
     this.websocketService.on(WS.ON.TEST_CASE_ACTIONS).subscribe((data: TestCaseProgressReport) => {
-      if (data.idTestCase === this.testCaseId) {
+      if (data.idTestCase.toString() === this.testCaseId.toString()) {
         this.actionResults = data.completed;
         this.totalActionResults = data.totalActionResults;
       }

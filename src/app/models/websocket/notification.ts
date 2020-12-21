@@ -18,4 +18,5 @@ export interface Notification {
   testCaseId: number;
   projectId: number;
   readStatus: ReadStatus;
+  htcId: number;
 }

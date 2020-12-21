@@ -1,11 +1,10 @@
-import {Component, DoCheck, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {WebsocketService} from '../../services/websocket/websocket.service';
 import {WS} from '../../services/websocket/websocket.events';
 import {map} from 'rxjs/operators';
-import {ReadStatus} from '../../models/websocket/notification';
-import {Notification} from '../../models/websocket/notification';
+import {Notification, NotificationStatus, ReadStatus} from '../../models/websocket/notification';
 
 @Component({
   selector: 'app-notifications',
@@ -23,7 +22,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private websocketService: WebsocketService
-  ){}
+  ) {
+  }
 
   ngOnInit(): void {
     this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
@@ -43,8 +43,13 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.websocketService.send(WS.SEND.GET_NOTIFICATIONS);
   }
 
-  goToRunDetails(idTestCase: number): void {
-    this.router.navigate([`test-scenario/${idTestCase}/info`]);
+  goToRunDetails(idTestCase: number, htcId: number, projectId: number, notificationStatus: NotificationStatus): void {
+    if (notificationStatus === NotificationStatus.IN_PROCESS) {
+      this.router.navigate([`test-scenario/${idTestCase}/info`]);
+    } else {
+      this.router.navigate([`projects/${projectId}/test-cases/${idTestCase}/history/${htcId}`]);
+    }
+
   }
 
   deleteNotification(id: number): void {
@@ -54,7 +59,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.newNotifications.length > 0) {
       const ids: number[] = this.newNotifications.map((notification) => notification.id);
-      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, {notifications: ids});
+      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, ids);
     }
   }
 }
