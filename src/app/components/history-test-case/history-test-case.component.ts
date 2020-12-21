@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../../services/auth/auth.service';
 import {GetHistoryTestCase, HistoryService} from '../../services/history/history.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-history-test-case',
@@ -18,15 +19,25 @@ export class HistoryTestCaseComponent implements OnInit {
 
   styleFailedOrCompleted: string[];
   emptyRow = [];
+  projectId: number;
+  testCaseId: number;
+  titleTestCase: string;
 
   constructor(private auth: AuthService,
-              private historyService: HistoryService) {
+              private historyService: HistoryService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.testCaseId = +this.route.snapshot.paramMap.get('idTestCase');
+    this.projectId = +this.route.snapshot.paramMap.get('idProject');
+    this.route.queryParams
+      .subscribe(params =>
+        this.titleTestCase = params[Object.keys(params)[0]]);
     this.testCase = {
       historyTestCases: [],
       totalTestCases: 0
     };
     this.historyService.getHistoryTestCase(
-      this.pageSize, this.numPage)
+      this.testCaseId, this.pageSize, this.numPage)
       .subscribe(elem => {
         this.testCase = elem;
         this.styleFailedOrCompleted = new Array<string>
@@ -41,7 +52,7 @@ export class HistoryTestCaseComponent implements OnInit {
   }
 
   pageChange(page: number): void {
-    this.historyService.getHistoryTestCase(
+    this.historyService.getHistoryTestCase(this.testCaseId,
       this.pageSize, page)
       .subscribe(elem => {
         this.testCase = elem;
@@ -54,6 +65,20 @@ export class HistoryTestCaseComponent implements OnInit {
         }
         this.emptyRow = new Array(this.pageSize - this.testCase.historyTestCases.length + 3);
       });
+  }
+
+  detailsTestCase(id: number, date: string): void {
+    let HTCTitle;
+    this.route.queryParams
+      .subscribe(params => {
+        HTCTitle = params[Object.keys(params)[0]];
+        this.router.navigate(['projects', this.projectId, 'test-cases', this.testCaseId, 'history', id],
+          {queryParams: { HTCTitle: HTCTitle}});
+      });
+  }
+
+  goBack(): void {
+    this.router.navigate(['/projects', this.projectId, 'test-cases']);
   }
 
   ngOnInit(): void {

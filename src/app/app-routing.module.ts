@@ -106,11 +106,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:id/history-test-case',
-    component: HistoryTestCaseComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'projects/:id/test-cases',
     component: TestCaseListComponent,
     canActivate: [AuthGuard]
@@ -123,6 +118,11 @@ const routes: Routes = [
   {
     path: 'projects/:projectId/test-cases/edit-test-case/:id',
     component: TestCaseConfigurationComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/history',
+    component: HistoryTestCaseComponent,
     canActivate: [AuthGuard]
   },
   {
