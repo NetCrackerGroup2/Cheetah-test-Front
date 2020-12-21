@@ -9,14 +9,15 @@
   font-size: 1vw;
 }
 
-.ngb-pagination ::ng-deep ul > li.active > a {
+ngb-pagination ::ng-deep ul > li.active > a {
   background-color: #BD7D42 !important;
   border: rgba(0, 0, 00, 0.0);
   box-shadow: 5px 5px 10px #BD7D42;
 }
 
-.ngb-pagination ::ng-deep ul > li:not(.active) > a {
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
   border: rgba(0, 0, 00, 0.0);
   color: #BD7D42 !important;
   box-shadow: 5px 5px 10px #BD7D42;
 }
+

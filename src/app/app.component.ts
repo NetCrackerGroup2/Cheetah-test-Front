@@ -25,8 +25,10 @@ export class AppComponent implements OnDestroy{
         this.user = x;
       }
     );
-    profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
-      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
+    if (this.authenticationService.userValue !== null) {
+      profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+        (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
+    }
   }
 
   get isOut(): boolean {
@@ -61,5 +63,9 @@ export class AppComponent implements OnDestroy{
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+  }
+  loadPhoto(): void {
+    this.profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
   }
 }

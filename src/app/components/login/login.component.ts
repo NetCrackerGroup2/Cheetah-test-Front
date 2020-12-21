@@ -5,6 +5,7 @@ import {LoginDto} from '../../models/loginDto/loginDto';
 import {first} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AppComponent} from '../../app.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthService
+    private authenticationService: AuthService,
+    private app: AppComponent
   ) {
     if (this.authenticationService.userValue) {
       this.router.navigate(['dashboard']);
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(first())
       .subscribe({
         next: () => {
+          this.app.loadPhoto();
           this.router.navigate(['dashboard']);
           this.loading = false;
         },
