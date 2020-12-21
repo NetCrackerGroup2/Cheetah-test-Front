@@ -154,7 +154,7 @@
             </tr>
             <tr *ngFor="let userProject of userProjects">
               <td><a (click)="goToProject(userProject.id)">{{userProject.title}}</a></td>
-              <td>{{userProject.userStatus}}</td>
+              <td class="text-right">{{userProject.userStatus | titlecase}}</td>
             </tr>
             </tbody>
           </table>

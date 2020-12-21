@@ -35,16 +35,14 @@ export class DashboardComponent implements OnInit {
   isAdmin = false;
   totalUsers: number[] = [];
   userProjects: UserProject[] = [];
+  currentUserProject: UserProject;
   plannedTestCases: PlannedTestCase[] = [];
-  totalArchivedProjects = 18;
+  totalArchivedProjects: number;
   recentUsers: RecentUser[];
   projectActivity: ProjectActivityData;
-
-
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
-  // testCaseStats = [];
   testCaseStats = [
     {
       "name": "Sucesseful",
@@ -62,26 +60,25 @@ export class DashboardComponent implements OnInit {
   testCasesColorScheme = {
     domain: ['#24c215', '#d41313', '#585858']
   };
-
   single = [
     {
-      name: 'Karthikeyan',
+      name: 'Total projects',
       series: [
         {
-          name: '2016',
-          value: '15000'
+          name: '19.12.20',
+          value: '2'
         },
         {
-          name: '2017',
-          value: '20000'
+          name: '19.12.20',
+          value: '5'
         },
         {
-          name: '2018',
-          value: '25000'
+          name: '20.12.20',
+          value: '4'
         },
         {
-          name: '2019',
-          value: '30000'
+          name: '21.12.20',
+          value: '8'
         }
       ],
     },
@@ -95,7 +92,7 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.user = this.authenticationService.userValue;
-    this.userId = 2;
+    this.userId = 2; // TODO
     this.isAdmin = this.user.role === 'ADMIN';
     this.dashboardService.getTotalUsers().subscribe(
       data => this.totalUsers = data
@@ -106,20 +103,32 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => this.totalArchivedProjects = data);
     this.dashboardService.getTodayProjects()
       .subscribe(data => this.totalTodayProjects = data);
-    this.dashboardService.getProjectActivity().subscribe(
-      data => this.projectActivity = data
+    // this.dashboardService.getProjectActivity().subscribe(
+    //   data => this.projectActivity = data
+    // );
+
+    this.currentUserProject = new UserProject();
+    this.dashboardService.getUserProjectsBy(this.userId).subscribe(
+      data => {
+        this.userProjects = data;
+        this.currentUserProject.title = data[0].title;
+        this.currentUserProject.id = data[0].id;
+        this.currentUserProject.userStatus = data[0].userStatus;
+      }
     );
-    this.dashboardService.getUserProjectsBy(2).subscribe(
-      data => this.userProjects = data
-    );
+
+    console.log(this.currentUserProject);
     if (this.user.role === 'ENGINEER') {
       this.dashboardService.getPlannedTestCasesForEngineer(this.userId)
         .subscribe(data => this.plannedTestCases = data);
     }
+
     else if (this.user.role === 'MANAGER') {
       this.dashboardService.getPlannedTestCasesForManager()
         .subscribe(data => this.plannedTestCases = data);
     }
+
+    // TODO
     this.dashboardService.getTestCaseStatsByProjectId(1)
       .subscribe(data => this.testCaseStats = getTestCaseStats(data));
   }
@@ -127,8 +136,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-
 
   goToProject(projectId: number): void {
     this.router.navigate(['projects', projectId, 'test-cases']);
