@@ -24,6 +24,7 @@ export class TestScenarioComponent implements OnInit {
   testScenarios: TestScenario[] = [];
 
   @Input() theTestCaseId;
+  @Input() projectId;
 
   constructor(private authenticationService: AuthService,
               private router: Router,
@@ -83,7 +84,7 @@ export class TestScenarioComponent implements OnInit {
   }
 
   view(testScenario: TestScenario): void {
-    this.router.navigate([`/test-scenario/${testScenario.id}/${testScenario.idTestCase}`],
+    this.router.navigate([`projects/${this.projectId}/test-scenario/${testScenario.id}/test-case/${testScenario.idTestCase}`],
       {
         queryParams: {
           testScenarioTitle: testScenario.title,

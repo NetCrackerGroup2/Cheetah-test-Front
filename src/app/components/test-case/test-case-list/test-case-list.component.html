@@ -40,7 +40,7 @@
       </td>
       <td class="row">
         <button [routerLink]="['/data-set', testCase.id]" type="button" class="options mt-1">Data Set</button>
-        <button [routerLink]="['/general-test-scenario', testCase.id]" type="button" class="options mt-1">Test Scenario</button>
+        <button [routerLink]="['/projects',this.projectId, 'test-cases', testCase.id, 'general-test-scenario']" type="button" class="options mt-1">Test Scenario</button>
         <button type="button" class="options mt-1" (click)="getReportDetails(testCase.id)">Report details</button>
         <button type="button" class="options mt-1" (click)="edit(testCase.id)">Edit</button>
         <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"

@@ -25,6 +25,7 @@ export class CreateTestScenarioComponent implements OnInit, OnDestroy {
   errorMessage: string;
   createTestScenarioForm: FormGroup;
   theTestCaseId: number;
+  projectId: number;
 
   actions: Action[];
   compounds: Compound[];
@@ -64,6 +65,7 @@ export class CreateTestScenarioComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.maxLength(300)])
     });
     this.theTestCaseId = +this.route.snapshot.paramMap.get('id');
+    this.projectId = +this.route.snapshot.paramMap.get('projectId');
   }
 
   get description(): any {
@@ -75,7 +77,7 @@ export class CreateTestScenarioComponent implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigate(['general-test-scenario', this.theTestCaseId]);
+    this.router.navigate(['/projects', this.projectId, 'test-cases', this.theTestCaseId, 'general-test-scenario']);
   }
 
   onSubmit(): void {

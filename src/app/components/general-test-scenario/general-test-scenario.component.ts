@@ -9,15 +9,17 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class GeneralTestScenarioComponent implements OnInit {
 
   theTestCaseId: number;
+  projectId: number;
 
   constructor(private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.theTestCaseId = +this.route.snapshot.paramMap.get('id');
+    this.projectId = +this.route.snapshot.paramMap.get('projectId');
   }
 
   createTestScenario(): string {
-    return `/create-test-scenario/${this.theTestCaseId}`;
+    return `/projects/${this.projectId}/create-test-scenario/${this.theTestCaseId}`;
   }
 
   createCompound(): void {
@@ -26,6 +28,6 @@ export class GeneralTestScenarioComponent implements OnInit {
 
   goToTestCase(): void {
     // this.router.navigate([`projects/${this.theTestCaseId}/test-cases`]);
-    this.router.navigate(['']);
+    this.router.navigate(['projects', this.projectId, 'test-cases']);
   }
 }

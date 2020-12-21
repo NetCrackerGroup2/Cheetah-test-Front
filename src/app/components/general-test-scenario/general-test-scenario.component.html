@@ -11,10 +11,10 @@
       Create Compound
     </button>
     <button class="options  ml-1" (click)="goToTestCase()">
-      Go to Test Case
+      Go to Test Cases
     </button>
   </div>
   <div class = "main-content" >
-    <app-test-scenario [theTestCaseId] = "theTestCaseId"></app-test-scenario>
+    <app-test-scenario [theTestCaseId] = "theTestCaseId" [projectId]="projectId"></app-test-scenario>
   </div>
 </div>
