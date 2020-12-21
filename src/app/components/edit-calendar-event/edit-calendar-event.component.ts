@@ -73,4 +73,10 @@ export class EditCalendarEventComponent implements OnInit {
       .editEvent(this.dateDto).subscribe();
     this.router.navigate(['/calendar']);
   }
+
+  delete(): void {
+    this.datesSubscription = this.сalendarService
+      .deleteDates(this.dateDto.testCaseId).subscribe();
+    this.router.navigate(['/calendar']);
+  }
 }

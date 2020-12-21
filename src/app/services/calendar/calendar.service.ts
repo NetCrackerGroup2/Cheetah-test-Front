@@ -35,7 +35,7 @@ export class CalendarService {
 
   deleteDates(id: number): Observable<any> {
     const url = `${environment.apiUrl}/api/schedule-test-case/${id}`;
-    return this.http.delete<DatePostDto>(url);
+    return this.http.delete<any>(url);
   }
   createDates(date: DatePostDto): Observable<any> {
     const url = `${environment.apiUrl}/api/schedule-test-case`;
