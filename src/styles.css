@@ -224,3 +224,7 @@ ul.search-result {
   color: white;
 }
 
+.fc-day-sun, .fc-day-sat {
+  background: #CA9768;
+}
+
