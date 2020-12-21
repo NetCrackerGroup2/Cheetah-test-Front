@@ -83,7 +83,7 @@ export class TestScenarioComponent implements OnInit {
   }
 
   view(testScenario: TestScenario): void {
-    this.router.navigate([`/test-case/${testScenario.id}/${testScenario.idTestCase}`],
+    this.router.navigate([`/test-scenario/${testScenario.id}/${testScenario.idTestCase}`],
       {
         queryParams: {
           testScenarioTitle: testScenario.title,
@@ -96,7 +96,7 @@ export class TestScenarioComponent implements OnInit {
     this.testScenarioService.remove(id)
       .pipe(take(1))
       .subscribe(
-       // () => this.listTestScenarios()
+       () => this.listTestScenarios()
       );
   }
 
