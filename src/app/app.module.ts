@@ -35,6 +35,7 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
+import {WebsocketModule} from './services/websocket/websocket.module';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
@@ -86,6 +87,7 @@ import { RunDetailsComponent } from './components/run-details/run-details.compon
     FormsModule,
     NgbModule,
     SidebarModule,
+    WebsocketModule,
     DragDropModule,
     NgCircleProgressModule.forRoot({
       backgroundColor: '#F1F1F1',

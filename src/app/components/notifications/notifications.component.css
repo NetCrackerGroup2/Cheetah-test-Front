@@ -1,17 +1,20 @@
 
-.ngb-pagination ::ng-deep a {
-  color: #bd7d42 !important;
+.notification-class-title {
+  color: #3e3223;
+  text-align: center;
+  width: 100%;
 }
 
-.ngb-pagination ::ng-deep .page-item.active .page-link {
-  border-color: black;
-  background-color: lightgrey;
+
+.delete-button {
+  background-color: #fd6363;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-style: normal;
+  font-size: 16px;
 }
 
-.ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
-  box-shadow: 0 0 0 0.1rem dimgrey;
-}
-
-.ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
-  box-shadow: 0 0 0 0.1rem dimgrey;
+.delete-button:hover {
+  background-color: #fa7f7f;
 }
