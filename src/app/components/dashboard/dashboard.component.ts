@@ -35,37 +35,24 @@ export class DashboardComponent implements OnInit {
   isAdmin = false;
   totalUsers: number[] = [];
   userProjects: UserProject[] = [];
-  currentUserProject: UserProject;
+  totalTestCases: number;
   plannedTestCases: PlannedTestCase[] = [];
   totalArchivedProjects: number;
   recentUsers: RecentUser[];
-  projectActivity: ProjectActivityData;
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
-  testCaseStats = [
-    {
-      "name": "Sucesseful",
-      "value": 154
-    },
-    {
-      "name": "Failed",
-      "value": 78
-    },
-    {
-      "name": "Not yet started",
-      "value": 29
-    }
-  ];
+  selectedProject: UserProject;
+  testCaseStats = [];
   testCasesColorScheme = {
     domain: ['#24c215', '#d41313', '#585858']
   };
-  single = [
+  projectActivity = [
     {
-      name: 'Total projects',
+      name: 'Projects',
       series: [
         {
-          name: '19.12.20',
+          name: '18.12.20',
           value: '2'
         },
         {
@@ -84,6 +71,7 @@ export class DashboardComponent implements OnInit {
     },
   ];
   totalTodayProjects: number;
+  projectPercent: number;
 
   constructor(
     private authenticationService: AuthService,
@@ -92,10 +80,12 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.user = this.authenticationService.userValue;
-    this.userId = 2; // TODO
     this.isAdmin = this.user.role === 'ADMIN';
     this.dashboardService.getTotalUsers().subscribe(
       data => this.totalUsers = data
+    );
+    this.dashboardService.getProjectPercent().subscribe(
+      data => this.projectPercent = Math.round(data[1] / data[0] * 100) / 100
     );
     this.dashboardService.getRecentUsers()
       .subscribe(data => this.recentUsers = data);
@@ -107,30 +97,35 @@ export class DashboardComponent implements OnInit {
     //   data => this.projectActivity = data
     // );
 
-    this.currentUserProject = new UserProject();
-    this.dashboardService.getUserProjectsBy(this.userId).subscribe(
+    this.userService.searchEntries(this.user.email).subscribe(
       data => {
-        this.userProjects = data;
-        this.currentUserProject.title = data[0].title;
-        this.currentUserProject.id = data[0].id;
-        this.currentUserProject.userStatus = data[0].userStatus;
+        this.userId = data[0].id;
+        this.dashboardService.getUserProjectsBy(this.userId).subscribe(
+          d => {
+            this.userProjects = d;
+            this.selectedProject = d[0];
+            this.dashboardService.getTestCaseStatsByProjectId(this.userProjects[0].id)
+              .subscribe(p => {
+                this.testCaseStats = [
+                  {name: 'Successful', value: p[0]},
+                  {name: 'Failed', value: p[1]},
+                  {name: 'Not started yet', value: p[2]}
+                ];
+                this.totalTestCases = p[3];
+              });
+          }
+        );
+        if (this.user.role === 'ENGINEER') {
+          this.dashboardService.getPlannedTestCasesForEngineer(this.userId)
+            .subscribe(v => this.plannedTestCases = v);
+        }
+
+        else if (this.user.role === 'MANAGER') {
+          this.dashboardService.getPlannedTestCasesForManager()
+            .subscribe(z => this.plannedTestCases = z);
+        }
       }
     );
-
-    console.log(this.currentUserProject);
-    if (this.user.role === 'ENGINEER') {
-      this.dashboardService.getPlannedTestCasesForEngineer(this.userId)
-        .subscribe(data => this.plannedTestCases = data);
-    }
-
-    else if (this.user.role === 'MANAGER') {
-      this.dashboardService.getPlannedTestCasesForManager()
-        .subscribe(data => this.plannedTestCases = data);
-    }
-
-    // TODO
-    this.dashboardService.getTestCaseStatsByProjectId(1)
-      .subscribe(data => this.testCaseStats = getTestCaseStats(data));
   }
 
   ngOnInit(): void {
@@ -139,5 +134,9 @@ export class DashboardComponent implements OnInit {
 
   goToProject(projectId: number): void {
     this.router.navigate(['projects', projectId, 'test-cases']);
+  }
+
+  selectTestCaseStats(projectId: number): void {
+
   }
 }

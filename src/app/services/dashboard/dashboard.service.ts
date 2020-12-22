@@ -15,9 +15,14 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getTotalUsers(): Observable<any> {
+  getTotalUsers(): Observable<number[]> {
     const url = `${environment.apiUrl}/api/dashboard/admin/count-users`;
-    return this.http.get<any>(url);
+    return this.http.get<number[]>(url);
+  }
+
+  getProjectPercent(): Observable<number[]> {
+    const url = `${environment.apiUrl}/api/dashboard/admin/percent-projects`;
+    return this.http.get<number[]>(url);
   }
 
   getRecentUsers(): Observable<RecentUser[]> {

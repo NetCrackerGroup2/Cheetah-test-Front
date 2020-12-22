@@ -11,6 +11,10 @@
   transition: linear 0.38s;
 }
 
+.project-card {
+  width: 30px;
+}
+
 .size2{
   background:black;
   width:300px;
@@ -101,4 +105,8 @@ select {
   font-family: 'Lato', sans-serif;
   font-size: 15px;
   padding: 7px;
+}
+
+.project-table td {
+
 }
