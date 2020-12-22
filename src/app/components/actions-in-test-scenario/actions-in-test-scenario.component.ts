@@ -24,6 +24,7 @@ export class ActionsInTestScenarioComponent implements OnInit, OnDestroy {
 
   testScenarioId: number;
   theTestCaseId: number;
+  projectId: number;
   testScenarioTitle: string;
   testScenarioDescription: string;
   actScenarios: ActScenario[];
@@ -45,6 +46,7 @@ export class ActionsInTestScenarioComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.testScenarioId = +this.route.snapshot.paramMap.get('idTestScenario');
     this.theTestCaseId = +this.route.snapshot.paramMap.get('idTestCase');
+    this.projectId = +this.route.snapshot.paramMap.get('projectId');
     this.subscription = this.route
       .queryParams
       .subscribe(params => {

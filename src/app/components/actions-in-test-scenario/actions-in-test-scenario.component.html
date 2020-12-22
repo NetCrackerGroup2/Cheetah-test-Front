@@ -2,8 +2,8 @@
   <div class="row mt-5">
     <h1 class="col display-4 black">Actions In "{{ testScenarioTitle }}"</h1>
     <div class="col mt-5">
-      <button class="options" [routerLink]="['/general-library']">
-        Back to Library
+      <button class="options" [routerLink]="['/projects',this.projectId, 'test-cases', this.theTestCaseId, 'general-test-scenario']">
+        Back Test Scenario
       </button>
     </div>
   </div>
