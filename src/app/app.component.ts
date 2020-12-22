@@ -8,6 +8,7 @@ import {WebsocketService} from './services/websocket/websocket.service';
 import {WS} from './services/websocket/websocket.events';
 import {Notification, ReadStatus} from './models/websocket/notification';
 import {map} from 'rxjs/operators';
+import {ProfileService} from './services/profile/profile.service';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +19,15 @@ export class AppComponent implements OnInit, OnDestroy{
   user: User;
   opened = true;
   authenticationServiceSubscription: Subscription;
+  url: string;
 
   private notifications$: Observable<Notification[]>;
   private newNotificationsCount$: Observable<number>;
 
   constructor(private authenticationService: AuthService,
               private router: Router,
-              private websocketService: WebsocketService
-  ) {
+              private websocketService: WebsocketService,
+              private profileService: ProfileService) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
