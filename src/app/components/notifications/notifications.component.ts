@@ -1,44 +1,65 @@
-import {Component, OnInit} from '@angular/core';
-import {Notification, NotificationsService} from '../../services/notifications/notifications.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {WebsocketService} from '../../services/websocket/websocket.service';
+import {WS} from '../../services/websocket/websocket.events';
+import {map} from 'rxjs/operators';
+import {Notification, NotificationStatus, ReadStatus} from '../../models/websocket/notification';
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.css']
 })
-export class NotificationsComponent implements OnInit {
-  notifications: Notification[];
-  totalElements = 0;
-  thePageNumber = 1;
-  thePageSize = 5;
+export class NotificationsComponent implements OnInit, OnDestroy {
 
-  constructor(private notificationsService: NotificationsService, private router: Router) {
-    this.getNotifications(1, 5);
+  notifications$: Observable<Notification[]>;
+  oldNotifications$: Observable<Notification[]>;
+  newNotifications$: Observable<Notification[]>;
+  newNotifications: Notification[];
+
+
+  constructor(
+    private router: Router,
+    private websocketService: WebsocketService
+  ) {
   }
 
   ngOnInit(): void {
+    this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
+    this.newNotifications$ = this.notifications$.pipe(
+      map((notifications) => notifications.filter((notification) => ReadStatus.UNREAD === notification.readStatus))
+    );
+    this.oldNotifications$ = this.notifications$.pipe(
+      map((notifications) => notifications.filter((notification) => ReadStatus.READ === notification.readStatus))
+    );
+
+    this.newNotifications$.subscribe({
+      next: (notifications) => {
+        this.newNotifications = notifications;
+      }
+    });
+
+    this.websocketService.send(WS.SEND.GET_NOTIFICATIONS);
   }
 
-  getNotifications(page: number, size: number): void {
-    this.notifications = [
-      {name: 'ugfasf', testCaseId: 1, projectId: 11},
-      {name: 'fafe', testCaseId: 1, projectId: 11},
-      {name: 'tagga', testCaseId: 1, projectId: 11},
-      {name: 'thwt', testCaseId: 1, projectId: 11},
-      {name: 'wryw', testCaseId: 1, projectId: 11}
+  goToRunDetails(idTestCase: number, htcId: number, projectId: number, notificationStatus: NotificationStatus): void {
+    if (notificationStatus === NotificationStatus.IN_PROCESS) {
+      this.router.navigate([`test-scenario/${idTestCase}/info`]);
+    } else {
+      this.router.navigate([`projects/${projectId}/test-cases/${idTestCase}/history/${htcId}`]);
+    }
 
-    ];
-    this.totalElements = 20;
-    /*this.notificationsService.getNotifications(page, size)
-      .pipe(take(1))
-      .subscribe(data => {
-        this.notifications = data.notifications;
-        this.totalElements = data.totalElements;
-      });*/
   }
 
-  goToRunDetails(idTestCase: number): void {
-    this.router.navigate(['/test-scenario', idTestCase, 'info']);
+  deleteNotification(id: number): void {
+    this.websocketService.send(WS.SEND.DELETE_NOTIFICATION, id);
+  }
+
+  ngOnDestroy(): void {
+    if (this.newNotifications.length > 0) {
+      const ids: number[] = this.newNotifications.map((notification) => notification.id);
+      this.websocketService.send(WS.SEND.NOTIFICATIONS_VIEWED, ids);
+    }
   }
 }

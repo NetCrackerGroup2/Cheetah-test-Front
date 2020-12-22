@@ -144,7 +144,8 @@ export class TestCaseListComponent implements OnInit {
     this.router.navigate(['projects', this.projectId, 'test-cases', id, 'test-scenario']);
   }
 
-  filter() {
+  // TODO
+  filter(): void {
 
   }
 }

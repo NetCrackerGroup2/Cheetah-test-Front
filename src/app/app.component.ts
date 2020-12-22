@@ -1,27 +1,50 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from './models/user/user';
 import {AuthService} from './services/auth/auth.service';
 import {Role} from './models/roles/role';
 import {Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {WebsocketService} from './services/websocket/websocket.service';
+import {WS} from './services/websocket/websocket.events';
+import {Notification, ReadStatus} from './models/websocket/notification';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy{
+export class AppComponent implements OnInit, OnDestroy{
   user: User;
   opened = true;
   authenticationServiceSubscription: Subscription;
 
+  private notifications$: Observable<Notification[]>;
+  private newNotificationsCount$: Observable<number>;
+
   constructor(private authenticationService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private websocketService: WebsocketService
+  ) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
       }
     );
+    if (this.authenticationService.userValue !== null) {
+      profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+        (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
+    }
+  }
+
+  ngOnInit(): void {
+    this.notifications$ = this.websocketService.on<Notification[]>(WS.ON.NOTIFICATIONS);
+    this.newNotificationsCount$ = this.notifications$.pipe(
+      map(
+        (notifications) => notifications.filter((notification) => notification.readStatus === ReadStatus.UNREAD).length
+      )
+    );
+    this.websocketService.send('get-notifications');
   }
 
   get isOut(): boolean {
@@ -46,5 +69,19 @@ export class AppComponent implements OnDestroy{
     if (this.authenticationServiceSubscription) {
       this.authenticationServiceSubscription.unsubscribe();
     }
+  }
+
+  setUrl(event: any): void{
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (elem: any) => {
+        this.url = elem.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+  loadPhoto(): void {
+    this.profileService.getPhotoURL(this.authenticationService.userValue.email).subscribe(
+      (elem) => this.url = elem ? elem : 'assets/sidebar_images/img_example.jpg');
   }
 }

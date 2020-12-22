@@ -4,11 +4,11 @@
       *ngIf="user && !isOut"
       [opened]=opened
       autoCollapseWidth="1000"
-      mode="over">
+      mode="push">
       <div class="list-group list-group-flush">
         <div class="text-center mt-5">
           <a [routerLink]="['profile']">
-            <img src="../assets/sidebar_images/img_example.jpg" alt="Profile Image" class="profile_img">
+            <img [src]="url" alt="Profile Image" class="profile_img">
           </a>
         </div>
         <div class="row mt-3">
@@ -36,6 +36,16 @@
             Notifications</a>
         </div>
         <div class="row">
+          <div class="new-notifications-count mt-2 ml-5 p-1" *ngIf="newNotificationsCount$ | async as newNotificationsCount">
+              + {{newNotificationsCount}} new notifications
+          </div>
+        </div>
+        <div class="row">
+          <a [routerLink]="['calendar']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/calendar.png" alt="Calendar" class="mr-3">
+            Calendar</a>
+        </div>
+        <div class="row">
           <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
             <img src="assets/sidebar_images/back_to.svg" alt="Logout" class="mr-3">
             Logout</a>
@@ -43,7 +53,7 @@
       </div>
     </ng-sidebar>
     <div ng-sidebar-content>
-      <div class="contents">
+      <div class="contents ml-5">
         <router-outlet></router-outlet>
       </div>
     </div>
