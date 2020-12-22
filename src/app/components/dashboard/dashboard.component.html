@@ -199,15 +199,16 @@
     </div>
     <div>
       <label>
-        <select>
-          <option *ngFor="let project of userProjects">
+        <select [(ngModel)]="selectProjectId" (change)="onUserProjectSelected(selectProjectId)">
+          <option *ngFor="let project of userProjects"
+                  [ngValue]="project.id">
             {{project.title}}
           </option>
         </select>
       </label>
     </div>
   </div>
-  <div class="container-fluid justify-content-lg-center row">
+  <div class="container-fluid row justify-content-lg-center">
       <div>
         <ngx-charts-pie-grid
           [view]="[680, 350]"
@@ -216,10 +217,7 @@
         </ngx-charts-pie-grid>
       </div>
       <div>
-        <div>
-          <h3>Total test cases of {{selectedProject.title}}: {{totalTestCases}}</h3>
-        </div>
-        <table class="mt-5 ml-2 table table-striped table-hover">
+        <table class="table table-striped table-hover">
           <thead>
             <tr>
               <th>Project</th>

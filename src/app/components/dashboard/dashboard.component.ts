@@ -10,20 +10,6 @@ import {UserService} from '../../services/user/user.service';
 import {PlannedTestCase} from '../../models/dashboard/PlannedTestCase';
 
 
-function getTestCaseStats(data: number[]): any {
-  const status = ['Successful', 'Failed', 'Not started yet'];
-  const stats = [];
-  for (let i = 0; i < 3; i++) {
-    stats.push(
-      {
-        name: status[i],
-        value: data[i]
-      }
-    );
-  }
-  return stats;
-}
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -42,6 +28,7 @@ export class DashboardComponent implements OnInit {
   colorScheme = {
     domain: ['#bf9d76', '#e99450', '#b2854f', '#f2dfa7']
   };
+  selectProjectId: number;
   selectedProject: UserProject;
   testCaseStats = [];
   testCasesColorScheme = {
@@ -104,6 +91,7 @@ export class DashboardComponent implements OnInit {
           d => {
             this.userProjects = d;
             this.selectedProject = d[0];
+            this.selectProjectId = this.selectedProject.id;
             this.dashboardService.getTestCaseStatsByProjectId(this.userProjects[0].id)
               .subscribe(p => {
                 this.testCaseStats = [
@@ -138,5 +126,16 @@ export class DashboardComponent implements OnInit {
 
   selectTestCaseStats(projectId: number): void {
 
+  }
+
+  onUserProjectSelected(projectId: number): void {
+    this.dashboardService.getTestCaseStatsByProjectId(projectId).subscribe(
+      p => {
+        this.testCaseStats = [
+          {name: 'Successful', value: p[0]},
+          {name: 'Failed', value: p[1]},
+          {name: 'Not started yet', value: p[2]}
+        ];
+      });
   }
 }

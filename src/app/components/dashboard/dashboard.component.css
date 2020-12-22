@@ -97,16 +97,8 @@ h1, h2, h3, table {
   background-color: #555;
 }
 
-ngx-charts-advanced-pie-chart {
-  width: 100px;
-}
-
 select {
   font-family: 'Lato', sans-serif;
   font-size: 15px;
   padding: 7px;
-}
-
-.project-table td {
-
 }
