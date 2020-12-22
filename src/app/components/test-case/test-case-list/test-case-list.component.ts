@@ -132,8 +132,8 @@ export class TestCaseListComponent implements OnInit {
     this.router.navigate(['projects', this.projectId, 'test-cases', id, 'run-details']);
   }
 
-  getTestCaseHistory(): void {
-    this.router.navigate(['projects', this.projectId, 'history-test-case']);
+  getTestCaseHistory(id: number): void {
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'history']);
   }
 
   viewDataSet(id: number): void {
@@ -141,7 +141,7 @@ export class TestCaseListComponent implements OnInit {
   }
 
   viewTestScenario(id: number): void {
-    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'test-scenario']);
+    this.router.navigate(['projects', this.projectId, 'test-cases', id, 'general-test-scenario']);
   }
 
   // TODO
