@@ -1,0 +1,20 @@
+
+.notification-class-title {
+  color: #3e3223;
+  text-align: center;
+  width: 100%;
+}
+
+
+.delete-button {
+  background-color: #fd6363;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.delete-button:hover {
+  background-color: #fa7f7f;
+}

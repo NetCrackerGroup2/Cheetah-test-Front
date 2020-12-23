@@ -1,41 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {DataSetService} from '../../services/data-set/data-set.service';
+import {DataSet} from '../../models/data-set/data-set';
+import {AuthService} from '../../services/auth/auth.service';
 import {User} from '../../models/user/user';
-import {Parameter} from '../../models/parameter/parameter';
-import {EditDataSetService} from '../../services/edit-data-set/edit-data-set.service';
 
 @Component({
   selector: 'app-edit-data-set',
   templateUrl: './edit-data-set.component.html',
   styleUrls: ['./edit-data-set.component.css']
 })
-export class EditDataSetComponent implements OnInit {
+export class EditDataSetComponent implements OnInit, OnDestroy {
   user: User;
+  dataSet: DataSet = new DataSet();
   dataSetId: number;
-  dataSetTitle: string;
-  theTestCaseId: number;
-  isFound = true;
+  theProjectId: number;
+  testCaseId: number;
+  createDataSetForm: FormGroup;
+  createTestCaseSubscription: Subscription;
+  dataSetSubscription: Subscription;
+  querySubscription: Subscription;
   authenticationServiceSubscription: Subscription;
-  parametersSearchSubscription: Subscription;
-  private querySubscription: Subscription;
-  parametersSubscription: Subscription;
-  value = '';
-  searchMode = false;
-  previousKeyword: string = null;
-  parameterValue: string;
-  parameterType: string;
-  thePageNumber = 1;
-  thePageSize = 5;
-  theTotalElements: number;
-  parameters: Parameter[] = [];
-  parameter: Parameter = null;
+  loading = false;
+  isEdit = false;
+  id: number;
+  errorMessage: string;
 
   constructor(private authenticationService: AuthService,
-              private router: Router,
               private route: ActivatedRoute,
-              private parametersService: EditDataSetService) {
+              private formBuilder: FormBuilder,
+              private dataSetService: DataSetService,
+  ) {
     this.authenticationServiceSubscription = this.authenticationService.user.subscribe(
       x => {
         this.user = x;
@@ -43,78 +40,57 @@ export class EditDataSetComponent implements OnInit {
     );
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
-        this.dataSetId = queryParam['idDataSet'];
-        this.theTestCaseId = queryParam['idTestCase'];
-        this.dataSetTitle = queryParam['title'];
-        console.log(this.dataSetTitle);
+        this.dataSet.title = queryParam.title;
+        this.dataSet.description = queryParam.description;
       }
     );
+    this.theProjectId = +this.route.snapshot.paramMap.get('projectId');
+    this.testCaseId = +this.route.snapshot.paramMap.get('testCaseId');
+    this.dataSetId = +this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
-    this.listParameters();
+    this.createDataSetForm = this.formBuilder.group({
+      title: new FormControl(this.dataSet.title,
+        [Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(3)]),
+      description: new FormControl(this.dataSet.description,
+        [Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(3)])
+    });
   }
 
-  doSearch(value: string): void {
-    this.value = value;
-    this.listParameters();
+  get title(): any {
+    return this.createDataSetForm.get('title');
   }
 
-  listParameters(): void {
-    this.searchMode = !!this.value;
+  get description(): any {
+    return this.createDataSetForm.get('description');
+  }
 
-    if (this.searchMode) {
-      this.handleSearchDataSets();
 
+  onSubmit(): void {
+    this.errorMessage = '';
+    if (this.title.value === this.dataSet.title && this.description.value === this.dataSet.description) {
+      this.errorMessage = 'Data Set Already Exists';
     } else {
-      this.handleDataSets();
+      this.dataSet.title = this.title.value;
+      this.dataSet.description = this.description.value;
+      this.dataSet.id = this.dataSetId;
+      this.dataSet.idTestCase = this.testCaseId;
+      this.dataSetSubscription = this.dataSetService.editDataSet(this.dataSet).subscribe();
     }
   }
 
-  createParameter(): void{
-    const parameter: Parameter = new Parameter();
-    parameter.value = this.parameterValue;
-    parameter.type = this.parameterType;
-    parameter.idDataSet = this.dataSetId;
-    this.parametersService.createParameter(parameter).subscribe();
-    this.listParameters();
-  }
-
-  private handleDataSets(): void {
-    this.parametersSubscription = this.parametersService
-      .getParameters(this.thePageNumber, this.thePageSize, this.dataSetId)
-      .subscribe(data => {
-        this.parameters = data.parameters;
-        this.theTotalElements = data.totalParameters;
-      });
-  }
-
-  private handleSearchDataSets(): void {
-    const theKeyword: string = this.value;
-    if (this.previousKeyword !== theKeyword) {
-      this.thePageNumber = 1;
+  ngOnDestroy(): void {
+    if (this.createTestCaseSubscription) {
+      this.createTestCaseSubscription.unsubscribe();
+      this.querySubscription.unsubscribe();
     }
-
-    this.previousKeyword = theKeyword;
-
-    this.parametersSubscription = this.parametersService.searchParameters(
-      this.thePageNumber,
-      this.dataSetId,
-      this.thePageSize,
-      theKeyword)
-      .subscribe(data => {
-        this.parameters = data.parameters;
-        this.theTotalElements = data.totalParameters;
-      });
   }
-
   backToDataSet(): string{
-    return `/data-set/${this.theTestCaseId}`;
+    return `/projects/${this.theProjectId}/test-cases/${this.testCaseId}/data-set`;
   }
-
-  deleteParameter(id: number): void{
-    this.parametersService.deleteParameter(id).subscribe();
-    this.listParameters();
-  }
-
 }

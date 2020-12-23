@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './components/login/login.component';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {AuthGuard} from './helpers/authguard.service';
@@ -21,6 +21,15 @@ import {CreateTestScenarioComponent} from "./components/create-test-scenario/cre
 import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {AddCalendarEventComponent} from './components/add-calendar-event/add-calendar-event.component';
+import {EditCalendarEventComponent} from './components/edit-calendar-event/edit-calendar-event.component';
+import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
+import {RunDetailsComponent} from './components/run-details/run-details.component';
+import {ParametersComponent} from './components/parameters/parameters.component';
 import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
 import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
 
@@ -91,8 +100,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/edit-project/:id',
+    path: 'projects/:id/edit-project',
     component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/edit-watchers',
+    component: EditWatchersComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -101,18 +115,18 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'data-set/:id',
+    path: 'projects/:projectId/test-cases/:id/data-set',
     component: DataSetComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'edit-data-set',
+    path: 'projects/:projectId/test-cases/:testCaseId/data-set/:id/edit-data-set',
     component: EditDataSetComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'history-test-case',
-    component: HistoryTestCaseComponent,
+    path: 'projects/:projectId/test-cases/:testCaseId/data-set/:id/parameters',
+    component: ParametersComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -131,12 +145,53 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:projectId/test-cases/last-report-details',
-    component: LastReportDetailsComponent,
+    path: 'projects/:idProject/test-cases/:idTestCase/history',
+    component: HistoryTestCaseComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/history/:idHTC',
+    component: TestCaseInfoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/history/:idHTC/send-report',
+    component: SendReportComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:idProject/test-cases/:idTestCase/run-details',
+    component: RunDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'test-scenario/:idTestCase/info',
+    component: RunDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar',
+    component: CalendarComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar/add-event',
+    component: AddCalendarEventComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'calendar/edit-event',
+    component: EditCalendarEventComponent,
     canActivate: [AuthGuard]
   },
   {path: '**', redirectTo: 'dashboard', pathMatch: 'full'}
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

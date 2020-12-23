@@ -1,1 +1,244 @@
-<p>dashboard works!</p>
+<div class="container mt-5 mb-5">
+
+  <div class="greeting container-fluid text-center justify-content-lg-center">
+    <div>
+      <img class="w-25 h-25" src="https://github.com/NetCrackerGroup2/Cheetah-test/blob/dev/src/main/resources/image/mail.png?raw=true" alt="Cheetah Test">
+    </div>
+    <div>
+      <h1 class="" style="color: #996633; font-weight: lighter">Welcome to Cheetah Test, {{user.name}}!</h1>
+    </div>
+  </div>
+
+  <!-- All Users -->
+  <div *ngIf="isAdmin" class="container-fluid p-0 mt-5">
+    <div>
+      <h2 class="black">Users</h2>
+    </div>
+    <div class="container-fluid row mt-3 justify-content-lg-between">
+      <div class="border-dance card" style="width: 18em;">
+        <div class="card-body w-auto row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-right">Admins</h5>
+            <h3 class="text-right black">Total: {{totalUsers[0]}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="border-dance card" style="width: 18em;">
+        <div class="card-body w-auto row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-right">Managers</h5>
+            <h3 class="text-right black">Total: {{totalUsers[1]}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="border-dance card" style="width: 18em;">
+        <div class="card-body w-auto row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" fill="#BD7D42" class="bi bi-person-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+            </svg>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-right">Engineers</h5>
+            <h3 class="text-right black">Total: {{totalUsers[2]}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users activity -->
+  <div *ngIf="isAdmin" class="container-fluid p-0 mt-5 row">
+    <div class="container-fluid row">
+        <div class="col-lg-12">
+          <div>
+            <h2 class="black">Last users activity in 24 hours</h2>
+          </div>
+          <div class="dashboard-item mt-4">
+            <table class="table table-hover table-striped">
+              <tbody>
+              <tr *ngFor="let recentUser of recentUsers">
+                <td>
+                  <div class="container-fluid justify-content-lg-between row">
+                    <div class="container-fluid row">
+                      <div class="mr-2">
+                        <img
+                          src="{{recentUser.photoUrl == null ? './assets/anonymous.jpg' : recentUser.photoUrl}}"
+                          alt="Anonymous">
+                      </div>
+                      <div>
+                        <h5>{{recentUser.name | titlecase}}</h5>
+                        <h6 style="color: gray; font-weight: bold">{{recentUser.role | titlecase}}</h6>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <div class="mt-2">
+                    <h5>at {{recentUser.time}}</h5>
+                  </div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Projects stats -->
+  <div class="container-fluid mt-5 row">
+    <div>
+      <h2 class="black">Last project statistics</h2>
+    </div>
+    <div class="container-fluid row mt-3">
+      <div *ngIf="isAdmin" class="card" style="width: 22em;">
+        <div class="card-body row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="#BD7D42" class="bi bi-archive-fill" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z"/>
+            </svg>
+          </div>
+          <div class="col ml-3">
+            <h5 class="card-title text-right">Archived projects</h5>
+            <h3 class="text-right black" style="font-weight: normal">{{totalArchivedProjects}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 20em;">
+        <div class="card-body w-auto row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="#BD7D42" class="bi bi-folder-plus" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M9.828 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91H9v1H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0 0 13.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 0 1 1-.98h3.672a1 1 0 0 1 .707.293z"/>
+              <path fill-rule="evenodd" d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-right">Projects today</h5>
+            <h3 class="text-right black" style="font-weight: normal">{{totalTodayProjects}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="width: 30em;">
+        <div class="card-body w-auto row">
+          <div class="col-3 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#BD7D42" class="bi bi-percent" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>
+          </div>
+          <div class="col">
+            <h5 class="card-title text-right">Project percent of the week</h5>
+            <h3 class="text-right black" style="font-weight: normal">{{projectPercent}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid justify-content-lg-between row mt-4">
+      <div>
+        <h4 *ngIf="isAdmin" class="black">
+          All projects
+        </h4>
+        <h4 *ngIf="!isAdmin" class="black">
+          Your projects
+        </h4>
+        <div class="dashboard-item mt-5">
+          <table class="project-table table table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="text-center table-dark">Project</th>
+              <th *ngIf="this.user.role == 'ENGINEER'" scope="col" class="text-center table-dark">Your status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngIf="userProjects.length === 0">
+              <td colspan="2">No projects yet</td>
+            </tr>
+            <tr *ngFor="let userProject of userProjects">
+              <td><a (click)="goToProject(userProject.id)">{{userProject.title}}</a></td>
+              <td *ngIf="this.user.role == 'ENGINEER'" class="text-right">{{userProject.userStatus | titlecase}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-right black">Project Activity for 7 days</h3>
+        <div>
+          <ngx-charts-line-chart class="col"
+            [view]="[650,400]"
+            [results]="projectActivity"
+            [xAxisLabel]="'Date'"
+            [yAxisLabel]="'Quantity of created projects'"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [scheme]="colorScheme"
+            [xAxis]="true"
+            [yAxis]="true">
+          </ngx-charts-line-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Test Cases Statistics -->
+  <div class="text-center mt-3">
+    <h2 class="black">Test cases statistics</h2>
+  </div>
+  <div class="row"> <!-- *ngIf="this.user.role === 'ENGINEER'" -->
+    <div>
+      <h5 class="mt-1 mr-3 black">Select a project: </h5>
+    </div>
+    <div>
+      <label>
+        <select [(ngModel)]="selectProjectId" (change)="onUserProjectSelected(selectProjectId)">
+          <option *ngFor="let project of userProjects"
+                  [ngValue]="project.id">
+            {{project.title}}
+          </option>
+        </select>
+      </label>
+    </div>
+  </div>
+  <div class="container-fluid row justify-content-lg-center">
+      <div>
+        <ngx-charts-pie-grid
+          [view]="[680, 350]"
+          [scheme]="testCasesColorScheme"
+          [results]="testCaseStats">
+        </ngx-charts-pie-grid>
+      </div>
+      <div>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Planned test cases</th>
+              <th>Date of execution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="plannedTestCases.length === 0">
+              <td colspan="3" class="text-center">You do not have any planned test cases!</td>
+            </tr>
+            <tr *ngFor="let plTestCase of plannedTestCases">
+              <td>{{plTestCase.titleProject}}</td>
+              <td>{{plTestCase.titleTestCase}}</td>
+              <td class="text-right">{{plTestCase.cronDate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

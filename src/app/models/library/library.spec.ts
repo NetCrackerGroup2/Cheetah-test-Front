@@ -1,4 +1,4 @@
-import { Library } from './library';
+import {Library} from './library';
 
 describe('Library', () => {
   it('should create an instance', () => {

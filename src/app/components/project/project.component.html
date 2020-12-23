@@ -26,12 +26,12 @@
         <div class="col-2">Title</div>
         <div class="col-2">Link</div>
         <div class="col-2">Create Date</div>
-        <div class="col-3">Options</div>
+        <div class="col-4">Options</div>
       </div>
       <div class="mt-5 stripped">
         <div class="row mt-2" *ngFor="let project of projects">
           <div class="col-2">{{project.title}}</div>
-          <div class="col-2">{{project.link}}</div>
+          <div class="col-2"><a href="http://{{project.link}}">{{project.link}}</a></div>
           <div class="col-1">{{project.createDate | date: 'dd/MM/yyyy'}}</div>
           <div class="col-1 pt-2">
             <button class="options-table" (click)="showTestCases(project.id)">View</button>
@@ -42,6 +42,11 @@
           <div class="col-1 pt-2">
             <button class="options-table" (click)="archive(project.id)">
               Archive
+            </button>
+          </div>
+          <div class="col-1 pt-2">
+            <button class="options-table" (click)="editWatchers(project.id)">
+              Edit Watchers
             </button>
           </div>
         </div>

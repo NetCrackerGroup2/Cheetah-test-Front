@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-12 col-lg-3 col-md-6">
         <div class="display-1 h1-black">
-          <h1 class="h1-style">DataSet</h1>
+          <h1 class="h1-style">Data Sets</h1>
         </div>
       </div>
       <div class="col-sm-12 col-lg-12 col-md-12">
@@ -18,7 +18,7 @@
             </button>
           </div>
           <div class="col-sm-6 col-lg-2 col-md-3">
-            <button class="options ml-1 button-list" color="primary">Go to test case</button>
+            <button class="options ml-1 button-list" color="primary" (click)="goBack()">Go to test case</button>
           </div>
         </div>
       </div>
@@ -34,10 +34,10 @@
           </thead>
           <tbody>
           <tr>
-            <td><input id="dataSetName" name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible"
+            <td><input id="dataSetName" name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible bordered_to_input"
                        type="text"></td>
             <td><input id="dataSetDescription" name="dataSetDescription" [(ngModel)]="dataSetDescription"
-                       class="div-input-invisible" type="text"></td>
+                       class="div-input-invisible bordered_to_input" type="text"></td>
             <td>
               <button class="options" (click)="createDataSet()">Create</button>
             </td>
@@ -47,8 +47,9 @@
             <td>{{dataset.description}}</td>
             <td>
               <button class="options ml-1" (click)="deleteDataSet(dataset.id)">Delete</button>
-              <button class="options ml-1" [routerLink]="['/edit-data-set']"
-                      [queryParams]="{idTestCase: theTestCaseId, idDataSet: dataset.id, title: dataset.title}">Edit
+              <button class="options ml-1" (click)="goEdit(dataset)">Edit
+              </button>
+              <button class="options ml-1" (click)="goToParameters(dataset)">Parameters
               </button>
             </td>
           </tr>

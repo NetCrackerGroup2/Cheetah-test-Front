@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -32,6 +33,22 @@ import { CreateTestScenarioComponent } from './components/create-test-scenario/c
 import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
+import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
+import {SendReportComponent} from './components/send-report/send-report.component';
+import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {NgCircleProgressModule} from 'ng-circle-progress';
+import {WebsocketModule} from './services/websocket/websocket.module';
+import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import { EditCalendarEventComponent } from './components/edit-calendar-event/edit-calendar-event.component';
+import { RunDetailsComponent } from './components/run-details/run-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
+import { ParametersComponent } from './components/parameters/parameters.component';
 import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
 import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
 
@@ -65,6 +82,17 @@ import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scena
     TestCaseConfigurationComponent,
     LastReportDetailsComponent,
     ActionsInTestScenarioComponent
+    SendReportComponent,
+    TestCaseInfoComponent,
+    CircularDiagramComponent,
+    NotificationsComponent,
+    CalendarComponent,
+    AddCalendarEventComponent,
+    EditCalendarEventComponent,
+    NotificationsComponent,
+    EditWatchersComponent,
+    RunDetailsComponent,
+    ParametersComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +102,30 @@ import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scena
     FormsModule,
     NgbModule,
     SidebarModule,
-    DragDropModule
+    WebsocketModule,
+    DragDropModule,
+    NgCircleProgressModule.forRoot({
+      backgroundColor: '#F1F1F1',
+      backgroundPadding: -18,
+      radius: 60,
+      toFixed: 0,
+      maxPercent: 100,
+      outerStrokeWidth: 10,
+      outerStrokeColor: '#FF6347',
+      innerStrokeColor: '#32CD32',
+      innerStrokeWidth: 1,
+      showInnerStroke: false,
+      startFromZero: false
+    }),
+    PieChartModule,
+    LineChartModule,
+    BarChartModule,
+    PolarChartModule,
+    BrowserAnimationsModule,
+    NumberCardModule,
+    FullCalendarModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

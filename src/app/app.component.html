@@ -4,15 +4,15 @@
       *ngIf="user && !isOut"
       [opened]=opened
       autoCollapseWidth="1000"
-      mode="over">
+      mode="push">
       <div class="list-group list-group-flush">
         <div class="text-center mt-5">
           <a [routerLink]="['profile']">
-            <img src="../assets/sidebar_images/img_example.jpg" alt="Profile Image" class="profile_img">
+            <img [src]="url" alt="Profile Image" class="profile_img">
           </a>
         </div>
         <div class="row mt-3">
-          <a class="item ml-5 mt-4">
+          <a [routerLink]="['dashboard']" class="item ml-5 mt-4">
             <img src="../assets/sidebar_images/home.svg" alt="Home" class="mr-3">
             Home</a></div>
         <div class="row">
@@ -26,23 +26,24 @@
             <img src="assets/sidebar_images/project.svg" alt="Project" class="mr-3">
             Project</a></div>
         <div class="row">
-          <a [routerLink]="['data-set/2']" class="item ml-5 mt-4">
-            <img src="assets/sidebar_images/data_set.svg" alt="Data set" class="mr-3">
-            Data set</a></div>
-        <div class="row">
-          <a class="item ml-5 mt-4">
-            <img src="assets/sidebar_images/test_case_history.svg" alt="Test case history" class="mr-3">
-            Test case history
-          </a></div>
-        <div class="row">
           <a [routerLink]="['general-library']" class="item ml-5 mt-4">
             <img src="assets/sidebar_images/library.png" alt="Notifications" class="mr-3">
             Library</a>
         </div>
         <div class="row">
-          <a [routerLink]="['']" class="item ml-5 mt-4">
+          <a [routerLink]="['notifications']" class="item ml-5 mt-4">
             <img src="assets/sidebar_images/notifications.svg" alt="Notifications" class="mr-3">
             Notifications</a>
+        </div>
+        <div class="row">
+          <div class="new-notifications-count mt-2 ml-5 p-1" *ngIf="newNotificationsCount$ | async as newNotificationsCount">
+              + {{newNotificationsCount}} new notifications
+          </div>
+        </div>
+        <div class="row">
+          <a [routerLink]="['calendar']" class="item ml-5 mt-4">
+            <img src="assets/sidebar_images/calendar.png" alt="Calendar" class="mr-3">
+            Calendar</a>
         </div>
         <div class="row">
           <a (click)="logout()" class="item ml-5 mt-4 cursor-pointer">
@@ -52,7 +53,7 @@
       </div>
     </ng-sidebar>
     <div ng-sidebar-content>
-      <div class="contents">
+      <div class="contents ml-5">
         <router-outlet></router-outlet>
       </div>
     </div>
@@ -68,5 +69,3 @@
     </div>
   </nav>
 </div>
-
-

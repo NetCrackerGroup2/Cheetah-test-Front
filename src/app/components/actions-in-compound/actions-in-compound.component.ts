@@ -58,11 +58,9 @@ export class ActionsInCompoundComponent implements OnInit, OnDestroy {
       );
   }
 
-
   addToList(action: Action): void {
     this.actions.push(action);
   }
-
 
   drop($event: CdkDragDrop<Action[]>): void {
     moveItemInArray(this.actions, $event.previousIndex, $event.currentIndex);

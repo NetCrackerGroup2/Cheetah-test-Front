@@ -1,0 +1,77 @@
+.send-report {
+  display: flex;
+  justify-content: space-around;
+}
+
+.send-report-form {
+  margin: 0 auto;
+  width: 30vw;
+  border-radius: 20px;
+  background-color: #f2e5d9;
+}
+
+label {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: black;
+}
+
+input, textarea, select {
+  border: 1px solid #BD7D42;
+  border-radius: 0;
+  resize: none;
+  width: 90%;
+}
+
+button {
+  background: #BD7D42;
+  border-radius: 15px;
+  width: 60%;
+}
+
+form {
+  padding: 5% 5% 0 5%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  min-width: 200px;
+}
+
+.added-result li {
+  border-bottom: 1px solid #BD7D42;
+  border-left: 1px solid #BD7D42;
+  border-right: 1px solid #BD7D42;
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.added-result li:first-child {
+  border-top: 1px solid #BD7D42;
+}
+
+.added-result li:hover {
+  background-color: #ac0202;
+}
+
+.added-result li a {
+  color: black;
+  display: block;
+  text-decoration: none;
+}
+
+.added-result li a:hover {
+  color: white;
+}
+
+.added-result li a:active {
+  color: white;
+}
+
+ul.added-result {
+  color: black;
+  margin-top: 0;
+  padding-left: 0;
+}

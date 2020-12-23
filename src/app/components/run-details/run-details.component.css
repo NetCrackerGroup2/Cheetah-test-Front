@@ -1,0 +1,9 @@
+
+#status{
+  font-weight: 500;
+}
+.main-buttons{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20%;
+}

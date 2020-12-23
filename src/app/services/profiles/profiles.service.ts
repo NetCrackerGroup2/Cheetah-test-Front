@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user/user';
 import { environment } from '../../../environments/environment';
 import { Observable, Subscription } from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 
 @Injectable({
@@ -54,6 +55,16 @@ export class ProfilesService {
     const options = {headers: {'Content-Type': 'application/json'}};
     return this.http.post(url, JSON.stringify(sendData), options).subscribe(
       (t: string) => JSON.stringify(t));
+  }
+  search(terms: Observable<string>): Observable<User[]> {
+    return terms.pipe(
+      debounceTime(150),
+      distinctUntilChanged(),
+      switchMap(term => this.searchUserByEmail(term)));
+  }
+  searchUserByEmail(email: string): Observable<User[]> {
+    const url = `${environment.apiUrl}/api/user?email=${email}`;
+    return this.http.get<User[]>(url);
   }
 }
 

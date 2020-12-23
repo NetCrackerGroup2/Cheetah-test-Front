@@ -1,0 +1,55 @@
+<div class="main-content ml-5">
+  <div class="row main-buttons mt-5 mb-5">
+    <h1 class="display-4 black mr-5">Notifications</h1>
+  </div>
+
+  <div class="mt-5 row" *ngIf="newNotifications$ | async as newNotifications">
+    <h4 class="notification-class-title">New notifications</h4>
+    <div class="custom-table black">
+      <div class="mt-5 stripped">
+        <div class="row mt-3" *ngFor="let newNotification of newNotifications">
+          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{newNotification.testCaseId}} was completed</div>
+          <div class="col-lg-2 col-md-3 col-sm-5 pt-2">
+            {{newNotification.date | date: 'hh:mm  dd-MM-yyyy'}}
+          </div>
+          <div class="col-lg-1 col-md-2 col-sm-11 pt-2">
+            <button class="delete-button" (click)="deleteNotification(this.newNotification.id)">Delete</button>
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
+            {{newNotification.description}} Click on the link below to see more information:
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
+            <button class="options-table" (click)="goToRunDetails(newNotification.testCaseId, newNotification.htcId,newNotification.projectId, newNotification.notificationStatus)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 row" *ngIf="oldNotifications$ | async as oldNotifications">
+    <h4 class="notification-class-title">Old notifications</h4>
+    <div class="custom-table black">
+      <div class="mt-5 stripped">
+        <div class="row mt-3" *ngFor="let oldNotification of oldNotifications">
+          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{oldNotification.testCaseId}} was completed</div>
+          <div class="col-lg-2 col-md-3 col-sm-5 pt-2">
+            {{oldNotification.date | date: 'hh:mm  dd-MM-yyyy'}}
+          </div>
+          <div class="col-lg-1 col-md-2 col-sm-11 pt-2">
+            <button class="delete-button" (click)="deleteNotification(this.oldNotification.id)">Delete</button>
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
+            {{oldNotification.description}} Click on the link below to see more information:
+          </div>
+          <div class="col-lg-11 col-md-11 col-sm-11 pt-2">
+            <button class="options-table" (click)="goToRunDetails(oldNotification.testCaseId,oldNotification.htcId,oldNotification.projectId, oldNotification.notificationStatus)">
+              View Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

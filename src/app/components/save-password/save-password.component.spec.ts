@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SavePasswordComponent } from './save-password.component';
+import {SavePasswordComponent} from './save-password.component';
 
 describe('SavePasswordComponent', () => {
   let component: SavePasswordComponent;

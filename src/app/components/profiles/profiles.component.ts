@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { ProfilesService, GetUser } from '../../services/profiles/profiles.service';
 import {LoginDto} from '../../models/loginDto/loginDto';
-import { User } from 'src/app/models/user/user';
+import {User} from 'src/app/models/user/user';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -69,7 +69,8 @@ export class ProfilesComponent implements OnInit {
         .subscribe(elem => { this.elements = elem; });
   }
 
-  constructor(private profileService: ProfilesService,
+  constructor(private router: Router,
+              private profileService: ProfilesService,
               private authService: AuthService) {
     this.elements = {
       users: [],
@@ -196,6 +197,10 @@ export class ProfilesComponent implements OnInit {
       this.searchEmail, this.searchRole,
       this.pageSize, this.numPage)
       .subscribe(elem => { this.elements = elem; });
+  }
+
+  createUser(): void {
+    this.router.navigate(['sign-up']);
   }
 
 }
