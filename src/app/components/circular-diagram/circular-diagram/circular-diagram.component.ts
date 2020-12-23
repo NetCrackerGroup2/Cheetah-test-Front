@@ -14,15 +14,15 @@ export class CircularDiagramComponent implements OnInit {
 
 
   constructor(private router: Router, private wsService: WebsocketService) {
-    (wsService
-      .connect('http/ahdliuahsdf.com').subscribe(msg => {
-          const data = JSON.parse(msg.data);
-          data.observable.subscribe(percent => {
-            this.percent = percent;
-          });
-          this.messageChannel = data.observer;
-        }
-      ));
+    // (wsService
+    //   .connect('http/ahdliuahsdf.com').subscribe(msg => {
+    //       const data = JSON.parse(msg.data);
+    //       data.observable.subscribe(percent => {
+    //         this.percent = percent;
+    //       });
+    //       this.messageChannel = data.observer;
+    //     }
+    //   ));
   }
 
   ngOnInit(): void {

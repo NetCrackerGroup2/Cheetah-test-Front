@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { FullCalendarModule } from '@fullcalendar/angular';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -34,7 +35,13 @@ import {SendReportComponent} from './components/send-report/send-report.componen
 import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {NgCircleProgressModule} from 'ng-circle-progress';
+import {WebsocketModule} from './services/websocket/websocket.module';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import { EditCalendarEventComponent } from './components/edit-calendar-event/edit-calendar-event.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
@@ -66,6 +73,11 @@ import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, Polar
     TestCaseInfoComponent,
     CircularDiagramComponent,
     NotificationsComponent,
+    CalendarComponent,
+    AddCalendarEventComponent,
+    EditCalendarEventComponent,
+    NotificationsComponent,
+    EditWatchersComponent,
     EditWatchersComponent,
     RunDetailsComponent
   ],
@@ -77,6 +89,7 @@ import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, Polar
     FormsModule,
     NgbModule,
     SidebarModule,
+    WebsocketModule,
     DragDropModule,
     NgCircleProgressModule.forRoot({
       backgroundColor: '#F1F1F1',
@@ -96,7 +109,10 @@ import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, Polar
     BarChartModule,
     PolarChartModule,
     BrowserAnimationsModule,
-    NumberCardModule
+    NumberCardModule,
+    FullCalendarModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

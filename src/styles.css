@@ -51,7 +51,6 @@ input.au-input.au-input-xl{
 }
 
 .main-content{
-  padding-left: 20%;
 }
 
 .options{
@@ -222,5 +221,9 @@ ul.search-result {
   background: #CA9768;
   transition: none;
   color: white;
+}
+
+.fc-day-sun, .fc-day-sat {
+  background: #CA9768;
 }
 

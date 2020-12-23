@@ -11,42 +11,37 @@
       </div>
       <div class="col-lg-6 col-md-12">
         <button type="button" class="options m-1" (click)="create()">Create new</button>
-        <button type="button" class="options m-1" (click)="getTestCaseHistory()">Test case history</button>
+        <button type="button" class="options m-1">Filter</button>
         <button [routerLink]="['/projects']" type="button" class="options m-1">Go Back</button>
         <button (click)="runTestCases()" type="button" class="options m-1">Run</button>
+        <button (click)="getLastReportDetails()" type="button" class="options m-1">Last Report Details</button>
         <button [routerLink]="['/projects/edit-project/', projectId]" type="button" class="options m-1">Edit project</button>
       </div>
     </div>
-  </div>
-  <div *ngIf="isRun" class="alert alert-success">
-    Test cases are being executed successfully!
-  </div>
-  <div *ngIf="noSelectedRunTestCases" class="alert alert-warning">
-    There no selected test cases to run
   </div>
   <table class="table table-striped table-hover col-lg-12 col-md-12 col-sm-12">
     <caption></caption>
     <thead>
     <tr>
       <th scope="col">Description</th>
-      <th scope="col">Result</th>
+      <th scope="col">Status</th>
       <th scope="col">Add to Test</th>
       <th scope="col">Options</th>
     </tr>
     </thead>
     <tr *ngFor="let testCase of testCases">
       <td class="py-4 px-4">{{testCase.title}}</td>
-      <td class="py-4 px-4">{{testCase.result}}</td>
+      <td class="py-4 px-4">{{testCase.status}}</td>
       <td class="text-center">
         <div class="form-check py-2">
-          <input type="checkbox" class="form-check-input" [checked]="this.runTestCaseIdsList.includes(testCase.id)"
-                 (change)="handleRunTestCases(testCase.id)">
+          <input type="checkbox" class="form-check-input" [checked]="isCheckedTestCase(testCase)"
+                 (change)="handleRunTestCases(testCase)">
         </div>
       </td>
       <td class="row">
-        <button type="button" class="options mt-1" (click)="viewDataSet(testCase.id)">Data Set</button>
-        <button type="button" class="options mt-1" (click)="viewTestScenario(testCase.id)">Test Scenario</button>
-        <button type="button" class="options mt-1" (click)="getReportDetails(testCase.id)">Report details</button>
+        <button [routerLink]="['/data-set', testCase.id]" type="button" class="options mt-1">View</button>
+        <button type="button" class="options mt-1"
+                (click)="getReportDetails(testCase.id, testCase.title)">Report details</button>
         <button type="button" class="options mt-1" (click)="edit(testCase.id)">Edit</button>
         <button [disabled]="testCase.status == 'INACTIVE'" (click)="deactivateTestCase(testCase.id)"
                 type="button" class="options mt-1">Deactivate</button>
