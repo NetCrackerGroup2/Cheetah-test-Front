@@ -27,6 +27,9 @@ import { ProjectComponent } from './components/project/project.component';
 import { CreateProjectComponent } from './components/create-project/create-project.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ActionsInCompoundComponent } from './components/actions-in-compound/actions-in-compound.component';
+import { TestScenarioComponent } from './components/test-scenario/test-scenario.component';
+import { GeneralTestScenarioComponent } from './components/general-test-scenario/general-test-scenario.component';
+import { CreateTestScenarioComponent } from './components/create-test-scenario/create-test-scenario.component';
 import { HistoryTestCaseComponent } from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
@@ -46,6 +49,8 @@ import { RunDetailsComponent } from './components/run-details/run-details.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
 import { ParametersComponent } from './components/parameters/parameters.component';
+import { LastReportDetailsComponent } from './components/test-case/last-report-details/last-report-details.component';
+import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
 
 @NgModule({
   declarations: [
@@ -67,9 +72,16 @@ import { ParametersComponent } from './components/parameters/parameters.componen
     ProjectComponent,
     CreateProjectComponent,
     ActionsInCompoundComponent,
+    CreateCompoundComponent,
+    TestScenarioComponent,
+    GeneralTestScenarioComponent,
+    CreateTestScenarioComponent,
+    ActionsInCompoundComponent,
     HistoryTestCaseComponent,
     TestCaseListComponent,
     TestCaseConfigurationComponent,
+    LastReportDetailsComponent,
+    ActionsInTestScenarioComponent,
     SendReportComponent,
     TestCaseInfoComponent,
     CircularDiagramComponent,

@@ -16,6 +16,8 @@ import {ProfilesComponent} from './components/profiles/profiles.component';
 import {DataSetComponent} from './components/data-set/data-set.component';
 import {EditDataSetComponent} from './components/edit-data-set/edit-data-set.component';
 import {ActionsInCompoundComponent} from './components/actions-in-compound/actions-in-compound.component';
+import {GeneralTestScenarioComponent} from "./components/general-test-scenario/general-test-scenario.component";
+import {CreateTestScenarioComponent} from "./components/create-test-scenario/create-test-scenario.component";
 import {HistoryTestCaseComponent} from './components/history-test-case/history-test-case.component';
 import {TestCaseListComponent} from './components/test-case/test-case-list/test-case-list.component';
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
@@ -28,6 +30,8 @@ import {EditCalendarEventComponent} from './components/edit-calendar-event/edit-
 import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
 import {RunDetailsComponent} from './components/run-details/run-details.component';
 import {ParametersComponent} from './components/parameters/parameters.component';
+import {LastReportDetailsComponent} from './components/test-case/last-report-details/last-report-details.component';
+import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scenario/actions-in-test-scenario.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -58,6 +62,21 @@ const routes: Routes = [
   {
     path: 'general-library',
     component: GeneralLibraryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/create-test-scenario/:id',
+    component: CreateTestScenarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/:id/general-test-scenario',
+    component: GeneralTestScenarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-scenario/:idTestScenario/test-case/:idTestCase',
+    component: ActionsInTestScenarioComponent,
     canActivate: [AuthGuard]
   },
   {

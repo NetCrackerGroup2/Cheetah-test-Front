@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="display-4 h1-black ml-5">Test Scenario</h1>
+  </div>
+  <div class="main-buttons">
+
+    <button class = "options" [routerLink]="createTestScenario()">
+      Create Test Scenario
+    </button>
+    <button class="options  ml-1" (click)="createCompound()">
+      Create Compound
+    </button>
+    <button class="options  ml-1" (click)="goToTestCase()">
+      Go to Test Cases
+    </button>
+  </div>
+  <div class = "main-content" >
+    <app-test-scenario [theTestCaseId] = "theTestCaseId" [projectId]="projectId"></app-test-scenario>
+  </div>
+</div>

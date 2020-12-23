@@ -1,0 +1,59 @@
+<div class="row mt-5">
+  <div class="search-config">
+    <div class="form-header">
+      <input #myInput placeholder="Search for a test scenario ..."
+             class="au-input input-long mt-1" type="text"
+             (keyup.enter)="doSearch(myInput.value)"/>
+
+      <button class="options ml-1 mt-1" (click)="doSearch(myInput.value)">
+        Search
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="testScenarios?.length == 0" class="alert alert-warning col-md-10 mt-5" role="alert">
+  No test scenarios found.
+</div>
+<div class="mt-5 row" *ngIf="testScenarios?.length !== 0">
+  <div class="custom-table black">
+    <div class="row thead">
+      <div class="col-2">Title</div>
+      <div class="col-4">Description</div>
+      <div class="col-4" *ngIf="isAdmin">Options</div>
+    </div>
+
+    <div class="mt-5 stripped">
+      <div class="row mt-2" *ngFor="let testScenario of testScenarios">
+        <div class="col-2">{{testScenario.title}}</div>
+        <div class="col-4">{{testScenario.description}}</div>
+        <div class="col-2 pt-2" *ngIf="isAdmin">
+          <button class="options-table ml-1" (click)="remove(testScenario.id)">
+            Remove
+          </button>
+        </div>
+        <div class="col-4 pt-2">
+          <button (click)="view(testScenario)" class="options-table ml-1">
+            Select Parameters
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row pagination mt-3">
+  <div class="col-md-6">
+    <div class="row">
+      <div class="col-md-9">
+        <ngb-pagination [(page)]="thePageNumber"
+                        [pageSize]="thePageSize"
+                        [collectionSize]="theTotalElements"
+                        [maxSize]="5"
+                        [boundaryLinks]="true"
+                        (pageChange)="listTestScenarios()"
+                        class="ngb-pagination">
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

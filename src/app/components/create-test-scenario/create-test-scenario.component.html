@@ -1,14 +1,12 @@
 <div class="container-fluid" (click)="cleanList()">
 
-  <div class="row">
+  <div class="row ml-5">
     <div class="col">
-      <h2 class="display-5 h1-black">Create Compound</h2>
+      <h2 class="display-5 h1-black ml-5">Create Test Scenario</h2>
     </div>
     <div class="col back">
-      <button class="options" [routerLink]="['/general-library']">
-        Back to Library
-      </button>
-      <button class="options ml-1" [routerLink]="['/general-test-scenario']">
+
+      <button class="options ml-1 mt-5" (click)="goBack()">
         Back to Test Scenario
       </button>
     </div>
@@ -17,16 +15,13 @@
   <div class="container-sm">
     <h5 class="text-success text-center mb-1">{{successMessage}}</h5>
     <h5 class="text-danger text-center mb-1">{{errorMessage}}</h5>
-    <form [formGroup]="createCompoundForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="createTestScenarioForm" (ngSubmit)="onSubmit()">
       <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger text-center mb-1">
         <div *ngIf="name.errors.required">
           <h5>Name is required</h5>
         </div>
         <div *ngIf="name.errors.maxlength">
           <h5>Max length of name is 100 chars</h5>
-        </div>
-        <div *ngIf="name.errors.minlength">
-          <h5>Min length of name is 3 chars</h5>
         </div>
       </div>
       <div class="form-group row">
@@ -36,6 +31,7 @@
           <input type="text" class="form-control" formControlName="name" id="title">
         </div>
       </div>
+
       <div *ngIf="description.invalid && (description.dirty || description.touched)"
            class="text-danger text-center mb-1">
         <div *ngIf="description.errors.required">
@@ -44,7 +40,6 @@
         <div *ngIf="description.errors.maxlength">
           <h5>Max length of description is 300 chars</h5>
         </div>
-
       </div>
       <div class="form-group row">
         <label for="title" class="col-sm-5 col-form-label">Description: </label>
@@ -53,59 +48,73 @@
                     formControlName="description"></textarea>
         </div>
       </div>
+
+
       <div class="form-group row">
         <label class="col-sm-5 col-form-label">Add action: </label>
-        <div id="search-component" class="col-sm-7">
+        <div id="search-component-act" class="col-sm-7">
           <input
-            (keyup)="searchTerm$.next($event.target.value)" #term class="form-control">
+            (keyup)="searchTermAct$.next($event.target.value)" #termA class="form-control">
 
           <ul *ngIf="actions" class="search-result">
             <li *ngFor="let action of actions | slice:0:9">
-              <a (click)="addToList(action)" target="_blank">
+              <a (click)="addToListAct(action)" target="_blank">
                 {{ action.title }}
               </a>
             </li>
           </ul>
-          <div cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="addedActions?.length > 0">
+        </div>
+
+        <label class="col-sm-5 col-form-label">Add compound: </label>
+        <div id="search-component-comp" class="col-sm-7">
+          <input
+            (keyup)="searchTermComp$.next($event.target.value)" #termC class="form-control">
+
+          <ul *ngIf="compounds" class="search-result">
+            <li *ngFor="let compound of compounds | slice:0:9">
+              <a (click)="addToListComp(compound)" target="_blank">
+                {{ compound.title }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div id="dragAndDrop" class="col-sm-12">
+          <div cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="addedActionsAndCompounds.length > 0">
             <hr>
-            <em>ORDER IS IMPORTANT</em>
+            <em class="text-dark">ORDER IS IMPORTANT</em>
             <br>
 
             <div class="row">
               <div class="col-1"></div>
-              <div class="col-2">Action</div>
-              <div class="col-2">Order</div>
+              <div class="col-6 text-dark">Actions and Compounds</div>
+              <div class="col-2 text-dark">Order</div>
             </div>
-            <div cdkDrag *ngFor="let action of addedActions" class="row cursor-pointer">
+            <div cdkDrag *ngFor="let actComp of addedActionsAndCompounds" class="row cursor-pointer">
               <div class="col-1">
                 <img src="assets/sidebar_images/remove.png"
                      class="x_img cursor-pointer" alt="remove"
-                     (click)="remove(action)">
+                     (click)="removeActAndComp(actComp)">
+              </div>
+              <div class="col-6">
+                {{ actComp.getKind() }}{{": " + actComp.getTitle() }}
               </div>
               <div class="col-2">
-                {{ action.title }}
-              </div>
-              <div class="col-2">
-                {{ addedActions.indexOf(action) + 1 }}
+                {{ addedActionsAndCompounds.indexOf(actComp) + 1 }}
               </div>
             </div>
           </div>
-
-          <ul class="added-result">
-            <li *ngFor="let action of addedActions">
-              <a (click)="remove(action)">{{ action.title }}</a>
-            </li>
-          </ul>
         </div>
+
       </div>
+
+
       <div class="form-group row">
         <div class="col-md-7 text-center mx-auto my-4">
-          <button class="options-table" [disabled]="!createCompoundForm.valid">Save
+          <button class="options" [disabled]="!createTestScenarioForm.valid">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
           </button>
         </div>
       </div>
     </form>
   </div>
-
 </div>
