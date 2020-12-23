@@ -24,11 +24,16 @@ export class DataSetService {
 
   deleteDataSet(id: number): Observable<any> {
     const url = `${environment.apiUrl}/api/data-set?&id=${id}`;
-    return this.http.delete<GetResponseDataSets>(url);
+    return this.http.delete<any>(url);
   }
   createDataSet(dataSet: DataSet): Observable<any> {
     const url = `${environment.apiUrl}/api/data-set`;
     return this.http.post<DataSet>(url, dataSet);
+  }
+
+  editDataSet(dataset: DataSet): Observable<any>{
+    const url = `${environment.apiUrl}/api/data-set/${dataset.id}`;
+    return this.http.put<any>(url, dataset);
   }
 }
 
