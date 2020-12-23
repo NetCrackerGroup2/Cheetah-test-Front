@@ -79,7 +79,6 @@ import { ParametersComponent } from './components/parameters/parameters.componen
     EditCalendarEventComponent,
     NotificationsComponent,
     EditWatchersComponent,
-    EditWatchersComponent,
     RunDetailsComponent,
     ParametersComponent,
   ],
