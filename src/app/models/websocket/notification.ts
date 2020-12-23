@@ -1,7 +1,7 @@
 export enum NotificationStatus {
   COMPLETE = 'COMPLETE',
   FAILED = 'FAILED',
-  IN_PROCESS = 'IN_PROCESS'
+  INPROCESS = 'INPROCESS'
 }
 
 export enum ReadStatus {

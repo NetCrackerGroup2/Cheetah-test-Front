@@ -44,8 +44,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   }
 
   goToRunDetails(idTestCase: number, htcId: number, projectId: number, notificationStatus: NotificationStatus): void {
-    if (notificationStatus === NotificationStatus.IN_PROCESS) {
-      this.router.navigate([`test-scenario/${idTestCase}/info`]);
+    if (notificationStatus === NotificationStatus.INPROCESS) {
+      this.router.navigate([`projects/${projectId}/test-cases/${idTestCase}/run-details`]);
     } else {
       this.router.navigate([`projects/${projectId}/test-cases/${idTestCase}/history/${htcId}`]);
     }
@@ -54,6 +54,14 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   deleteNotification(id: number): void {
     this.websocketService.send(WS.SEND.DELETE_NOTIFICATION, id);
+  }
+
+  getStatusTitle(notificationStatus: NotificationStatus): string {
+    if (notificationStatus === NotificationStatus.INPROCESS) {
+      return 'is in progress of executing.';
+    } else {
+      return 'was completed.';
+    }
   }
 
   ngOnDestroy(): void {

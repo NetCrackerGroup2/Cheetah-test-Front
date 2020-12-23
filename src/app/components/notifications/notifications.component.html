@@ -8,7 +8,8 @@
     <div class="custom-table black">
       <div class="mt-5 stripped">
         <div class="row mt-3" *ngFor="let newNotification of newNotifications">
-          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{newNotification.testCaseId}} was completed</div>
+          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{newNotification.testCaseId}}
+            {{this.getStatusTitle(newNotification.notificationStatus)}} </div>
           <div class="col-lg-2 col-md-3 col-sm-5 pt-2">
             {{newNotification.date | date: 'hh:mm  dd-MM-yyyy'}}
           </div>
@@ -33,7 +34,8 @@
     <div class="custom-table black">
       <div class="mt-5 stripped">
         <div class="row mt-3" *ngFor="let oldNotification of oldNotifications">
-          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{oldNotification.testCaseId}} was completed</div>
+          <div class="font-weight-bold col-lg-8 col-md-6 col-sm-6 pt-2">Test case {{oldNotification.testCaseId}}
+            {{this.getStatusTitle(oldNotification.notificationStatus)}}</div>
           <div class="col-lg-2 col-md-3 col-sm-5 pt-2">
             {{oldNotification.date | date: 'hh:mm  dd-MM-yyyy'}}
           </div>
