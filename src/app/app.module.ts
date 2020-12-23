@@ -39,10 +39,12 @@ import {WebsocketModule} from './services/websocket/websocket.module';
 import { EditWatchersComponent } from './components/edit-watchers/edit-watchers.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { AddCalendarEventComponent } from './components/add-calendar-event/add-calendar-event.component';
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { EditCalendarEventComponent } from './components/edit-calendar-event/edit-calendar-event.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
 import { ParametersComponent } from './components/parameters/parameters.component';
 
 @NgModule({
@@ -104,6 +106,12 @@ import { ParametersComponent } from './components/parameters/parameters.componen
       showInnerStroke: false,
       startFromZero: false
     }),
+    PieChartModule,
+    LineChartModule,
+    BarChartModule,
+    PolarChartModule,
+    BrowserAnimationsModule,
+    NumberCardModule,
     FullCalendarModule,
     MatOptionModule,
     MatSelectModule
