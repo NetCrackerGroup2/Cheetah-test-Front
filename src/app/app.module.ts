@@ -81,7 +81,7 @@ import {ActionsInTestScenarioComponent} from "./components/actions-in-test-scena
     TestCaseListComponent,
     TestCaseConfigurationComponent,
     LastReportDetailsComponent,
-    ActionsInTestScenarioComponent
+    ActionsInTestScenarioComponent,
     SendReportComponent,
     TestCaseInfoComponent,
     CircularDiagramComponent,
