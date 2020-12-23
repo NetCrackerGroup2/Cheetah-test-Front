@@ -34,29 +34,7 @@ export class DashboardComponent implements OnInit {
   testCasesColorScheme = {
     domain: ['#24c215', '#d41313', '#585858']
   };
-  projectActivity = [
-    {
-      name: 'Projects',
-      series: [
-        {
-          name: '18.12.20',
-          value: '2'
-        },
-        {
-          name: '19.12.20',
-          value: '5'
-        },
-        {
-          name: '20.12.20',
-          value: '4'
-        },
-        {
-          name: '21.12.20',
-          value: '8'
-        }
-      ],
-    },
-  ];
+  projectActivity = [];
   totalTodayProjects: number;
   projectPercent: number;
 
@@ -80,9 +58,17 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => this.totalArchivedProjects = data);
     this.dashboardService.getTodayProjects()
       .subscribe(data => this.totalTodayProjects = data);
-    // this.dashboardService.getProjectActivity().subscribe(
-    //   data => this.projectActivity = data
-    // );
+    this.dashboardService.getProjectActivity().subscribe(
+      data => {
+        const s = data.series;
+        this.projectActivity = [
+          {
+            name: 'Projects',
+            series: s
+          }
+        ];
+      }
+    );
 
     this.userService.searchEntries(this.user.email).subscribe(
       data => {
