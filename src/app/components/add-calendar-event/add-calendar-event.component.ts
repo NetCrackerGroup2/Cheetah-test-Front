@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from "../../models/user/user";
-import {Subject, Subscription} from "rxjs";
-import {AuthService} from "../../services/auth/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {DatePostDto} from "../../models/date/date-post-dto";
+import {User} from '../../models/user/user';
+import {Subject, Subscription} from 'rxjs';
+import {AuthService} from '../../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {DatePostDto} from '../../models/date/date-post-dto';
 declare var $: any;
-import {CalendarService} from "../../services/calendar/calendar.service";
-import {TestCaseDate} from "../../models/date/test-case-date";
+import {CalendarService} from '../../services/calendar/calendar.service';
+import {TestCaseDate} from '../../models/date/test-case-date';
 
 @Component({
   selector: 'app-add-calendar-event',
@@ -43,9 +43,9 @@ export class AddCalendarEventComponent implements OnInit {
       });
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
-        this.dateStart = queryParam['dateStart'];
-        if(this.dateStart.length == 10){
-          this.dateStart = this.dateStart + "T00:00:00+00:00";
+        this.dateStart = queryParam.dateStart;
+        if(this.dateStart.length === 10){
+          this.dateStart = this.dateStart + 'T00:00:00';
         }
       }
     );

@@ -1,56 +1,53 @@
 <div class="container-fluid">
-  <div class="container pb-lg-3 pb-md-2 pb-sm-1">
+  <div class="container">
     <div class="row">
       <div class="col-sm-12 col-lg-3 col-md-6">
         <div class="display-1 h1-black">
-          <h1 class="h1-style">Data Sets</h1>
+          <h3 class="h1-style">Parameters of {{dataSetTitle}}</h3>
         </div>
       </div>
       <div class="col-sm-12 col-lg-12 col-md-12">
         <div class="row">
           <div class="col-sm-12 col-lg-6 col-md-6">
-            <input #myInput class="form-control ml-auto input-long" type="text" placeholder="Search"
+            <input #myInput class="form-control mr-sm-2 input-long" type="text" placeholder="Search"
                    (keyup.enter)="doSearch(myInput.value)">
           </div>
           <div class="col-sm-6 col-lg-2 col-md-3">
-            <button class="options mr-1 button-list" (click)="doSearch(myInput.value)">
+            <button class="options ml-1 button-list" (click)="doSearch(myInput.value)">
               Search
             </button>
           </div>
           <div class="col-sm-6 col-lg-2 col-md-3">
-            <button class="options ml-1 button-list" color="primary" (click)="goBack()">Go to test case</button>
+            <button [routerLink]="[backToDataSet()]" class="options ml-1 button-list" color="primary">Go to data sets
+            </button>
           </div>
         </div>
       </div>
       <div class="table-responsive">
-        <table aria-descriptionby="dataSets" class="table table-striped table-config" *ngIf="isFound">
+        <table aria-descriptionby="parameters" class="table table-striped table-config" *ngIf="isFound">
           <caption></caption>
           <thead class="thead">
           <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Options</th>
+            <th scope="col">Value</th>
+            <th scope="col">Type</th>
+            <th scope="col">Options</th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <td><input id="dataSetName" name="dataSetName" [(ngModel)]="dataSetTitle" class="div-input-invisible bordered_to_input"
-                       type="text"></td>
-            <td><input id="dataSetDescription" name="dataSetDescription" [(ngModel)]="dataSetDescription"
+            <td><input id="parameterValue" name="parameterValue" [(ngModel)]="parameterValue"
                        class="div-input-invisible bordered_to_input" type="text"></td>
+            <td><input id="parameterType" name="parameterType" [(ngModel)]="parameterType" class="div-input-invisible bordered_to_input"
+                       type="text"></td>
             <td>
-              <button class="options" (click)="createDataSet()">Create</button>
+              <button class="options" (click)="createParameter()">Create</button>
             </td>
           </tr>
-          <tr *ngFor="let dataset of datasets">
-            <td>{{dataset.title}}</td>
-            <td>{{dataset.description}}</td>
+          <tr *ngFor="let parameter of parameters">
+            <td>{{parameter.value}}</td>
+            <td>{{parameter.type}}</td>
             <td>
-              <button class="options ml-1" (click)="deleteDataSet(dataset.id)">Delete</button>
-              <button class="options ml-1" (click)="goEdit(dataset)">Edit
-              </button>
-              <button class="options ml-1" (click)="goToParameters(dataset)">Parameters
-              </button>
+              <button class="options" (click)="deleteParameter(parameter.id)">Delete</button>
             </td>
           </tr>
           </tbody>
@@ -71,7 +68,7 @@
                             [collectionSize]="theTotalElements"
                             [maxSize]="5"
                             [boundaryLinks]="true"
-                            (pageChange)="listDataSets()"
+                            (pageChange)="listParameters()"
                             class="ngb-pagination">
             </ngb-pagination>
           </div>

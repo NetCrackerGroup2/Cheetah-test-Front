@@ -45,6 +45,7 @@ import { EditCalendarEventComponent } from './components/edit-calendar-event/edi
 import { RunDetailsComponent } from './components/run-details/run-details.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, PolarChartModule} from '@swimlane/ngx-charts';
+import { ParametersComponent } from './components/parameters/parameters.component';
 
 @NgModule({
   declarations: [
@@ -78,8 +79,8 @@ import {BarChartModule, LineChartModule, NumberCardModule, PieChartModule, Polar
     EditCalendarEventComponent,
     NotificationsComponent,
     EditWatchersComponent,
-    EditWatchersComponent,
-    RunDetailsComponent
+    RunDetailsComponent,
+    ParametersComponent,
   ],
   imports: [
     BrowserModule,

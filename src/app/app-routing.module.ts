@@ -21,13 +21,13 @@ import {TestCaseListComponent} from './components/test-case/test-case-list/test-
 import {TestCaseConfigurationComponent} from './components/test-case/test-case-configuration/test-case-configuration.component';
 import {TestCaseInfoComponent} from './components/test-case-info/test-case-info.component';
 import {SendReportComponent} from './components/send-report/send-report.component';
-import {CircularDiagramComponent} from './components/circular-diagram/circular-diagram/circular-diagram.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {CalendarComponent} from './components/calendar/calendar.component';
 import {AddCalendarEventComponent} from './components/add-calendar-event/add-calendar-event.component';
-import {EditCalendarEventComponent} from "./components/edit-calendar-event/edit-calendar-event.component";
+import {EditCalendarEventComponent} from './components/edit-calendar-event/edit-calendar-event.component';
 import {EditWatchersComponent} from './components/edit-watchers/edit-watchers.component';
 import {RunDetailsComponent} from './components/run-details/run-details.component';
+import {ParametersComponent} from './components/parameters/parameters.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -101,8 +101,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:projectId/test-cases/:id/data-set/edit-data-set',
+    path: 'projects/:projectId/test-cases/:testCaseId/data-set/:id/edit-data-set',
     component: EditDataSetComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:projectId/test-cases/:testCaseId/data-set/:id/parameters',
+    component: ParametersComponent,
     canActivate: [AuthGuard]
   },
   {

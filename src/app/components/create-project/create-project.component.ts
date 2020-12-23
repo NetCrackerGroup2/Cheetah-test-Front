@@ -93,7 +93,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
           data => {
             if (data.message === 'A new project has been created successfully!') {
               this.successMessage = 'A new project has been created successfully!';
-              this.createProjectForm.reset();
               this.addedUsers = [];
             } else {
               this.errorMessage = 'Invalid Input';
@@ -111,7 +110,6 @@ export class CreateProjectComponent implements OnInit, OnDestroy {
         data => {
           if (data.message === 'The project has been updated!') {
             this.successMessage = 'The project has been updated!';
-            this.createProjectForm.reset();
             this.addedUsers = [];
           } else {
             this.errorMessage = 'Invalid Input';
