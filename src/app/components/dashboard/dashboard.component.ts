@@ -73,28 +73,44 @@ export class DashboardComponent implements OnInit {
     this.userService.searchEntries(this.user.email).subscribe(
       data => {
         this.userId = data[0].id;
-        this.dashboardService.getUserProjectsBy(this.userId).subscribe(
-          d => {
-            this.userProjects = d;
-            this.selectedProject = d[0];
-            this.selectProjectId = this.selectedProject.id;
-            this.dashboardService.getTestCaseStatsByProjectId(this.userProjects[0].id)
-              .subscribe(p => {
-                this.testCaseStats = [
-                  {name: 'Successful', value: p[0]},
-                  {name: 'Failed', value: p[1]},
-                  {name: 'Not started yet', value: p[2]}
-                ];
-                this.totalTestCases = p[3];
-              });
-          }
-        );
         if (this.user.role === 'ENGINEER') {
+          this.dashboardService.getUserProjectsForEngineerBy(this.userId).subscribe(
+            d => {
+              this.userProjects = d;
+              this.selectedProject = d[0];
+              this.selectProjectId = this.selectedProject.id;
+              this.dashboardService.getTestCaseStatsByProjectId(this.userProjects[0].id)
+                .subscribe(p => {
+                  this.testCaseStats = [
+                    {name: 'Successful', value: p[0]},
+                    {name: 'Failed', value: p[1]},
+                    {name: 'Not started yet', value: p[2]}
+                  ];
+                  this.totalTestCases = p[3];
+                });
+            }
+          );
           this.dashboardService.getPlannedTestCasesForEngineer(this.userId)
             .subscribe(v => this.plannedTestCases = v);
         }
 
         else if (this.user.role === 'MANAGER') {
+          this.dashboardService.getUserProjectsForManager().subscribe(
+            d => {
+              this.userProjects = d;
+              this.selectedProject = d[0];
+              this.selectProjectId = this.selectedProject.id;
+              this.dashboardService.getTestCaseStatsByProjectId(this.userProjects[0].id)
+                .subscribe(p => {
+                  this.testCaseStats = [
+                    {name: 'Successful', value: p[0]},
+                    {name: 'Failed', value: p[1]},
+                    {name: 'Not started yet', value: p[2]}
+                  ];
+                  this.totalTestCases = p[3];
+                });
+            }
+          );
           this.dashboardService.getPlannedTestCasesForManager()
             .subscribe(z => this.plannedTestCases = z);
         }

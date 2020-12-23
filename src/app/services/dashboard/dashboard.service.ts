@@ -57,10 +57,15 @@ export class DashboardService {
     return this.http.get<ProjectActivityData>(url);
   }
 
-  getUserProjectsBy(userId: number): Observable<UserProject[]> {
+  getUserProjectsForEngineerBy(userId: number): Observable<UserProject[]> {
     const url = `${environment.apiUrl}/api/dashboard/personal-projects`;
     const p = new HttpParams().set('id', userId + '');
     return this.http.get<UserProject[]>(url, {params: p});
+  }
+
+  getUserProjectsForManager(): Observable<UserProject[]> {
+    const url = `${environment.apiUrl}/api/dashboard/supp-projects`;
+    return this.http.get<UserProject[]>(url);
   }
 
   getTestCaseStatsByProjectId(projectId: number): Observable<number[]> {
