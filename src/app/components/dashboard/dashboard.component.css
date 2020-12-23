@@ -8,6 +8,7 @@
 
 .card {
   transition: linear 0.38s;
+  margin-right: 15px;
 }
 
 .project-card {
