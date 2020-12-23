@@ -1,14 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from "../../models/user/user";
-import {DatePostDto} from "../../models/date/date-post-dto";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subject, Subscription} from "rxjs";
-import {AuthService} from "../../services/auth/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {CalendarService} from "../../services/calendar/calendar.service";
-import {strict} from "assert";
-import {DataSet} from "../../models/data-set/data-set";
-
+import {User} from '../../models/user/user';
+import {DatePostDto} from '../../models/date/date-post-dto';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subject, Subscription} from 'rxjs';
+import {AuthService} from '../../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CalendarService} from '../../services/calendar/calendar.service';
 declare var $: any;
 
 @Component({
@@ -41,8 +38,8 @@ export class EditCalendarEventComponent implements OnInit {
     );
     this.querySubscription = route.queryParams.subscribe(
       (queryParam: any) => {
-        this.dateDto.testCaseId = +queryParam['testCaseId'];
-        if (queryParam['repeatable'] === 'true') {
+        this.dateDto.testCaseId = +queryParam.testCaseId;
+        if (queryParam.repeatable === 'true') {
           this.dateDto.repeatable = true;
         } else {
           this.dateDto.repeatable = false;
@@ -65,10 +62,10 @@ export class EditCalendarEventComponent implements OnInit {
   }
 
   onSubmit(): void {
-    let newDate = new Date($('#newDate').val());
-    let newTime = document.querySelector('input[type="time"]');
+    const newDate = new Date($('#newDate').val());
+    const newTime = document.querySelector('input[type="time"]');
     // @ts-ignore
-    this.dateDto.executionCronDate = newDate.getFullYear() + "-" + (newDate.getMonth() + 1) + "-" + newDate.getDate() + "T" + newTime.value + ":00:+00:00";
+    this.dateDto.executionCronDate = newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate() + 'T' + newTime.value + ':00';
     this.datesSubscription = this.сalendarService
       .editEvent(this.dateDto).subscribe();
     this.router.navigate(['/calendar']);

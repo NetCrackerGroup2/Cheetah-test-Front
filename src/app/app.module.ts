@@ -43,6 +43,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import { EditCalendarEventComponent } from './components/edit-calendar-event/edit-calendar-event.component';
 import { RunDetailsComponent } from './components/run-details/run-details.component';
+import { ParametersComponent } from './components/parameters/parameters.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { RunDetailsComponent } from './components/run-details/run-details.compon
     NotificationsComponent,
     EditWatchersComponent,
     EditWatchersComponent,
-    RunDetailsComponent
+    RunDetailsComponent,
+    ParametersComponent,
   ],
   imports: [
     BrowserModule,

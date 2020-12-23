@@ -1,51 +1,113 @@
-.h1-style{
-  text-align: left;
-  width: auto;
+.container-fluid {
+  padding-top: -50px;
 }
 
-.button-row {
-  display: table-cell;
-  width: 10%;
-}
-.button-list{
-  height: 40px;
-  width: 150px;
+form {
+  padding: 5% 5% 0 5%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
 }
 
-.input-long{
-  width: 100%;
-  border-radius: 10px;
+label {
+  font-size: 1.6em;
+  font-weight: 600;
+  color: black;
 }
 
-/*pagination*/
-.pagination {
-  display: flex;
+input, textarea, select {
+  border: 1px solid #BD7D42;
+  border-radius: 0;
+  resize: none;
+  width: 90%;
+}
+
+button {
+  background: #BD7D42;
+  border-radius: 15px;
+  width: 70%;
+
+}
+
+.container-sm {
+  width: 50%;
+  margin-top: 7%;
+}
+
+.search-result li {
+  border-bottom: 1px solid #BD7D42;
+  border-left: 1px solid #BD7D42;
+  border-right: 1px solid #BD7D42;
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
+  list-style-type: none;
+}
+
+.search-result li:first-child {
+  border-top: 1px solid #BD7D42;
+}
+
+.search-result li:hover {
+  background-color: #BD7D42;
+}
+
+.search-result li a {
+  color: black;
+  display: block;
+  text-decoration: none;
+}
+
+.search-result li a:hover {
+  color: white;
+}
+
+.search-result li a:active {
+  color: white;
+}
+
+ul.search-result {
+  margin-top: 0;
   padding-left: 0;
-  list-style: none;
-  border-radius: .25rem;
-
-}
-.ngb-pagination ::ng-deep a {
-  color: #bd7d42 !important;
 }
 
-.ngb-pagination ::ng-deep .page-item.active .page-link {
-  border-color: black;
-  background-color: lightgrey;
+
+.added-result li {
+  border-bottom: 1px solid #BD7D42;
+  border-left: 1px solid #BD7D42;
+  border-right: 1px solid #BD7D42;
+  width: 90%;
+  height: 30px;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
+  list-style-type: none;
 }
 
-.ngb-pagination ::ng-deep .page-item.active .page-link:focus, .page-link:not(:disabled):not(.disabled):active:focus {
-  box-shadow: 0 0 0 0.1rem dimgrey;
+.added-result li:first-child {
+  border-top: 1px solid #BD7D42;
 }
 
-.ngb-pagination ::ng-deep .page-link:not(:disabled):not(.disabled):active:focus {
-  box-shadow: 0 0 0 0.1rem dimgrey;
+.added-result li:hover {
+  background-color: #ac0202;
 }
 
-.div-size{
-  width: 400px;
+.added-result li a {
+  color: black;
+  display: block;
+  text-decoration: none;
 }
-.div-input-invisible {
-  background: transparent;
-  border: none;
+
+.added-result li a:hover {
+  color: white;
+}
+
+.added-result li a:active {
+  color: white;
+}
+
+ul.added-result {
+  margin-top: 0;
+  padding-left: 0;
 }

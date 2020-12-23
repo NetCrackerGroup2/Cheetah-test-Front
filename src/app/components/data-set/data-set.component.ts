@@ -88,7 +88,7 @@ export class DataSetComponent implements OnInit {
       });
   }
 
-  createDataSet(): void{
+  createDataSet(): void {
     const dataset1: DataSet = new DataSet();
     dataset1.title = this.dataSetTitle;
     dataset1.description = this.dataSetDescription;
@@ -107,11 +107,20 @@ export class DataSetComponent implements OnInit {
     this.listDataSets();
   }
 
-  goEdit(dataset: DataSet):void{
-    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', 'edit-data-set'], { queryParams: { idDataSet: dataset.id, title: dataset.title } });
+  goEdit(dataset: DataSet): void {
+    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', dataset.id, 'edit-data-set'], {
+      queryParams: {
+        description: dataset.description,
+        title: dataset.title
+      }
+    });
   }
 
-  goBack(): void{
+  goToParameters(dataset: DataSet): void {
+    this.router.navigate(['projects', this.theProjectId, 'test-cases', this.theTestCaseId, 'data-set', dataset.id, 'parameters'], {queryParams: {title: dataset.title}});
+  }
+
+  goBack(): void {
     this.router.navigate(['projects', this.theTestCaseId, 'test-cases']);
   }
 }
