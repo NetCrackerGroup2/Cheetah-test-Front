@@ -103,7 +103,7 @@
       <h2 class="black">Last project statistics</h2>
     </div>
     <div class="container-fluid row mt-3">
-      <div *ngIf="isAdmin" class="card" style="width: 23em;">
+      <div *ngIf="isAdmin" class="card" style="width: 22em;">
         <div class="card-body row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="#BD7D42" class="bi bi-archive-fill" viewBox="0 0 16 16">
@@ -116,7 +116,7 @@
           </div>
         </div>
       </div>
-      <div class="card" style="width: 23em;">
+      <div class="card" style="width: 20em;">
         <div class="card-body w-auto row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" fill="#BD7D42" class="bi bi-folder-plus" viewBox="0 0 16 16">
@@ -125,12 +125,12 @@
             </svg>
           </div>
           <div class="col">
-            <h5 class="card-title text-right">Create projects today</h5>
+            <h5 class="card-title text-right">Projects today</h5>
             <h3 class="text-right black" style="font-weight: normal">{{totalTodayProjects}}</h3>
           </div>
         </div>
       </div>
-      <div class="card" style="width: 18em;">
+      <div class="card" style="width: 30em;">
         <div class="card-body w-auto row">
           <div class="col-3 text-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#BD7D42" class="bi bi-percent" viewBox="0 0 16 16">
@@ -138,7 +138,7 @@
             </svg>
           </div>
           <div class="col">
-            <h5 class="card-title text-right">Project percent</h5>
+            <h5 class="card-title text-right">Project percent of the week</h5>
             <h3 class="text-right black" style="font-weight: normal">{{projectPercent}}</h3>
           </div>
         </div>
@@ -146,7 +146,10 @@
     </div>
     <div class="container-fluid justify-content-lg-between row mt-4">
       <div>
-        <h4 class="black">
+        <h4 *ngIf="isAdmin" class="black">
+          All projects
+        </h4>
+        <h4 *ngIf="!isAdmin" class="black">
           Your projects
         </h4>
         <div class="dashboard-item mt-5">
@@ -154,7 +157,7 @@
             <thead>
             <tr>
               <th scope="col" class="text-center table-dark">Project</th>
-              <th scope="col" class="text-center table-dark">Your status</th>
+              <th *ngIf="this.user.role == 'ENGINEER'" scope="col" class="text-center table-dark">Your status</th>
             </tr>
             </thead>
             <tbody>
@@ -163,7 +166,7 @@
             </tr>
             <tr *ngFor="let userProject of userProjects">
               <td><a (click)="goToProject(userProject.id)">{{userProject.title}}</a></td>
-              <td class="text-right">{{userProject.userStatus | titlecase}}</td>
+              <td *ngIf="this.user.role == 'ENGINEER'" class="text-right">{{userProject.userStatus | titlecase}}</td>
             </tr>
             </tbody>
           </table>

@@ -94,7 +94,7 @@ export class DashboardComponent implements OnInit {
             .subscribe(v => this.plannedTestCases = v);
         }
 
-        else if (this.user.role === 'MANAGER') {
+        else if (this.user.role === 'MANAGER' || this.isAdmin) {
           this.dashboardService.getUserProjectsForManager().subscribe(
             d => {
               this.userProjects = d;
